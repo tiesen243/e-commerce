@@ -1,5 +1,5 @@
 {
-  "name": "express-api-starter-ts",
+  "name": "ty-ecommerce-api",
   "version": "1.2.0",
   "description": " A basic starter for an express.js API with Typescript",
   "main": "src/index.ts",
@@ -8,7 +8,9 @@
     "dev": "nodemon src/index.ts",
     "build": "tsc",
     "lint": "eslint --fix src test",
-    "typecheck": "tsc --noEmit"
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "vercel-build": "echo 'vercel-build'"
   },
   "keywords": [],
   "author": "CJ R. <cj@null.computer> (https://w3cj.now.sh)",
