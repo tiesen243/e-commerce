@@ -1,30 +1,20 @@
-import express from 'express';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import cors from 'cors';
+import express, { Application } from "express";
+import morgan from "morgan";
+import helmet from "helmet";
+import cors from "cors";
+import Routes from "./routes";
+import connectToDB from "./utils/mongodb";
+require("dotenv").config();
 
-import * as middlewares from './middlewares';
-import api from './api';
-import MessageResponse from './interfaces/MessageResponse';
+const app: Application = express();
+const MONGODB_URI: string = process.env.MONGODB_URI || "";
 
-require('dotenv').config();
-
-const app = express();
-
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get<{}, MessageResponse>('/', (req, res) => {
-  res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
-  });
-});
-
-app.use('/api/v1', api);
-
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+connectToDB(MONGODB_URI);
+Routes(app);
 
 export default app;
