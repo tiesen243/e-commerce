@@ -17,7 +17,7 @@ async function bootstrap() {
 
   // CORS
   app.enableCors()
-  app.use(helmet())
+  // app.use(helmet())
   app.use((req: Request, res: Response, next: NextFunction) => {
     req.headers['if-none-match'] = 'no-match-for-this'
     res.header('Access-Control-Allow-Origin', '*')

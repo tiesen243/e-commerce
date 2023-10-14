@@ -19,6 +19,7 @@ const config = new DocumentBuilder()
     },
     'JWT-Auth',
   )
+  .addTag('product', 'Product API')
   .build()
 
 const options = {

@@ -1,11 +1,15 @@
 import { Controller, Get, Res } from '@nestjs/common'
 import { Response } from 'express'
-import { IResponse } from './types'
+import { ApiResponse } from '@nestjs/swagger'
 
 @Controller()
 export class AppController {
   @Get()
-  getHello(@Res() res: Response): Response<IResponse> {
+  @ApiResponse({
+    status: 200,
+    description: 'Welcome to the Yuki API ☝️🤓',
+  })
+  getHello(@Res() res: Response): Response {
     return res.status(200).json({
       status: 69,
       message: 'Welcome to the Yuki API ☝️🤓',
@@ -19,7 +23,11 @@ export class AppController {
   }
 
   @Get('/health')
-  getHealth(@Res() res: Response): Response<IResponse> {
-    return res.status(200).json({ message: 'OK' })
+  @ApiResponse({
+    status: 200,
+    description: 'Health check',
+  })
+  getHealth(@Res() res: Response): Response {
+    return res.json({ message: 'OK' })
   }
 }
