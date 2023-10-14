@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://ty-ecommerce-api.vercel.app/api/:path*",
+        destination: "https://yuki-api.vercel.app/:path*",
         permanent: true,
       },
     ];

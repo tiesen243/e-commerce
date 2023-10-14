@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { ApiProperty } from '@nestjs/swagger'
 import { Category, Tag } from './enum'
-import { Document } from 'mongoose'
+import mongoose, { Document } from 'mongoose'
 
 @Schema({ timestamps: true })
 export class Product extends Document {
@@ -56,6 +56,12 @@ export class Product extends Document {
     example: [Tag.R18, Tag.Drama],
   })
   tags: Tag[]
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  @ApiProperty({
+    description: 'The user who created the product',
+  })
+  userId: string
 
   @Prop({ default: new Date() })
   @ApiProperty({

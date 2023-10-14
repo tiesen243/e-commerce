@@ -10,7 +10,7 @@ export default class UpdateDto {
   @IsOptional()
   @IsString()
   @Length(4, 20)
-  readonly name: string
+  readonly userName: string
 
   @ApiProperty({
     description: 'The avatar of the user',

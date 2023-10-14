@@ -1,10 +1,22 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
-import { ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+  UseGuards,
+} from '@nestjs/common'
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger'
 import CreateDto from './dto/create.dto'
 import { ProductService } from './product.service'
 import { Product } from './schemas/product.schema'
 import UpdateDto from './dto/update.dto'
 import { IResponse } from '../types'
+import { AuthGuard } from '@nestjs/passport'
+import { User } from '../auth/schemas/user.shema'
 
 @Controller('product')
 @ApiTags('product')
@@ -40,6 +52,8 @@ export class ProductController {
   }
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth('JWT-Auth')
   @ApiResponse({
     status: 201,
     description: 'The product has been successfully created.',
@@ -49,12 +63,16 @@ export class ProductController {
     status: 400,
     description: 'Create product failed',
   })
-  async create(@Body() createDto: CreateDto): Promise<IResponse<Product>> {
-    console.log(createDto)
-    return await this.productService.create(createDto)
+  async create(
+    @Body() createDto: CreateDto,
+    @Req() req: { user: User },
+  ): Promise<IResponse<Product>> {
+    return await this.productService.create(createDto, req.user)
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth('JWT-Auth')
   @ApiResponse({
     status: 201,
     description: 'The product has been successfully updated.',
@@ -72,6 +90,8 @@ export class ProductController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth('JWT-Auth')
   @ApiResponse({
     status: 200,
     description: 'The product has been successfully deleted.',

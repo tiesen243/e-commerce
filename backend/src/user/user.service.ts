@@ -76,7 +76,7 @@ export class UserService {
     )
     if (!isMatch) throw new UnauthorizedException('Password not match')
 
-    const newName: string = updateDto.name || user.userName
+    const newName: string = updateDto.userName || user.userName
     const newAvatar: string = updateDto.avatar || user.avatar
 
     const updateUser: User = await this.userModel.findByIdAndUpdate(
