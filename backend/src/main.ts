@@ -5,9 +5,9 @@ import { NextFunction, Request, Response } from 'express'
 import helmet from 'helmet'
 import { join } from 'path'
 
-import { AppModule } from './app.module'
-import { config } from './utils'
 import { ValidationPipe } from '@nestjs/common'
+import { AppModule } from './app.module'
+import { config, options } from './utils'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
@@ -17,7 +17,8 @@ async function bootstrap() {
 
   // CORS
   app.enableCors()
-  // app.use(helmet())
+  if (process.env.NODE_ENV !== 'development') app.use(helmet())
+
   app.use((req: Request, res: Response, next: NextFunction) => {
     req.headers['if-none-match'] = 'no-match-for-this'
     res.header('Access-Control-Allow-Origin', '*')
@@ -28,7 +29,7 @@ async function bootstrap() {
 
   // Swagger
   const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup('api-docs', app, document)
+  SwaggerModule.setup('api-docs', app, document, options)
   app.useStaticAssets(join(__dirname, '..', 'node_modules/swagger-ui-dist'), {
     index: false,
   })

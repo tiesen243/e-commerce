@@ -1,11 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { ApiProperty } from '@nestjs/swagger'
 import { Category, Tag } from './enum'
+import { Document } from 'mongoose'
 
-@Schema({
-  timestamps: true,
-})
-export class Product {
+@Schema({ timestamps: true })
+export class Product extends Document {
   @Prop({ required: true, unique: true })
   @ApiProperty({
     description: 'The unique identifier of the product',
@@ -21,30 +20,26 @@ export class Product {
   name: string
 
   @Prop({ required: true })
+  @ApiProperty({ description: 'The image of the product' })
+  image: string
+
+  @Prop({ required: true })
+  @ApiProperty({ description: 'The description of the product' })
+  description: string
+
+  @Prop({ required: true, isInteger: true })
   @ApiProperty({
     description: 'The price of the product',
     example: 100000,
   })
   price: number
 
-  @Prop({ required: true })
+  @Prop({ required: true, isInteger: true })
   @ApiProperty({
     description: 'The stock of the product',
     example: 100,
   })
   stock: number
-
-  @Prop({ required: true })
-  @ApiProperty({
-    description: 'The description of the product',
-  })
-  description: string
-
-  @Prop({ required: true })
-  @ApiProperty({
-    description: 'The image of the product',
-  })
-  image: string
 
   @Prop({ required: true, default: Category.Other, type: String })
   @ApiProperty({

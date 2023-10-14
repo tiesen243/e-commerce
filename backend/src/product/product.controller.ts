@@ -18,16 +18,30 @@ export class ProductController {
     isArray: true,
   })
   @ApiResponse({
-    status: 400,
-    description: 'Get all products failed',
+    status: 404,
+    description: 'Products not found',
   })
   async findAll(): Promise<IResponse<Product[]>> {
     return await this.productService.findAll()
   }
 
-  @Post()
+  @Get(':id')
   @ApiResponse({
     status: 200,
+    description: 'The product has been successfully retrieved.',
+    type: Product,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Product not found',
+  })
+  async findOne(@Param('id') id: string): Promise<IResponse<Product>> {
+    return await this.productService.findOne(id)
+  }
+
+  @Post()
+  @ApiResponse({
+    status: 201,
     description: 'The product has been successfully created.',
     type: Product,
   })

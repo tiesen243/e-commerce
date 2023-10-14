@@ -1,7 +1,11 @@
-import { DocumentBuilder } from '@nestjs/swagger'
+import {
+  DocumentBuilder,
+  OpenAPIObject,
+  SwaggerCustomOptions,
+} from '@nestjs/swagger'
 
 // Swagger
-const config = new DocumentBuilder()
+const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
   .setTitle('Yuki API')
   .setDescription('Restful API for Yuki Shop')
   .setVersion('1.0')
@@ -22,11 +26,11 @@ const config = new DocumentBuilder()
   .addTag('product', 'Product API')
   .build()
 
-const options = {
+const options: SwaggerCustomOptions = {
   swaggerOptions: {
     persistAuthorization: true,
   },
-  customSiteTitle: 'TY API',
+  customSiteTitle: 'Yuki API',
   customfavIcon:
     'https://raw.githubusercontent.com/tiesen243/albums/main/favicon.ico',
 }
