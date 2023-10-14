@@ -4,6 +4,7 @@ import { Product } from './schemas/product.schema'
 import { Model } from 'mongoose'
 import CreateDto from './dto/create.dto'
 import { IResponse } from 'src/types'
+import UpdateDto from './dto/update.dto'
 
 @Injectable()
 export class ProductService {
@@ -26,11 +27,11 @@ export class ProductService {
     }
   }
 
-  async create(productDto: CreateDto): Promise<IResponse<Product>> {
+  async create(createDto: CreateDto): Promise<IResponse<Product>> {
     const newProduct = await this.productModel.create({
       code: Math.floor(Math.random() * (999900 - 100000 + 1) + 100000),
       createdAt: new Date(),
-      ...productDto,
+      ...createDto,
     })
 
     if (!newProduct)
@@ -46,12 +47,12 @@ export class ProductService {
     }
   }
 
-  async update(id: string, productDto: CreateDto): Promise<IResponse<Product>> {
+  async update(id: string, updateDto: UpdateDto): Promise<IResponse<Product>> {
     const updatedProduct = await this.productModel.findByIdAndUpdate(
       id,
       {
         updatedAt: new Date(),
-        ...productDto,
+        ...updateDto,
       },
       {
         new: true,

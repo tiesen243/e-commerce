@@ -4,6 +4,7 @@ import { IResponse } from 'src/types'
 import CreateDto from './dto/create.dto'
 import { ProductService } from './product.service'
 import { Product } from './schemas/product.schema'
+import UpdateDto from './dto/update.dto'
 
 @Controller('product')
 @ApiTags('product')
@@ -51,9 +52,9 @@ export class ProductController {
   })
   async update(
     @Param('id') id: string,
-    @Body() createDto: CreateDto,
+    @Body() updateDto: UpdateDto,
   ): Promise<IResponse<Product>> {
-    return await this.productService.update(id, createDto)
+    return await this.productService.update(id, updateDto)
   }
 
   @Delete(':id')
