@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator'
-import { Role } from 'src/auth/schemas/enum'
+import { Role } from '../../auth/schemas/enum'
 
 export default class UpdateRoleDto {
   @ApiProperty({
