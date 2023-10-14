@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
-import { IResponse } from 'src/types'
 import CreateDto from './dto/create.dto'
 import { ProductService } from './product.service'
 import { Product } from './schemas/product.schema'
 import UpdateDto from './dto/update.dto'
+import { IResponse } from '../types'
 
 @Controller('product')
 @ApiTags('product')

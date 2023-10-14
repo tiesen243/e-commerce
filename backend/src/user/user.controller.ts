@@ -15,6 +15,7 @@ import UpdateRoleDto from './dto/updaterole.dto'
 import UpdateDto from './dto/update.dto'
 import ChangePasswordDto from './dto/changePassword.dto'
 import { User } from '../auth/schemas/user.shema'
+import { IResponse } from '../types'
 
 @Controller('user')
 @ApiTags('user')
@@ -31,7 +32,7 @@ export class UserController {
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async getUserInfo(@Req() req: { user: User }) {
+  async getUserInfo(@Req() req: { user: User }): Promise<IResponse<User>> {
     return await this.userService.getUserInfo(req.user._id)
   }
 
@@ -45,7 +46,7 @@ export class UserController {
   })
   @ApiResponse({ status: 401, description: 'You are not admin' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async getAllUser(@Req() req: { user: User }) {
+  async getAllUser(@Req() req: { user: User }): Promise<IResponse<User[]>> {
     return await this.userService.getAllUser(req.user)
   }
 
@@ -63,7 +64,7 @@ export class UserController {
   async changeRole(
     @Body() updateRoleDto: UpdateRoleDto,
     @Req() req: { user: User },
-  ) {
+  ): Promise<IResponse<User>> {
     return await this.userService.changeRole(updateRoleDto, req.user)
   }
 
@@ -78,7 +79,10 @@ export class UserController {
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async updateInfo(@Body() updateDto: UpdateDto, @Req() req: { user: User }) {
+  async updateInfo(
+    @Body() updateDto: UpdateDto,
+    @Req() req: { user: User },
+  ): Promise<IResponse<User>> {
     return await this.userService.updateInfo(updateDto, req.user)
   }
 
@@ -96,7 +100,7 @@ export class UserController {
   async changePassword(
     @Body() changePasswordDto: ChangePasswordDto,
     @Req() req: { user: User },
-  ) {
+  ): Promise<IResponse<User>> {
     return await this.userService.changePassword(changePasswordDto, req.user)
   }
 
@@ -109,7 +113,7 @@ export class UserController {
     type: User,
   })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async deleteUser(@Req() req: { user: User }) {
+  async deleteUser(@Req() req: { user: User }): Promise<IResponse<User>> {
     return await this.userService.selfDelete(req.user)
   }
 
@@ -123,7 +127,10 @@ export class UserController {
   })
   @ApiResponse({ status: 401, description: 'You are not admin' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async adminDeleteUser(@Param('id') id: string, @Req() req: { user: User }) {
+  async adminDeleteUser(
+    @Param('id') id: string,
+    @Req() req: { user: User },
+  ): Promise<IResponse<User>> {
     return await this.userService.adminDelete(id, req.user)
   }
 }

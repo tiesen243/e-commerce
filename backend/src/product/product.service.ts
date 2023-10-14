@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { IResponse } from 'src/types'
+
 import CreateDto from './dto/create.dto'
 import UpdateDto from './dto/update.dto'
 import { Product } from './schemas/product.schema'
+import { IResponse } from '../types'
 
 @Injectable()
 export class ProductService {

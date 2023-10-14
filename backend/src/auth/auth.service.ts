@@ -12,8 +12,8 @@ import * as bcrypt from 'bcrypt'
 
 import { User } from './schemas/user.shema'
 import RegisterDto from './dto/register.dto'
-import { IResponse } from 'src/types'
 import LoginDto from './dto/login.dto'
+import { IResponse } from '../types'
 
 @Injectable()
 export class AuthService {
