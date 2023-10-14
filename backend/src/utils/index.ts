@@ -23,6 +23,8 @@ const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
     },
     'JWT-Auth',
   )
+  .addTag('auth', 'Authentications API')
+  .addTag('user', 'User API')
   .addTag('product', 'Product API')
   .build()
 
