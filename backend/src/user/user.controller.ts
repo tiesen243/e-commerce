@@ -10,12 +10,12 @@ import {
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { UserService } from './user.service'
-import UpdateRoleDto from './dto/updaterole.dto'
-import UpdateDto from './dto/update.dto'
-import ChangePasswordDto from './dto/changePassword.dto'
 import { User } from '../auth/schemas/user.shema'
 import { IResponse } from '../types'
+import ChangePasswordDto from './dto/changePassword.dto'
+import UpdateDto from './dto/update.dto'
+import UpdateRoleDto from './dto/updateRole.dto'
+import { UserService } from './user.service'
 
 @Controller('user')
 @ApiTags('user')

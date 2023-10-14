@@ -13,7 +13,7 @@ import { User } from '../auth/schemas/user.shema'
 import { IResponse } from '../types'
 import ChangePasswordDto from './dto/changePassword.dto'
 import UpdateDto from './dto/update.dto'
-import UpdateRoleDto from './dto/updateRole.dto'
+import UpdateRoleDto from './dto/updaterole.dto'
 
 @Injectable()
 export class UserService {
