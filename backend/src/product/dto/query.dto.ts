@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
 import {
+  IsEnum,
   IsNumber,
   IsOptional,
   IsString,
@@ -8,6 +9,7 @@ import {
   Max,
   Min,
 } from 'class-validator'
+import { Category, Tag } from '../schemas/enum'
 
 export default class QueryDto {
   @ApiProperty({
@@ -52,4 +54,24 @@ export default class QueryDto {
   @Max(999999)
   @Type(() => Number)
   readonly code: number
+
+  @ApiProperty({
+    description: 'The category of product',
+    required: false,
+    enum: Category,
+  })
+  @IsOptional()
+  @IsEnum(Category)
+  readonly category: Category
+
+  @ApiProperty({
+    description: 'The tags of product',
+    required: false,
+    enum: Tag,
+    isArray: true,
+    default: [],
+  })
+  @IsOptional()
+  @IsEnum(Tag, { each: true })
+  readonly tags: Tag[]
 }

@@ -14,6 +14,7 @@ import UpdateProductDto from './dto/updateProduct.dto'
 import { Product } from './schemas/product.schema'
 import QueryDto from './dto/query.dto'
 import { IResponse } from '../utils/resreq.interface'
+import { Category } from './schemas/enum'
 
 @Injectable()
 export class ProductService {
@@ -22,7 +23,7 @@ export class ProductService {
   ) {}
 
   async findAll(q: QueryDto): Promise<IResponse<Product[]>> {
-    const { limit, page, keyword, code } = q
+    const { limit, page, keyword, code, category, tags } = q
     const skip: number = (page - 1) * limit
 
     const name = keyword
@@ -43,8 +44,19 @@ export class ProductService {
         }
       : {}
 
+    const productCategory = category
+      ? {
+          category: {
+            $regex: category,
+            $options: 'i',
+          },
+        }
+      : {}
+
+    const productTags = tags ? { tags: { $in: tags } } : {}
+
     const allProducts = await this.productModel
-      .find({ ...productCode, ...name })
+      .find({ ...productCode, ...name, ...productCategory, ...productTags })
       .limit(limit)
       .skip(skip)
       .exec()
@@ -64,10 +76,7 @@ export class ProductService {
   async findOne(id: string): Promise<IResponse<Product>> {
     const product = await this.productModel.findById(id).exec()
     if (!product)
-      throw new NotFoundException({
-        status: 404,
-        message: 'Product has been deleted or not found',
-      })
+      throw new NotFoundException('Product has been deleted or not found')
 
     return {
       statusCode: 200,

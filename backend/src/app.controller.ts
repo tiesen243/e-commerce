@@ -1,6 +1,8 @@
 import { Controller, Get, Res } from '@nestjs/common'
 import { Response } from 'express'
 import { ApiResponse } from '@nestjs/swagger'
+import { IResponse } from './utils/resreq.interface'
+import { Category, Tag } from './product/schemas/enum'
 
 @Controller()
 export class AppController {
@@ -29,5 +31,31 @@ export class AppController {
   })
   getHealth(@Res() res: Response): Response {
     return res.json({ message: 'OK' })
+  }
+
+  @Get('/categories')
+  @ApiResponse({
+    status: 200,
+    description: 'Get all product categories',
+  })
+  getCategories(@Res() res: Response) {
+    return res.json({
+      statusCode: 200,
+      message: 'Product categories',
+      data: Object.values(Category),
+    })
+  }
+
+  @Get('/tags')
+  @ApiResponse({
+    status: 200,
+    description: 'Get all product tags',
+  })
+  getTags(@Res() res: Response) {
+    return res.json({
+      statusCode: 200,
+      message: 'Product tags',
+      data: Object.values(Tag),
+    })
   }
 }
