@@ -6,47 +6,48 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common'
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger'
-import CreateDto from './dto/create.dto'
+import { AuthGuard } from '@nestjs/passport'
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger'
+
+import CreateProductDto from './dto/createProduct.dto'
+import QueryDto from './dto/query.dto'
+import UpdateProductDto from './dto/updateProduct.dto'
 import { ProductService } from './product.service'
 import { Product } from './schemas/product.schema'
-import UpdateDto from './dto/update.dto'
-import { IResponse } from '../types'
-import { AuthGuard } from '@nestjs/passport'
-import { User } from '../auth/schemas/user.shema'
+import { IRequest, IResponse } from '../utils/resreq.interface'
 
 @Controller('product')
 @ApiTags('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
   @Get()
-  @ApiResponse({
-    status: 200,
+  @ApiNotFoundResponse({ description: 'No products found' })
+  @ApiOkResponse({
     description: 'All products has been successfully retrieved.',
-    type: Product,
-    isArray: true,
+    type: [Product],
   })
-  @ApiResponse({
-    status: 404,
-    description: 'Products not found',
-  })
-  async findAll(): Promise<IResponse<Product[]>> {
-    return await this.productService.findAll()
+  async findAll(@Query() q: QueryDto): Promise<IResponse<Product[]>> {
+    return await this.productService.findAll(q)
   }
 
   @Get(':id')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'The product has been successfully retrieved.',
     type: Product,
   })
-  @ApiResponse({
-    status: 404,
-    description: 'Product not found',
-  })
+  @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
   async findOne(@Param('id') id: string): Promise<IResponse<Product>> {
     return await this.productService.findOne(id)
   }
@@ -54,18 +55,14 @@ export class ProductController {
   @Post()
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 201,
+  @ApiCreatedResponse({
     description: 'The product has been successfully created.',
     type: Product,
   })
-  @ApiResponse({
-    status: 400,
-    description: 'Create product failed',
-  })
+  @ApiBadRequestResponse({ description: 'Create product failed' })
   async create(
-    @Body() createDto: CreateDto,
-    @Req() req: { user: User },
+    @Body() createDto: CreateProductDto,
+    @Req() req: IRequest,
   ): Promise<IResponse<Product>> {
     return await this.productService.create(createDto, req.user)
   }
@@ -73,35 +70,33 @@ export class ProductController {
   @Put(':id')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 201,
+  @ApiOkResponse({
     description: 'The product has been successfully updated.',
     type: Product,
   })
-  @ApiResponse({
-    status: 400,
-    description: 'Product has been deleted or not found',
-  })
+  @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
+  @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
   async update(
     @Param('id') id: string,
-    @Body() updateDto: UpdateDto,
+    @Body() updateDto: UpdateProductDto,
+    @Req() req: IRequest,
   ): Promise<IResponse<Product>> {
-    return await this.productService.update(id, updateDto)
+    return await this.productService.update(id, updateDto, req.user)
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'The product has been successfully deleted.',
     type: Product,
   })
-  @ApiResponse({
-    status: 400,
-    description: 'Product has been deleted or not found',
-  })
-  async delete(@Param('id') id: string): Promise<IResponse<Product>> {
-    return await this.productService.delete(id)
+  @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
+  @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
+  async delete(
+    @Param('id') id: string,
+    @Req() req: IRequest,
+  ): Promise<IResponse<Product>> {
+    return await this.productService.delete(id, req.user)
   }
 }

@@ -11,7 +11,7 @@ import {
 } from 'class-validator'
 import { Category, Tag } from '../schemas/enum'
 
-export default class UpdateDto {
+export default class UpdateProductDto {
   @ApiProperty({
     description: 'The name of the product',
   })

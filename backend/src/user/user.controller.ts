@@ -9,13 +9,21 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger'
+
 import { User } from '../auth/schemas/user.shema'
-import { IResponse } from '../types'
 import ChangePasswordDto from './dto/changePassword.dto'
-import UpdateDto from './dto/update.dto'
 import UpdateRoleDto from './dto/updateRole.dto'
+import UpdateUserDto from './dto/updateUser.dto'
 import { UserService } from './user.service'
+import { IRequest, IResponse } from '../utils/resreq.interface'
 
 @Controller('user')
 @ApiTags('user')
@@ -25,45 +33,41 @@ export class UserController {
   @Get()
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'Get user info successfully',
     type: User,
   })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @ApiResponse({ status: 404, description: 'User not found' })
-  async getUserInfo(@Req() req: { user: User }): Promise<IResponse<User>> {
+  @ApiNotFoundResponse({ description: 'User not found' })
+  async getUserInfo(@Req() req: IRequest): Promise<IResponse<User>> {
     return await this.userService.getUserInfo(req.user._id)
   }
 
   @Get('all')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'Get all user successfully',
     type: [User],
   })
-  @ApiResponse({ status: 401, description: 'You are not admin' })
-  @ApiResponse({ status: 404, description: 'User not found' })
-  async getAllUser(@Req() req: { user: User }): Promise<IResponse<User[]>> {
+  @ApiUnauthorizedResponse({ status: 401, description: 'You are not admin' })
+  @ApiNotFoundResponse({ description: 'User not found' })
+  async getAllUser(@Req() req: IRequest): Promise<IResponse<User[]>> {
     return await this.userService.getAllUser(req.user)
   }
 
   @Put('role')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'Change role successfully',
     type: User,
   })
-  @ApiResponse({ status: 400, description: 'Bad request' })
-  @ApiResponse({ status: 401, description: 'You are not admin' })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiBadRequestResponse({ description: 'Bad request' })
+  @ApiUnauthorizedResponse({ description: 'You are not admin' })
+  @ApiNotFoundResponse({ description: 'User not found' })
   async changeRole(
     @Body() updateRoleDto: UpdateRoleDto,
-    @Req() req: { user: User },
+    @Req() req: IRequest,
   ): Promise<IResponse<User>> {
     return await this.userService.changeRole(updateRoleDto, req.user)
   }
@@ -71,17 +75,16 @@ export class UserController {
   @Put('info')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'Update user info successfully',
     type: User,
   })
-  @ApiResponse({ status: 400, description: 'Bad request' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiBadRequestResponse({ description: 'Bad request' })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+  @ApiNotFoundResponse({ description: 'User not found' })
   async updateInfo(
-    @Body() updateDto: UpdateDto,
-    @Req() req: { user: User },
+    @Body() updateDto: UpdateUserDto,
+    @Req() req: IRequest,
   ): Promise<IResponse<User>> {
     return await this.userService.updateInfo(updateDto, req.user)
   }
@@ -89,17 +92,16 @@ export class UserController {
   @Put('password')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'Change password successfully',
     type: User,
   })
-  @ApiResponse({ status: 400, description: 'Bad request' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiBadRequestResponse({ description: 'Bad request' })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+  @ApiNotFoundResponse({ description: 'User not found' })
   async changePassword(
     @Body() changePasswordDto: ChangePasswordDto,
-    @Req() req: { user: User },
+    @Req() req: IRequest,
   ): Promise<IResponse<User>> {
     return await this.userService.changePassword(changePasswordDto, req.user)
   }
@@ -107,29 +109,27 @@ export class UserController {
   @Delete()
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'Delete user successfully',
     type: User,
   })
-  @ApiResponse({ status: 404, description: 'User not found' })
-  async deleteUser(@Req() req: { user: User }): Promise<IResponse<User>> {
+  @ApiNotFoundResponse({ description: 'User not found' })
+  async deleteUser(@Req() req: IRequest): Promise<IResponse<User>> {
     return await this.userService.selfDelete(req.user)
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'Delete user successfully',
     type: User,
   })
-  @ApiResponse({ status: 401, description: 'You are not admin' })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiUnauthorizedResponse({ description: 'You are not admin' })
+  @ApiNotFoundResponse({ status: 404, description: 'User not found' })
   async adminDeleteUser(
     @Param('id') id: string,
-    @Req() req: { user: User },
+    @Req() req: IRequest,
   ): Promise<IResponse<User>> {
     return await this.userService.adminDelete(id, req.user)
   }

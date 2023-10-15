@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -6,12 +7,13 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 
-import CreateDto from './dto/create.dto'
-import UpdateDto from './dto/update.dto'
-import { Product } from './schemas/product.schema'
-import { IResponse } from '../types'
-import { User } from '../auth/schemas/user.shema'
 import { Role } from '../auth/schemas/enum'
+import { User } from '../auth/schemas/user.shema'
+import CreateProductDto from './dto/createProduct.dto'
+import UpdateProductDto from './dto/updateProduct.dto'
+import { Product } from './schemas/product.schema'
+import QueryDto from './dto/query.dto'
+import { IResponse } from '../utils/resreq.interface'
 
 @Injectable()
 export class ProductService {
@@ -19,12 +21,37 @@ export class ProductService {
     @InjectModel(Product.name) private readonly productModel: Model<Product>,
   ) {}
 
-  async findAll(): Promise<IResponse<Product[]>> {
-    const allProducts = await this.productModel.find().exec()
+  async findAll(q: QueryDto): Promise<IResponse<Product[]>> {
+    const { limit, page, keyword, code } = q
+    const skip: number = (page - 1) * limit
+
+    const name = keyword
+      ? {
+          name: {
+            $regex: keyword,
+            $options: 'i',
+          },
+        }
+      : {}
+
+    const productCode = code
+      ? {
+          code: {
+            $gte: code,
+            $lte: code,
+          },
+        }
+      : {}
+
+    const allProducts = await this.productModel
+      .find({ ...productCode, ...name })
+      .limit(limit)
+      .skip(skip)
+      .exec()
     if (allProducts.length === 0)
       throw new NotFoundException({
         status: 404,
-        message: 'Products not found',
+        message: 'No products found',
       })
 
     return {
@@ -39,7 +66,7 @@ export class ProductService {
     if (!product)
       throw new NotFoundException({
         status: 404,
-        message: 'Product not found',
+        message: 'Product has been deleted or not found',
       })
 
     return {
@@ -49,7 +76,10 @@ export class ProductService {
     }
   }
 
-  async create(createDto: CreateDto, user: User): Promise<IResponse<Product>> {
+  async create(
+    createDto: CreateProductDto,
+    user: User,
+  ): Promise<IResponse<Product>> {
     if (user.role !== Role.ADMIN && user.role !== Role.SELLER)
       throw new UnauthorizedException('You are not admin or seller')
 
@@ -60,7 +90,7 @@ export class ProductService {
       ...createDto,
     })
 
-    if (!newProduct) throw new Error('Create product failed')
+    if (!newProduct) throw new BadRequestException('Create product failed')
 
     return {
       status: 201,
@@ -69,35 +99,40 @@ export class ProductService {
     }
   }
 
-  async update(id: string, updateDto: UpdateDto): Promise<IResponse<Product>> {
-    const updatedProduct = await this.productModel.findByIdAndUpdate(
-      id,
-      {
-        updatedAt: new Date(),
-        ...updateDto,
-      },
-      {
-        new: true,
-      },
-    )
-    if (!updatedProduct) throw new Error('Update product failed')
+  async update(
+    id: string,
+    updateDto: UpdateProductDto,
+    user: User,
+  ): Promise<IResponse<Product>> {
+    const { data } = await this.findOne(id)
+    if (user._id.toString() !== data.userId.toString())
+      throw new UnauthorizedException('You are not owner of this product')
 
     return {
-      status: 200,
+      status: 204,
       message: 'The product has been successfully updated.',
-      data: updatedProduct,
+      data: await this.productModel.findByIdAndUpdate(
+        id,
+        {
+          updatedAt: new Date(),
+          ...updateDto,
+        },
+        {
+          new: true,
+        },
+      ),
     }
   }
 
-  async delete(id: string): Promise<IResponse<Product>> {
-    const deletedProduct = await this.productModel.findByIdAndDelete(id)
-    if (!deletedProduct)
-      throw new Error('Product has been deleted or not found')
+  async delete(id: string, user: User): Promise<IResponse<Product>> {
+    const { data } = await this.findOne(id)
+    if (user._id.toString() !== data.userId.toString())
+      throw new UnauthorizedException('You are not owner of this product')
 
     return {
-      status: 200,
+      status: 202,
       message: 'The product has been successfully deleted.',
-      data: deletedProduct,
+      data: await this.productModel.findByIdAndDelete(id),
     }
   }
 }

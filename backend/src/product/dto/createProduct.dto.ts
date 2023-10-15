@@ -11,7 +11,7 @@ import {
 } from 'class-validator'
 import { Category, Tag } from '../schemas/enum'
 
-export default class CreateDto {
+export default class CreateProductDto {
   @ApiProperty({ description: 'The name of the product' })
   @IsNotEmpty()
   @IsString()

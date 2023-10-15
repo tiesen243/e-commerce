@@ -10,10 +10,10 @@ import { Model } from 'mongoose'
 
 import { Role } from '../auth/schemas/enum'
 import { User } from '../auth/schemas/user.shema'
-import { IResponse } from '../types'
 import ChangePasswordDto from './dto/changePassword.dto'
-import UpdateDto from './dto/update.dto'
 import UpdateRoleDto from './dto/updateRole.dto'
+import UpdateUserDto from './dto/updateUser.dto'
+import { IResponse } from '../utils/resreq.interface'
 
 @Injectable()
 export class UserService {
@@ -68,7 +68,10 @@ export class UserService {
     }
   }
 
-  async updateInfo(updateDto: UpdateDto, user: User): Promise<IResponse<User>> {
+  async updateInfo(
+    updateDto: UpdateUserDto,
+    user: User,
+  ): Promise<IResponse<User>> {
     console.log(updateDto)
     const isMatch: boolean = await bcrypt.compare(
       updateDto.password,

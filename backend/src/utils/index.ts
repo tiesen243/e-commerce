@@ -1,40 +1,33 @@
-import {
-  DocumentBuilder,
-  OpenAPIObject,
-  SwaggerCustomOptions,
-} from '@nestjs/swagger'
+import { ValidationPipe } from '@nestjs/common'
+import { NestExpressApplication } from '@nestjs/platform-express'
+import { SwaggerModule } from '@nestjs/swagger'
+import { NextFunction, Request, Response } from 'express'
+import helmet from 'helmet'
+import { join } from 'path'
+import { config, options } from './swagger'
 
-// Swagger
-const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
-  .setTitle('Yuki API')
-  .setDescription('Restful API for Yuki Shop')
-  .setVersion('1.0')
-  .setContact('Tiesen', 'https://tiesen.id.vn', 'ttien56906@gmail.com')
-  .setLicense('MIT', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-  .setTermsOfService('https://www.youtube.com/watch?v=qWNQUvIk954')
-  .addBasicAuth(
-    {
-      type: 'http',
-      scheme: 'bearer',
-      description: 'Please enter your token',
-      bearerFormat: 'JWT',
-      name: 'Authorization',
-      in: 'header',
-    },
-    'JWT-Auth',
-  )
-  .addTag('auth', 'Authentications API')
-  .addTag('user', 'User API')
-  .addTag('product', 'Product API')
-  .build()
+const ConfigApp = (app: NestExpressApplication) => {
+  // Config
+  app.useGlobalPipes(new ValidationPipe({ transform: true }))
 
-const options: SwaggerCustomOptions = {
-  swaggerOptions: {
-    persistAuthorization: true,
-  },
-  customSiteTitle: 'Yuki API',
-  customfavIcon:
-    'https://raw.githubusercontent.com/tiesen243/albums/main/favicon.ico',
+  // CORS
+  app.enableCors()
+  if (process.env.NODE_ENV !== 'development') app.use(helmet())
+
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    req.headers['if-none-match'] = 'no-match-for-this'
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')
+    next()
+  })
+
+  // Swagger
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('api-docs', app, document, options)
+  app.useStaticAssets(join(__dirname, '..', 'node_modules/swagger-ui-dist'), {
+    index: false,
+  })
 }
 
-export { config, options }
+export default ConfigApp

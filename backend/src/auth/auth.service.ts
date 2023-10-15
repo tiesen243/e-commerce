@@ -13,7 +13,7 @@ import * as bcrypt from 'bcrypt'
 import { User } from './schemas/user.shema'
 import RegisterDto from './dto/register.dto'
 import LoginDto from './dto/login.dto'
-import { IResponse } from '../types'
+import { IResponse } from '../utils/resreq.interface'
 
 @Injectable()
 export class AuthService {
