@@ -14,7 +14,6 @@ import UpdateProductDto from './dto/updateProduct.dto'
 import { Product } from './schemas/product.schema'
 import QueryDto from './dto/query.dto'
 import { IResponse } from '../utils/resreq.interface'
-import { Category } from './schemas/enum'
 
 @Injectable()
 export class ProductService {
@@ -45,10 +44,16 @@ export class ProductService {
         message: 'No products found',
       })
 
+    const totalPage: number = Math.ceil(
+      (await this.productModel.countDocuments()) / limit,
+    )
+
     return {
       statusCode: 200,
       message: 'All products has been successfully retrieved.',
       data: allProducts,
+      page,
+      totalPage,
     }
   }
 
