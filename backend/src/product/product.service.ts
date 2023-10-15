@@ -26,34 +26,13 @@ export class ProductService {
     const { limit, page, keyword, code, category, tags } = q
     const skip: number = (page - 1) * limit
 
-    const name = keyword
-      ? {
-          name: {
-            $regex: keyword,
-            $options: 'i',
-          },
-        }
-      : {}
-
-    const productCode = code
-      ? {
-          code: {
-            $gte: code,
-            $lte: code,
-          },
-        }
-      : {}
-
-    const productCategory = category
-      ? {
-          category: {
-            $regex: category,
-            $options: 'i',
-          },
-        }
-      : {}
-
+    // Search by name, code, category, tags
+    const name = keyword ? { name: { $regex: keyword, $options: 'i' } } : {}
+    const productCode = code ? { code: { $gte: code, $lte: code } } : {}
     const productTags = tags ? { tags: { $in: tags } } : {}
+    const productCategory = category
+      ? { category: { regex: category, $options: 'i' } }
+      : {}
 
     const allProducts = await this.productModel
       .find({ ...productCode, ...name, ...productCategory, ...productTags })
