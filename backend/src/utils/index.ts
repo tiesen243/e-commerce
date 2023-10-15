@@ -25,9 +25,12 @@ const ConfigApp = (app: NestExpressApplication) => {
   // Swagger
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api-docs', app, document, options)
-  app.useStaticAssets(join(__dirname, '..', 'node_modules/swagger-ui-dist'), {
-    index: false,
-  })
+  app.useStaticAssets(
+    join(__dirname, '..', '..', 'node_modules/swagger-ui-dist'),
+    {
+      index: false,
+    },
+  )
 }
 
 export default ConfigApp
