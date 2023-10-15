@@ -12,7 +12,15 @@ const ConfigApp = (app: NestExpressApplication) => {
 
   // CORS
   app.enableCors()
-  if (process.env.NODE_ENV !== 'development') app.use(helmet())
+  if (process.env.NODE_ENV !== 'development')
+    app.use(
+      helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+          'img-src': ["'self'", 'https:', 'data:'],
+        },
+      }),
+    )
 
   app.use((req: Request, res: Response, next: NextFunction) => {
     req.headers['if-none-match'] = 'no-match-for-this'
