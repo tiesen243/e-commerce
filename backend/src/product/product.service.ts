@@ -108,19 +108,20 @@ export class ProductService {
     if (user._id.toString() !== data.userId.toString())
       throw new UnauthorizedException('You are not owner of this product')
 
+    await this.productModel.findByIdAndUpdate(
+      id,
+      {
+        updatedAt: new Date(),
+        ...updateDto,
+      },
+      {
+        new: true,
+      },
+    )
+
     return {
       statusCode: 204,
       message: 'The product has been successfully updated.',
-      data: await this.productModel.findByIdAndUpdate(
-        id,
-        {
-          updatedAt: new Date(),
-          ...updateDto,
-        },
-        {
-          new: true,
-        },
-      ),
     }
   }
 
@@ -129,10 +130,10 @@ export class ProductService {
     if (user._id.toString() !== data.userId.toString())
       throw new UnauthorizedException('You are not owner of this product')
 
+    await this.productModel.findByIdAndDelete(id)
     return {
-      statusCode: 202,
+      statusCode: 204,
       message: 'The product has been successfully deleted.',
-      data: await this.productModel.findByIdAndDelete(id),
     }
   }
 }

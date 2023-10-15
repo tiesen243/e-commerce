@@ -62,9 +62,8 @@ export class UserService {
     if (!userUpdate) throw new NotFoundException('User not found')
 
     return {
-      statusCode: 200,
+      statusCode: 204,
       message: 'Change role successfully',
-      data: userUpdate,
     }
   }
 
@@ -72,7 +71,6 @@ export class UserService {
     updateDto: UpdateUserDto,
     user: User,
   ): Promise<IResponse<User>> {
-    console.log(updateDto)
     const isMatch: boolean = await bcrypt.compare(
       updateDto.password,
       user.password,
@@ -94,9 +92,8 @@ export class UserService {
     if (!updateUser) throw new NotFoundException('User not found')
 
     return {
-      statusCode: 200,
+      statusCode: 204,
       message: 'Update user info successfully',
-      data: updateUser,
     }
   }
 
@@ -126,9 +123,8 @@ export class UserService {
     if (!updatePassword) throw new NotFoundException('User not found')
 
     return {
-      statusCode: 200,
+      statusCode: 204,
       message: 'Change password successfully',
-      data: updatePassword,
     }
   }
 
@@ -137,9 +133,8 @@ export class UserService {
     if (!delUser) throw new NotFoundException('User not found')
 
     return {
-      statusCode: 200,
+      statusCode: 204,
       message: 'Delete user successfully',
-      data: delUser,
     }
   }
 
@@ -151,9 +146,8 @@ export class UserService {
     if (!delUser) throw new NotFoundException('User not found')
 
     return {
-      statusCode: 200,
+      statusCode: 204,
       message: 'Delete user successfully',
-      data: delUser,
     }
   }
 }

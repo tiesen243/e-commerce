@@ -43,9 +43,9 @@ export class AuthService {
     const token: string = this.jwtService.sign({ id: newUser._id })
 
     return {
-      data: { token },
-      message: 'User created successfully',
       statusCode: 201,
+      message: 'User created successfully',
+      data: { token },
     }
   }
 
@@ -60,9 +60,9 @@ export class AuthService {
     const token: string = this.jwtService.sign({ id: user._id })
 
     return {
-      data: { token },
-      message: 'User logged in successfully',
       statusCode: 201,
+      message: 'User logged in successfully',
+      data: { token },
     }
   }
 }

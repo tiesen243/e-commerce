@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
@@ -15,6 +16,7 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiCreatedResponse,
+  ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
@@ -68,11 +70,11 @@ export class ProductController {
   }
 
   @Put(':id')
+  @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiOkResponse({
+  @ApiNoContentResponse({
     description: 'The product has been successfully updated.',
-    type: Product,
   })
   @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
   @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
@@ -85,11 +87,11 @@ export class ProductController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiOkResponse({
+  @ApiNoContentResponse({
     description: 'The product has been successfully deleted.',
-    type: Product,
   })
   @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
   @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
