@@ -55,7 +55,7 @@ export class ProductService {
       })
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'All products has been successfully retrieved.',
       data: allProducts,
     }
@@ -70,7 +70,7 @@ export class ProductService {
       })
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'The product has been successfully retrieved.',
       data: product,
     }
@@ -93,7 +93,7 @@ export class ProductService {
     if (!newProduct) throw new BadRequestException('Create product failed')
 
     return {
-      status: 201,
+      statusCode: 201,
       message: 'The product has been successfully created.',
       data: newProduct,
     }
@@ -109,7 +109,7 @@ export class ProductService {
       throw new UnauthorizedException('You are not owner of this product')
 
     return {
-      status: 204,
+      statusCode: 204,
       message: 'The product has been successfully updated.',
       data: await this.productModel.findByIdAndUpdate(
         id,
@@ -130,7 +130,7 @@ export class ProductService {
       throw new UnauthorizedException('You are not owner of this product')
 
     return {
-      status: 202,
+      statusCode: 202,
       message: 'The product has been successfully deleted.',
       data: await this.productModel.findByIdAndDelete(id),
     }

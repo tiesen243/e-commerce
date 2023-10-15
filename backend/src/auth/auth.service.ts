@@ -45,7 +45,7 @@ export class AuthService {
     return {
       data: { token },
       message: 'User created successfully',
-      status: 201,
+      statusCode: 201,
     }
   }
 
@@ -62,7 +62,7 @@ export class AuthService {
     return {
       data: { token },
       message: 'User logged in successfully',
-      status: 201,
+      statusCode: 201,
     }
   }
 }

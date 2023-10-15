@@ -26,7 +26,7 @@ export class UserService {
     if (!user) throw new NotFoundException('User not found')
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'Get user info successfully',
       data: user,
     }
@@ -40,7 +40,7 @@ export class UserService {
     if (!users) throw new NotFoundException('User not found')
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'Get all user successfully',
       data: users,
     }
@@ -62,7 +62,7 @@ export class UserService {
     if (!userUpdate) throw new NotFoundException('User not found')
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'Change role successfully',
       data: userUpdate,
     }
@@ -94,7 +94,7 @@ export class UserService {
     if (!updateUser) throw new NotFoundException('User not found')
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'Update user info successfully',
       data: updateUser,
     }
@@ -126,7 +126,7 @@ export class UserService {
     if (!updatePassword) throw new NotFoundException('User not found')
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'Change password successfully',
       data: updatePassword,
     }
@@ -137,7 +137,7 @@ export class UserService {
     if (!delUser) throw new NotFoundException('User not found')
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'Delete user successfully',
       data: delUser,
     }
@@ -151,7 +151,7 @@ export class UserService {
     if (!delUser) throw new NotFoundException('User not found')
 
     return {
-      status: 200,
+      statusCode: 200,
       message: 'Delete user successfully',
       data: delUser,
     }
