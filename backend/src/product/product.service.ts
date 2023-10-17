@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model } from 'mongoose'
+import { Model, ObjectId } from 'mongoose'
 
 import { Role } from '../auth/schemas/enum'
 import { User } from '../auth/schemas/user.shema'
@@ -54,6 +54,20 @@ export class ProductService {
       data: allProducts,
       page,
       totalPage,
+    }
+  }
+
+  async findAllByUser(user: User): Promise<IResponse<Product[]>> {
+    const allProducts = await this.productModel
+      .find({ userId: user._id })
+      .exec()
+    if (allProducts.length === 0)
+      throw new NotFoundException('No products found')
+
+    return {
+      statusCode: 200,
+      message: 'All products has been successfully retrieved.',
+      data: allProducts,
     }
   }
 

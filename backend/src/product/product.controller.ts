@@ -44,6 +44,18 @@ export class ProductController {
     return await this.productService.findAll(q)
   }
 
+  @Get('/my-products')
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth('JWT-Auth')
+  @ApiOkResponse({
+    description: 'All products has been successfully retrieved.',
+    type: [Product],
+  })
+  @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
+  async findAllByUser(@Req() req: IRequest): Promise<IResponse<Product[]>> {
+    return await this.productService.findAllByUser(req.user)
+  }
+
   @Get(':id')
   @ApiOkResponse({
     description: 'The product has been successfully retrieved.',
