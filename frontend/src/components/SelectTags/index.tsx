@@ -1,11 +1,10 @@
 import StyledTextField from '@/components/StyledTextField'
-import { Tag } from '@/types/product.type'
+import { Prod, Tag } from '@/types/product.type'
 import { MenuItem } from '@mui/material'
-import { Data } from './page'
 
 interface Props {
-  data: Data
-  setData: React.Dispatch<React.SetStateAction<Data>>
+  data: Prod
+  setData: React.Dispatch<React.SetStateAction<Prod>>
 }
 const SelectTags: React.FC<Props> = ({ data, setData }) => (
   <StyledTextField

@@ -100,7 +100,7 @@ const Page: NextPage = () => {
           </Typography>
         )}
 
-        <img src={preview || ''} className="w-32" />
+        <img src={preview || ''} alt='preview' className="w-32" />
       </section>
 
       <StyledTextField

@@ -1,4 +1,3 @@
-import { getAnalytics } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 
@@ -13,7 +12,6 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
-export const analytics = getAnalytics(app)
 export const storage = getStorage(app)
 
 export const uploadImage = async (image: File | null, name: string): Promise<string> => {
@@ -28,13 +26,4 @@ export const deleteImage = async (name: string) => {
   await deleteObject(imageRef).catch(() => { })
 }
 
-export const show = () => {
-  console.log(firebaseConfig.apiKey)
-  console.log(firebaseConfig.authDomain)
-  console.log(firebaseConfig.projectId)
-  console.log(firebaseConfig.storageBucket)
-  console.log(firebaseConfig.messagingSenderId)
-  console.log(firebaseConfig.appId)
-  console.log(firebaseConfig.measurementId)
-  console.log(process.env)
-}
+
