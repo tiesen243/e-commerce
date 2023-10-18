@@ -1,13 +1,20 @@
 import useSWR from 'swr'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetcher = async (url: string) => {
+  const res = await fetch(url, { headers: { 'Content-Type': 'application/json' } })
+  const data = await res.json()
+  if (data.statusCode !== 200) throw new Error(data.message)
+  return data
+}
 
-export const useProduct = (id: string) => {
-  const { data, error } = useSWR(`/api/product/${id}`, fetcher)
+const useProduct = (id: string) => {
+  const { data, error, isLoading } = useSWR(`/api/product/${id}`, fetcher)
 
   return {
-    product: data,
-    isLoading: !error && !data,
-    isError: error,
+    product: data?.product,
+    isLoading,
+    error,
   }
 }
+
+export default useProduct

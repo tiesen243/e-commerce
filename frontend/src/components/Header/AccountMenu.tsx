@@ -47,11 +47,11 @@ const AccountMenu: React.FC = () => {
       >
         <StyledMenuItem text={userName} disabled />
         <StyledMenuItem icon={<Avatar />} text="Profile" href="profile" />
-        <StyledMenuItem icon={<ShoppingCartRounded />} text="My Cart" href="cart" />
+        <StyledMenuItem icon={<ShoppingCartRounded />} text="My Cart" href="/cart" />
         {role === 'seller' || role === 'admin' ? (
-          <StyledMenuItem icon={<Inventory2Rounded />} text="Product" href="product" />
+          <StyledMenuItem icon={<Inventory2Rounded />} text="Product" href="/product" />
         ) : null}
-        {role === 'admin' && <StyledMenuItem icon={<AdminPanelSettingsRounded />} text="Admin" href="admin" />}
+        {role === 'admin' && <StyledMenuItem icon={<AdminPanelSettingsRounded />} text="Admin" href="/admin" />}
         <Divider />
         <StyledMenuItem icon={<Logout />} text="Logout" onClick={() => dispatch(logout())} />
       </Menu>

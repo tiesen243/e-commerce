@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import StyledTextField from '@/components/StyledTextField'
+import { ErrorToast, SuccessToast } from '@/utils/notify'
 
 type Data = {
   email: string
@@ -30,9 +31,12 @@ const Page: NextPage = () => {
       body: JSON.stringify(data),
     }).catch((err) => err.response)
     const json = await res.json()
-    if (json.statusCode !== 201) setError(json.message)
-    else {
+    if (json.statusCode !== 201) {
+      setError(json.message)
+      ErrorToast('Login failed')
+    } else {
       setCookie('token', json.data.token, { maxAge: 60 * 60 * 24 * 7 })
+      SuccessToast('Login success')
       push('/')
     }
   }

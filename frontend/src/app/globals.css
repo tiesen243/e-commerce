@@ -6,6 +6,15 @@
   body {
     @apply bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-primary-light transition-colors duration-300 ease-linear;
   }
+  ::-webkit-scrollbar {
+    @apply w-1 h-1;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-blue-400;
+  }
 }
 
 @layer components {

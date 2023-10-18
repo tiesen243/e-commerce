@@ -62,3 +62,30 @@ export enum Tag {
   Yuri = 'Yuri',
   Yaoi = 'Yaoi',
 }
+
+
+
+// Product type
+export default interface Product {
+  _id: string
+  code: number
+  name: string
+  description: string
+  image: string
+  category: Category
+  tags: Tag[]
+  price: number
+  stock: number
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface Prod {
+  name: string
+  image: File | null
+  description: string
+  price: number
+  stock: number
+  category: Category
+  tags: Tag[]
+}

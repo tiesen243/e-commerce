@@ -27,8 +27,8 @@ export default class UpdateProductDto {
   })
   @IsOptional()
   @IsString()
-  @Length(4, 200, {
-    message: 'The description must be between 4 and 200 characters',
+  @Length(4, 1000, {
+    message: 'The description must be between 4 and 1000 characters',
   })
   readonly description: string
 

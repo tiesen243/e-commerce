@@ -16,6 +16,9 @@ const darkPalette = {
     main: '#242526',
     sub: '#000428',
   },
+  error: {
+    main: '#f44336',
+  },
 }
 
 const lightPalette = {

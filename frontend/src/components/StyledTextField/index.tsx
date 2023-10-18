@@ -1,5 +1,5 @@
-import { NextPage } from 'next'
 import { TextField, TextFieldProps } from '@mui/material'
+import { NextPage } from 'next'
 
 const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => {
   return (
@@ -16,8 +16,8 @@ const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => {
             borderColor: 'primary.hover',
             transition: 'border-color 0.3s ease-in-out',
           },
-          '&.Mui-focused fieldset': {
-            borderColor: 'primary.main',
+          '&.Mui-focused fprimt': {
+            borderColor: 'secondary.main',
           },
           '&:hover input': {
             backgroundColor: 'primary.hover',
@@ -25,11 +25,14 @@ const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => {
             transition: 'background-color 0.3s ease-in-out',
           },
           '&.Mui-focused input': {
-            backgroundColor: 'secondary.sub',
+            backgroundColor: 'secondary.main',
           },
         },
       }}
+      autoComplete='off'
+      autoCorrect='off'
       variant="outlined"
+      {...(props.type === 'number' && { inputProps: { min: 0 } })}
       InputProps={{
         className: 'text-primary-dark dark:text-primary-light',
       }}
