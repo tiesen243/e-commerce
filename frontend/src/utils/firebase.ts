@@ -3,13 +3,13 @@ import { initializeApp } from 'firebase/app'
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyC3KrhnqMDy2ocz8O-hFuWYLioNpJ85wNA',
-  authDomain: 'e-comerce-dc328.firebaseapp.com',
-  projectId: 'e-comerce-dc328',
-  storageBucket: 'e-comerce-dc328.appspot.com',
-  messagingSenderId: '716969826436',
-  appId: '1:716969826436:web:b79af92b089f3a1213cad1',
-  measurementId: 'G-WDLNR19KSX',
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGINGSENDERID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 }
 
 const app = initializeApp(firebaseConfig)
@@ -25,5 +25,16 @@ export const uploadImage = async (image: File | null, name: string): Promise<str
 
 export const deleteImage = async (name: string) => {
   const imageRef = ref(storage, `product/${name.replace(/\s/g, '')}`)
-  await deleteObject(imageRef).catch(() => {})
+  await deleteObject(imageRef).catch(() => { })
+}
+
+export const show = () => {
+  console.log(firebaseConfig.apiKey)
+  console.log(firebaseConfig.authDomain)
+  console.log(firebaseConfig.projectId)
+  console.log(firebaseConfig.storageBucket)
+  console.log(firebaseConfig.messagingSenderId)
+  console.log(firebaseConfig.appId)
+  console.log(firebaseConfig.measurementId)
+  console.log(process.env)
 }

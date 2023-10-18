@@ -63,8 +63,6 @@ export enum Tag {
   Yaoi = 'Yaoi',
 }
 
-
-
 // Product type
 export default interface Product {
   _id: string

@@ -74,7 +74,7 @@ const Page: NextPage = () => {
 
   return (
     <Box className="flex flex-col gap-4" component="form" autoComplete="off" onSubmit={handleSubmit}>
-      <Typography variant="h1" textAlign='center' marginBottom={4}>
+      <Typography variant="h1" textAlign="center" marginBottom={4}>
         Edit Product {prod.name}
       </Typography>
 

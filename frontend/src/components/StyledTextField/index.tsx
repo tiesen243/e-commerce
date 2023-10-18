@@ -29,8 +29,8 @@ const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => {
           },
         },
       }}
-      autoComplete='off'
-      autoCorrect='off'
+      autoComplete="off"
+      autoCorrect="off"
       variant="outlined"
       {...(props.type === 'number' && { inputProps: { min: 0 } })}
       InputProps={{

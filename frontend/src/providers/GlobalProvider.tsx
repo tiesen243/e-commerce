@@ -6,7 +6,7 @@ import { NextPage } from 'next'
 const GlobalProvider: NextPage<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoading } = useUser()
 
-  return !isLoading ? <main>{children}</main> : <div>Loading...</div>
+  return !isLoading ? <main>{children}</main> : <main>Loading...</main>
 }
 
 export default GlobalProvider

@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation'
 import { useDropzone } from 'react-dropzone'
 
 const Page: NextPage = () => {
-  const [data, setData] = useState<Prod>({
+  const [prod, setProd] = useState<Prod>({
     name: '',
     description: '',
     image: null,
@@ -34,7 +34,7 @@ const Page: NextPage = () => {
       const file = new FileReader()
       file.onload = () => setPreview(file.result as string)
       file.readAsDataURL(acceptedFiles[0])
-      setData({ ...data, image: acceptedFiles[0] })
+      setProd((prev) => ({ ...prev, image: acceptedFiles[0] }))
     }
   }, [])
 
@@ -43,14 +43,15 @@ const Page: NextPage = () => {
   const { push } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const url = await uploadImage(data.image, data.name)
+    const url = await uploadImage(prod.image, prod.name)
 
     const res = await fetch('/api/product', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getCookie('token')}` },
-      body: JSON.stringify({ ...data, image: url }),
+      body: JSON.stringify({ ...prod, image: url }),
     })
-    if (res.status !== 201) console.log(await res.text())
+    const { message } = await res.json()
+    if (res.status !== 201) ErrorToast(message.join(', '))
     else {
       SuccessToast('Product created successfully')
       push('/product')
@@ -66,8 +67,8 @@ const Page: NextPage = () => {
       <StyledTextField
         required
         label="Name"
-        value={data.name}
-        onChange={(e) => setData({ ...data, name: e.target.value })}
+        value={prod.name}
+        onChange={(e) => setProd({ ...prod, name: e.target.value })}
       />
 
       <section
@@ -90,36 +91,36 @@ const Page: NextPage = () => {
 
       <StyledTextField
         label="Description"
-        value={data.description}
-        onChange={(e) => setData({ ...data, description: e.target.value })}
+        value={prod.description}
+        onChange={(e) => setProd({ ...prod, description: e.target.value })}
         required
       />
       <StyledTextField
         label="Price"
         type="number"
-        value={data.price}
-        onChange={(e) => setData({ ...data, price: Number(e.target.value) })}
+        value={prod.price}
+        onChange={(e) => setProd({ ...prod, price: Number(e.target.value) })}
         required
       />
       <StyledTextField
         label="Stock"
         type="number"
-        value={data.stock}
-        onChange={(e) => setData({ ...data, stock: Number(e.target.value) })}
+        value={prod.stock}
+        onChange={(e) => setProd({ ...prod, stock: Number(e.target.value) })}
         required
       />
 
       <CustomSelect
         label="Category"
         data={Object.values(Category)}
-        value={data.category}
+        value={prod.category}
         onChange={(e) => {
-          setData({ ...data, category: e.target.value as Category })
+          setProd({ ...prod, category: e.target.value as Category })
         }}
         required
       />
 
-      <SelectTags data={data} setData={setData} />
+      <SelectTags data={prod} setData={setProd} />
 
       <Button variant="contained" color="secondary" type="submit">
         Submit
