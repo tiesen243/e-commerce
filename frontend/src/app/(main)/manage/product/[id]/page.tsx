@@ -43,7 +43,7 @@ const Page: NextPage = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-  const { push, back } = useRouter()
+  const { back } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (isChange) deleteImage(oldImage)
@@ -65,7 +65,7 @@ const Page: NextPage = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch(`/api/v1/product/${id}`)
+      const res = await fetch(`/api/v1/product/update/${id}`)
       const { data } = await res.json()
       setProd(data)
       setPreview(data.image)

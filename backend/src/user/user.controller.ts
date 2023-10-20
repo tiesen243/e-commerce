@@ -33,7 +33,7 @@ import { IRequest, IResponse } from '../utils/resreq.interface'
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('/info')
+  @Get('/me')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiOperation({

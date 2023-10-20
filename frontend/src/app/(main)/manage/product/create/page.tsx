@@ -45,7 +45,7 @@ const Page: NextPage = () => {
     e.preventDefault()
     const url = await uploadImage(prod.image, prod.name)
 
-    const res = await fetch('/api/v1/product', {
+    const res = await fetch('/api/v1/product/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${data?.token}` },
       body: JSON.stringify({ ...prod, image: url }),

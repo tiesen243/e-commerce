@@ -49,17 +49,6 @@ export class ProductController {
     return await this.productService.findAll(q)
   }
 
-  @Get(':id')
-  @ApiOperation({ summary: 'Get product by id' })
-  @ApiOkResponse({
-    description: 'The product has been successfully retrieved.',
-    type: Product,
-  })
-  @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
-  async findOne(@Param('id') id: string): Promise<IResponse<Product>> {
-    return await this.productService.findOne(id)
-  }
-
   @Get('/me')
   @ApiOperation({ summary: 'Get all products of user' })
   @UseGuards(AuthGuard('jwt'))
@@ -71,6 +60,17 @@ export class ProductController {
   @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
   async findAllByUser(@Req() req: IRequest): Promise<IResponse<Product[]>> {
     return await this.productService.findAllByUser(req.user)
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get product by id' })
+  @ApiOkResponse({
+    description: 'The product has been successfully retrieved.',
+    type: Product,
+  })
+  @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
+  async findOne(@Param('id') id: string): Promise<IResponse<Product>> {
+    return await this.productService.findOne(id)
   }
 
   @Post('/create')

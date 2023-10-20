@@ -1,13 +1,13 @@
 'use client'
 
+import Loading from '@/components/Loading'
 import StyledTextField from '@/components/StyledTextField'
 import { SuccessToast } from '@/utils/notify'
 import { Box, Button, FormHelperText, Typography } from '@mui/material'
 import { NextPage } from 'next'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Loading from '@/components/Loading'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 const Page: NextPage = () => {
   const [data, setdata] = useState({
@@ -28,7 +28,7 @@ const Page: NextPage = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
-    if (res.status !== 201) {
+    if (res.status !== 204) {
       const { message } = await res.json()
       setError(message)
       setIsSubmitting(false)
@@ -43,6 +43,7 @@ const Page: NextPage = () => {
       <Typography variant="h1" className="text-center">
         Register New User
       </Typography>
+
       <StyledTextField
         label="User Name"
         type="text"
@@ -84,9 +85,9 @@ const Page: NextPage = () => {
         Register
       </Button>
       {isSubmitting && (
-        <div className="fixed inset-0 bg-black/50">
+        <Box className="fixed inset-0 bg-black/50">
           <Loading text="Registering..." />
-        </div>
+        </Box>
       )}
     </Box>
   )

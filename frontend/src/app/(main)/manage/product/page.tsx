@@ -3,11 +3,11 @@
 import { DataGrid } from '@mui/x-data-grid'
 import { NextPage } from 'next'
 
-import { useMyProduct } from '@/hooks/useMyProduct'
-import { col } from './Head'
-import { Button, CircularProgress, Typography } from '@mui/material'
-import Link from 'next/link'
 import Loading from '@/components/Loading'
+import { useMyProduct } from '@/hooks/useMyProduct'
+import { Button, Typography } from '@mui/material'
+import Link from 'next/link'
+import { col } from './Head'
 
 const Page: NextPage = () => {
   const { products, isLoading, error } = useMyProduct()
@@ -18,7 +18,7 @@ const Page: NextPage = () => {
         <Typography variant="h1" fontSize={69}>
           {error.message}
         </Typography>
-        <Button component={Link} href="/shop/product/create" color="info" variant="contained">
+        <Button component={Link} href="/manage/product/create" color="info" variant="contained">
           Create Product
         </Button>
       </div>

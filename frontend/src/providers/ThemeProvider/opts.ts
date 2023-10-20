@@ -6,6 +6,7 @@ const darkTheme = {
     main: '#242526',
     sub: '#3a3b3c',
     hover: '#4e4f50  ',
+    focus: '#ffffff',
   },
   info: {
     main: '#6190E8',
@@ -30,6 +31,7 @@ const lightTheme = {
     main: '#ffffff',
     sub: '#f2f2f2',
     hover: '#e3e5e8',
+    focus: '#000000',
   },
   info: {
     main: '#6190E8',

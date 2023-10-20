@@ -21,7 +21,7 @@ const opts: NextAuthOptions = {
         }).then((res) => res.json())
         if (loginRes.statusCode !== 201) throw new Error(loginRes.message)
 
-        const userRes = await fetch('https://yuki-api.vercel.app/user', {
+        const userRes = await fetch('https://yuki-api.vercel.app/user/info', {
           method: 'GET',
           headers: { Authorization: `Bearer ${loginRes.data.token}` },
         }).then((res) => res.json())

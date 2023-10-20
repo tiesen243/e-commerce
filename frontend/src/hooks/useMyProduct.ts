@@ -22,11 +22,9 @@ export const useMyProduct = (): {
 } => {
   const { data: session } = useSession()
 
-  const { data, isLoading, error } = useSWR(
-    '/api/v1/product/my-products',
-    (url: string) => fetcher(url, session?.token),
-    { refreshInterval: 500 },
-  )
+  const { data, isLoading, error } = useSWR('/api/v1/product/me', (url: string) => fetcher(url, session?.token), {
+    refreshInterval: 500,
+  })
 
   return {
     products: data,

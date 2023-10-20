@@ -25,8 +25,9 @@ const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => (
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
           borderColor: 'transparent',
-          '&:hover': { borderColor: 'transparent' },
-          '&.Mui-focused': { borderColor: 'transparent' },
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: 'secondary.focus',
         },
       },
     }}
