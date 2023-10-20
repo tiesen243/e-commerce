@@ -38,9 +38,10 @@ const SelectTags: React.FC<Props> = ({ data, setData }) => (
       <MenuItem
         key={tag}
         value={tag}
+        // glow when hover
         className={`${
           data.tags.includes(tag) ? 'bg-[#ebf5ff] dark:bg-[#222e3b]' : 'bg-transparent'
-        } transition-colors duration-200 ease-linear`}
+        } hover:bg-[#ebf5ff] dark:hover:bg-[#222e3b] transition-colors duration-100 ease-linear`}
       >
         {tag}
       </MenuItem>

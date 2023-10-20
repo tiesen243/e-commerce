@@ -31,7 +31,7 @@ const Page: NextPage = () => {
         <Typography variant="h1" fontSize={40}>
           My Product List
         </Typography>
-        <Button component={Link} href="/shop/product/create" variant="contained" color="info">
+        <Button component={Link} href="/manage/product/create" variant="contained" color="info">
           Create Product
         </Button>
       </section>

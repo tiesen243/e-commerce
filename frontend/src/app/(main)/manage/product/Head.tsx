@@ -19,20 +19,21 @@ export const col: GridColDef[] = [
     renderCell: (params: GridRenderCellParams) => {
       const { data } = useSession()
       const handleDelete = async (id: string, fileName: string) => {
-        const res = await fetch(`/api/v1/product/${id}`, {
+        const res = await fetch(`/api/v1/product/delete/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${data?.token}`,
           },
         })
-        await deleteImage(fileName)
-        if (res.status === 204) SuccessToast('Product deleted')
-        else ErrorToast('Something went wrong')
+        if (res.status === 204) {
+          await deleteImage(fileName)
+          SuccessToast('Product deleted')
+        } else ErrorToast(await res.text())
       }
       return (
         <Box className="flex justify-between items-center w-full">
-          <Button variant="contained" color="info" component={Link} href={`/shop/product/${params.row._id}`}>
+          <Button variant="contained" color="info" component={Link} href={`/manage/product/${params.row._id}`}>
             Edit
           </Button>
           <Button

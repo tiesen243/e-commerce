@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react'
 const Page: NextPage = () => {
   const { data } = useSession()
 
-  return <div>{data?.user.userName}</div>
+  return <main>{data?.user.userName}</main>
 }
 
 export default Page

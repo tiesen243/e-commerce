@@ -73,11 +73,7 @@ const Page: NextPage = () => {
         </Button>
       </Box>
 
-      {isSubmitting && (
-        <div className="fixed inset-0 bg-black/50">
-          <Loading text="Logining..." />
-        </div>
-      )}
+      {isSubmitting && <Loading text="Logining..." />}
     </>
   )
 }

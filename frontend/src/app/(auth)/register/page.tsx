@@ -84,11 +84,7 @@ const Page: NextPage = () => {
       <Button color="info" type="submit">
         Register
       </Button>
-      {isSubmitting && (
-        <Box className="fixed inset-0 bg-black/50">
-          <Loading text="Registering..." />
-        </Box>
-      )}
+      {isSubmitting && <Loading text="Registering..." />}
     </Box>
   )
 }
