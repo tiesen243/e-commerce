@@ -5,7 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
-  Put,
+  Patch,
   Req,
   UseGuards,
 } from '@nestjs/common'
@@ -22,11 +22,11 @@ import {
 } from '@nestjs/swagger'
 
 import { User } from '../auth/schemas/user.shema'
+import { IRequest, IResponse } from '../utils/resreq.interface'
 import ChangePasswordDto from './dto/changePassword.dto'
 import UpdateRoleDto from './dto/updateRole.dto'
 import UpdateUserDto from './dto/updateUser.dto'
 import { UserService } from './user.service'
-import { IRequest, IResponse } from '../utils/resreq.interface'
 
 @Controller('user')
 @ApiTags('user')
@@ -57,7 +57,7 @@ export class UserController {
     return await this.userService.getAllUser(req.user)
   }
 
-  @Put('/update/role')
+  @Patch('/update/role')
   @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
@@ -76,7 +76,7 @@ export class UserController {
     return await this.userService.changeRole(updateRoleDto, req.user)
   }
 
-  @Put('/update/info')
+  @Patch('/update/info')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiOperation({
@@ -97,7 +97,7 @@ export class UserController {
     return await this.userService.updateInfo(updateDto, req.user)
   }
 
-  @Put('/update/password')
+  @Patch('/update/password')
   @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')

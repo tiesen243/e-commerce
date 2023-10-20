@@ -5,8 +5,8 @@ import {
   Get,
   HttpCode,
   Param,
+  Patch,
   Post,
-  Put,
   Query,
   Req,
   UseGuards,
@@ -24,12 +24,12 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 
+import { IRequest, IResponse } from '../utils/resreq.interface'
 import CreateProductDto from './dto/createProduct.dto'
 import QueryDto from './dto/query.dto'
 import UpdateProductDto from './dto/updateProduct.dto'
 import { ProductService } from './product.service'
 import { Product } from './schemas/product.schema'
-import { IRequest, IResponse } from '../utils/resreq.interface'
 
 @Controller('product')
 @ApiTags('product')
@@ -89,7 +89,7 @@ export class ProductController {
     return await this.productService.create(createDto, req.user)
   }
 
-  @Put('/update/:id')
+  @Patch('/update/:id')
   @HttpCode(204)
   @ApiOperation({ summary: 'Update product by id' })
   @UseGuards(AuthGuard('jwt'))

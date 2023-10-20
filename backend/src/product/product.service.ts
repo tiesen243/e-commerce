@@ -5,15 +5,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model, ObjectId } from 'mongoose'
+import { Model } from 'mongoose'
 
 import { Role } from '../auth/schemas/enum'
 import { User } from '../auth/schemas/user.shema'
+import { IResponse } from '../utils/resreq.interface'
 import CreateProductDto from './dto/createProduct.dto'
+import QueryDto from './dto/query.dto'
 import UpdateProductDto from './dto/updateProduct.dto'
 import { Product } from './schemas/product.schema'
-import QueryDto from './dto/query.dto'
-import { IResponse } from '../utils/resreq.interface'
 
 @Injectable()
 export class ProductService {

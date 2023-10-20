@@ -71,12 +71,6 @@ export class UserService {
     updateDto: UpdateUserDto,
     user: User,
   ): Promise<IResponse<User>> {
-    const isMatch: boolean = await bcrypt.compare(
-      updateDto.password,
-      user.password,
-    )
-    if (!isMatch) throw new UnauthorizedException('Password not match')
-
     const newName: string = updateDto.userName || user.userName
     const newAvatar: string = updateDto.avatar || user.avatar
 
