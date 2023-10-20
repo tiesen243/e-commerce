@@ -62,7 +62,7 @@ const Page: NextPage = () => {
         <FormHelperText error>{error}</FormHelperText>
 
         <Typography variant="subtitle2">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <Button variant="text" color="info" onClick={() => push('/register')}>
             Register
           </Button>

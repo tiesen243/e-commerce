@@ -9,7 +9,7 @@ const Header: React.FC = () => {
     <AppBar position="sticky" color="secondary" className="transition-colors duration-300 ease-linear">
       <Toolbar className="flex justify-between">
         <Typography variant="h1" component={Link} href="/shop">
-          Yuki's Shop
+          Yuki&apos;s Shop
         </Typography>
 
         <AccountMenu />

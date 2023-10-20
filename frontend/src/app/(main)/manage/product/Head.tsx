@@ -16,36 +16,38 @@ export const col: GridColDef[] = [
     field: 'action',
     headerName: 'Action',
     width: 200,
-    renderCell: (params: GridRenderCellParams) => {
-      const { data } = useSession()
-      const handleDelete = async (id: string, fileName: string) => {
-        const res = await fetch(`/api/v1/product/delete/${id}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${data?.token}`,
-          },
-        })
-        if (res.status === 204) {
-          await deleteImage(fileName)
-          SuccessToast('Product deleted')
-        } else ErrorToast(await res.text())
-      }
-      return (
-        <Box className="flex justify-between items-center w-full">
-          <Button variant="contained" color="info" component={Link} href={`/manage/product/${params.row._id}`}>
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            component="a"
-            color="error"
-            onClick={() => handleDelete(params.row._id, params.row.name)}
-          >
-            Delete
-          </Button>
-        </Box>
-      )
-    },
+    renderCell: (params: GridRenderCellParams) => <ButtonAction {...params} />,
   },
 ]
+
+const ButtonAction = (params: GridRenderCellParams) => {
+  const { data } = useSession()
+  const handleDelete = async (id: string, fileName: string) => {
+    const res = await fetch(`/api/v1/product/delete/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${data?.token}`,
+      },
+    })
+    if (res.status === 204) {
+      await deleteImage(fileName)
+      SuccessToast('Product deleted')
+    } else ErrorToast(await res.text())
+  }
+  return (
+    <Box className="flex justify-between items-center w-full">
+      <Button variant="contained" color="info" component={Link} href={`/manage/product/${params.row._id}`}>
+        Edit
+      </Button>
+      <Button
+        variant="contained"
+        component="a"
+        color="error"
+        onClick={() => handleDelete(params.row._id, params.row.name)}
+      >
+        Delete
+      </Button>
+    </Box>
+  )
+}

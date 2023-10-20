@@ -73,7 +73,9 @@ const Page: NextPage = () => {
         required
       />
 
-      <FormHelperText error>{typeof error === 'string' ? error : error?.map((e) => <p>* {e}</p>)}</FormHelperText>
+      <FormHelperText error>
+        {typeof error === 'string' ? error : error?.map((e: string, idx: number) => <p key={idx}>* {e}</p>)}
+      </FormHelperText>
 
       <Typography variant="subtitle2">
         Already have an account?{' '}

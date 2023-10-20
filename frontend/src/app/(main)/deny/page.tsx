@@ -8,7 +8,7 @@ const Page: NextPage = () => {
       <Typography variant="h1" fontSize={69}>
         PERMISSION DENIED
       </Typography>
-      <Typography variant="h5">You don't have permission to access this page.</Typography>
+      <Typography variant="h5">You don&apos;t have permission to access this page.</Typography>
 
       <Typography variant="subtitle2">
         Go back to <Link href="/shop">home</Link>

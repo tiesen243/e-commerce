@@ -33,6 +33,7 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     const localTheme = localStorage.getItem('theme') || 'dark'
     document.documentElement.classList.toggle('dark', localTheme === 'dark')
     dispatch(setTheme(localTheme))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <Provider theme={theme}>{children}</Provider>
