@@ -9,7 +9,7 @@ interface Props extends MenuItemProps {
 
 const StyledMenuItem: React.FC<Props> = ({ text, icon, href, ...props }) => {
   return (
-    <MenuItem {...props} {...(href && { component: Link, href })} sx={{ py: 1, px: 2 }}>
+    <MenuItem {...props} {...(href && { component: Link, href })} className="flex items-center gap-4 py-2">
       {icon && <ListItemIcon>{icon}</ListItemIcon>}
       <Typography>{text}</Typography>
     </MenuItem>

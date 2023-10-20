@@ -1,7 +1,7 @@
 'use client'
 
-import Loading from '@/components/Loading'
-import useProduct from '@/hooks/useProduct'
+import { Loading } from '@/components'
+import { useProduct } from '@/hooks'
 import { NextPage } from 'next'
 
 const Page: NextPage = () => {

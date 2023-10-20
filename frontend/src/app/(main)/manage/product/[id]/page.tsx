@@ -7,10 +7,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import CustomSelect from '@/components/CustomSelect'
-import Loading from '@/components/Loading'
-import SelectTags from '@/components/SelectTags'
-import StyledTextField from '@/components/StyledTextField'
+import { CustomSelect, CustomSelectTags, Loading, StyledTextField } from '@/components'
 import { Category, Prod } from '@/types/product.type'
 import { deleteImage, uploadImage } from '@/utils/firebase'
 import { ErrorToast, SuccessToast } from '@/utils/notify'
@@ -153,7 +150,7 @@ const Page: NextPage = () => {
           required
         />
 
-        <SelectTags data={prod} setData={setProd} />
+        <CustomSelectTags data={prod} setData={setProd} />
 
         <Button variant="outlined" color="info" type="submit">
           Update

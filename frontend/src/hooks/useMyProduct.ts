@@ -1,4 +1,5 @@
 import Product from '@/types/product.type'
+import { info } from 'console'
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
@@ -15,7 +16,7 @@ const fetcher = async (url: string, token: string | undefined) => {
   return data
 }
 
-export const useMyProduct = (): {
+const useMyProduct = (): {
   products: Product[]
   isLoading: boolean
   error: Error
@@ -32,3 +33,5 @@ export const useMyProduct = (): {
     error,
   }
 }
+
+export default useMyProduct

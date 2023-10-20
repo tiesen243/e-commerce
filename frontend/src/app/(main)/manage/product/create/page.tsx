@@ -1,5 +1,6 @@
 'use client'
 
+import { ArrowBackIosNewRounded } from '@mui/icons-material'
 import { Box, Button, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
@@ -7,14 +8,10 @@ import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import CustomSelect from '@/components/CustomSelect'
-import Loading from '@/components/Loading'
-import SelectTags from '@/components/SelectTags'
-import StyledTextField from '@/components/StyledTextField'
+import { CustomSelect, CustomSelectTags, Loading, StyledTextField } from '@/components'
 import { Category, Prod } from '@/types/product.type'
 import { uploadImage } from '@/utils/firebase'
 import { ErrorToast, SuccessToast } from '@/utils/notify'
-import { ArrowBackIosNewRounded } from '@mui/icons-material'
 
 const Page: NextPage = () => {
   const { data: user } = useSession()
@@ -135,7 +132,7 @@ const Page: NextPage = () => {
           required
         />
 
-        <SelectTags data={prod} setData={setProd} />
+        <CustomSelectTags data={prod} setData={setProd} />
 
         <Button variant="outlined" color="info" type="submit">
           Create

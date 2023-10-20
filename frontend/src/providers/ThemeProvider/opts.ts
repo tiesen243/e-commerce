@@ -21,6 +21,10 @@ const darkTheme = {
     primary: '#ffffff',
     disabled: '#6b7280',
   },
+  background: {
+    default: '#18191a',
+    paper: '#242526',
+  },
 }
 
 const lightTheme = {
@@ -42,6 +46,10 @@ const lightTheme = {
   text: {
     primary: '#000000',
     disabled: '#6b7280',
+  },
+  background: {
+    default: '#f0f2f5',
+    paper: '#ffffff',
   },
 }
 

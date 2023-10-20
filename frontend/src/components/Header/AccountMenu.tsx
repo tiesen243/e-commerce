@@ -1,7 +1,13 @@
 'use client'
 
-import { AdminPanelSettingsRounded, Inventory2Rounded, Logout, ShoppingCartRounded } from '@mui/icons-material'
-import { Avatar, Button, Divider, IconButton, Menu, Tooltip } from '@mui/material'
+import {
+  AdminPanelSettingsRounded,
+  Inventory2Rounded,
+  Logout,
+  Settings,
+  ShoppingCartRounded,
+} from '@mui/icons-material'
+import { Avatar, Button, Divider, IconButton, Menu, Paper, Tooltip } from '@mui/material'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -35,7 +41,7 @@ const AccountMenu: React.FC = () => {
   const user: IUser = data.user
   return (
     <>
-      <Tooltip title="Account settings">
+      <Tooltip title="Account menu">
         <IconButton
           onClick={handleClick}
           size="small"
@@ -44,7 +50,7 @@ const AccountMenu: React.FC = () => {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar src={user.avatar}></Avatar>
+          <Avatar {...(user.avatar ? { src: user.avatar } : { sx: { bgcolor: 'gray' } })} />
         </IconButton>
       </Tooltip>
 
@@ -54,21 +60,21 @@ const AccountMenu: React.FC = () => {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        PaperProps={papperProps}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        PaperProps={papperProps}
       >
-        <StyledMenuItem text={user.userName} disabled />
-        <StyledMenuItem icon={<Avatar />} text="Profile" href="/manage/profile" />
+        <StyledMenuItem icon={<Avatar sx={{ width: 25, height: 25 }} />} text={user.userName} href="/manage/profile" />
         <StyledMenuItem icon={<ShoppingCartRounded />} text="My Cart" href="/manage/cart" />
         {user.role === 'seller' || user.role === 'admin' ? (
-          <StyledMenuItem icon={<Inventory2Rounded />} text="Product" href="/manage/product" />
+          <StyledMenuItem icon={<Inventory2Rounded />} text="Product Manage" href="/manage/product" />
         ) : null}
         {user.role === 'admin' && (
-          <StyledMenuItem icon={<AdminPanelSettingsRounded />} text="Admin" href="/manage/admin" />
+          <StyledMenuItem icon={<AdminPanelSettingsRounded />} text="Admin Panel" href="/manage/admin" />
         )}
         <Divider />
         <StyledMenuItem icon={<Logout />} text="Logout" onClick={handleLogout} />
+        <StyledMenuItem disabled icon={<Settings />} text="Settings" href="/manage/settings" />
       </Menu>
     </>
   )

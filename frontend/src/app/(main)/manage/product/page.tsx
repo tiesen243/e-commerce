@@ -1,12 +1,12 @@
 'use client'
 
+import { Button, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import { NextPage } from 'next'
-
-import Loading from '@/components/Loading'
-import { useMyProduct } from '@/hooks/useMyProduct'
-import { Button, Typography } from '@mui/material'
 import Link from 'next/link'
+
+import { Loading } from '@/components'
+import { useMyProduct } from '@/hooks'
 import { col } from './Head'
 
 const Page: NextPage = () => {

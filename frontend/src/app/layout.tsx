@@ -5,13 +5,9 @@ export const metadata: Metadata = {
   description: 'Yuki Store',
 }
 
-import Notification from '@/components/Notification'
-import AuthProvider from '@/providers/AuthProvider'
-import ReduxProvider from '@/providers/ReduxProvider'
-import ThemeProvider from '@/providers/ThemeProvider'
-
+import { Notification, ThemeBtn } from '@/components'
+import { AuthProvider, ReduxProvider, ThemeProvider } from '@/providers'
 import './globals.css'
-import ThemeBtn from '@/components/ThemeBtn'
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (

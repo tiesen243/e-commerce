@@ -1,13 +1,13 @@
 'use client'
 
-import Loading from '@/components/Loading'
-import StyledTextField from '@/components/StyledTextField'
-import { SuccessToast } from '@/utils/notify'
 import { Box, Button, FormHelperText, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+
+import { Loading, StyledTextField } from '@/components'
+import { SuccessToast } from '@/utils/notify'
 
 const Page: NextPage = () => {
   const [data, setdata] = useState({

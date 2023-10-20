@@ -6,9 +6,8 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import Loading from '@/components/Loading'
-import StyledTextField from '@/components/StyledTextField'
 import { ErrorToast, SuccessToast } from '@/utils/notify'
+import { Loading, StyledTextField } from '@/components'
 
 type Data = {
   email: string
