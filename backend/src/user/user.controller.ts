@@ -77,6 +77,7 @@ export class UserController {
   }
 
   @Patch('/update/info')
+  @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiOperation({

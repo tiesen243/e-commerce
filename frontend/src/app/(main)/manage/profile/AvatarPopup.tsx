@@ -8,12 +8,13 @@ import { ErrorToast, SuccessToast } from '@/utils/notify'
 import { Loading } from '@/components'
 
 interface Props {
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   user: IUser
+  token: string
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AvatarPopup: React.FC<Props> = (props) => {
-  const { user, setIsOpen } = props
+  const { user, token, setIsOpen } = props
   const [avatar, setAvatar] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(user.avatar)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -40,13 +41,17 @@ const AvatarPopup: React.FC<Props> = (props) => {
       return
     }
     setIsLoading(true)
-    await deleteImage(user.userName).catch((err) => err)
-    await uploadImage(avatar, user.userName, 'avatar')
-      .catch((err) => ErrorToast(err.message))
-      .then(() => {
-        SuccessToast('Change avatar successfully')
-        setIsOpen(false)
-      })
+    await deleteImage(user.userName, 'avatar').catch((err) => err)
+    const url = await uploadImage(avatar, user.userName, 'avatar').catch((err) => ErrorToast(err.message))
+    const res = await fetch('/api/v1/user/update/info', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ avatar: url }),
+    })
+    console.log(res, await res.json())
   }
 
   return (

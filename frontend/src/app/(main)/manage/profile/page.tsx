@@ -26,7 +26,7 @@ const Page: NextPage = () => {
       <Button variant="outlined" color="info" hidden={!isShow} onClick={() => setIsOpen(true)}>
         Change avatar
       </Button>
-      {isOpen && <AvatarPopup setIsOpen={setIsOpen} user={user} />}
+      {isOpen && <AvatarPopup setIsOpen={setIsOpen} user={user} token={data.token} />}
 
       <Typography variant="h1" className="text-4xl">
         {user.userName}

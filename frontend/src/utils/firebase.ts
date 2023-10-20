@@ -21,7 +21,7 @@ export const uploadImage = async (image: File | null, name: string, type: string
   return url
 }
 
-export const deleteImage = async (name: string) => {
-  const imageRef = ref(storage, `product/${name.replace(/\s/g, '')}`)
+export const deleteImage = async (name: string, type: string) => {
+  const imageRef = ref(storage, `${type}/${name.replace(/\s/g, '')}`)
   await deleteObject(imageRef).catch(() => {})
 }
