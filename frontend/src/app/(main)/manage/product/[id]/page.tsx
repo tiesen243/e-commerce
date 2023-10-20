@@ -2,20 +2,21 @@
 
 import { Box, Button, Typography } from '@mui/material'
 import { NextPage } from 'next'
-import { useCallback, useState } from 'react'
-
-import CustomSelect from '@/components/CustomSelect'
-import StyledTextField from '@/components/StyledTextField'
-import { Category, Prod } from '@/types/product.type'
-import { uploadImage } from '@/utils/firebase'
-
-import SelectTags from '@/components/SelectTags'
-import { ErrorToast, SuccessToast } from '@/utils/notify'
-import { getCookie } from 'cookies-next'
-import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useParams, useRouter } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
+import CustomSelect from '@/components/CustomSelect'
+import SelectTags from '@/components/SelectTags'
+import StyledTextField from '@/components/StyledTextField'
+import { Category, Prod } from '@/types/product.type'
+import { deleteImage, uploadImage } from '@/utils/firebase'
+import { ErrorToast, SuccessToast } from '@/utils/notify'
+
 const Page: NextPage = () => {
+  const { id } = useParams()
+  const { data } = useSession()
   const [prod, setProd] = useState<Prod>({
     name: '',
     description: '',
@@ -26,7 +27,8 @@ const Page: NextPage = () => {
     tags: [],
   })
   const [preview, setPreview] = useState<string | null>(null)
-
+  const [isChange, setIsChange] = useState<boolean>(false)
+  const [oldImage, setOldImage] = useState<string>('')
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0].size > 5 * 1024 * 1024) return ErrorToast('Image size must be less than 5MB')
     else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/)) return ErrorToast('Image must be .jpg or .png')
@@ -35,33 +37,51 @@ const Page: NextPage = () => {
       file.onload = () => setPreview(file.result as string)
       file.readAsDataURL(acceptedFiles[0])
       setProd((prev) => ({ ...prev, image: acceptedFiles[0] }))
+      setIsChange(true)
     }
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-  const { push } = useRouter()
+  const { push, back } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const url = await uploadImage(prod.image, prod.name)
+    if (isChange) deleteImage(oldImage)
+    const url = isChange ? await uploadImage(prod.image, prod.name) : prod.image
 
-    const res = await fetch('/api/product', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getCookie('token')}` },
-      body: JSON.stringify({ ...prod, image: url }),
+    const res = await fetch(`/api/v1/product/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${data?.token}` },
+      body: JSON.stringify({ ...prod, image: url, updatedAt: new Date() }),
     })
-    const { message } = await res.json()
-    if (res.status !== 201) ErrorToast(message.join(', '))
-    else {
-      SuccessToast('Product created successfully')
-      push('/product')
+    if (res.status !== 204) {
+      const { message } = await res.json()
+      ErrorToast(message.join(', '))
+    } else {
+      SuccessToast('Product updated successfully')
+      back()
     }
   }
 
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch(`/api/v1/product/${id}`)
+      const { data } = await res.json()
+      setProd(data)
+      setPreview(data.image)
+      setOldImage(data.name)
+    }
+    getData()
+  }, [])
+
   return (
     <Box className="flex flex-col gap-4" component="form" autoComplete="off" onSubmit={handleSubmit}>
+      <Button variant="contained" color="info" component="a" className="flex" onClick={() => back()}>
+        {'< Back'}
+      </Button>
+
       <Typography variant="h1" textAlign="center" marginBottom={4}>
-        Create New Product
+        Edit Product
       </Typography>
 
       <StyledTextField
@@ -71,28 +91,32 @@ const Page: NextPage = () => {
         onChange={(e) => setProd({ ...prod, name: e.target.value })}
       />
 
-      <section
-        className="flex justify-between items-center border-2 border-dashed border-gray-400 rounded-md p-4"
-        {...getRootProps()}
-      >
-        <input hidden {...getInputProps} />
-        {isDragActive ? (
-          <Typography variant="subtitle2" className="ml-4">
-            Drop image here...
-          </Typography>
-        ) : (
-          <Typography variant="subtitle2" className="ml-4">
-            Drag image here or click to select image
-          </Typography>
-        )}
+      <Box className="flex justify-between items-center border-2 border-dashed border-gray-400 rounded-md p-4">
+        <Button variant="contained" color="info" component="label">
+          Choose image <input hidden onChange={getInputProps().onChange} type="file" />
+        </Button>
 
-        <img src={preview || ''} alt='preview' className="w-32" />
-      </section>
+        <Box {...getRootProps()}>
+          <input {...getInputProps} hidden />
+          {isDragActive ? (
+            <Typography variant="subtitle2" className="ml-4">
+              Drop image here...
+            </Typography>
+          ) : (
+            <Typography variant="subtitle2" className="ml-4">
+              Or drag image here
+            </Typography>
+          )}
+        </Box>
+      </Box>
+      {preview && <img src={preview} alt="preview" className="w-32" />}
 
       <StyledTextField
         label="Description"
         value={prod.description}
         onChange={(e) => setProd({ ...prod, description: e.target.value })}
+        multiline
+        rows={4}
         required
       />
       <StyledTextField
@@ -122,7 +146,7 @@ const Page: NextPage = () => {
 
       <SelectTags data={prod} setData={setProd} />
 
-      <Button variant="contained" color="secondary" type="submit">
+      <Button variant="outlined" color="info" type="submit">
         Submit
       </Button>
     </Box>

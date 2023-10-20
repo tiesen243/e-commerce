@@ -10,10 +10,10 @@ import { Model } from 'mongoose'
 
 import { Role } from '../auth/schemas/enum'
 import { User } from '../auth/schemas/user.shema'
+import { IResponse } from '../utils/resreq.interface'
 import ChangePasswordDto from './dto/changePassword.dto'
 import UpdateRoleDto from './dto/updateRole.dto'
 import UpdateUserDto from './dto/updateUser.dto'
-import { IResponse } from '../utils/resreq.interface'
 
 @Injectable()
 export class UserService {
@@ -36,7 +36,7 @@ export class UserService {
     if (user.role !== Role.ADMIN)
       throw new UnauthorizedException('You are not admin')
 
-    const users: User[] = await this.userModel.find().exec()
+    const users: User[] = await this.userModel.find({}, { password: 0 }).exec()
     if (!users) throw new NotFoundException('User not found')
 
     return {
@@ -129,6 +129,7 @@ export class UserService {
   }
 
   async selfDelete(user: User): Promise<IResponse<User>> {
+    console.log(user)
     const delUser = await this.userModel.findByIdAndDelete(user._id)
     if (!delUser) throw new NotFoundException('User not found')
 

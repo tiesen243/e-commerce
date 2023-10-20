@@ -19,6 +19,7 @@ import {
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
@@ -35,6 +36,7 @@ import { IRequest, IResponse } from '../utils/resreq.interface'
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
   @Get()
+  @ApiOperation({ summary: 'Get all products' })
   @ApiNotFoundResponse({ description: 'No products found' })
   @ApiOkResponse({
     description: 'All products has been successfully retrieved.',
@@ -44,7 +46,19 @@ export class ProductController {
     return await this.productService.findAll(q)
   }
 
-  @Get('/my-products')
+  @Get(':id')
+  @ApiOperation({ summary: 'Get product by id' })
+  @ApiOkResponse({
+    description: 'The product has been successfully retrieved.',
+    type: Product,
+  })
+  @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
+  async findOne(@Param('id') id: string): Promise<IResponse<Product>> {
+    return await this.productService.findOne(id)
+  }
+
+  @Get('/me')
+  @ApiOperation({ summary: 'Get all products of user' })
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiOkResponse({
@@ -56,17 +70,8 @@ export class ProductController {
     return await this.productService.findAllByUser(req.user)
   }
 
-  @Get(':id')
-  @ApiOkResponse({
-    description: 'The product has been successfully retrieved.',
-    type: Product,
-  })
-  @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
-  async findOne(@Param('id') id: string): Promise<IResponse<Product>> {
-    return await this.productService.findOne(id)
-  }
-
-  @Post()
+  @Post('/create')
+  @ApiOperation({ summary: 'Create new product' })
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiCreatedResponse({
@@ -81,8 +86,9 @@ export class ProductController {
     return await this.productService.create(createDto, req.user)
   }
 
-  @Put(':id')
+  @Put('/update/:id')
   @HttpCode(204)
+  @ApiOperation({ summary: 'Update product by id' })
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiNoContentResponse({
@@ -98,8 +104,9 @@ export class ProductController {
     return await this.productService.update(id, updateDto, req.user)
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   @HttpCode(204)
+  @ApiOperation({ summary: 'Delete product by id' })
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiNoContentResponse({

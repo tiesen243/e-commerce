@@ -32,7 +32,7 @@ import { IRequest, IResponse } from '../utils/resreq.interface'
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get()
+  @Get('/info')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiOkResponse({ description: 'Get user info successfully', type: User })
@@ -41,7 +41,7 @@ export class UserController {
     return await this.userService.getUserInfo(req.user._id)
   }
 
-  @Get('all')
+  @Get('/all')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiOkResponse({ description: 'Get all user successfully', type: [User] })
@@ -51,7 +51,7 @@ export class UserController {
     return await this.userService.getAllUser(req.user)
   }
 
-  @Put('role')
+  @Put('/update/role')
   @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
@@ -66,7 +66,7 @@ export class UserController {
     return await this.userService.changeRole(updateRoleDto, req.user)
   }
 
-  @Put('info')
+  @Put('/update/info')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiOkResponse({
@@ -83,7 +83,7 @@ export class UserController {
     return await this.userService.updateInfo(updateDto, req.user)
   }
 
-  @Put('password')
+  @Put('/update/password')
   @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
@@ -98,8 +98,9 @@ export class UserController {
     return await this.userService.changePassword(changePasswordDto, req.user)
   }
 
-  @Delete()
+  @Delete('/delete')
   @HttpCode(204)
+  @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
   @ApiNoContentResponse({ description: 'Delete user successfully' })
   @ApiNotFoundResponse({ description: 'User not found' })
@@ -107,7 +108,7 @@ export class UserController {
     return await this.userService.selfDelete(req.user)
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')

@@ -1,44 +1,38 @@
 import { TextField, TextFieldProps } from '@mui/material'
 import { NextPage } from 'next'
 
-const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => {
-  return (
-    <TextField
-      sx={{
-        '& label.Mui-focused': {
-          color: 'primary.main',
+const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => (
+  <TextField
+    autoComplete="off"
+    autoCorrect="off"
+    variant="outlined"
+    fullWidth
+    className="shadow-lg"
+    InputLabelProps={{
+      sx: {
+        '&.Mui-focused': { color: 'text.primary' },
+      },
+    }}
+    InputProps={{
+      sx: {
+        backgroundColor: 'secondary.sub',
+        '&:hover': { backgroundColor: 'secondary.hover', transition: 'background-color 0.3s ease' },
+        '&.Mui-focused': { backgroundColor: 'secondary.sub' },
+        color: 'text.primary',
+      },
+    }}
+    sx={{
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: 'transparent',
+          '&:hover': { borderColor: 'transparent' },
+          '&.Mui-focused': { borderColor: 'transparent' },
         },
-        '& .MuiOutlinedInput-root': {
-          '& fieldset': {
-            borderColor: 'primary.sub',
-          },
-          '&:hover fieldset': {
-            borderColor: 'primary.hover',
-            transition: 'border-color 0.3s ease-in-out',
-          },
-          '&.Mui-focused fprimt': {
-            borderColor: 'secondary.main',
-          },
-          '&:hover input': {
-            backgroundColor: 'primary.hover',
-            borderRadius: '0.5rem',
-            transition: 'background-color 0.3s ease-in-out',
-          },
-          '&.Mui-focused input': {
-            backgroundColor: 'secondary.main',
-          },
-        },
-      }}
-      autoComplete="off"
-      autoCorrect="off"
-      variant="outlined"
-      {...(props.type === 'number' && { inputProps: { min: 0 } })}
-      InputProps={{
-        className: 'text-primary-dark dark:text-primary-light',
-      }}
-      {...props}
-    />
-  )
-}
+      },
+    }}
+    {...(props.type === 'number' && { inputProps: { min: 0 } })}
+    {...props}
+  />
+)
 
 export default StyledTextField

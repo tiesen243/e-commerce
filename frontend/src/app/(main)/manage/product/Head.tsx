@@ -2,7 +2,7 @@ import { deleteImage } from '@/utils/firebase'
 import { ErrorToast, SuccessToast } from '@/utils/notify'
 import { Box, Button } from '@mui/material'
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
-import { getCookie } from 'cookies-next'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 export const col: GridColDef[] = [
@@ -17,24 +17,30 @@ export const col: GridColDef[] = [
     headerName: 'Action',
     width: 200,
     renderCell: (params: GridRenderCellParams) => {
+      const { data } = useSession()
       const handleDelete = async (id: string, fileName: string) => {
-        await fetch(`/api/product/${id}`, {
+        const res = await fetch(`/api/v1/product/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${getCookie('token')}`,
+            Authorization: `Bearer ${data?.token}`,
           },
         })
         await deleteImage(fileName)
-          .catch((err) => ErrorToast(err.message))
-          .then(() => SuccessToast('Product deleted successfully'))
+        if (res.status === 204) SuccessToast('Product deleted')
+        else ErrorToast('Something went wrong')
       }
       return (
         <Box className="flex justify-between items-center w-full">
-          <Button variant="contained" color="primary" component={Link} href={`/product/${params.row._id}`}>
+          <Button variant="contained" color="info" component={Link} href={`/shop/product/${params.row._id}`}>
             Edit
           </Button>
-          <Button variant="contained" color="error" onClick={() => handleDelete(params.row._id, params.row.name)}>
+          <Button
+            variant="contained"
+            component="a"
+            color="error"
+            onClick={() => handleDelete(params.row._id, params.row.name)}
+          >
             Delete
           </Button>
         </Box>

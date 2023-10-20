@@ -2,25 +2,38 @@
 
 import { AdminPanelSettingsRounded, Inventory2Rounded, Logout, ShoppingCartRounded } from '@mui/icons-material'
 import { Avatar, Button, Divider, IconButton, Menu, Tooltip } from '@mui/material'
+import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
-import { logout } from '@/redux/slicers/user.slice'
-import { RootState } from '@/redux/store'
+import IUser from '@/types/user.type'
+import { SuccessToast } from '@/utils/notify'
+import { useRouter } from 'next/navigation'
 import StyledMenuItem from '../StyledMenuItem'
 
 const AccountMenu: React.FC = () => {
-  const { userName, avatar, role, isAuth } = useSelector((state: RootState) => state.user)
+  const { data } = useSession()
+  const { push } = useRouter()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)
   const handleClose = () => setAnchorEl(null)
+  const handleLogout = () => {
+    signOut({ redirect: false })
+    SuccessToast('Logout success')
+    push('/shop')
+  }
 
-  const dispatch = useDispatch()
+  if (!data)
+    return (
+      <Button component={Link} href="/login" variant="text" color="info">
+        Login
+      </Button>
+    )
 
-  return isAuth ? (
+  const user: IUser = data.user
+  return (
     <>
       <Tooltip title="Account settings">
         <IconButton
@@ -31,7 +44,7 @@ const AccountMenu: React.FC = () => {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar src={avatar}></Avatar>
+          <Avatar src={user.avatar}></Avatar>
         </IconButton>
       </Tooltip>
 
@@ -45,21 +58,19 @@ const AccountMenu: React.FC = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <StyledMenuItem text={userName} disabled />
-        <StyledMenuItem icon={<Avatar />} text="Profile" href="profile" />
-        <StyledMenuItem icon={<ShoppingCartRounded />} text="My Cart" href="/cart" />
-        {role === 'seller' || role === 'admin' ? (
-          <StyledMenuItem icon={<Inventory2Rounded />} text="Product" href="/product" />
+        <StyledMenuItem text={user.userName} disabled />
+        <StyledMenuItem icon={<Avatar />} text="Profile" href="/manage/profile" />
+        <StyledMenuItem icon={<ShoppingCartRounded />} text="My Cart" href="/manage/cart" />
+        {user.role === 'seller' || user.role === 'admin' ? (
+          <StyledMenuItem icon={<Inventory2Rounded />} text="Product" href="/manage/product" />
         ) : null}
-        {role === 'admin' && <StyledMenuItem icon={<AdminPanelSettingsRounded />} text="Admin" href="/admin" />}
+        {user.role === 'admin' && (
+          <StyledMenuItem icon={<AdminPanelSettingsRounded />} text="Admin" href="/manage/admin" />
+        )}
         <Divider />
-        <StyledMenuItem icon={<Logout />} text="Logout" onClick={() => dispatch(logout())} />
+        <StyledMenuItem icon={<Logout />} text="Logout" onClick={handleLogout} />
       </Menu>
     </>
-  ) : (
-    <Button component={Link} href="login">
-      Login
-    </Button>
   )
 }
 

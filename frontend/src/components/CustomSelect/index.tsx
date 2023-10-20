@@ -1,22 +1,19 @@
-import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/material'
+import { MenuItem, TextFieldProps } from '@mui/material'
+import StyledTextField from '../StyledTextField'
 
-interface Props extends SelectProps {
-  label: string
+interface Props {
   data: string[]
 }
 
-const CustomSelect: React.FC<Props> = (props) => {
+const CustomSelect: React.FC<Props & TextFieldProps> = (props) => {
   return (
-    <FormControl fullWidth>
-      <InputLabel>{props.label}</InputLabel>
-      <Select {...props}>
-        {props.data.map((item) => (
-          <MenuItem key={item} value={item}>
-            {item}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <StyledTextField label={props.label} select {...props}>
+      {props.data.map((item) => (
+        <MenuItem key={item} value={item}>
+          {item}
+        </MenuItem>
+      ))}
+    </StyledTextField>
   )
 }
 

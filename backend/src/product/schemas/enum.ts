@@ -61,4 +61,8 @@ export enum Tag {
   Wars = 'Wars',
   Yuri = 'Yuri',
   Yaoi = 'Yaoi',
+  R15 = 'R15',
+  R18 = 'R18',
+  R18G = 'R18G',
+  Other = 'Other',
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, HttpCode, Post } from '@nestjs/common'
 import {
   ApiBadRequestResponse,
   ApiConflictResponse,
@@ -19,13 +19,12 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
+  @HttpCode(204)
   @ApiCreatedResponse({ description: 'User successfully registered' })
   @ApiUnauthorizedResponse({ description: 'Passwords do not match' })
   @ApiBadRequestResponse({ description: 'Registration failed' })
   @ApiConflictResponse({ description: 'User already exists' })
-  async register(
-    @Body() registerDto: RegisterDto,
-  ): Promise<IResponse<{ token: string }>> {
+  async register(@Body() registerDto: RegisterDto): Promise<IResponse> {
     return this.authService.register(registerDto)
   }
 

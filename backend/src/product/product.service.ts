@@ -29,9 +29,7 @@ export class ProductService {
     const name = keyword ? { name: { $regex: keyword, $options: 'i' } } : {}
     const productCode = code ? { code: { $gte: code, $lte: code } } : {}
     const productTags = tags ? { tags: { $in: tags } } : {}
-    const productCategory = category
-      ? { category: { regex: category, $options: 'i' } }
-      : {}
+    const productCategory = category ? { category: category } : {}
 
     const allProducts = await this.productModel
       .find({ ...productCode, ...name, ...productCategory, ...productTags })

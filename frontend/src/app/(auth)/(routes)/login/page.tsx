@@ -1,13 +1,14 @@
 'use client'
 
 import { Box, Button, FormHelperText, Typography } from '@mui/material'
-import { setCookie } from 'cookies-next'
 import { NextPage } from 'next'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import StyledTextField from '@/components/StyledTextField'
 import { ErrorToast, SuccessToast } from '@/utils/notify'
+import Loading from '@/components/Loading'
 
 type Data = {
   email: string
@@ -20,27 +21,22 @@ const Page: NextPage = () => {
     password: '',
   })
   const [error, setError] = useState<string>('')
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const { push } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setError('')
     e.preventDefault()
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    }).catch((err) => err.response)
-    const json = await res.json()
-    if (json.statusCode !== 201) {
-      setError(json.message)
+    setIsSubmitting(true)
+    const res = await signIn('credentials', { ...data, redirect: false })
+    if (res?.status !== 200) {
+      setError(res?.error ?? 'Something went wrong')
+      setIsSubmitting(false)
       ErrorToast('Login failed')
     } else {
-      setCookie('token', json.data.token, { maxAge: 60 * 60 * 24 * 7 })
       SuccessToast('Login success')
-      push('/')
+      push('/shop')
     }
   }
-
   return (
     <>
       <Typography variant="h1" className="text-center">
@@ -65,10 +61,23 @@ const Page: NextPage = () => {
 
         <FormHelperText error>{error}</FormHelperText>
 
-        <Button className="btn" type="submit">
+        <Typography variant="subtitle2">
+          Don't have an account?{' '}
+          <Button variant="text" color="info" onClick={() => push('/register')}>
+            Register
+          </Button>
+        </Typography>
+
+        <Button color="info" type="submit">
           Login
         </Button>
       </Box>
+
+      {isSubmitting && (
+        <div className="fixed inset-0 bg-black/50">
+          <Loading text="Logining..." />
+        </div>
+      )}
     </>
   )
 }

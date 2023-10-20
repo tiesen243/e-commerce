@@ -40,12 +40,9 @@ export class AuthService {
     })
     if (!newUser) throw new BadRequestException('Registration failed')
 
-    const token: string = this.jwtService.sign({ id: newUser._id })
-
     return {
-      statusCode: 201,
+      statusCode: 204,
       message: 'User created successfully',
-      data: { token },
     }
   }
 

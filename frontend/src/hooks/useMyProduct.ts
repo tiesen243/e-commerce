@@ -1,26 +1,35 @@
-import { getCookie } from 'cookies-next'
+import Product from '@/types/product.type'
+import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
-const fetcher = async (url: string, token: string) => {
+const fetcher = async (url: string, token: string | undefined) => {
+  if (!token) return
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   }).catch((err) => err.response)
-  const data = await res.json()
-  if (data.statusCode !== 200) throw new Error(data.message)
+  if (res.status !== 200) throw new Error((await res.json()).message)
+  const { data } = await res.json()
   return data
 }
 
-export const useMyProduct = () => {
-  const token: string = getCookie('token') || ''
-  const { data, isLoading, error } = useSWR('/api/product/my-products', (url: string) => fetcher(url, token), {
-    refreshInterval: 1000,
-  })
+export const useMyProduct = (): {
+  products: Product[]
+  isLoading: boolean
+  error: Error
+} => {
+  const { data: session } = useSession()
+
+  const { data, isLoading, error } = useSWR(
+    '/api/v1/product/my-products',
+    (url: string) => fetcher(url, session?.token),
+    { refreshInterval: 500 },
+  )
 
   return {
-    data,
+    products: data,
     isLoading,
     error,
   }
