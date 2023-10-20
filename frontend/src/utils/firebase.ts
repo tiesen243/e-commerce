@@ -14,8 +14,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 export const storage = getStorage(app)
 
-export const uploadImage = async (image: File | null, name: string): Promise<string> => {
-  const imageRef = ref(storage, `product/${name.replace(/\s/g, '')}`)
+export const uploadImage = async (image: File | null, name: string, type: string): Promise<string> => {
+  const imageRef = ref(storage, `${type}/${name.replace(/\s/g, '')}`)
   const uploadTask = await uploadBytes(imageRef, image as Blob)
   const url = await getDownloadURL(uploadTask.ref)
   return url
@@ -23,7 +23,5 @@ export const uploadImage = async (image: File | null, name: string): Promise<str
 
 export const deleteImage = async (name: string) => {
   const imageRef = ref(storage, `product/${name.replace(/\s/g, '')}`)
-  await deleteObject(imageRef).catch(() => { })
+  await deleteObject(imageRef).catch(() => {})
 }
-
-

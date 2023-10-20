@@ -45,7 +45,7 @@ const Page: NextPage = () => {
     e.preventDefault()
     setIsLoading(true)
     if (user?.token === undefined) return ErrorToast('You must login first')
-    const url = await uploadImage(prod.image, prod.name)
+    const url = await uploadImage(prod.image, prod.name, 'product')
 
     const res = await fetch('/api/v1/product/create', {
       method: 'POST',
