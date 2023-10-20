@@ -3,7 +3,9 @@ import {
   ApiBadRequestResponse,
   ApiConflictResponse,
   ApiCreatedResponse,
+  ApiNoContentResponse,
   ApiNotFoundResponse,
+  ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
@@ -20,7 +22,11 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(204)
-  @ApiCreatedResponse({ description: 'User successfully registered' })
+  @ApiOperation({
+    summary: 'Register a new user',
+    description: 'Register a new user',
+  })
+  @ApiNoContentResponse({ description: 'User successfully registered' })
   @ApiUnauthorizedResponse({ description: 'Passwords do not match' })
   @ApiBadRequestResponse({ description: 'Registration failed' })
   @ApiConflictResponse({ description: 'User already exists' })
@@ -29,6 +35,10 @@ export class AuthController {
   }
 
   @Post('login')
+  @ApiOperation({
+    summary: 'Login a user',
+    description: 'Login to an existing user',
+  })
   @ApiCreatedResponse({ description: 'User successfully logged in' })
   @ApiNotFoundResponse({ description: 'User not found' })
   @ApiUnauthorizedResponse({ description: 'Incorrect password' })

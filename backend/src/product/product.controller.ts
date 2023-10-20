@@ -36,7 +36,10 @@ import { IRequest, IResponse } from '../utils/resreq.interface'
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
   @Get()
-  @ApiOperation({ summary: 'Get all products' })
+  @ApiOperation({
+    summary: 'Get all products',
+    description: 'Get all products',
+  })
   @ApiNotFoundResponse({ description: 'No products found' })
   @ApiOkResponse({
     description: 'All products has been successfully retrieved.',
