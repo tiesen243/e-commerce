@@ -50,7 +50,7 @@ const Page: NextPage = () => {
     setIsLoading(true)
     if (user?.token === undefined) return ErrorToast('You must login first')
     if (isChange) deleteImage(oldImage)
-    const url = isChange ? await uploadImage(prod.image, prod.name) : prod.image
+    const url = isChange ? await uploadImage(prod.image, prod.name, 'product') : prod.image
 
     const res = await fetch(`/api/v1/product/update/${id}`, {
       method: 'PUT',
