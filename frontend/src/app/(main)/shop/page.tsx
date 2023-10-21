@@ -2,21 +2,22 @@
 
 import { useProduct } from '@/hooks'
 import { NextPage } from 'next'
-import { useSession } from 'next-auth/react'
 
-import { Loading } from '@/components'
+import { Loading, ProdCard } from '@/components'
+import { Grid } from '@mui/material'
 
 const Page: NextPage = () => {
   const { products, error, isLoading } = useProduct()
-  const { data } = useSession()
-  console.log(data)
+
   return !isLoading ? (
     <div>
-      <h1>
+      <Grid container spacing={2}>
         {products.map((prod) => (
-          <div key={prod._id}>{prod.name}</div>
+          <Grid item xs={6} sm={4} lg={3} key={prod._id}>
+            <ProdCard product={prod} />
+          </Grid>
         ))}
-      </h1>
+      </Grid>
     </div>
   ) : (
     <Loading />

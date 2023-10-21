@@ -1,14 +1,6 @@
+import { getToken, getUser } from '@/utils'
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-
-const getUser = async (token: string) => {
-  const user = await fetch('https://yuki-api.vercel.app/user/me', {
-    method: 'GET',
-    headers: { Authorization: `Bearer ${token}` },
-  }).then((res) => res.json())
-  if (user.statusCode !== 200) throw new Error(user.message)
-  return user.data
-}
 
 const opts: NextAuthOptions = {
   providers: [
@@ -38,15 +30,16 @@ const opts: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (!user) return token
-      token.role = await getUser(user.token).then((res) => res.role)
-      token.token = user.token
+      token.role = await getUser(user.refreshToken).then((res) => res.role)
+      token.refreshToken = user.refreshToken
       return token
     },
 
     async session({ session, token }) {
       if (!session) return session
-      session.user = await getUser(token.token)
-      session.token = token.token
+      session.user = await getUser(token.refreshToken)
+      session.token = token.refreshToken
+      setInterval(async () => (session.token = await getToken(token.refreshToken)), 15 * 60 * 1000)
       return session
     },
   },

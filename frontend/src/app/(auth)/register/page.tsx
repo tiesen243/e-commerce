@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { Loading, StyledTextField } from '@/components'
-import { SuccessToast } from '@/utils/notify'
+import { showSuccessToast } from '@/utils/notify'
 
 const Page: NextPage = () => {
   const [data, setdata] = useState({
@@ -33,7 +33,7 @@ const Page: NextPage = () => {
       setError(message)
       setIsSubmitting(false)
     } else {
-      SuccessToast('Register success')
+      showSuccessToast('Register success')
       push('/login')
     }
   }

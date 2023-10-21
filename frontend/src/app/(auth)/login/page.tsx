@@ -6,8 +6,8 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { ErrorToast, SuccessToast } from '@/utils/notify'
 import { Loading, StyledTextField } from '@/components'
+import { showErrorToast, showSuccessToast } from '@/utils/notify'
 
 type Data = {
   email: string
@@ -30,9 +30,9 @@ const Page: NextPage = () => {
     if (res?.status !== 200) {
       setError(res?.error ?? 'Something went wrong')
       setIsSubmitting(false)
-      ErrorToast('Login failed')
+      showErrorToast('Login failed')
     } else {
-      SuccessToast('Login success')
+      showSuccessToast('Login success')
       push('/shop')
     }
   }

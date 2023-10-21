@@ -1,11 +1,11 @@
 'use client'
 
 import { Button, Typography } from '@mui/material'
-import { DataGrid } from '@mui/x-data-grid'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
-import { Loading } from '@/components'
+import { CustomToolBar, Loading } from '@/components'
 import { useMyProduct } from '@/hooks'
 import { col } from './Head'
 
@@ -27,15 +27,18 @@ const Page: NextPage = () => {
 
   return !isLoading && products ? (
     <>
-      <section className="flex justify-between items-center mb-4">
-        <Typography variant="h1" fontSize={40}>
-          My Product List
-        </Typography>
+      <section className="flex justify-end items-center mb-4">
         <Button component={Link} href="/manage/product/create" variant="contained" color="info">
           Create Product
         </Button>
       </section>
-      <DataGrid columns={col} rows={products} pageSizeOptions={[5, 10]} getRowId={(row) => row.code} />
+      <DataGrid
+        slots={{ toolbar: CustomToolBar }}
+        columns={col}
+        rows={products}
+        pageSizeOptions={[5, 10]}
+        getRowId={(row) => row.code}
+      />
     </>
   ) : (
     <Loading />

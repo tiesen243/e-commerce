@@ -22,7 +22,7 @@ const SelectTags: React.FC<Props> = ({ data, setData }) => (
           {(selected as string[]).map((tag) => (
             <Box
               key={tag}
-              className="rounded-md px-2 py-1 m-1"
+              className="rounded-md px-2 py-1 m-1 shadow-md"
               sx={{
                 backgroundColor: 'secondary.main',
               }}

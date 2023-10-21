@@ -1,5 +1,4 @@
 import Product from '@/types/product.type'
-import { info } from 'console'
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 

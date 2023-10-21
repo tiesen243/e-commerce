@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import IUser from '@/types/user.type'
-import { SuccessToast } from '@/utils/notify'
+import { showSuccessToast } from '@/utils/notify'
 import { useRouter } from 'next/navigation'
 import StyledMenuItem from '../StyledMenuItem'
 
@@ -27,7 +27,7 @@ const AccountMenu: React.FC = () => {
   const handleClose = () => setAnchorEl(null)
   const handleLogout = () => {
     signOut({ redirect: false })
-    SuccessToast('Logout success')
+    showSuccessToast('Logout success')
     push('/shop')
   }
 

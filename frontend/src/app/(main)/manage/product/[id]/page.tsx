@@ -24,11 +24,10 @@ const Page: NextPage = () => {
     stock: 0,
     category: Category.Other,
     tags: [],
-    available: true,
+    available: false,
   })
   const [preview, setPreview] = useState<string | null>(null)
   const [isChange, setIsChange] = useState<boolean>(false)
-  const [oldImage, setOldImage] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -43,7 +42,6 @@ const Page: NextPage = () => {
       setIsChange(true)
     }
   }, [])
-  console.log(prod.available)
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   const { back } = useRouter()
@@ -51,7 +49,7 @@ const Page: NextPage = () => {
     e.preventDefault()
     setIsLoading(true)
     if (user?.token === undefined) return showErrorToast('You must login first')
-    if (isChange) deleteImage(oldImage, 'product')
+    if (isChange) deleteImage(prod.name, 'product')
     const url = isChange ? await uploadImage(prod.image, prod.name, 'product') : prod.image
 
     const res = await fetch(`/api/v1/product/update/${id}`, {
@@ -75,7 +73,6 @@ const Page: NextPage = () => {
       const { data } = await res.json()
       setProd(data)
       setPreview(data.image)
-      setOldImage(data.name)
       setIsLoading(false)
     }
     getData()
@@ -93,7 +90,7 @@ const Page: NextPage = () => {
         </Typography>
 
         <StyledTextField
-          required
+          disabled
           label="Name"
           value={prod.name}
           onChange={(e) => setProd({ ...prod, name: e.target.value })}
@@ -120,7 +117,7 @@ const Page: NextPage = () => {
         {preview && <img src={preview} alt="preview" className="w-32" />}
 
         <CustomCheckbox
-          value={prod.available}
+          checked={prod.available}
           onChange={(e) => setProd({ ...prod, available: e.target.checked })}
           label="Available"
         />

@@ -1,15 +1,13 @@
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
+import { Checkbox, CheckboxProps, FormControlLabel, FormGroup } from '@mui/material'
 
-interface CheckboxProps {
+interface Props {
   label: string
-  value: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const CustomCheckbox: React.FC<CheckboxProps> = (props) => {
+const CustomCheckbox: React.FC<Props & CheckboxProps> = (props) => {
   return (
     <FormGroup>
-      <FormControlLabel required control={<Checkbox {...props} color="info" />} label={props.label} />
+      <FormControlLabel control={<Checkbox {...props} color="info" />} label={props.label} />
     </FormGroup>
   )
 }

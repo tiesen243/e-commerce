@@ -8,6 +8,7 @@ import { deleteImage, showErrorToast, showSuccessToast } from '@/utils'
 export const col: GridColDef[] = [
   { field: 'code', headerName: 'Code', width: 100, type: 'number' },
   { field: 'name', headerName: 'Name', width: 250, type: 'string' },
+  { field: 'category', headerName: 'Category', width: 150, type: 'string' },
   { field: 'price', headerName: 'Price', width: 100, type: 'number' },
   { field: 'stock', headerName: 'Stock', width: 100, type: 'number' },
   { field: 'createdAt', headerName: 'Created At', width: 200, type: 'Date' },
