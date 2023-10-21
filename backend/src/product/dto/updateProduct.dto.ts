@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
 import {
-  IsBooleanString,
+  IsBoolean,
   IsEnum,
   IsNumber,
   IsOptional,
@@ -66,8 +66,7 @@ export default class UpdateProductDto {
 
   @ApiProperty({ description: 'The availability of the product' })
   @IsOptional()
-  @IsBooleanString()
-  @Type(() => Boolean)
+  @IsBoolean()
   readonly available: boolean
 
   @ApiProperty({ description: 'The category of the product', enum: Category })

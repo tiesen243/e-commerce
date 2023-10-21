@@ -22,6 +22,7 @@ const Page: NextPage = () => {
     stock: 0,
     category: Category.Other,
     tags: [],
+    available: true,
   })
   const [preview, setPreview] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -44,25 +45,28 @@ const Page: NextPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    if (user?.token === undefined) return showErrorToast('You must login first')
-    const url = await uploadImage(prod.image, prod.name, 'product')
-
-    const res = await fetch('/api/v1/product/create', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user.token}` },
-      body: JSON.stringify({ ...prod, image: url }),
-    })
-    const { message } = await res.json()
-    console.log(res.status)
-    if (res.status !== 201) {
+    if (user?.token === undefined) {
       setIsLoading(false)
-      // showErrorToast(message.join(', '))
+      return showErrorToast('You must login first')
+    } else if (prod.image === null) {
+      setIsLoading(false)
+      return showErrorToast('You must upload an image')
     } else {
-      showSuccessToast('Product created successfully')
-      push('/manage/product')
+      const url = await uploadImage(prod.image, prod.name, 'product').catch((err) => showErrorToast(err.message))
+      const res = await fetch('/api/v1/product/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user.token}` },
+        body: JSON.stringify({ ...prod, image: url }),
+      })
+      if (res.status !== 201) {
+        const { message } = await res.json()
+        setIsLoading(false)
+        message.forEach((msg: string) => showErrorToast(msg))
+      } else {
+        showSuccessToast('Product created successfully')
+        push('/manage/product')
+      }
     }
-
-    setIsLoading(false)
   }
 
   return (

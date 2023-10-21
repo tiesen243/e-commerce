@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-primary-light transition-colors duration-300 ease-linear;
+    @apply bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-primary-light transition-colors overflow-x-hidden duration-300 ease-linear;
   }
   ::-webkit-scrollbar {
     @apply w-1 h-1;

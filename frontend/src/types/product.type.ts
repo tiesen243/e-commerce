@@ -86,4 +86,5 @@ export interface Prod {
   stock: number
   category: Category
   tags: Tag[]
+  available: boolean
 }

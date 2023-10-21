@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { CustomSelect, CustomSelectTags, Loading, StyledTextField } from '@/components'
+import CustomCheckbox from '@/components/CustomCheckbox'
 import { Category, Prod } from '@/types/product.type'
 import { deleteImage, showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 
@@ -23,6 +24,7 @@ const Page: NextPage = () => {
     stock: 0,
     category: Category.Other,
     tags: [],
+    available: true,
   })
   const [preview, setPreview] = useState<string | null>(null)
   const [isChange, setIsChange] = useState<boolean>(false)
@@ -41,7 +43,7 @@ const Page: NextPage = () => {
       setIsChange(true)
     }
   }, [])
-
+  console.log(prod.available)
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   const { back } = useRouter()
@@ -117,6 +119,12 @@ const Page: NextPage = () => {
         </Box>
         {preview && <img src={preview} alt="preview" className="w-32" />}
 
+        <CustomCheckbox
+          value={prod.available}
+          onChange={(e) => setProd({ ...prod, available: e.target.checked })}
+          label="Available"
+        />
+
         <StyledTextField
           label="Description"
           value={prod.description}
@@ -125,6 +133,7 @@ const Page: NextPage = () => {
           rows={4}
           required
         />
+
         <StyledTextField
           label="Price"
           type="number"
@@ -132,6 +141,7 @@ const Page: NextPage = () => {
           onChange={(e) => setProd({ ...prod, price: Number(e.target.value) })}
           required
         />
+
         <StyledTextField
           label="Stock"
           type="number"
