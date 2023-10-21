@@ -29,7 +29,7 @@ const Page: NextPage = () => {
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0].size > 5 * 1024 * 1024) return ErrorToast('Image size must be less than 5MB')
-    else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/)) return ErrorToast('Image must be .jpg or .png')
+    else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/)) return ErrorToast('Image must be .jpg or .png or .jpeg')
     else {
       const file = new FileReader()
       file.onload = () => setPreview(file.result as string)

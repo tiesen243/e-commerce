@@ -7,7 +7,7 @@ import {
   Settings,
   ShoppingCartRounded,
 } from '@mui/icons-material'
-import { Avatar, Button, Divider, IconButton, Menu, Paper, Tooltip } from '@mui/material'
+import { Avatar, Button, Divider, IconButton, Menu, Tooltip } from '@mui/material'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useState } from 'react'

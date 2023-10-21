@@ -32,7 +32,7 @@ const Page: NextPage = () => {
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0].size > 5 * 1024 * 1024) return ErrorToast('Image size must be less than 5MB')
-    else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/)) return ErrorToast('Image must be .jpg or .png')
+    else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/)) return ErrorToast('Image must be .jpg or .png or .jpeg')
     else {
       const file = new FileReader()
       file.onload = () => setPreview(file.result as string)
@@ -49,11 +49,11 @@ const Page: NextPage = () => {
     e.preventDefault()
     setIsLoading(true)
     if (user?.token === undefined) return ErrorToast('You must login first')
-    if (isChange) deleteImage(oldImage)
+    if (isChange) deleteImage(oldImage, 'product')
     const url = isChange ? await uploadImage(prod.image, prod.name, 'product') : prod.image
 
     const res = await fetch(`/api/v1/product/update/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user.token}` },
       body: JSON.stringify({ ...prod, image: url, updatedAt: new Date() }),
     })
