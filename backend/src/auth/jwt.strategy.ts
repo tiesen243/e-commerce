@@ -33,7 +33,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 export class JwtPayload {
   @ApiProperty({
     example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
-    description: 'Token',
+    description: 'Access token',
   })
-  token: string
+  accessToken: string
+
+  @ApiProperty({
+    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+    description: 'Refresh token',
+  })
+  refreshToken: string
 }

@@ -12,7 +12,8 @@ import {
 
 import { IResponse } from '../utils'
 import { AuthService } from './auth.service'
-import { LoginDto, RegisterDto } from './dto'
+import { LoginDto, RefreshDto, RegisterDto } from './dto'
+import { JwtPayload } from './jwt.strategy'
 
 @Controller('auth')
 @ApiTags('auth')
@@ -21,10 +22,7 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(204)
-  @ApiOperation({
-    summary: 'Register a new user',
-    description: 'Register a new user',
-  })
+  @ApiOperation({ summary: 'Register a new user' })
   @ApiNoContentResponse({ description: 'User successfully registered' })
   @ApiUnauthorizedResponse({ description: 'Passwords do not match' })
   @ApiBadRequestResponse({ description: 'Registration failed' })
@@ -34,16 +32,19 @@ export class AuthController {
   }
 
   @Post('login')
-  @ApiOperation({
-    summary: 'Login a user',
-    description: 'Login to an existing user',
-  })
+  @ApiOperation({ summary: 'Login a user' })
   @ApiCreatedResponse({ description: 'User successfully logged in' })
   @ApiNotFoundResponse({ description: 'User not found' })
   @ApiUnauthorizedResponse({ description: 'Incorrect password' })
-  async login(
-    @Body() loginDto: LoginDto,
-  ): Promise<IResponse<{ token: string }>> {
+  async login(@Body() loginDto: LoginDto): Promise<IResponse<JwtPayload>> {
     return this.authService.login(loginDto)
+  }
+
+  @Post('refresh')
+  @ApiOperation({ summary: 'Refresh access token' })
+  @ApiCreatedResponse({ description: 'Access token successfully refreshed' })
+  @ApiUnauthorizedResponse({ description: 'Invalid refresh token' })
+  async refresh(@Body() refreshToken: RefreshDto) {
+    return this.authService.refresh(refreshToken.refreshToken)
   }
 }

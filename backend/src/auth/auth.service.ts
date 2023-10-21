@@ -13,6 +13,7 @@ import { Model } from 'mongoose'
 import { IResponse } from '../utils'
 import { LoginDto, RegisterDto } from './dto'
 import { User } from './schemas'
+import { JwtPayload } from './jwt.strategy'
 
 @Injectable()
 export class AuthService {
@@ -45,7 +46,7 @@ export class AuthService {
     }
   }
 
-  async login(loginDto: LoginDto): Promise<IResponse<{ token: string }>> {
+  async login(loginDto: LoginDto): Promise<IResponse<JwtPayload>> {
     const { email, password } = loginDto
     const user = await this.userModel.findOne({ email })
     if (!user) throw new NotFoundException('User not found')
@@ -53,12 +54,38 @@ export class AuthService {
     const isCorrect: boolean = await bcrypt.compare(password, user.password)
     if (!isCorrect) throw new UnauthorizedException('Incorrect password')
 
-    const token: string = this.jwtService.sign({ id: user._id })
+    const [at, rt] = await Promise.all([
+      this.jwtService.signAsync({ id: user._id }, { expiresIn: '15m' }),
+      this.jwtService.signAsync({ id: user._id }, { expiresIn: '60d' }),
+    ])
 
     return {
       statusCode: 201,
       message: 'User logged in successfully',
-      data: { token },
+      data: {
+        accessToken: at,
+        refreshToken: rt,
+      },
+    }
+  }
+
+  async refresh(refreshToken: string): Promise<IResponse<JwtPayload>> {
+    const payload = await this.jwtService.verifyAsync(refreshToken)
+    const user = await this.userModel.findById(payload.id)
+    if (!user) throw new NotFoundException('User not found')
+
+    const at = await this.jwtService.signAsync(
+      { id: user._id },
+      { expiresIn: '15m' },
+    )
+
+    return {
+      statusCode: 201,
+      message: 'Token refreshed successfully',
+      data: {
+        accessToken: at,
+        refreshToken,
+      },
     }
   }
 }
