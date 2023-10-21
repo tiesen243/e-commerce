@@ -21,11 +21,9 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 
-import { User } from '../auth/schemas/user.shema'
-import { IRequest, IResponse } from '../utils/resreq.interface'
-import ChangePasswordDto from './dto/changePassword.dto'
-import UpdateRoleDto from './dto/updateRole.dto'
-import UpdateUserDto from './dto/updateUser.dto'
+import { User } from '../auth/schemas'
+import { IRequest, IResponse } from '../utils'
+import { ChangePasswordDto, UpdateRoleDto, UpdateUserDto } from './dto'
 import { UserService } from './user.service'
 
 @Controller('user')

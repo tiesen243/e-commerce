@@ -1,12 +1,14 @@
 'use client'
 
-import { Loading } from '@/components'
+import { ModeEditRounded } from '@mui/icons-material'
 import { Avatar, Button, IconButton, Tooltip, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
+
+import { Loading } from '@/components'
+import { formatDate } from '@/utils'
 import AvatarPopup from './AvatarPopup'
-import { ModeEditRounded } from '@mui/icons-material'
 import NamePopup from './NamePopup'
 
 const Page: NextPage = () => {
@@ -19,7 +21,11 @@ const Page: NextPage = () => {
   if (!user) return <Loading />
 
   return (
-    <main className="flex flex-col items-center h-[80vh] justify-center gap-4">
+    <main className="flex flex-col items-center  gap-4 main p-4 rounded">
+      <Typography variant="h1" className="text-4xl">
+        Acount Infomation
+      </Typography>
+
       <Avatar
         sx={{ width: 200, height: 200 }}
         {...(user.avatar ? { src: user.avatar } : { sx: { bgcolor: 'gray' } })}
@@ -27,7 +33,7 @@ const Page: NextPage = () => {
         onClick={() => setShow((prev) => !prev)}
       />
       <Button variant="outlined" color="info" hidden={!isShow} onClick={() => setIsOpen(true)}>
-        Change avatar{' '}
+        Change avatar
       </Button>
       {isOpen && <AvatarPopup setIsOpen={setIsOpen} user={user} token={data.token} />}
 
@@ -40,6 +46,18 @@ const Page: NextPage = () => {
         </Tooltip>
       </Typography>
       {isChange && <NamePopup setIsChange={setIsChange} token={data.token} name={user.userName} />}
+
+      <Typography variant="subtitle1" className="text-xl">
+        Role: {user.role}
+      </Typography>
+
+      <Typography variant="subtitle1" className="text-xl">
+        Email: {user.email}
+      </Typography>
+
+      <Typography variant="subtitle1" className="text-xl">
+        Join at: {formatDate(user.createdAt)}
+      </Typography>
     </main>
   )
 }

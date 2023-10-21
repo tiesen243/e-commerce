@@ -10,8 +10,7 @@ import { useDropzone } from 'react-dropzone'
 
 import { CustomSelect, CustomSelectTags, Loading, StyledTextField } from '@/components'
 import { Category, Prod } from '@/types/product.type'
-import { uploadImage } from '@/utils/firebase'
-import { ErrorToast, SuccessToast } from '@/utils/notify'
+import { showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 
 const Page: NextPage = () => {
   const { data: user } = useSession()
@@ -28,8 +27,9 @@ const Page: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles[0].size > 5 * 1024 * 1024) return ErrorToast('Image size must be less than 5MB')
-    else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/)) return ErrorToast('Image must be .jpg or .png or .jpeg')
+    if (acceptedFiles[0].size > 5 * 1024 * 1024) return showErrorToast('Image size must be less than 5MB')
+    else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/))
+      return showErrorToast('Image must be .jpg or .png or .jpeg')
     else {
       const file = new FileReader()
       file.onload = () => setPreview(file.result as string)
@@ -44,7 +44,7 @@ const Page: NextPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    if (user?.token === undefined) return ErrorToast('You must login first')
+    if (user?.token === undefined) return showErrorToast('You must login first')
     const url = await uploadImage(prod.image, prod.name, 'product')
 
     const res = await fetch('/api/v1/product/create', {
@@ -55,9 +55,9 @@ const Page: NextPage = () => {
     const { message } = await res.json()
     if (res.status !== 201) {
       setIsLoading(false)
-      ErrorToast(message.join(', '))
+      showErrorToast(message.join(', '))
     } else {
-      SuccessToast('Product created successfully')
+      showSuccessToast('Product created successfully')
       push('/manage/product')
     }
   }

@@ -10,10 +10,9 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 
+import { IResponse } from '../utils'
 import { AuthService } from './auth.service'
-import LoginDto from './dto/login.dto'
-import RegisterDto from './dto/register.dto'
-import { IResponse } from '../utils/resreq.interface'
+import { LoginDto, RegisterDto } from './dto'
 
 @Controller('auth')
 @ApiTags('auth')

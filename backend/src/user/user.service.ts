@@ -8,12 +8,9 @@ import { InjectModel } from '@nestjs/mongoose'
 import * as bcrypt from 'bcrypt'
 import { Model } from 'mongoose'
 
-import { Role } from '../auth/schemas/enum'
-import { User } from '../auth/schemas/user.shema'
-import { IResponse } from '../utils/resreq.interface'
-import ChangePasswordDto from './dto/changePassword.dto'
-import UpdateRoleDto from './dto/updateRole.dto'
-import UpdateUserDto from './dto/updateUser.dto'
+import { Role, User } from '../auth/schemas'
+import { IResponse } from '../utils'
+import { ChangePasswordDto, UpdateRoleDto, UpdateUserDto } from './dto'
 
 @Injectable()
 export class UserService {

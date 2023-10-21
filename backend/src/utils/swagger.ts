@@ -4,7 +4,6 @@ import {
   SwaggerCustomOptions,
 } from '@nestjs/swagger'
 
-// Swagger
 const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
   .setTitle('Yuki API')
   .setDescription('Restful API for Yuki Shop')

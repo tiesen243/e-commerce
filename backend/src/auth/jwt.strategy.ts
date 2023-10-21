@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Model } from 'mongoose'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 
-import { User } from './schemas/user.shema'
+import { User } from './schemas'
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

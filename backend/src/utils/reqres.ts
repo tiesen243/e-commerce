@@ -1,5 +1,9 @@
 import { Request } from 'express'
-import { User } from '../auth/schemas/user.shema'
+import { User } from '../auth/schemas'
+
+export interface IRequest extends Request {
+  user: User
+}
 
 export interface IResponse<T = any> {
   statusCode: number
@@ -7,8 +11,4 @@ export interface IResponse<T = any> {
   data?: T
   page?: number
   totalPage?: number
-}
-
-export interface IRequest extends Request {
-  user: User
 }

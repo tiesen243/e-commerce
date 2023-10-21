@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { Loading } from '@/components'
 import IUser from '@/types/user.type'
-import { deleteImage, uploadImage } from '@/utils/firebase'
-import { ErrorToast, SuccessToast } from '@/utils/notify'
+import { deleteImage, showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 
 interface Props {
   user: IUser
@@ -23,10 +22,10 @@ const AvatarPopup: React.FC<Props> = (props) => {
     if (!avatar) return
     if (avatar.size > 5 * 1024 * 1024) {
       setAvatar(null)
-      ErrorToast('Image size must be less than 5MB')
+      showErrorToast('Image size must be less than 5MB')
     } else if (!avatar.name.match(/\.(jpg|jpeg|png)$/)) {
       setAvatar(null)
-      ErrorToast('Image must be .jpg or .png or .jpeg')
+      showErrorToast('Image must be .jpg or .png or .jpeg')
     } else {
       const file = new FileReader()
       file.onload = () => setPreview(file.result as string)
@@ -36,13 +35,13 @@ const AvatarPopup: React.FC<Props> = (props) => {
 
   const handleSave = async () => {
     if (!avatar || !preview) {
-      ErrorToast('Please choose an image')
+      showErrorToast('Please choose an image')
       setIsOpen(false)
       return
     }
     setIsLoading(true)
     await deleteImage(user._id, 'avatar').catch((err) => err)
-    const url = await uploadImage(avatar, user._id, 'avatar').catch((err) => ErrorToast(err.message))
+    const url = await uploadImage(avatar, user._id, 'avatar').catch((err) => showErrorToast(err.message))
     const res = await fetch('/api/v1/user/update/info', {
       method: 'PATCH',
       headers: {
@@ -52,10 +51,10 @@ const AvatarPopup: React.FC<Props> = (props) => {
       body: JSON.stringify({ avatar: url }),
     })
     if (res.status === 204) {
-      SuccessToast('Change avatar successfully')
+      showSuccessToast('Change avatar successfully')
       setIsOpen(false)
     } else {
-      ErrorToast('Change avatar failed')
+      showErrorToast('Change avatar failed')
       setIsLoading(false)
     }
   }

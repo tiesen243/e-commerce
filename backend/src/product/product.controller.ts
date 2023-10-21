@@ -24,12 +24,10 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 
-import { IRequest, IResponse } from '../utils/resreq.interface'
-import CreateProductDto from './dto/createProduct.dto'
-import QueryDto from './dto/query.dto'
-import UpdateProductDto from './dto/updateProduct.dto'
+import { IRequest, IResponse } from '../utils'
 import { ProductService } from './product.service'
-import { Product } from './schemas/product.schema'
+import { Product } from './schemas'
+import { CreateProductDto, QueryProductDto, UpdateProductDto } from './dto'
 
 @Controller('product')
 @ApiTags('product')
@@ -45,7 +43,7 @@ export class ProductController {
     description: 'All products has been successfully retrieved.',
     type: [Product],
   })
-  async findAll(@Query() q: QueryDto): Promise<IResponse<Product[]>> {
+  async findAll(@Query() q: QueryProductDto): Promise<IResponse<Product[]>> {
     return await this.productService.findAll(q)
   }
 

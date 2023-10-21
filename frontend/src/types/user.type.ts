@@ -11,4 +11,5 @@ export default interface IUser {
   email: string
   avatar: string
   role: Role
+  createdAt: Date
 }

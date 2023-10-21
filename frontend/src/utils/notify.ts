@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 
-const SuccessToast = (message: string) =>
+const showSuccessToast = (message: string) =>
   toast.success(message, {
     position: 'top-right',
     autoClose: 5000,
@@ -11,7 +11,7 @@ const SuccessToast = (message: string) =>
     progress: undefined,
   })
 
-const ErrorToast = (message: string) =>
+const showErrorToast = (message: string) =>
   toast.error(message, {
     position: 'top-right',
     autoClose: 5000,
@@ -22,4 +22,4 @@ const ErrorToast = (message: string) =>
     progress: undefined,
   })
 
-export { SuccessToast, ErrorToast }
+export { showSuccessToast, showErrorToast }

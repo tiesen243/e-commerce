@@ -1,7 +1,8 @@
 import { Controller, Get, Res } from '@nestjs/common'
 import { ApiResponse } from '@nestjs/swagger'
 import { Response } from 'express'
-import { Category, Tag } from './product/schemas/enum'
+
+import { Category, Tag } from './product/schemas'
 
 @Controller()
 export class AppController {

@@ -1,8 +1,9 @@
-import { Loading, StyledTextField } from '@/components'
-import { ErrorToast, SuccessToast } from '@/utils/notify'
 import { Close } from '@mui/icons-material'
 import { Button, Container, IconButton, Typography } from '@mui/material'
 import { useState } from 'react'
+
+import { Loading, StyledTextField } from '@/components'
+import { showErrorToast, showSuccessToast } from '@/utils'
 
 interface Props {
   setIsChange: React.Dispatch<React.SetStateAction<boolean>>
@@ -18,12 +19,12 @@ const NamePopup: React.FC<Props> = (props) => {
   const handleSave = async () => {
     setIsLoading(true)
     if (!name) {
-      ErrorToast('Please enter your name')
+      showErrorToast('Please enter your name')
       setIsLoading(false)
       return
     } else if (name === props.name) {
       setIsChange(false)
-      ErrorToast('No change')
+      showErrorToast('No change')
     } else {
       const res = await fetch('/api/v1/user/update/info', {
         method: 'PATCH',
@@ -35,10 +36,10 @@ const NamePopup: React.FC<Props> = (props) => {
       })
 
       if (res.status === 204) {
-        SuccessToast('Change name successfully')
+        showSuccessToast('Change name successfully')
         setIsChange(false)
       } else {
-        ErrorToast('Change name failed')
+        showErrorToast('Change name failed')
         setIsLoading(false)
       }
     }

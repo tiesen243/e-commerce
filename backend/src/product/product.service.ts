@@ -7,13 +7,10 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 
-import { Role } from '../auth/schemas/enum'
-import { User } from '../auth/schemas/user.shema'
-import { IResponse } from '../utils/resreq.interface'
-import CreateProductDto from './dto/createProduct.dto'
-import QueryDto from './dto/query.dto'
-import UpdateProductDto from './dto/updateProduct.dto'
 import { Product } from './schemas/product.schema'
+import { CreateProductDto, QueryProductDto, UpdateProductDto } from './dto'
+import { IResponse } from '../utils'
+import { User } from '../auth/schemas'
 
 @Injectable()
 export class ProductService {
@@ -21,7 +18,7 @@ export class ProductService {
     @InjectModel(Product.name) private readonly productModel: Model<Product>,
   ) {}
 
-  async findAll(q: QueryDto): Promise<IResponse<Product[]>> {
+  async findAll(q: QueryProductDto): Promise<IResponse<Product[]>> {
     const { limit, page, keyword, code, category, tags } = q
     const skip: number = (page - 1) * limit
 

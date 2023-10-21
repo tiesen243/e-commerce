@@ -3,8 +3,7 @@ import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-import { deleteImage } from '@/utils/firebase'
-import { ErrorToast, SuccessToast } from '@/utils/notify'
+import { deleteImage, showErrorToast, showSuccessToast } from '@/utils'
 
 export const col: GridColDef[] = [
   { field: 'code', headerName: 'Code', width: 100, type: 'number' },
@@ -33,8 +32,8 @@ const ButtonAction = (params: GridRenderCellParams) => {
     })
     if (res.status === 204) {
       await deleteImage(fileName, 'product')
-      SuccessToast('Product deleted')
-    } else ErrorToast(await res.text())
+      showSuccessToast('Product deleted')
+    } else showErrorToast(await res.text())
   }
   return (
     <Box className="flex justify-between items-center w-full">

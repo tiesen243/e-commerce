@@ -41,6 +41,13 @@ export class Product extends Document {
   })
   stock: number
 
+  @Prop({ default: true })
+  @ApiProperty({
+    description: 'The availability of the product',
+    example: true,
+  })
+  available: boolean
+
   @Prop({ required: true, default: Category.Other, type: String })
   @ApiProperty({
     description: 'The category of the product',
