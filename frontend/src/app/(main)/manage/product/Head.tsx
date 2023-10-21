@@ -32,7 +32,7 @@ const ButtonAction = (params: GridRenderCellParams) => {
       },
     })
     if (res.status === 204) {
-      await deleteImage(fileName)
+      await deleteImage(fileName, 'product')
       SuccessToast('Product deleted')
     } else ErrorToast(await res.text())
   }
