@@ -7,10 +7,10 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 
-import { Product } from './schemas/product.schema'
-import { CreateProductDto, QueryProductDto, UpdateProductDto } from './dto'
+import { Role, User } from '../auth/schemas'
 import { IResponse } from '../utils'
-import { User } from '../auth/schemas'
+import { CreateProductDto, QueryProductDto, UpdateProductDto } from './dto'
+import { Product } from './schemas/product.schema'
 
 @Injectable()
 export class ProductService {

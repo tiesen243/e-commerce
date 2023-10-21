@@ -53,13 +53,16 @@ const Page: NextPage = () => {
       body: JSON.stringify({ ...prod, image: url }),
     })
     const { message } = await res.json()
+    console.log(res.status)
     if (res.status !== 201) {
       setIsLoading(false)
-      showErrorToast(message.join(', '))
+      // showErrorToast(message.join(', '))
     } else {
       showSuccessToast('Product created successfully')
       push('/manage/product')
     }
+
+    setIsLoading(false)
   }
 
   return (
