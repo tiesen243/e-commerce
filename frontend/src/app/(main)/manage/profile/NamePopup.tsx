@@ -2,7 +2,7 @@ import { Close } from '@mui/icons-material'
 import { Button, Container, IconButton, Typography } from '@mui/material'
 import { useState } from 'react'
 
-import { Loading, StyledTextField } from '@/components'
+import { CustomTextField, Loading } from '@/components'
 import { showErrorToast, showSuccessToast } from '@/utils'
 
 interface Props {
@@ -56,7 +56,7 @@ const NamePopup: React.FC<Props> = (props) => {
           </IconButton>
         </section>
 
-        <StyledTextField label="Name" value={name} onChange={(e) => setName(e.target.value)} />
+        <CustomTextField label="Name" value={name} onChange={(e) => setName(e.target.value)} />
 
         <Button variant="outlined" color="info" onClick={handleSave}>
           Save

@@ -64,27 +64,22 @@ export enum Tag {
 }
 
 // Product type
-export default interface Product {
+export default interface Product extends Prod {
   _id: string
   code: number
-  name: string
-  description: string
   image: string
-  category: Category
-  tags: Tag[]
-  price: number
-  stock: number
   createdAt: Date
   updatedAt: Date
 }
 
 export interface Prod {
   name: string
-  image: File | null
+  img: File | null
   description: string
   price: number
   stock: number
   category: Category
   tags: Tag[]
   available: boolean
+  saleOffPercent: number
 }

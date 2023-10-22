@@ -1,8 +1,8 @@
 'use client'
 
 import { AppBar, Toolbar, Typography } from '@mui/material'
-import AccountMenu from './AccountMenu'
 import Link from 'next/link'
+import AccountMenu from './AccountMenu'
 
 const Header: React.FC = () => {
   return (

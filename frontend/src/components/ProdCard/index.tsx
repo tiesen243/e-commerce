@@ -1,5 +1,5 @@
 import Product from '@/types/product.type'
-import { Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material'
 import Link from 'next/link'
 
 interface Props {
@@ -19,7 +19,14 @@ const ProdCard: React.FC<Props> = ({ product }) => {
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
-            {product.price}
+            {product.saleOffPercent !== 0 ? (
+              <>
+                <del>${product.price}</del>
+                <span className="text-red-500"> ${product.price - (product.price * product.saleOffPercent) / 100}</span>
+              </>
+            ) : (
+              <span>${product.price}</span>
+            )}
           </Typography>
         </CardContent>
       </CardActionArea>

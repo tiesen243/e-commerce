@@ -7,7 +7,15 @@ import { useSession } from 'next-auth/react'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-import { CustomCheckbox, CustomSelect, CustomSelectTags, DragAndDrop, Loading, StyledTextField } from '@/components'
+import {
+  CustomCheckbox,
+  CustomSelect,
+  CustomSelectTags,
+  CustomSlider,
+  CustomTextField,
+  DragAndDrop,
+  Loading,
+} from '@/components'
 import { Category, Prod } from '@/types/product.type'
 import { deleteImage, showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 
@@ -17,12 +25,13 @@ const Page: NextPage = () => {
   const [prod, setProd] = useState<Prod>({
     name: '',
     description: '',
-    image: null,
+    img: null,
     price: 0,
     stock: 0,
     category: Category.Other,
     tags: [],
     available: false,
+    saleOffPercent: 0,
   })
   const [preview, setPreview] = useState<string>('')
   const [isChange, setIsChange] = useState<boolean>(false)
@@ -34,7 +43,7 @@ const Page: NextPage = () => {
     setIsLoading(true)
     if (token === undefined) return showErrorToast('You must login first')
     if (isChange) deleteImage(prod.name, 'product')
-    const url = isChange ? await uploadImage(prod.image, prod.name, 'product') : prod.image
+    const url = isChange ? await uploadImage(prod.img, prod.name, 'product') : prod.img
 
     const res = await fetch(`/api/v1/product/update/${id}`, {
       method: 'PATCH',
@@ -61,7 +70,6 @@ const Page: NextPage = () => {
     }
     getData()
   }, [id])
-
   return (
     <>
       <Button variant="outlined" className="after:content-['back'] after:ml-2" color="info" onClick={() => back()}>
@@ -73,7 +81,7 @@ const Page: NextPage = () => {
           Edit Product
         </Typography>
 
-        <StyledTextField
+        <CustomTextField
           disabled
           label="Name"
           value={prod.name}
@@ -82,13 +90,15 @@ const Page: NextPage = () => {
 
         <DragAndDrop preview={preview} setProd={setProd} setIsChanged={setIsChange} />
 
+        <CustomSlider label="Sale off" prod={prod} setProd={setProd} />
+
         <CustomCheckbox
           checked={prod.available}
           onChange={(e) => setProd({ ...prod, available: e.target.checked })}
           label="Available"
         />
 
-        <StyledTextField
+        <CustomTextField
           label="Description"
           value={prod.description}
           onChange={(e) => setProd({ ...prod, description: e.target.value })}
@@ -97,7 +107,7 @@ const Page: NextPage = () => {
           required
         />
 
-        <StyledTextField
+        <CustomTextField
           label="Price"
           type="number"
           value={prod.price}
@@ -105,7 +115,7 @@ const Page: NextPage = () => {
           required
         />
 
-        <StyledTextField
+        <CustomTextField
           label="Stock"
           type="number"
           value={prod.stock}

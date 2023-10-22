@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { Loading, StyledTextField } from '@/components'
+import { CustomTextField, Loading } from '@/components'
 import { showSuccessToast } from '@/utils/notify'
 
 const Page: NextPage = () => {
@@ -44,28 +44,28 @@ const Page: NextPage = () => {
         Register New User
       </Typography>
 
-      <StyledTextField
+      <CustomTextField
         label="User Name"
         type="text"
         value={data.userName}
         onChange={(e) => setdata({ ...data, userName: e.target.value })}
         required
       />
-      <StyledTextField
+      <CustomTextField
         type="email"
         label="Email"
         value={data.email}
         onChange={(e) => setdata({ ...data, email: e.target.value })}
         required
       />
-      <StyledTextField
+      <CustomTextField
         label="Password"
         type="password"
         value={data.password}
         onChange={(e) => setdata({ ...data, password: e.target.value })}
         required
       />
-      <StyledTextField
+      <CustomTextField
         label="Confirm Password"
         type="password"
         value={data.confirmPassword}

@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { StyledMenuItem } from '@/components'
+import { CustomMenuItem } from '@/components'
 import IUser from '@/types/user.type'
 import { showSuccessToast } from '@/utils/notify'
 
@@ -64,17 +64,17 @@ const AccountMenu: React.FC = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         PaperProps={papperProps}
       >
-        <StyledMenuItem icon={<Avatar src={user.avatar} />} text={user.userName} href="/manage/profile" />
-        <StyledMenuItem icon={<ShoppingCartRounded />} text="My Cart" href="/manage/cart" />
+        <CustomMenuItem icon={<Avatar src={user.avatar} />} text={user.userName} href="/manage/profile" />
+        <CustomMenuItem icon={<ShoppingCartRounded />} text="My Cart" href="/manage/cart" />
         {user.role === 'seller' || user.role === 'admin' ? (
-          <StyledMenuItem icon={<Inventory2Rounded />} text="Product Manage" href="/manage/product" />
+          <CustomMenuItem icon={<Inventory2Rounded />} text="Product Manage" href="/manage/product" />
         ) : null}
         {user.role === 'admin' && (
-          <StyledMenuItem icon={<AdminPanelSettingsRounded />} text="Admin Panel" href="/manage/admin" />
+          <CustomMenuItem icon={<AdminPanelSettingsRounded />} text="Admin Panel" href="/manage/admin" />
         )}
         <Divider />
-        <StyledMenuItem icon={<Logout />} text="Logout" onClick={handleLogout} />
-        <StyledMenuItem disabled icon={<Settings />} text="Settings" href="/manage/settings" />
+        <CustomMenuItem icon={<Logout />} text="Logout" onClick={handleLogout} />
+        <CustomMenuItem disabled icon={<Settings />} text="Settings" href="/manage/settings" />
       </Menu>
     </>
   )

@@ -1,13 +1,13 @@
-import StyledTextField from '@/components/StyledTextField'
 import { Prod, Tag } from '@/types/product.type'
 import { Box, MenuItem } from '@mui/material'
+import { CustomTextField } from '..'
 
 interface Props {
   data: Prod
   setData: React.Dispatch<React.SetStateAction<Prod>>
 }
 const SelectTags: React.FC<Props> = ({ data, setData }) => (
-  <StyledTextField
+  <CustomTextField
     select
     name="tags"
     id="tags"
@@ -46,7 +46,7 @@ const SelectTags: React.FC<Props> = ({ data, setData }) => (
         {tag}
       </MenuItem>
     ))}
-  </StyledTextField>
+  </CustomTextField>
 )
 
 export default SelectTags

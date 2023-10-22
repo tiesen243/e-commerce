@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { CustomSelect, CustomSelectTags, DragAndDrop, Loading, StyledTextField } from '@/components'
+import { CustomSelect, CustomSelectTags, CustomTextField, DragAndDrop, Loading } from '@/components'
 import { Category, Prod } from '@/types/product.type'
 import { showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 
@@ -16,12 +16,13 @@ const Page: NextPage = () => {
   const [prod, setProd] = useState<Prod>({
     name: '',
     description: '',
-    image: null,
+    img: null,
     price: 0,
     stock: 0,
     category: Category.Other,
     tags: [],
     available: true,
+    saleOffPercent: 0,
   })
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -33,11 +34,11 @@ const Page: NextPage = () => {
     if (token === undefined) {
       setIsLoading(false)
       return showErrorToast('You must login first')
-    } else if (prod.image === null) {
+    } else if (prod.img === null) {
       setIsLoading(false)
       return showErrorToast('You must upload an image')
     } else {
-      const url = await uploadImage(prod.image, prod.name, 'product').catch((err) => showErrorToast(err.message))
+      const url = await uploadImage(prod.img, prod.name, 'product').catch((err) => showErrorToast(err.message))
       const res = await fetch('/api/v1/product/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
@@ -65,7 +66,7 @@ const Page: NextPage = () => {
           Create New Product
         </Typography>
 
-        <StyledTextField
+        <CustomTextField
           required
           label="Name"
           value={prod.name}
@@ -74,7 +75,7 @@ const Page: NextPage = () => {
 
         <DragAndDrop setProd={setProd} />
 
-        <StyledTextField
+        <CustomTextField
           label="Description"
           value={prod.description}
           onChange={(e) => setProd({ ...prod, description: e.target.value })}
@@ -83,7 +84,7 @@ const Page: NextPage = () => {
           required
         />
 
-        <StyledTextField
+        <CustomTextField
           label="Price"
           type="number"
           value={prod.price}
@@ -91,7 +92,7 @@ const Page: NextPage = () => {
           required
         />
 
-        <StyledTextField
+        <CustomTextField
           label="Stock"
           type="number"
           value={prod.stock}

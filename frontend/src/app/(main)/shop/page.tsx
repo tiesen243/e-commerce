@@ -8,7 +8,7 @@ import { Grid } from '@mui/material'
 
 const Page: NextPage = () => {
   const { products, error, isLoading } = useProduct()
-
+  console.log(products)
   return !isLoading ? (
     <div>
       <Grid container spacing={2}>

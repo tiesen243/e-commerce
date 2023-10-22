@@ -1,7 +1,7 @@
 'use client'
 
 import { Box, Button, Typography } from '@mui/material'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { Prod } from '@/types/product.type'
@@ -15,8 +15,9 @@ interface Props {
 
 const DragAndDrop: React.FC<Props> = (props) => {
   const { setProd, setIsChanged } = props
-  const [preview, setPreview] = useState<string>(props.preview || '')
 
+  const [preview, setPreview] = useState<string>()
+  useEffect(() => setPreview(props.preview), [props.preview])
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0].size > 5 * 1024 * 1024) return showErrorToast('Image size must be less than 5MB')
     else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/))
@@ -25,12 +26,11 @@ const DragAndDrop: React.FC<Props> = (props) => {
       const file = new FileReader()
       file.onload = () => setPreview(file.result as string)
       file.readAsDataURL(acceptedFiles[0])
-      setProd((prev) => ({ ...prev, image: acceptedFiles[0] }))
+      setProd((prev) => ({ ...prev, img: acceptedFiles[0] }))
       if (setIsChanged) setIsChanged(true)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   return (

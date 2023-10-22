@@ -1,6 +1,6 @@
 'use client'
 
-import { StyledTextField } from '@/components'
+import { CustomTextField } from '@/components'
 import { showSuccessToast } from '@/utils'
 import { Box, Button, FormHelperText, Typography } from '@mui/material'
 import { NextPage } from 'next'
@@ -42,7 +42,7 @@ const Page: NextPage = () => {
         Change password
       </Typography>
 
-      <StyledTextField
+      <CustomTextField
         label="New password"
         type="password"
         value={data.newPassword}
@@ -50,7 +50,7 @@ const Page: NextPage = () => {
         required
       />
 
-      <StyledTextField
+      <CustomTextField
         label="Confirm password"
         type="password"
         value={data.confirmPassword}
@@ -58,7 +58,7 @@ const Page: NextPage = () => {
         required
       />
 
-      <StyledTextField
+      <CustomTextField
         label="Old password"
         type="password"
         value={data.oldPassword}

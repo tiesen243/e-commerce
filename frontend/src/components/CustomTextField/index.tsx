@@ -1,7 +1,7 @@
 import { TextField, TextFieldProps } from '@mui/material'
 import { NextPage } from 'next'
 
-const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => (
+const CustomTextField: NextPage<TextFieldProps> = ({ ...props }) => (
   <TextField
     autoComplete="off"
     autoCorrect="off"
@@ -36,4 +36,4 @@ const StyledTextField: NextPage<TextFieldProps> = ({ ...props }) => (
   />
 )
 
-export default StyledTextField
+export default CustomTextField

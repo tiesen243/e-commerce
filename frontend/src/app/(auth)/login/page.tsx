@@ -6,7 +6,7 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { Loading, StyledTextField } from '@/components'
+import { CustomTextField, Loading } from '@/components'
 import { showErrorToast, showSuccessToast } from '@/utils/notify'
 
 type Data = {
@@ -43,14 +43,14 @@ const Page: NextPage = () => {
       </Typography>
 
       <Box component="form" onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <StyledTextField
+        <CustomTextField
           label="Email"
           type="email"
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
           required
         />
-        <StyledTextField
+        <CustomTextField
           label="Password"
           type="password"
           value={data.password}
