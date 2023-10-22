@@ -10,19 +10,19 @@ import {
 import { Avatar, Button, Divider, IconButton, Menu, Tooltip } from '@mui/material'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { StyledMenuItem } from '@/components'
 import IUser from '@/types/user.type'
 import { showSuccessToast } from '@/utils/notify'
-import { useRouter } from 'next/navigation'
-import StyledMenuItem from '../StyledMenuItem'
 
 const AccountMenu: React.FC = () => {
   const { data } = useSession()
-  const { push } = useRouter()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
+  const { push } = useRouter()
   const handleClick = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)
   const handleClose = () => setAnchorEl(null)
   const handleLogout = () => {
@@ -64,7 +64,7 @@ const AccountMenu: React.FC = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         PaperProps={papperProps}
       >
-        <StyledMenuItem icon={<Avatar sx={{ width: 25, height: 25 }} />} text={user.userName} href="/manage/profile" />
+        <StyledMenuItem icon={<Avatar src={user.avatar} />} text={user.userName} href="/manage/profile" />
         <StyledMenuItem icon={<ShoppingCartRounded />} text="My Cart" href="/manage/cart" />
         {user.role === 'seller' || user.role === 'admin' ? (
           <StyledMenuItem icon={<Inventory2Rounded />} text="Product Manage" href="/manage/product" />
@@ -84,15 +84,15 @@ export default AccountMenu
 
 const papperProps = {
   elevation: 0,
+  className: 'rounded-md',
   sx: {
     overflow: 'visible',
     filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-    mt: 1.5,
+    mt: 2.5,
     '& .MuiAvatar-root': {
-      width: 32,
-      height: 32,
+      width: 35,
+      height: 35,
       ml: -0.5,
-      mr: 1,
     },
     '&:before': {
       content: '""',
@@ -102,7 +102,7 @@ const papperProps = {
       right: 14,
       width: 10,
       height: 10,
-      bgcolor: 'background.paper',
+      bgcolor: 'secondary.main',
       transform: 'translateY(-50%) rotate(45deg)',
       zIndex: 0,
     },

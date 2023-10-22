@@ -4,6 +4,7 @@ export { default as CustomSelect } from './CustomSelect'
 export { default as CustomToolBar } from './CustomToolBar'
 export { default as Loading } from './Loading'
 export { default as CustomSelectTags } from './SelectTags'
+export { default as CustomCheckbox } from './CustomCheckbox'
 
 // Styled MUI components
 export { default as StyledMenuItem } from './StyledMenuItem'
@@ -17,3 +18,4 @@ export { default as Header } from './Header'
 export { default as Notification } from './Notification'
 export { default as ThemeBtn } from './ThemeBtn'
 export { default as ProdCard } from './ProdCard'
+export { default as DragAndDrop } from './DragAndDrop'

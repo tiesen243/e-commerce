@@ -26,20 +26,13 @@ const Page: NextPage = () => {
   }
 
   return !isLoading && products ? (
-    <>
-      <section className="flex justify-end items-center mb-4">
-        <Button component={Link} href="/manage/product/create" variant="contained" color="info">
-          Create Product
-        </Button>
-      </section>
-      <DataGrid
-        slots={{ toolbar: CustomToolBar }}
-        columns={col}
-        rows={products}
-        pageSizeOptions={[5, 10]}
-        getRowId={(row) => row.code}
-      />
-    </>
+    <DataGrid
+      slots={{ toolbar: CustomToolBar }}
+      columns={col}
+      rows={products}
+      pageSizeOptions={[5, 10]}
+      getRowId={(row) => row.code}
+    />
   ) : (
     <Loading />
   )

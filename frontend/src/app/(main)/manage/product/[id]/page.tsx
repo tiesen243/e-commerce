@@ -5,17 +5,15 @@ import { Box, Button, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { useParams, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { useEffect, useState } from 'react'
 
-import { CustomSelect, CustomSelectTags, Loading, StyledTextField } from '@/components'
-import CustomCheckbox from '@/components/CustomCheckbox'
+import { CustomCheckbox, CustomSelect, CustomSelectTags, DragAndDrop, Loading, StyledTextField } from '@/components'
 import { Category, Prod } from '@/types/product.type'
 import { deleteImage, showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 
 const Page: NextPage = () => {
   const { id } = useParams()
-  const { data: user } = useSession()
+  const { token } = useSession().data || {}
   const [prod, setProd] = useState<Prod>({
     name: '',
     description: '',
@@ -26,35 +24,21 @@ const Page: NextPage = () => {
     tags: [],
     available: false,
   })
-  const [preview, setPreview] = useState<string | null>(null)
+  const [preview, setPreview] = useState<string>('')
   const [isChange, setIsChange] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles[0].size > 5 * 1024 * 1024) return showErrorToast('Image size must be less than 5MB')
-    else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/))
-      return showErrorToast('Image must be .jpg or .png or .jpeg')
-    else {
-      const file = new FileReader()
-      file.onload = () => setPreview(file.result as string)
-      file.readAsDataURL(acceptedFiles[0])
-      setProd((prev) => ({ ...prev, image: acceptedFiles[0] }))
-      setIsChange(true)
-    }
-  }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   const { back } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    if (user?.token === undefined) return showErrorToast('You must login first')
+    if (token === undefined) return showErrorToast('You must login first')
     if (isChange) deleteImage(prod.name, 'product')
     const url = isChange ? await uploadImage(prod.image, prod.name, 'product') : prod.image
 
     const res = await fetch(`/api/v1/product/update/${id}`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user.token}` },
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ ...prod, image: url }),
     })
     if (res.status !== 204) {
@@ -96,25 +80,7 @@ const Page: NextPage = () => {
           onChange={(e) => setProd({ ...prod, name: e.target.value })}
         />
 
-        <Box className="flex justify-between items-center border-2 border-dashed border-gray-400 rounded-md p-4">
-          <Button variant="contained" color="info" component="label">
-            Choose image <input hidden onChange={getInputProps().onChange} type="file" />
-          </Button>
-
-          <Box {...getRootProps()}>
-            <input {...getInputProps} hidden />
-            {isDragActive ? (
-              <Typography variant="subtitle2" className="ml-4">
-                Drop image here...
-              </Typography>
-            ) : (
-              <Typography variant="subtitle2" className="ml-4">
-                Or drag image here
-              </Typography>
-            )}
-          </Box>
-        </Box>
-        {preview && <img src={preview} alt="preview" className="w-32" />}
+        <DragAndDrop preview={preview} setProd={setProd} setIsChanged={setIsChange} />
 
         <CustomCheckbox
           checked={prod.available}

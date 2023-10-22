@@ -5,15 +5,14 @@ import { Box, Button, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useCallback, useState } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { useState } from 'react'
 
-import { CustomSelect, CustomSelectTags, Loading, StyledTextField } from '@/components'
+import { CustomSelect, CustomSelectTags, DragAndDrop, Loading, StyledTextField } from '@/components'
 import { Category, Prod } from '@/types/product.type'
 import { showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 
 const Page: NextPage = () => {
-  const { data: user } = useSession()
+  const { token } = useSession().data ?? {}
   const [prod, setProd] = useState<Prod>({
     name: '',
     description: '',
@@ -24,28 +23,14 @@ const Page: NextPage = () => {
     tags: [],
     available: true,
   })
-  const [preview, setPreview] = useState<string | null>(null)
+
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles[0].size > 5 * 1024 * 1024) return showErrorToast('Image size must be less than 5MB')
-    else if (!acceptedFiles[0].name.match(/\.(jpg|jpeg|png)$/))
-      return showErrorToast('Image must be .jpg or .png or .jpeg')
-    else {
-      const file = new FileReader()
-      file.onload = () => setPreview(file.result as string)
-      file.readAsDataURL(acceptedFiles[0])
-      setProd((prev) => ({ ...prev, image: acceptedFiles[0] }))
-    }
-  }, [])
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   const { push, back } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    if (user?.token === undefined) {
+    if (token === undefined) {
       setIsLoading(false)
       return showErrorToast('You must login first')
     } else if (prod.image === null) {
@@ -55,7 +40,7 @@ const Page: NextPage = () => {
       const url = await uploadImage(prod.image, prod.name, 'product').catch((err) => showErrorToast(err.message))
       const res = await fetch('/api/v1/product/create', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user.token}` },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...prod, image: url }),
       })
       if (res.status !== 201) {
@@ -87,24 +72,7 @@ const Page: NextPage = () => {
           onChange={(e) => setProd({ ...prod, name: e.target.value })}
         />
 
-        <Box className="flex justify-between items-center border-2 border-dashed border-gray-400 rounded-md p-4">
-          <Button variant="contained" color="info" component="label">
-            Choose image <input onChange={getInputProps().onChange} type="file" hidden />
-          </Button>
-          <Box {...getRootProps()}>
-            <input {...getInputProps} hidden />
-            {isDragActive ? (
-              <Typography variant="subtitle2" className="ml-4">
-                Drop image here...
-              </Typography>
-            ) : (
-              <Typography variant="subtitle2" className="ml-4">
-                Or drag image here
-              </Typography>
-            )}
-          </Box>
-        </Box>
-        {preview && <img src={preview} alt="preview" className="w-32" />}
+        <DragAndDrop setProd={setProd} />
 
         <StyledTextField
           label="Description"
@@ -114,6 +82,7 @@ const Page: NextPage = () => {
           rows={4}
           required
         />
+
         <StyledTextField
           label="Price"
           type="number"
@@ -121,6 +90,7 @@ const Page: NextPage = () => {
           onChange={(e) => setProd({ ...prod, price: Number(e.target.value) })}
           required
         />
+
         <StyledTextField
           label="Stock"
           type="number"
@@ -133,9 +103,7 @@ const Page: NextPage = () => {
           label="Category"
           data={Object.values(Category)}
           value={prod.category}
-          onChange={(e) => {
-            setProd({ ...prod, category: e.target.value as Category })
-          }}
+          onChange={(e) => setProd({ ...prod, category: e.target.value as Category })}
           required
         />
 

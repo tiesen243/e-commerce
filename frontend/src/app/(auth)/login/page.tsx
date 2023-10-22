@@ -67,7 +67,7 @@ const Page: NextPage = () => {
           </Button>
         </Typography>
 
-        <Button color="info" type="submit">
+        <Button color="info" type="submit" variant="outlined">
           Login
         </Button>
       </Box>

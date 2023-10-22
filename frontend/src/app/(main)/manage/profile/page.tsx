@@ -3,13 +3,14 @@
 import { ModeEditRounded } from '@mui/icons-material'
 import { Avatar, Button, IconButton, Tooltip, Typography } from '@mui/material'
 import { NextPage } from 'next'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useState } from 'react'
 
 import { Loading } from '@/components'
 import { formatDate } from '@/utils'
 import AvatarPopup from './AvatarPopup'
 import NamePopup from './NamePopup'
+import Link from 'next/link'
 
 const Page: NextPage = () => {
   const { data } = useSession()
@@ -38,7 +39,7 @@ const Page: NextPage = () => {
       {isOpen && <AvatarPopup setIsOpen={setIsOpen} user={user} token={data.token} />}
 
       <Typography variant="h1" className="text-4xl">
-        {user.userName}{' '}
+        {user.userName}
         <Tooltip title="Change username">
           <IconButton className="ml-2" onClick={() => setIsChange(true)}>
             <ModeEditRounded />
@@ -58,6 +59,10 @@ const Page: NextPage = () => {
       <Typography variant="subtitle1" className="text-xl">
         Join at: {formatDate(user.createdAt)}
       </Typography>
+
+      <Button variant="contained" color="info" component={Link} href="/manage/profile/change-password">
+        Change password
+      </Button>
     </main>
   )
 }

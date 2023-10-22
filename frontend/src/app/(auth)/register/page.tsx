@@ -83,7 +83,7 @@ const Page: NextPage = () => {
           Login{' '}
         </Button>
       </Typography>
-      <Button color="info" type="submit">
+      <Button color="info" type="submit" variant="outlined">
         Register
       </Button>
       {isSubmitting && <Loading text="Registering..." />}
