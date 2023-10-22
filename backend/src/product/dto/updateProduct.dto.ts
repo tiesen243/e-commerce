@@ -8,6 +8,7 @@ import {
   IsString,
   IsUrl,
   Length,
+  Max,
   Min,
 } from 'class-validator'
 import { Category, Tag } from '../schemas/enum'
@@ -63,6 +64,14 @@ export default class UpdateProductDto {
   @Type(() => Number)
   @Min(0)
   readonly stock: number
+
+  @ApiProperty({ description: 'The sale off percent of the product' })
+  @IsOptional()
+  @IsNumber()
+  @Type(() => Number)
+  @Min(0)
+  @Max(100)
+  readonly saleOffPercent: number
 
   @ApiProperty({ description: 'The availability of the product' })
   @IsOptional()

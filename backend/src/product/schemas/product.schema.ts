@@ -41,6 +41,10 @@ export class Product extends Document {
   })
   stock: number
 
+  @Prop({ required: true, isInteger: true, default: 0 })
+  @ApiProperty({ description: 'The sale off percent of the product' })
+  saleOffPercent: number
+
   @Prop({ default: true })
   @ApiProperty({
     description: 'The availability of the product',
