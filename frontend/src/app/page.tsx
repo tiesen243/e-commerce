@@ -4,7 +4,7 @@ import { NextPage } from 'next'
 
 const Page: NextPage = () => {
   return (
-    <Container maxWidth="lg" className="flex flex-col justify-center items-center gap-8 w-screen h-screen">
+    <Container maxWidth="lg" className="flex h-screen w-screen flex-col items-center justify-center gap-8">
       <Typography variant="h1" fontSize={69}>
         Welcome to Yuki&apos;s Shop
       </Typography>

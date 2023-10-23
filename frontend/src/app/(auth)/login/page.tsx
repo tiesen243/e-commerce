@@ -8,6 +8,7 @@ import { useState } from 'react'
 
 import { CustomTextField, Loading } from '@/components'
 import { showErrorToast, showSuccessToast } from '@/utils/notify'
+import Link from 'next/link'
 
 type Data = {
   email: string
@@ -20,16 +21,16 @@ const Page: NextPage = () => {
     password: '',
   })
   const [error, setError] = useState<string>('')
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [isLogining, setLogin] = useState<boolean>(false)
 
   const { push } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    setLogin(true)
     const res = await signIn('credentials', { ...data, redirect: false })
     if (res?.status !== 200) {
       setError(res?.error ?? 'Something went wrong')
-      setIsSubmitting(false)
+      setLogin(false)
       showErrorToast('Login failed')
     } else {
       showSuccessToast('Login success')
@@ -62,17 +63,17 @@ const Page: NextPage = () => {
 
         <Typography variant="subtitle2">
           Don&apos;t have an account?{' '}
-          <Button variant="text" color="info" onClick={() => push('/register')}>
+          <Button variant="text" color="info" component={Link} href="/register">
             Register
           </Button>
         </Typography>
 
-        <Button color="info" type="submit" variant="outlined">
+        <Button className="bg-blue-light" type="submit" variant="contained">
           Login
         </Button>
       </Box>
 
-      {isSubmitting && <Loading text="Logining..." />}
+      {isLogining && <Loading text="Logining..." />}
     </>
   )
 }

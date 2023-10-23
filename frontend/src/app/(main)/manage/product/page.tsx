@@ -14,7 +14,7 @@ const Page: NextPage = () => {
 
   if (error) {
     return (
-      <div className="h-[80vh] overflow-y-hidden flex flex-col gap-8 items-center justify-center">
+      <div className="flex h-[80vh] flex-col items-center justify-center gap-8 overflow-y-hidden">
         <Typography variant="h1" fontSize={69}>
           {error.message}
         </Typography>

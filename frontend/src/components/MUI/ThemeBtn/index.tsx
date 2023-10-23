@@ -13,8 +13,12 @@ const ThemeBtn = () => {
 
   const handleClick = () => dispatch(toggleTheme())
   return (
-    <Box role="presentation" onClick={handleClick} sx={{ position: 'fixed', bottom: 16, right: 16, color: 'primary' }}>
-      <Fab size="small" aria-label="toggle theme" className="btn">
+    <Box role="presentation" className="fixed bottom-4 right-4" onClick={handleClick}>
+      <Fab
+        size="small"
+        aria-label="toggle theme"
+        className="bg-secondary-light text-black transition-all duration-300 ease-linear hover:opacity-60 dark:bg-secondary-dark dark:text-white"
+      >
         {theme === 'light' ? <DarkMode /> : <LightMode />}
       </Fab>
     </Box>

@@ -35,7 +35,7 @@ const DragAndDrop: React.FC<Props> = (props) => {
 
   return (
     <>
-      <Box className="flex justify-between items-center border-2 border-dashed border-gray-400 rounded-md p-4">
+      <Box className="flex items-center justify-between rounded-md border-2 border-dashed border-gray-400 p-4">
         <Button variant="contained" color="info" component="label">
           Choose image <input onChange={getInputProps().onChange} type="file" hidden />
         </Button>

@@ -1,6 +1,6 @@
 import { Prod, Tag } from '@/types/product.type'
 import { Box, MenuItem } from '@mui/material'
-import { CustomTextField } from '..'
+import CustomTextField from '../CustomTextField'
 
 interface Props {
   data: Prod
@@ -20,13 +20,7 @@ const SelectTags: React.FC<Props> = ({ data, setData }) => (
       renderValue: (selected) => (
         <Box className="flex flex-wrap">
           {(selected as string[]).map((tag) => (
-            <Box
-              key={tag}
-              className="rounded-md px-2 py-1 m-1 shadow-md"
-              sx={{
-                backgroundColor: 'secondary.main',
-              }}
-            >
+            <Box key={tag} className="m-1 rounded-md bg-secondary-dark px-2 py-1 shadow-md">
               {tag}
             </Box>
           ))}
@@ -41,7 +35,7 @@ const SelectTags: React.FC<Props> = ({ data, setData }) => (
         // glow when hover
         className={`${
           data.tags.includes(tag) ? 'bg-[#ebf5ff] dark:bg-[#222e3b]' : 'bg-transparent'
-        } hover:bg-[#ebf5ff] dark:hover:bg-[#222e3b] transition-colors duration-100 ease-linear`}
+        } transition-colors duration-100 ease-linear hover:bg-[#ebf5ff] dark:hover:bg-[#222e3b]`}
       >
         {tag}
       </MenuItem>

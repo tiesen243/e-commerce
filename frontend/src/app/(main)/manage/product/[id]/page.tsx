@@ -72,7 +72,7 @@ const Page: NextPage = () => {
   }, [id])
   return (
     <>
-      <Button variant="outlined" className="after:content-['back'] after:ml-2" color="info" onClick={() => back()}>
+      <Button variant="outlined" className="after:ml-2 after:content-['back']" color="info" onClick={() => back()}>
         <ArrowBackIosNewRounded fontSize="small" />
       </Button>
 

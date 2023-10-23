@@ -37,7 +37,7 @@ const ButtonAction = (params: GridRenderCellParams) => {
     } else showErrorToast(await res.text())
   }
   return (
-    <Box className="flex justify-between items-center w-full">
+    <Box className="flex w-full items-center justify-between">
       <Button variant="contained" color="info" component={Link} href={`/manage/product/${params.row._id}`}>
         Edit
       </Button>

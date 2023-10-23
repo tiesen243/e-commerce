@@ -1,20 +1,19 @@
-// Custom MUI components
-export { default as CustomCheckbox } from './CustomCheckbox'
-export { default as CustomListItemButton } from './CustomListItemButton'
-export { default as CustomMenuItem } from './CustomMenuItem'
-export { default as CustomSelect } from './CustomSelect'
-export { default as CustomSlider } from './CustomSlider'
-export { default as CustomTextField } from './CustomTextField'
-export { default as CustomToolBar } from './CustomToolBar'
-export { default as CustomSelectTags } from './SelectTags'
-
 // Layout
-export { default as Footer } from './Footer'
-export { default as Header } from './Header'
+export { default as Footer } from './Layouts/Footer'
+export { default as Header } from './Layouts/Header'
+export { default as Notification } from './Layouts/Notification'
 
-// Custom components
-export { default as DragAndDrop } from './DragAndDrop'
-export { default as Loading } from './Loading'
-export { default as Notification } from './Notification'
-export { default as ProdCard } from './ProdCard'
-export { default as ThemeBtn } from './ThemeBtn'
+// Custom MUI components
+export { default as CustomCheckbox } from './MUI/CustomCheckbox'
+export { default as CustomListItemButton } from './MUI/CustomListItemButton'
+export { default as CustomMenuItem } from './MUI/CustomMenuItem'
+export { default as CustomSelect } from './MUI/CustomSelect'
+export { default as CustomSlider } from './MUI/CustomSlider'
+export { default as CustomTextField } from './MUI/CustomTextField'
+export { default as CustomToolBar } from './MUI/CustomToolBar'
+export { default as DragAndDrop } from './MUI/DragAndDrop'
+export { default as FirstCard } from './MUI/FirstCard'
+export { default as Loading } from './MUI/Loading'
+export { default as ProdCard } from './MUI/ProdCard'
+export { default as CustomSelectTags } from './MUI/SelectTags'
+export { default as ThemeBtn } from './MUI/ThemeBtn'

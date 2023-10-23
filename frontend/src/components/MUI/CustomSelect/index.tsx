@@ -1,5 +1,5 @@
 import { MenuItem, TextFieldProps } from '@mui/material'
-import { CustomTextField } from '..'
+import CustomTextField from '../CustomTextField'
 
 interface Props {
   data: string[]

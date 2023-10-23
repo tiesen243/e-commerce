@@ -11,19 +11,9 @@ const darkTheme = {
   info: {
     main: '#6190E8',
   },
-  error: {
-    main: '#f44336',
-  },
-  focus: {
-    main: '#ffffff',
-  },
   text: {
     primary: '#ffffff',
     disabled: '#6b7280',
-  },
-  background: {
-    default: '#18191a',
-    paper: '#242526',
   },
 }
 
@@ -40,16 +30,9 @@ const lightTheme = {
   info: {
     main: '#6190E8',
   },
-  error: {
-    main: '#f44336',
-  },
   text: {
     primary: '#000000',
     disabled: '#6b7280',
-  },
-  background: {
-    default: '#f0f2f5',
-    paper: '#ffffff',
   },
 }
 

@@ -36,7 +36,7 @@ const CustomSlider: React.FC<Props> = (props) => {
       <FormLabel>{label}</FormLabel>
       <Slider
         {...rest}
-        className="w-11/12 mx-auto"
+        className="mx-auto w-11/12"
         color="info"
         min={0}
         max={100}

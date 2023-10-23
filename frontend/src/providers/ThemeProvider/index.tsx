@@ -6,14 +6,15 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { setTheme } from '@/redux/slicers/theme.slice'
 import { RootState } from '@/redux/store'
-import { darkTheme, lightTheme } from './opts'
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const themeState = useSelector((state: RootState) => state.theme.themeState)
   const theme = createTheme({
     palette: {
       mode: themeState === 'dark' ? 'dark' : 'light',
-      ...(themeState === 'dark' ? darkTheme : lightTheme),
+      primary: {
+        main: '#6190E8',
+      },
     },
     typography: {
       fontFamily: 'unset, sans-serif',

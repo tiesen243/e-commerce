@@ -10,7 +10,7 @@ const ProdCard: React.FC<Props> = ({ product }) => {
   const previewName: string = product.name.length > 20 ? product.name.slice(0, 20) + '...' : product.name
   const url: string = `/products/${product._id}`
   return (
-    <Card>
+    <Card className="relative transition-colors duration-300 ease-linear bg-secondary-light dark:bg-secondary-dark">
       <CardActionArea component={Link} href={url}>
         <CardMedia sx={{ height: 300 }} image={product.image} title={product.name} />
         <CardContent>
@@ -18,18 +18,27 @@ const ProdCard: React.FC<Props> = ({ product }) => {
             {previewName}
           </Typography>
 
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="subtitle1" color="Gray">
+            Price:{' '}
             {product.saleOffPercent !== 0 ? (
               <>
                 <del>${product.price}</del>
-                <span className="text-red-500"> ${product.price - (product.price * product.saleOffPercent) / 100}</span>
+                <span className="text-red-600">
+                  {' $' + (product.price - (product.price * product.saleOffPercent) / 100).toFixed(2)}
+                </span>
               </>
             ) : (
-              <span>${product.price}</span>
+              <>${product.price}</>
             )}
           </Typography>
         </CardContent>
       </CardActionArea>
+
+      {product.saleOffPercent !== 0 && (
+        <Typography className="absolute right-1 top-1 flex aspect-square items-center justify-center rounded-full bg-red-600 p-2 text-sm font-bold shadow-2xl">
+          {product.saleOffPercent}%
+        </Typography>
+      )}
     </Card>
   )
 }

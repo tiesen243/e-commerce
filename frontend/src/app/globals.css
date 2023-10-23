@@ -13,15 +13,12 @@
     @apply bg-transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-blue-400;
+    @apply bg-blue-light hover:bg-blue-dark;
   }
 }
 
 @layer components {
   .main {
     @apply bg-secondary-light dark:bg-secondary-dark text-primary-dark dark:text-primary-light rounded shadow-lg transition-colors duration-300 ease-linear;
-  }
-  .btn {
-    @apply bg-secondary-light hover:bg-hover-light dark:bg-secondary-dark dark:hover:bg-hover-dark text-primary-dark dark:text-primary-light transition-colors duration-300 ease-linear;
   }
 }

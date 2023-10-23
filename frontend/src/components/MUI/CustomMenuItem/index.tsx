@@ -11,7 +11,7 @@ const StyledMenuItem: React.FC<Props> = ({ text, icon, href, ...props }) => (
   <MenuItem
     {...props}
     {...(href && { component: Link, href })}
-    className="flex items-center gap-4 px-4 py-3 mx-2 rounded-lg transition-colors duration-200 ease-linear"
+    className="mx-2 flex items-center gap-4 rounded-lg px-4 py-3 transition-colors duration-200 ease-linear"
   >
     <ListItemIcon>{icon}</ListItemIcon>
     <Typography>{text}</Typography>

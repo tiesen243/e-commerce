@@ -1,6 +1,6 @@
 'use client'
 
-import { CustomTextField } from '@/components'
+import { CustomCheckbox, CustomTextField } from '@/components'
 import { showSuccessToast } from '@/utils'
 import { Box, Button, FormHelperText, Typography } from '@mui/material'
 import { NextPage } from 'next'
@@ -68,7 +68,7 @@ const Page: NextPage = () => {
 
       <FormHelperText error>{error}</FormHelperText>
 
-      <Button type="submit" variant="outlined" color="info">
+      <Button type="submit" variant="contained" className="bg-blue-light">
         Change password
       </Button>
     </Box>

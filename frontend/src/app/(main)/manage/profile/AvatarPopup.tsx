@@ -60,10 +60,10 @@ const AvatarPopup: React.FC<Props> = (props) => {
   }
 
   return (
-    <main className="fixed inset-0 bg-black/50 flex items-center justify-center w-screen h-screen z-50">
-      <Container maxWidth="sm" className="main p-4 rounded shadow-lg flex flex-col gap-8">
+    <main className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-black/50">
+      <Container maxWidth="sm" className="main flex flex-col gap-8 rounded p-4 shadow-lg">
         <section className="grid grid-cols-12 items-center">
-          <Typography variant="h1" className="text-3xl col-span-11 text-center">
+          <Typography variant="h1" className="col-span-11 text-center text-3xl">
             Change avatar
           </Typography>
           <IconButton onClick={() => setIsOpen(false)}>
@@ -75,7 +75,7 @@ const AvatarPopup: React.FC<Props> = (props) => {
 
         <FormHelperText className="text-center">Image must be .jpg or .png or .jpeg and less than 5MB</FormHelperText>
 
-        <section className="flex justify-around items-center">
+        <section className="flex items-center justify-around">
           <input type="file" onChange={(e) => setAvatar((prev) => (e.target.files ? e.target.files[0] : prev))} />
 
           <Button variant="outlined" color="info" className="mx-auto" disabled={!preview} onClick={handleSave}>

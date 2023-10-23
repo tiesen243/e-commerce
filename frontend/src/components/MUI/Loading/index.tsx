@@ -7,9 +7,9 @@ interface Props {
 const Loading: React.FC<Props> = (props) => {
   const { text = 'Loading...' } = props
   return (
-    <div className="h-screen w-screen fixed inset-0 bg-black/50 flex flex-col justify-center items-center gap-4">
+    <div className="fixed inset-0 flex h-screen w-screen flex-col items-center justify-center gap-4 bg-black/50">
       <CircularProgress color="info" />
-      <p className="text-2xl font-bold animate-pulse">{text}</p>
+      <p className="animate-pulse text-2xl font-bold">{text}</p>
     </div>
   )
 }

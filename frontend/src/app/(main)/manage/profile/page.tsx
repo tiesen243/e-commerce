@@ -22,7 +22,7 @@ const Page: NextPage = () => {
   if (!user) return <Loading />
 
   return (
-    <main className="flex flex-col items-center  gap-4 main p-4 rounded">
+    <main className="main flex flex-col  items-center gap-4 rounded p-4">
       <Typography variant="h1" className="text-4xl">
         Acount Infomation
       </Typography>
@@ -30,7 +30,7 @@ const Page: NextPage = () => {
       <Avatar
         sx={{ width: 200, height: 200 }}
         {...(user.avatar ? { src: user.avatar } : { sx: { bgcolor: 'gray' } })}
-        className="transition-transform duration-300 ease-in-out hover:scale-105 mb-4"
+        className="mb-4 transition-transform duration-300 ease-in-out hover:scale-105"
         onClick={() => setShow((prev) => !prev)}
       />
       <Button variant="outlined" color="info" hidden={!isShow} onClick={() => setIsOpen(true)}>
@@ -60,7 +60,7 @@ const Page: NextPage = () => {
         Join at: {formatDate(user.createdAt)}
       </Typography>
 
-      <Button variant="contained" color="info" component={Link} href="/manage/profile/change-password">
+      <Button variant="contained" color="primary" component={Link} href="/manage/profile/change-password">
         Change password
       </Button>
     </main>

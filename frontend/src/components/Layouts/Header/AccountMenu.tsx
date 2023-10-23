@@ -84,7 +84,7 @@ export default AccountMenu
 
 const papperProps = {
   elevation: 0,
-  className: 'rounded-md',
+  className: 'rounded-md bg-secondary-light dark:bg-secondary-dark',
   sx: {
     overflow: 'visible',
     filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
@@ -102,7 +102,7 @@ const papperProps = {
       right: 14,
       width: 10,
       height: 10,
-      bgcolor: 'secondary.main',
+      bgcolor: 'inherit',
       transform: 'translateY(-50%) rotate(45deg)',
       zIndex: 0,
     },

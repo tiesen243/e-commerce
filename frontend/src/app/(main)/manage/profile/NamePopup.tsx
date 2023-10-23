@@ -45,10 +45,10 @@ const NamePopup: React.FC<Props> = (props) => {
     }
   }
   return (
-    <main className="fixed inset-0 bg-black/50 flex items-center justify-center w-screen h-screen">
-      <Container maxWidth="sm" className="main p-4 rounded shadow-lg flex flex-col gap-8">
+    <main className="fixed inset-0 flex h-screen w-screen items-center justify-center bg-black/50">
+      <Container maxWidth="sm" className="main flex flex-col gap-8 rounded p-4 shadow-lg">
         <section className="grid grid-cols-12 items-center">
-          <Typography variant="h1" className="text-3xl col-span-11 text-center">
+          <Typography variant="h1" className="col-span-11 text-center text-3xl">
             Change user name
           </Typography>
           <IconButton onClick={() => setIsChange(false)}>

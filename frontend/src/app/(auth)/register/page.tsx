@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { CustomTextField, Loading } from '@/components'
+import { CustomCheckbox, CustomTextField, Loading } from '@/components'
 import { showSuccessToast } from '@/utils/notify'
 
 const Page: NextPage = () => {
@@ -17,12 +17,12 @@ const Page: NextPage = () => {
     confirmPassword: '',
   })
   const [error, setError] = useState<string[]>()
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [isRegistering, setRegister] = useState<boolean>(false)
 
   const { push } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    setRegister(true)
     const res = await fetch('/api/v1/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -31,7 +31,7 @@ const Page: NextPage = () => {
     if (res.status !== 204) {
       const { message } = await res.json()
       setError(message)
-      setIsSubmitting(false)
+      setRegister(false)
     } else {
       showSuccessToast('Register success')
       push('/login')
@@ -73,6 +73,32 @@ const Page: NextPage = () => {
         required
       />
 
+      <CustomCheckbox
+        label={
+          <>
+            I agree to the{' '}
+            <Link
+              className="text-blue-light hover:underline"
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Terms and Conditions
+            </Link>
+            {' and '}
+            <Link
+              className="text-blue-light hover:underline"
+              href="https://www.youtube.com/watch?v=qWNQUvIk954"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Privacy Policy
+            </Link>
+          </>
+        }
+        required
+      />
+
       <FormHelperText error>
         {typeof error === 'string' ? error : error?.map((e: string, idx: number) => <p key={idx}>* {e}</p>)}
       </FormHelperText>
@@ -83,10 +109,10 @@ const Page: NextPage = () => {
           Login{' '}
         </Button>
       </Typography>
-      <Button color="info" type="submit" variant="outlined">
+      <Button type="submit" className="bg-blue-light" disabled={isRegistering} variant="contained">
         Register
       </Button>
-      {isSubmitting && <Loading text="Registering..." />}
+      {isRegistering && <Loading text="Registering..." />}
     </Box>
   )
 }
