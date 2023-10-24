@@ -1,13 +1,9 @@
 'use client'
 
-import { RootState } from '@/redux/store'
-import { useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Notification: React.FC = () => {
-  const themeState = useSelector((state: RootState) => state.ui.themeState)
-
   return (
     <ToastContainer
       position="top-right"
@@ -19,7 +15,7 @@ const Notification: React.FC = () => {
       pauseOnFocusLoss={false}
       draggable
       pauseOnHover={false}
-      theme={themeState === 'dark' ? 'dark' : 'light'}
+      theme="dark"
     />
   )
 }

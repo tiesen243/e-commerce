@@ -1,23 +1,18 @@
-'use client'
-
 import { Footer, Header } from '@/components'
-import Sidebar from '@/components/Layouts/Sidebar'
-import { useScreen } from '@/hooks'
 import { Container } from '@mui/material'
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
-  const isMobile = useScreen() < 768
+interface Props {
+  children: React.ReactNode
+}
+const MainLayout: React.FC<Props> = ({ children }) => {
   return (
-    <>
-      <main className="relative flex min-h-screen w-screen select-none flex-col overflow-x-hidden">
-        <Header />
-        <Container maxWidth="lg" className="mb-4 mt-20 flex-grow ">
-          {children}
-        </Container>
-        <Footer />
-      </main>
-      {isMobile && <Sidebar />}
-    </>
+    <main className="flex flex-col min-h-screen">
+      <Header />
+      <Container maxWidth="lg" sx={{ mt: 3, mb: 3, flexGrow: 1 }}>
+        {children}
+      </Container>
+      <Footer />
+    </main>
   )
 }
 

@@ -1,9 +1,4 @@
-// Metadata
-import type { Metadata } from 'next'
-export const metadata: Metadata = {
-  title: 'Yuki',
-  description: 'Yuki Store',
-}
+export { default as metadata } from './metadata'
 
 import { Notification } from '@/components'
 import { AuthProvider, ReduxProvider, ThemeProvider } from '@/providers'
