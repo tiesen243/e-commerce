@@ -1,7 +1,11 @@
 import { NextPage } from 'next'
 
 const Page: NextPage = () => {
-  return <div className="text-red-400">Page</div>
+  return (
+    <div>
+      <h1>Page</h1>
+    </div>
+  )
 }
 
 export default Page

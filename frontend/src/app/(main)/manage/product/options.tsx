@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 import { deleteImage, showErrorToast, showSuccessToast } from '@/utils'
+import { DeleteRounded, EditRounded } from '@mui/icons-material'
 
 export const col: GridColDef[] = [
   { field: 'code', headerName: 'Code', width: 100, type: 'number' },
@@ -38,14 +39,14 @@ const ButtonAction = (params: GridRenderCellParams) => {
   }
   return (
     <Box className="flex w-full items-center justify-between">
-      <Button variant="contained" color="info" component={Link} href={`/manage/product/${params.row._id}`}>
+      <Button variant="text" component={Link} href={`/manage/product/${params.row._id}`} endIcon={<EditRounded />}>
         Edit
       </Button>
       <Button
-        variant="contained"
-        component="a"
+        variant="text"
         color="error"
         onClick={() => handleDelete(params.row._id, params.row.name)}
+        endIcon={<DeleteRounded />}
       >
         Delete
       </Button>

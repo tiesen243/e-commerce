@@ -1,14 +1,15 @@
 'use client'
 
-import { ThemeProvider as Provider, createTheme } from '@mui/material'
-import React, { useEffect } from 'react'
+import { Box, Fab, IconButton, ThemeProvider as Provider, createTheme } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
-import { setTheme } from '@/redux/slicers/theme.slice'
 import { RootState } from '@/redux/store'
+import { DarkMode, LightMode } from '@mui/icons-material'
+import { toggleTheme } from '@/redux/slicers/ui.slice'
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const themeState = useSelector((state: RootState) => state.theme.themeState)
+  const themeState = useSelector((state: RootState) => state.ui.themeState)
   const theme = createTheme({
     palette: {
       mode: themeState === 'dark' ? 'dark' : 'light',
@@ -29,15 +30,26 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     },
   })
 
-  const dispatch = useDispatch()
   useEffect(() => {
-    const localTheme = localStorage.getItem('theme') || 'dark'
-    document.documentElement.classList.toggle('dark', localTheme === 'dark')
-    dispatch(setTheme(localTheme))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    document.documentElement.classList.toggle('dark', themeState === 'dark')
+  }, [themeState])
 
-  return <Provider theme={theme}>{children}</Provider>
+  const dispatch = useDispatch()
+  return (
+    <Provider theme={theme}>
+      {children}
+
+      <Box sx={{ position: 'fixed', bottom: 16, right: 16 }} role="presentation">
+        <Fab
+          size="small"
+          onClick={() => dispatch(toggleTheme())}
+          className="bg-secondary-light text-black transition-colors duration-300 ease-linear dark:bg-secondary-dark dark:text-white"
+        >
+          {themeState === 'light' ? <DarkMode /> : <LightMode />}
+        </Fab>
+      </Box>
+    </Provider>
+  )
 }
 
 export default ThemeProvider

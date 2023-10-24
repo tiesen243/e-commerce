@@ -1,13 +1,13 @@
 'use client'
 
 import { Button, Typography } from '@mui/material'
-import { DataGrid, GridToolbar } from '@mui/x-data-grid'
+import { DataGrid } from '@mui/x-data-grid'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
 import { CustomToolBar, Loading } from '@/components'
 import { useMyProduct } from '@/hooks'
-import { col } from './Head'
+import { col } from './options'
 
 const Page: NextPage = () => {
   const { products, isLoading, error } = useMyProduct()

@@ -10,7 +10,7 @@ const Page: NextPage = () => {
   const { products, error, isLoading } = useProduct()
   return !isLoading ? (
     <div>
-      <Typography variant="h1" className="font-bold mb-4">
+      <Typography variant="h1" className="mb-4 text-4xl font-bold">
         New Arrival
       </Typography>
       <FirstCard product={products[0]} />

@@ -19,7 +19,7 @@ const Sidebar: React.FC = () => {
       />
 
       <Box
-        className="fixed inset-0 z-50 h-full w-1/2 md:w-1/3 transform-gpu bg-secondary-light p-4 transition-all duration-300 ease-linear dark:bg-secondary-dark"
+        className="fixed inset-0 z-50 h-full w-1/2 transform-gpu bg-secondary-light p-4 transition-all duration-300 ease-linear dark:bg-secondary-dark md:w-1/3"
         style={{ transform: isOpen ? 'translateX(0)' : 'translateX(-100%)' }}
       >
         <Box className="flex items-center gap-4">

@@ -8,9 +8,9 @@ interface Props {
 
 const ProdCard: React.FC<Props> = ({ product }) => {
   const previewName: string = product.name.length > 20 ? product.name.slice(0, 20) + '...' : product.name
-  const url: string = `/products/${product._id}`
+  const url: string = `/product/${product._id}`
   return (
-    <Card className="relative transition-colors duration-300 ease-linear bg-secondary-light dark:bg-secondary-dark">
+    <Card className="relative bg-secondary-light transition-colors duration-300 ease-linear dark:bg-secondary-dark">
       <CardActionArea component={Link} href={url}>
         <CardMedia sx={{ height: 300 }} image={product.image} title={product.name} />
         <CardContent>

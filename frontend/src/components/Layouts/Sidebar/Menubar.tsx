@@ -1,5 +1,7 @@
 'use client'
 
+import { CustomListItemButton2 } from '@/components'
+import { useScreen } from '@/hooks'
 import {
   AltRouteRounded,
   AutoStoriesRounded,
@@ -12,60 +14,57 @@ import {
   MenuBookRounded,
   Search,
 } from '@mui/icons-material'
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import Link from 'next/link'
+import { Collapse, List, Menu } from '@mui/material'
 import { useState } from 'react'
 
 const Menubar: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false)
-  const handleClick = () => setOpen(!open)
+  const [isOpen, setOpen] = useState<boolean>(false)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const isMobile = useScreen() < 768
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+    setOpen(!isOpen)
+  }
+  const handleClose = () => setAnchorEl(null)
 
   return (
-    <List className="md:w-1/6 md:fixed">
-      <ListItemButton component={Link} href="/shop" sx={{ '&:hover': { borderBottom: '2px solid #6190e8' } }}>
-        <ListItemIcon>
-          <Home />
-        </ListItemIcon>
-        <ListItemText primary="Home" />
-      </ListItemButton>
+    <List className="md:flex md:gap-4">
+      <CustomListItemButton2 href="/shop" icon={<Home />} text="Home" />
 
-      <ListItemButton component={Link} href="/search" sx={{ '&:hover': { borderBottom: '2px solid #6190e8' } }}>
-        <ListItemIcon>
-          <Search />
-        </ListItemIcon>
-        <ListItemText primary="Search" />
-      </ListItemButton>
+      <CustomListItemButton2 icon={<Search />} href="/shop/search" text="Search" />
 
-      <ListItemButton sx={{ '&:hover': { borderBottom: '2px solid #6190e8' } }} onClick={handleClick}>
-        <ListItemIcon>
-          <Category />
-        </ListItemIcon>
-        <ListItemText primary="Category" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
+      <CustomListItemButton2 icon={<Category />} onClick={handleClick} text="Category" id="cate">
+        {isOpen ? <ExpandLess /> : <ExpandMore />}
+      </CustomListItemButton2>
 
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {categories.map((cate, idx: number) => (
-            <ListItemButton
-              component={Link}
-              href={`/shop/${cate.name}`}
-              key={idx}
-              sx={{ ml: 4, '&:hover': { borderBottom: '2px solid #6190e8' } }}
-            >
-              <ListItemIcon>{cate.icon}</ListItemIcon>
-              <ListItemText primary={cate.name} />
-            </ListItemButton>
-          ))}
-        </List>
-      </Collapse>
+      {isMobile ? (
+        <Collapse in={isOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {categories.map((cate, idx: number) => (
+              <CustomListItemButton2 key={idx} icon={cate.icon} text={cate.name} className="ml-8 md:ml-0" />
+            ))}
+          </List>
+        </Collapse>
+      ) : (
+        <Menu
+          id="cate"
+          open={isOpen}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          onClick={handleClick}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        >
+          <List component="div" disablePadding>
+            {categories.map((cate, idx: number) => (
+              <CustomListItemButton2 key={idx} icon={cate.icon} text={cate.name} className="ml-8 md:ml-0" />
+            ))}
+          </List>
+        </Menu>
+      )}
 
-      <ListItemButton component={Link} href="/contact" sx={{ '&:hover': { borderBottom: '2px solid #6190e8' } }}>
-        <ListItemIcon>
-          <ContactMailRounded />
-        </ListItemIcon>
-        <ListItemText primary="Contact Us" />
-      </ListItemButton>
+      <CustomListItemButton2 href="/shop/contact" icon={<ContactMailRounded />} text="Contact" />
     </List>
   )
 }

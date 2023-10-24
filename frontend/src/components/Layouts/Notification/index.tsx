@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Notification: React.FC = () => {
-  const theme = useSelector((state: RootState) => state.theme.themeState)
+  const themeState = useSelector((state: RootState) => state.ui.themeState)
 
   return (
     <ToastContainer
@@ -19,7 +19,7 @@ const Notification: React.FC = () => {
       pauseOnFocusLoss={false}
       draggable
       pauseOnHover={false}
-      theme={theme === 'dark' ? 'dark' : 'light'}
+      theme={themeState === 'dark' ? 'dark' : 'light'}
     />
   )
 }

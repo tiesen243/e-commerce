@@ -1,7 +1,6 @@
 import { TextField, TextFieldProps } from '@mui/material'
-import { NextPage } from 'next'
 
-const CustomTextField: NextPage<TextFieldProps> = ({ ...props }) => (
+const CustomTextField: React.FC<TextFieldProps> = ({ ...props }) => (
   <TextField
     fullWidth
     autoComplete="off"

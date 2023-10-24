@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { CustomSelect, CustomSelectTags, CustomTextField, DragAndDrop, Loading } from '@/components'
+import { CustomSelect, CustomSelectTags, CustomTextField, DragAndDrop, Loading, MarkdownEditor } from '@/components'
 import { Category, Prod } from '@/types/product.type'
 import { showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 
@@ -75,13 +75,10 @@ const Page: NextPage = () => {
 
         <DragAndDrop setProd={setProd} />
 
-        <CustomTextField
+        <MarkdownEditor
           label="Description"
           value={prod.description}
-          onChange={(e) => setProd({ ...prod, description: e.target.value })}
-          multiline
-          rows={4}
-          required
+          setValue={(value) => setProd({ ...prod, description: value })}
         />
 
         <CustomTextField

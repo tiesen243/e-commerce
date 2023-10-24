@@ -15,6 +15,7 @@ import {
   CustomTextField,
   DragAndDrop,
   Loading,
+  MarkdownEditor,
 } from '@/components'
 import { Category, Prod } from '@/types/product.type'
 import { deleteImage, showErrorToast, showSuccessToast, uploadImage } from '@/utils'
@@ -98,13 +99,10 @@ const Page: NextPage = () => {
           label="Available"
         />
 
-        <CustomTextField
+        <MarkdownEditor
           label="Description"
           value={prod.description}
-          onChange={(e) => setProd({ ...prod, description: e.target.value })}
-          multiline
-          rows={4}
-          required
+          setValue={(value) => setProd({ ...prod, description: value })}
         />
 
         <CustomTextField
