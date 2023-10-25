@@ -15,7 +15,7 @@ const Destop: React.FC<DestopProps> = ({ title, pages }) => (
 
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
       {pages.map((page) => (
-        <Button component={Link} href={page} key={page} sx={{ my: 2, color: 'white', display: 'block' }}>
+        <Button component={Link} href={page.toLowerCase()} key={page} sx={{ my: 2, color: 'white', display: 'block' }}>
           {page}
         </Button>
       ))}

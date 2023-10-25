@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   const title = 'Yuki'
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" color="secondary">
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Mobile title={title} pages={pages} />

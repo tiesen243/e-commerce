@@ -8,7 +8,7 @@ import AppProvider from '@/providers'
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body>
+      <body className="trans-colors bg-primary-light dark:bg-primary-dark">
         <AppProvider>
           <CssBaseline />
           {children} <Notification />

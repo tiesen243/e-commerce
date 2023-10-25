@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  /* Global */
-  /* body { */
-  /*   @apply bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-primary-light; */
-  /* } */
-
   /* Scroll bar */
   ::-webkit-scrollbar {
     @apply w-1 h-1;

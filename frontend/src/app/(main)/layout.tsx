@@ -6,7 +6,7 @@ interface Props {
 }
 const MainLayout: React.FC<Props> = ({ children }) => {
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="flex min-h-screen flex-col">
       <Header />
       <Container maxWidth="lg" sx={{ mt: 3, mb: 3, flexGrow: 1 }}>
         {children}

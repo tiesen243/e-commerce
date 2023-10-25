@@ -4,6 +4,7 @@ import { Box, Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemTe
 import { useState } from 'react'
 
 import Tittle from './Title'
+import Link from 'next/link'
 interface MobileProps {
   title: string
   pages: string[]
@@ -43,7 +44,7 @@ const Mobile: React.FC<MobileProps> = ({ title, pages }) => {
           <Typography>{title}</Typography>
           <List>
             {pages.map((page, index) => (
-              <ListItemButton key={index} onClick={toggleDrawer(false)}>
+              <ListItemButton key={index} component={Link} href={page.toLowerCase()} onClick={toggleDrawer(false)}>
                 <ListItemIcon>
                   <AdbIcon />
                 </ListItemIcon>
