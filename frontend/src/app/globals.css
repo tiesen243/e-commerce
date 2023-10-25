@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-primary-light transition-colors overflow-x-hidden duration-300 ease-linear;
-  }
+  /* Global */
+  /* body { */
+  /*   @apply bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-primary-light; */
+  /* } */
+
+  /* Scroll bar */
   ::-webkit-scrollbar {
     @apply w-1 h-1;
   }
@@ -19,6 +22,15 @@
 
 @layer components {
   .main {
-    @apply bg-secondary-light dark:bg-secondary-dark text-primary-dark dark:text-primary-light rounded shadow-lg transition-colors duration-300 ease-linear;
+    @apply bg-secondary-light dark:bg-secondary-dark text-primary-dark dark:text-primary-light;
+  }
+  .btn {
+    @apply bg-blue-light hover:bg-[#4b70b4];
+  }
+}
+
+@layer utilities {
+  .trans-colors {
+    @apply transition-colors duration-300 ease-linear;
   }
 }

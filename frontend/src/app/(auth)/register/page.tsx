@@ -1,12 +1,11 @@
 'use client'
 
-import { Box, Button, FormHelperText, Typography } from '@mui/material'
+import { Box, Button, FormHelperText, Typography, TextField, Checkbox } from '@mui/material'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { CustomCheckbox, CustomTextField, Loading } from '@/components'
 import { showSuccessToast } from '@/utils/notify'
 
 const Page: NextPage = () => {
@@ -44,28 +43,28 @@ const Page: NextPage = () => {
         Register New User
       </Typography>
 
-      <CustomTextField
+      <TextField
         label="User Name"
         type="text"
         value={data.userName}
         onChange={(e) => setdata({ ...data, userName: e.target.value })}
         required
       />
-      <CustomTextField
+      <TextField
         type="email"
         label="Email"
         value={data.email}
         onChange={(e) => setdata({ ...data, email: e.target.value })}
         required
       />
-      <CustomTextField
+      <TextField
         label="Password"
         type="password"
         value={data.password}
         onChange={(e) => setdata({ ...data, password: e.target.value })}
         required
       />
-      <CustomTextField
+      <TextField
         label="Confirm Password"
         type="password"
         value={data.confirmPassword}
@@ -73,31 +72,7 @@ const Page: NextPage = () => {
         required
       />
 
-      <CustomCheckbox
-        label={
-          <>
-            I agree to the{' '}
-            <Link
-              className="text-blue-light hover:underline"
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Terms and Conditions
-            </Link>
-            {' and '}
-            <Link
-              className="text-blue-light hover:underline"
-              href="https://www.youtube.com/watch?v=qWNQUvIk954"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Privacy Policy
-            </Link>
-          </>
-        }
-        required
-      />
+      <Checkbox required />
 
       <FormHelperText error>
         {typeof error === 'string' ? error : error?.map((e: string, idx: number) => <p key={idx}>* {e}</p>)}
@@ -112,7 +87,6 @@ const Page: NextPage = () => {
       <Button type="submit" className="bg-blue-light" disabled={isRegistering} variant="contained">
         Register
       </Button>
-      {isRegistering && <Loading text="Registering..." />}
     </Box>
   )
 }

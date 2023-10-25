@@ -1,12 +1,11 @@
 'use client'
 
-import { Box, Button, FormHelperText, Typography } from '@mui/material'
+import { Box, Button, FormHelperText, Typography, TextField } from '@mui/material'
 import { NextPage } from 'next'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { CustomTextField, Loading } from '@/components'
 import { showErrorToast, showSuccessToast } from '@/utils/notify'
 import Link from 'next/link'
 
@@ -34,7 +33,7 @@ const Page: NextPage = () => {
       showErrorToast('Login failed')
     } else {
       showSuccessToast('Login success')
-      push('/shop')
+      push('/')
     }
   }
   return (
@@ -44,14 +43,14 @@ const Page: NextPage = () => {
       </Typography>
 
       <Box component="form" onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <CustomTextField
+        <TextField
           label="Email"
           type="email"
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
           required
         />
-        <CustomTextField
+        <TextField
           label="Password"
           type="password"
           value={data.password}
@@ -68,12 +67,10 @@ const Page: NextPage = () => {
           </Button>
         </Typography>
 
-        <Button className="bg-blue-light" type="submit" variant="contained">
+        <Button type="submit" variant="contained" className="btn" disabled={isLogining}>
           Login
         </Button>
       </Box>
-
-      {isLogining && <Loading text="Logining..." />}
     </>
   )
 }
