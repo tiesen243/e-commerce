@@ -5,6 +5,8 @@ export interface Product {
   image: string
   price: number
   stock: number
+  available: boolean
+  saleOffPercent: number
   category: Category
   tags: Tag[]
   userId: string
@@ -13,14 +15,26 @@ export interface Product {
 }
 
 export interface CreateProduct {
+  code: string
   name: string
   description: string
-  image: string
+  image: File
   price: number
   stock: number
   category: Category
   tags: Tag[]
-  userId: string
+}
+
+export interface UpdateProduct {
+  name: string
+  description: string
+  image: File
+  price: number
+  stock: number
+  available: boolean
+  saleOffPercent: number
+  category: Category
+  tags: Tag[]
 }
 
 export enum Category {

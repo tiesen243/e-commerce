@@ -1,7 +1,7 @@
 // layouts
-export { default as Header } from './layouts/Header'
-export { default as Footer } from './layouts/Footer'
-export { default as Notification } from './layouts/Notification'
+export { default as Header } from './Layouts/Header'
+export { default as Footer } from './Layouts/Footer'
+export { default as Notification } from './Layouts/Notification'
 
 // components
 export { default as ThemeButton } from './ThemeBtn'
