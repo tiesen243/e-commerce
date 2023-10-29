@@ -1,9 +1,11 @@
 'use client'
 
+import { useTheme } from 'next-themes'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Notification: React.FC = () => {
+  const { theme } = useTheme()
   return (
     <ToastContainer
       position="top-right"
@@ -15,7 +17,7 @@ const Notification: React.FC = () => {
       pauseOnFocusLoss={false}
       draggable
       pauseOnHover={false}
-      theme="dark"
+      theme={theme === 'dark' ? 'dark' : 'light'}
     />
   )
 }

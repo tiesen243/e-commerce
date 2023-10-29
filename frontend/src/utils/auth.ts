@@ -1,5 +1,7 @@
+import { API_URL } from '.'
+
 const getUser = async (token: string) => {
-  const user = await fetch('https://yuki-api.vercel.app/user/me', {
+  const user = await fetch(`${API_URL}/user/me`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
   }).then((res) => res.json())
@@ -8,7 +10,7 @@ const getUser = async (token: string) => {
 }
 
 const getToken = async (refreshToken: string): Promise<string> => {
-  const token = await fetch('https://yuki-api.vercel.app/auth/refresh', {
+  const token = await fetch(`${API_URL}/auth/refresh`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ refreshToken }),

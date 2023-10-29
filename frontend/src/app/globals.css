@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  /* Scroll bar */
+  body {
+    @apply bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-primary-light overflow-x-hidden transition-colors duration-300 ease-linear;
+  }
+
   ::-webkit-scrollbar {
     @apply w-1 h-1;
   }
@@ -11,21 +14,15 @@
     @apply bg-transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-blue-light hover:bg-blue-dark;
+    @apply bg-secondary-light dark:bg-secondary-dark;
   }
 }
 
 @layer components {
   .main {
-    @apply bg-secondary-light dark:bg-secondary-dark text-primary-dark dark:text-primary-light;
+    @apply bg-secondary-light dark:bg-secondary-dark text-primary-dark dark:text-primary-light shadow-lg rounded transition-colors duration-300 ease-linear;
   }
   .btn {
-    @apply bg-blue-light hover:bg-[#4b70b4];
-  }
-}
-
-@layer utilities {
-  .trans-colors {
-    @apply transition-colors duration-300 ease-linear;
+    @apply bg-secondary-dark hover:bg-quaternary-dark dark:bg-secondary-light dark:hover:bg-quaternary-light text-primary-light dark:text-primary-dark shadow-lg rounded transition-colors duration-300 ease-linear;
   }
 }
