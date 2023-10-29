@@ -89,7 +89,7 @@ const Page: NextPage = () => {
 
       {error && (
         <FormHelperText error>
-          {typeof error === 'string' ? `* ${error}` : error.map((e) => <p>* {e}</p>)}
+          {typeof error === 'string' ? `* ${error}` : error.map((e, idx: number) => <p key={idx}>* {e}</p>)}
         </FormHelperText>
       )}
 

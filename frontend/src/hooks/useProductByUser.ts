@@ -7,7 +7,7 @@ const fetcher = async (url: string, token: string) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      /* Authorization: `Bearer ${token}`, */
+      Authorization: `Bearer ${token}`,
     },
   }).then((res) => res.json())
 
@@ -17,7 +17,9 @@ const fetcher = async (url: string, token: string) => {
 
 const useProductByUser = () => {
   const { token } = useSession().data || {}
-  const { data, error, isLoading } = useSWR(['/api/v1/product/me', token], ([url, token]) => fetcher(url, token))
+  const { data, error, isLoading } = useSWR(token ? ['/api/v1/product/me', token] : null, ([url, token]) =>
+    fetcher(url, token),
+  )
 
   console.log(error.message)
 
