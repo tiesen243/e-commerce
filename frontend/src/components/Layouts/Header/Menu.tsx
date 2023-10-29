@@ -27,14 +27,14 @@ const Menu = () => {
   const textColor = (item: Menu) =>
     pathName === item.path
       ? 'text-black dark:text-white'
-      : 'text-neutral-500 hover:underline underline-offset-8 hover:text-black dark:hover:text-white'
+      : 'text-neutral-500 group-hover:underline underline-offset-8 group-hover:text-neutral-700 dark:group-hover:text-neutral-200'
 
   return (
     <List className="gap-6 text-sm md:flex md:items-center">
       {menu.map((item: Menu, idx: number) => (
-        <ListItemButton component={Link} href={item.path} key={idx} className={textColor(item)}>
+        <ListItemButton component={Link} href={item.path} key={idx} className="group">
           <ListItemIcon className={`block md:hidden ${textColor(item)}`}>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.name} />
+          <ListItemText primary={item.name} className={textColor(item)} />
         </ListItemButton>
       ))}
     </List>

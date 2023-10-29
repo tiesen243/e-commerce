@@ -8,10 +8,19 @@ import {
   IsUrl,
   IsEnum,
   Min,
+  Max,
 } from 'class-validator'
 import { Category, Tag } from '../schemas/enum'
 
 export default class CreateProductDto {
+  @ApiProperty({ description: 'The code of the product' })
+  @IsNotEmpty()
+  @IsNumber()
+  @Min(100000)
+  @Max(999999)
+  @Type(() => Number)
+  readonly code: number
+
   @ApiProperty({ description: 'The name of the product' })
   @IsNotEmpty()
   @IsString()

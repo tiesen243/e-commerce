@@ -1,3 +1,28 @@
+export interface Product {
+  _id: string
+  name: string
+  description: string
+  image: string
+  price: number
+  stock: number
+  category: Category
+  tags: Tag[]
+  userId: string
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface CreateProduct {
+  name: string
+  description: string
+  image: string
+  price: number
+  stock: number
+  category: Category
+  tags: Tag[]
+  userId: string
+}
+
 export enum Category {
   Novel = 'Novel',
   LightNovel = 'Light Novel',

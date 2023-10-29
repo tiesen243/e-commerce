@@ -7,7 +7,11 @@ const opts: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'email', placeholder: 'Enter your email' },
+        email: {
+          label: 'Email',
+          type: 'email',
+          placeholder: 'Enter your email',
+        },
         password: { label: 'Password', type: 'password' },
       },
 

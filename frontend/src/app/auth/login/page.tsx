@@ -14,7 +14,10 @@ interface FormData {
 }
 
 const Page: NextPage = () => {
-  const [formData, setFormData] = useState<FormData>({ email: '', password: '' })
+  const [formData, setFormData] = useState<FormData>({
+    email: '',
+    password: '',
+  })
   const [isLoggin, setIsLoggin] = useState<boolean>(false)
 
   const { push } = useRouter()

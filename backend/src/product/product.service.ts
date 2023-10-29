@@ -86,7 +86,6 @@ export class ProductService {
       throw new UnauthorizedException('You are not admin or seller')
 
     const newProduct = await this.productModel.create({
-      code: Math.floor(Math.random() * (999900 - 100000 + 1) + 100000),
       createdAt: new Date(),
       userId: user._id,
       ...createDto,

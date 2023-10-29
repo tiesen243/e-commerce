@@ -16,7 +16,12 @@ interface FormData {
 }
 
 const Page: NextPage = () => {
-  const [formData, setFormData] = useState<FormData>({ userName: '', email: '', password: '', confirmPassword: '' })
+  const [formData, setFormData] = useState<FormData>({
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  })
   const [isRegister, setIsLoggin] = useState<boolean>(false)
 
   const [error, setError] = useState<string | string[]>('')
