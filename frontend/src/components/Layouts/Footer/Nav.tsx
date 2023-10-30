@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { logo } from '@/lib'
 
 const Nav: React.FC = () => (
-  <Grid item xs={6} className="grid grid-cols-1 md:grid-cols-3">
+  <Grid item xs={4} className="grid grid-cols-1 md:grid-cols-3">
     <section className="flex gap-2 mb-2">
       <Avatar src={logo} sx={{ width: 30, height: 30 }} />
       <Typography variant="h6" fontWeight="bold">

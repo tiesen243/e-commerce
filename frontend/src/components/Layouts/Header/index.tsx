@@ -11,7 +11,7 @@ import { logo } from '@/lib'
 export const Header: React.FC = () => (
   <AppBar position="sticky" className="trans-colors">
     <Container maxWidth="lg">
-      <Toolbar disableGutters className="flex justify-between gap-2">
+      <Toolbar disableGutters className="flex justify-between gap-2 py-2">
         <MobileMenu />
 
         <section className="flex items-center">

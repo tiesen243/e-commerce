@@ -7,7 +7,7 @@ const useRefreshToken = () => {
   const { data, update } = useSession()
 
   useEffect(() => {
-    // Update session every 10 minutes
+    // Update session every 5 minutes
     const interval = setInterval(() => update({}), 5 * 60 * 1000)
     return () => clearInterval(interval)
   }, [update])

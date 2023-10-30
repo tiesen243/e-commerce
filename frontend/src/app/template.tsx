@@ -11,7 +11,7 @@ const Template: React.FC<React.PropsWithChildren> = ({ children }) => {
   if (!mounted) return null
 
   return (
-    <main className="flex flex-col gap-4 min-h-screen w-screen">
+    <main className="flex flex-col gap-3 min-h-screen w-screen select-none">
       {/* Header */}
       <Header />
 

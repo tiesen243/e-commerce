@@ -15,7 +15,7 @@ const Toolbar = () => (
     <Typography variant="caption" fontWeight="bold" className="text-2xl">
       Manage Product
     </Typography>
-    <Button component={Link} href="/manage/create" variant="text" color="info">
+    <Button component={Link} href="/manage/create" variant="text" color="secondary">
       Create Product
     </Button>
     <GridToolbarColumnsButton sx={{ color: 'text.primary' }} />

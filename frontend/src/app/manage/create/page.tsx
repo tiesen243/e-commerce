@@ -71,7 +71,7 @@ const Page: NextPage = () => {
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
       />
 
-      <DragAndDrop name="image" setValue={(value: File) => setFormData({ ...formData, image: value })} />
+      <DragAndDrop name="image" setValue={(value: File) => setFormData((prev) => ({ ...prev, image: value }))} />
 
       <MarkdownEditor
         required

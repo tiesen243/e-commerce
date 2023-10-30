@@ -5,7 +5,7 @@ interface Props {
 }
 export const Loading: React.FC<Props> = ({ text = 'Loading...' }) => (
   <div className="fixed inset-0 w-screen h-screen bg-white/50 dark:bg-black/50 backdrop-blur z-50 flex flex-col gap-8 items-center justify-center">
-    <CircularProgress />
+    <CircularProgress color="info" />
     <Typography variant="h5" className="animate-pulse">
       {text}
     </Typography>

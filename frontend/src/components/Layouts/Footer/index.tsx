@@ -1,6 +1,6 @@
 import { AppBar, Box, Container, Grid, Typography } from '@mui/material'
 
-import Contact from './Contact'
+import MoreInfo from './MoreInfo'
 import Nav from './Nav'
 
 export const Footer: React.FC = () => (
@@ -9,7 +9,7 @@ export const Footer: React.FC = () => (
       <Grid container spacing={2} marginY={1}>
         <Nav />
 
-        <Contact />
+        <MoreInfo />
       </Grid>
 
       <Box className="flex justify-between items-center border-t border-gray-300 py-4">

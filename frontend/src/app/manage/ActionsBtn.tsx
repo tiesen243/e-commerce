@@ -24,7 +24,7 @@ const ActionsBtn = (params: GridRenderCellParams) => {
   }
   return (
     <Box className="flex w-full items-center justify-between">
-      <Button variant="text" component={Link} href={`/manage/${params.row._id}`} endIcon={<EditRounded />}>
+      <Button variant="text" component={Link} href={`/manage/${params.row._id}`} color="info" endIcon={<EditRounded />}>
         Edit
       </Button>
       <Button
