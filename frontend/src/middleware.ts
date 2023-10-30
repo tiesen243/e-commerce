@@ -6,7 +6,7 @@ export default withAuth(
     const role = req.nextauth.token?.role
     const pathname = req.nextUrl.pathname
 
-    if (pathname.startsWith('/manage/product') && role !== 'admin' && role !== 'seller')
+    if (pathname.startsWith('/manage') && role !== 'admin' && role !== 'seller')
       return NextResponse.rewrite(new URL('/deny', req.nextUrl))
     else if (pathname.startsWith('/manage/admin') && role !== 'admin')
       return NextResponse.rewrite(new URL('/deny', req.nextUrl))

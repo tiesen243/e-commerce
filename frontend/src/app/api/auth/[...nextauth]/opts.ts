@@ -1,4 +1,4 @@
-import { API_URL, getToken, getUser } from '@/utils'
+import { API_URL, getUser, refreshAccessToken } from '@/utils'
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -32,18 +32,32 @@ const opts: NextAuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
-      if (!user) return token
-      token.role = await getUser(user.refreshToken).then((res) => res.role)
-      token.refreshToken = user.refreshToken
+    async jwt({ token, user, trigger, session }) {
+      // Refresh access token
+      if (trigger === 'update' && session) {
+        token.accessToken = await refreshAccessToken(token.refreshToken)
+      }
+      // Initial sign in
+      if (user) {
+        return {
+          ...token,
+          accessToken: user.accessToken,
+          refreshToken: user.refreshToken,
+          role: await getUser(user.accessToken).then((res) => res.role),
+        }
+      }
+
       return token
     },
 
     async session({ session, token }) {
-      if (!session) return session
-      session.user = await getUser(token.refreshToken)
-      session.token = token.refreshToken
-      setInterval(async () => (session.token = await getToken(token.refreshToken)), 15 * 60 * 1000)
+      if (session)
+        return {
+          ...session,
+          token: token.accessToken,
+          user: await getUser(token.refreshToken),
+        }
+
       return session
     },
   },

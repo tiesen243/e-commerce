@@ -3,7 +3,9 @@
 import { ThemeProvider } from 'next-themes'
 
 const NextThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <ThemeProvider attribute="class">{children}</ThemeProvider>
+  <ThemeProvider attribute="class" enableSystem enableColorScheme>
+    {children}
+  </ThemeProvider>
 )
 
 export default NextThemeProvider

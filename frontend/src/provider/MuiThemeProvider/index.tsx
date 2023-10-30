@@ -1,34 +1,65 @@
 'use client'
 
-import poppins from '@/utils/font'
-import { ThemeProvider, createTheme } from '@mui/material'
+import { CssBaseline, GlobalStyles, ThemeProvider, createTheme, css } from '@mui/material'
 import { useTheme } from 'next-themes'
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
-const MuiThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const { theme: nextTheme } = useTheme()
+import poppins from '@/utils/font'
 
-  const theme = createTheme({
-    palette: {
-      mode: nextTheme === 'dark' ? 'dark' : 'light',
-      ...(nextTheme === 'dark' ? darkPalette : lightPalette),
-    },
-    typography: {
-      fontFamily: poppins.style.fontFamily,
-    },
-  })
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
+  const { resolvedTheme } = useTheme()
+  const [theme, setTheme] = useState(darkTheme)
+
+  useEffect(() => {
+    resolvedTheme === 'dark' ? setTheme(darkTheme) : setTheme(lightTheme)
+  }, [resolvedTheme])
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <GlobalStyles styles={globalStyles} />
+      {children}
+    </ThemeProvider>
+  )
 }
 
 export default MuiThemeProvider
 
-const lightPalette = {
-  secondary: {
-    main: '#242526',
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+    secondary: {
+      main: '#242526',
+    },
   },
-}
+  typography: {
+    fontFamily: poppins.style.fontFamily,
+  },
+})
 
-const darkPalette = {
-  secondary: {
-    main: '#ffffff',
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    secondary: {
+      main: '#ffffff',
+    },
   },
-}
+  typography: {
+    fontFamily: poppins.style.fontFamily,
+  },
+})
+
+export const globalStyles = css`
+  :root {
+    body {
+      background-color: #f0f2f5;
+      color: #000000;
+    }
+  }
+  [class='dark'] {
+    body {
+      background-color: #18191a;
+      color: #fff;
+    }
+  }
+`

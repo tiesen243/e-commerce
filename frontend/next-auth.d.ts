@@ -6,6 +6,7 @@ declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: IUser
     token: string
+    expires: number
   }
 
   interface User extends DefaultUser {
@@ -20,5 +21,6 @@ declare module 'next-auth/jwt' {
     role: Role
     accessToken: string
     refreshToken: string
+    expires: number
   }
 }

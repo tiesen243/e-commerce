@@ -15,10 +15,9 @@ export interface Product {
 }
 
 export interface CreateProduct {
-  code: string
   name: string
   description: string
-  image: File
+  image: File | null
   price: number
   stock: number
   category: Category

@@ -1,7 +1,7 @@
 export { API_URL, logo } from './constants'
 export { default as poppins } from './font'
 
-export { getToken, getUser } from './auth'
+export { refreshAccessToken, getUser } from './auth'
 
 export { uploadImage, deleteImage } from './firebase'
 

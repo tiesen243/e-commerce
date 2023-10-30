@@ -36,7 +36,7 @@ const Page: NextPage = () => {
   }
 
   return (
-    <Box component="form" className="flex flex-col justify-center gap-4" onSubmit={onSubmit}>
+    <Box component="form" className="flex flex-col justify-center h-[50vh] gap-4" onSubmit={onSubmit}>
       <Typography variant="h3" className="text-center font-bold">
         Login to your account
       </Typography>

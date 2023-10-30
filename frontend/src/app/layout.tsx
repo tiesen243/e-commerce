@@ -7,16 +7,12 @@ export const metadata: Metadata = {
 
 import poppins from '@/utils/font'
 import './globals.css'
-import { AuthProvider, MuiThemeProvider, NextThemeProvider } from '@/provider'
+import AppProviders from '@/provider'
 
 const RootLayout: NextPage<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={poppins.className}>
-      <NextThemeProvider>
-        <MuiThemeProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </MuiThemeProvider>
-      </NextThemeProvider>
+      <AppProviders>{children}</AppProviders>
     </body>
   </html>
 )

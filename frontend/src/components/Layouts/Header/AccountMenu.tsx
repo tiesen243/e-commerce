@@ -2,24 +2,29 @@
 
 import { AdminPanelSettingsRounded, Inventory2Rounded, Logout, ShoppingCartRounded } from '@mui/icons-material'
 import { Avatar, Button, Divider, IconButton, Menu, Tooltip } from '@mui/material'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { MuiMenuItem } from '@/components'
+import useRefreshToken from '@/hooks/useRefreshToken'
 import { showSuccessToast } from '@/utils'
 
 const AccountMenu: React.FC = () => {
-  const { user } = useSession().data ?? {}
+  const user = useRefreshToken()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)
   const handleClose = () => setAnchorEl(null)
+
+  const { push } = useRouter()
   const handleLogout = async () => {
     await signOut({ redirect: false })
     showSuccessToast('Logout successful')
+    push('/')
   }
 
   return user ? (
@@ -49,14 +54,17 @@ const AccountMenu: React.FC = () => {
         <MuiMenuItem icon={<Avatar src={user.avatar} alt={user.userName} />} title={user.userName} href="/account" />
         <MuiMenuItem icon={<ShoppingCartRounded fontSize="small" />} title="My cart" href="/account/cart" />
 
+        <Divider />
+
         {user.role === 'admin' && (
-          <MuiMenuItem icon={<AdminPanelSettingsRounded fontSize="small" />} title="Admin panel" href="/admin" />
+          <MuiMenuItem icon={<AdminPanelSettingsRounded fontSize="small" />} title="Admin panel" href="/manage/admin" />
         )}
         {user.role !== 'user' && (
-          <MuiMenuItem icon={<Inventory2Rounded fontSize="small" />} title="Product Manager" href="/manage" />
+          <MuiMenuItem icon={<Inventory2Rounded fontSize="small" />} title="Product Manager" href="/manage/product" />
         )}
 
         <Divider />
+
         <MuiMenuItem icon={<Logout fontSize="small" />} title="Logout" onClick={handleLogout} />
       </Menu>
     </>

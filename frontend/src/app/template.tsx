@@ -1,19 +1,23 @@
 import { Container } from '@mui/material'
 import { Suspense } from 'react'
 
-import { Footer, Header, Loading, Notification, ThemeButton } from '@/components'
+import { Footer, Header, Notification, ThemeButton } from '@/components'
 
 const Template: React.FC<React.PropsWithChildren> = ({ children }) => (
   <main className="flex flex-col gap-4 min-h-screen w-screen">
+    {/* Header */}
     <Header />
 
-    <Suspense fallback={<Loading />}>
+    {/* Content */}
+    <Suspense>
       <Container className="flex-grow">{children}</Container>
     </Suspense>
 
-    <ThemeButton />
+    {/* Actions */}
+    {/* <ThemeButton /> */}
     <Notification />
 
+    {/* Footer */}
     <Footer />
   </main>
 )

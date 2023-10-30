@@ -1,8 +1,8 @@
+import { Product } from '@/types/product.type'
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
-const fetcher = async (url: string, token: string) => {
-  console.log(url, token)
+const fetcher = async (url: string, token: string): Promise<Product[]> => {
   const data = await fetch(url, {
     method: 'GET',
     headers: {
@@ -15,14 +15,23 @@ const fetcher = async (url: string, token: string) => {
   return data.data
 }
 
-const useProductByUser = () => {
+interface UseProductByUser {
+  products: Product[]
+  isLoading: boolean
+  error: any
+}
+
+const useProductByUser = (): UseProductByUser => {
   const { token } = useSession().data || {}
-  const { data, error, isLoading } = useSWR(token ? ['/api/v1/product/me', token] : null, ([url, token]) =>
-    fetcher(url, token),
+  if (!token) return { products: [], isLoading: false, error: null }
+
+  const { data, error, isLoading } = useSWR(
+    token ? ['/api/v1/product/me', token] : null,
+    ([url, token]) => fetcher(url, token),
+    { refreshInterval: 1000 },
   )
 
-  console.log(error.message)
-
+  if (!data) return { products: [], isLoading: true, error: error }
   return {
     products: data,
     isLoading,
