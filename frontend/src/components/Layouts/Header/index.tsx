@@ -1,38 +1,37 @@
-'use client'
-
-import { AppBar, Avatar, Container, Toolbar, Typography } from '@mui/material'
-import Link from 'next/link'
-
-import Menu from './Menu'
+import AppBar from '@mui/material/AppBar'
+import Container from '@mui/material/Container'
+import Toolbar from '@mui/material/Toolbar'
 import MobileMenu from './MobileMenu'
-import Search from './Search'
+import Menu from './Menu'
 import AccountMenu from './AccountMenu'
+import Search from './Search'
+import { Avatar, Typography } from '@mui/material'
 import { logo } from '@/utils'
 
 const Header: React.FC = () => (
-  <AppBar position="sticky" className="main">
-    <Toolbar>
-      <Container maxWidth="lg" className="flex justify-between items-center p-4 md:p-0">
+  <AppBar position="sticky">
+    <Container maxWidth="lg">
+      <Toolbar disableGutters className="flex justify-between gap-2">
         <MobileMenu />
 
-        <section className="flex w-full md:w-1/3">
-          <Link href="/" className="mr-2 flex w-full items-center justify-center lg:mr-6">
-            <Avatar src={logo} alt="logo" />
-            <Typography className="ml-2 flex-none text-xl font-bold uppercase md:hidden lg:block">Yuki</Typography>
-          </Link>
+        <section className="flex items-center">
+          <Avatar alt="Logo" src={logo} sx={{ width: 32, height: 32, mr: 1 }} />
+          <Typography variant="h6" component="div" className="font-bold block md:hidden lg:block">
+            {process.env.NEXT_PUBLIC_SITE_NAME}
+          </Typography>
 
-          <section className="hidden md:block w-full">
+          <section className="hidden md:block ml-2">
             <Menu />
           </section>
         </section>
 
-        <section className="hidden md:flex justify-center">
+        <section className="hidden md:block flex-grow">
           <Search />
         </section>
 
         <AccountMenu />
-      </Container>
-    </Toolbar>
+      </Toolbar>
+    </Container>
   </AppBar>
 )
 

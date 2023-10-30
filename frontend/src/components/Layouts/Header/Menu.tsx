@@ -5,6 +5,27 @@ import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+const Menu = () => {
+  const pathName = usePathname()
+  const textColor = (item: Menu) =>
+    pathName === item.path
+      ? 'text-black dark:text-white'
+      : 'text-neutral-400 group-hover:underline underline-offset-8 group-hover:text-neutral-700 dark:group-hover:text-neutral-200'
+
+  return (
+    <List className="gap-6 text-sm md:flex md:items-center">
+      {menu.map((item: Menu, idx: number) => (
+        <ListItemButton component={Link} href={item.path} key={idx} className="group">
+          <ListItemIcon className={`md:hidden ${textColor(item)}`}>{item.icon}</ListItemIcon>
+          <ListItemText primary={item.name} className={textColor(item)} />
+        </ListItemButton>
+      ))}
+    </List>
+  )
+}
+
+export default Menu
+
 type Menu = {
   name: string
   icon: JSX.Element
@@ -22,23 +43,3 @@ const menu: Menu[] = [
     path: '/about',
   },
 ]
-const Menu = () => {
-  const pathName = usePathname()
-  const textColor = (item: Menu) =>
-    pathName === item.path
-      ? 'text-black dark:text-white'
-      : 'text-neutral-500 group-hover:underline underline-offset-8 group-hover:text-neutral-700 dark:group-hover:text-neutral-200'
-
-  return (
-    <List className="gap-6 text-sm md:flex md:items-center">
-      {menu.map((item: Menu, idx: number) => (
-        <ListItemButton component={Link} href={item.path} key={idx} className="group">
-          <ListItemIcon className={`block md:hidden ${textColor(item)}`}>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.name} className={textColor(item)} />
-        </ListItemButton>
-      ))}
-    </List>
-  )
-}
-
-export default Menu

@@ -1,6 +1,6 @@
 'use client'
 
-import { CssBaseline, GlobalStyles, ThemeProvider, createTheme, css } from '@mui/material'
+import { CssBaseline, Paper, ThemeProvider, createTheme } from '@mui/material'
 import { useTheme } from 'next-themes'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
@@ -17,7 +17,6 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <GlobalStyles styles={globalStyles} />
       {children}
     </ThemeProvider>
   )
@@ -28,6 +27,9 @@ export default MuiThemeProvider
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
+    primary: {
+      main: '#ffffff',
+    },
     secondary: {
       main: '#242526',
     },
@@ -40,6 +42,9 @@ const lightTheme = createTheme({
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary: {
+      main: '#242526',
+    },
     secondary: {
       main: '#ffffff',
     },
@@ -48,18 +53,3 @@ const darkTheme = createTheme({
     fontFamily: poppins.style.fontFamily,
   },
 })
-
-export const globalStyles = css`
-  :root {
-    body {
-      background-color: #f0f2f5;
-      color: #000000;
-    }
-  }
-  [class='dark'] {
-    body {
-      background-color: #18191a;
-      color: #fff;
-    }
-  }
-`

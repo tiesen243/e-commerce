@@ -1,25 +1,32 @@
+'use client'
+
 import { Container } from '@mui/material'
-import { Suspense } from 'react'
 
-import { Footer, Header, Notification, ThemeButton } from '@/components'
+import { Footer, Header, Loading, Notification } from '@/components'
+import { Suspense, useEffect, useState } from 'react'
 
-const Template: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <main className="flex flex-col gap-4 min-h-screen w-screen">
-    {/* Header */}
-    <Header />
+const Template: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  if (!mounted) return null
 
-    {/* Content */}
-    <Suspense>
-      <Container className="flex-grow">{children}</Container>
-    </Suspense>
+  return (
+    <main className="flex flex-col gap-4 min-h-screen w-screen">
+      {/* Header */}
+      <Header />
 
-    {/* Actions */}
-    {/* <ThemeButton /> */}
-    <Notification />
+      {/* Content */}
+      <Suspense fallback={<Loading />}>
+        <Container className="flex-grow">{children}</Container>
+      </Suspense>
 
-    {/* Footer */}
-    <Footer />
-  </main>
-)
+      {/* Actions */}
+      <Notification />
+
+      {/* Footer */}
+      <Footer />
+    </main>
+  )
+}
 
 export default Template

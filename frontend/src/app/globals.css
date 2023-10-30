@@ -25,4 +25,7 @@
   .btn {
     @apply bg-secondary-dark hover:bg-quaternary-dark dark:bg-secondary-light dark:hover:bg-quaternary-light text-primary-light dark:text-primary-dark shadow-lg rounded transition-colors duration-300 ease-linear;
   }
+  .icon-btn {
+    @apply flex h-11 w-11 aspect-square items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white md:hidden;
+  }
 }

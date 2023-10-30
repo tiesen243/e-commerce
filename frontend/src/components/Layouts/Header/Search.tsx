@@ -1,5 +1,7 @@
+'use client'
+
 import { SearchRounded } from '@mui/icons-material'
-import { IconButton, TextField } from '@mui/material'
+import { FormControl, IconButton, TextField } from '@mui/material'
 import { useState } from 'react'
 
 const Search: React.FC = () => {
@@ -9,9 +11,8 @@ const Search: React.FC = () => {
     console.log(search)
   }
   return (
-    <form className="my-4" onSubmit={handleSearch}>
+    <FormControl fullWidth component="form" onSubmit={handleSearch}>
       <TextField
-        fullWidth
         variant="outlined"
         label="Search"
         color="secondary"
@@ -25,7 +26,7 @@ const Search: React.FC = () => {
           ),
         }}
       />
-    </form>
+    </FormControl>
   )
 }
 

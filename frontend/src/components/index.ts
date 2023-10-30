@@ -4,7 +4,6 @@ export { default as Footer } from './Layouts/Footer'
 export { default as Notification } from './Layouts/Notification'
 
 // components
-export { default as ThemeButton } from './ThemeBtn'
 export { default as Loading } from './Loading'
 
 // Custom Input
