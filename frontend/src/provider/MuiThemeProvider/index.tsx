@@ -1,6 +1,6 @@
 'use client'
 
-import { CssBaseline, Paper, ThemeProvider, createTheme } from '@mui/material'
+import { CssBaseline, GlobalStyles, Paper, ThemeProvider, createTheme, css } from '@mui/material'
 import { useTheme } from 'next-themes'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
@@ -17,7 +17,8 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {children}
+      <GlobalStyles styles={globalStyles} />
+      <Paper className="trans-colors"> {children}</Paper>
     </ThemeProvider>
   )
 }
@@ -32,6 +33,9 @@ const lightTheme = createTheme({
     },
     secondary: {
       main: '#242526',
+    },
+    background: {
+      paper: '#f0f2f5',
     },
   },
   typography: {
@@ -48,8 +52,17 @@ const darkTheme = createTheme({
     secondary: {
       main: '#ffffff',
     },
+    background: {
+      paper: '#18191a',
+    },
   },
   typography: {
     fontFamily: poppins.style.fontFamily,
   },
 })
+
+const globalStyles = css`
+  body {
+    transition: all 0.2s ease;
+  }
+`

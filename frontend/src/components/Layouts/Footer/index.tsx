@@ -4,7 +4,7 @@ import Contact from './Contact'
 import Nav from './Nav'
 
 const Footer: React.FC = () => (
-  <AppBar position="static">
+  <AppBar position="static" className="trans-colors">
     <Container maxWidth="lg">
       <Grid container spacing={2} marginY={1}>
         <Nav />

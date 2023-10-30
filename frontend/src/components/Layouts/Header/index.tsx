@@ -1,24 +1,26 @@
-import AppBar from '@mui/material/AppBar'
-import Container from '@mui/material/Container'
-import Toolbar from '@mui/material/Toolbar'
-import MobileMenu from './MobileMenu'
-import Menu from './Menu'
+import { AppBar, Avatar, Container, Toolbar, Typography } from '@mui/material'
+
 import AccountMenu from './AccountMenu'
+import Menu from './Menu'
+import MobileMenu from './MobileMenu'
 import Search from './Search'
-import { Avatar, Typography } from '@mui/material'
 import { logo } from '@/utils'
+import Link from 'next/link'
+import ThemeBtn from './ThemeBtn'
 
 const Header: React.FC = () => (
-  <AppBar position="sticky">
+  <AppBar position="sticky" className="trans-colors">
     <Container maxWidth="lg">
       <Toolbar disableGutters className="flex justify-between gap-2">
         <MobileMenu />
 
         <section className="flex items-center">
-          <Avatar alt="Logo" src={logo} sx={{ width: 32, height: 32, mr: 1 }} />
-          <Typography variant="h6" component="div" className="font-bold block md:hidden lg:block">
-            {process.env.NEXT_PUBLIC_SITE_NAME}
-          </Typography>
+          <Link href="/" className="flex items-center gap-2">
+            <Avatar alt="Logo" src={logo} sx={{ width: 32, height: 32 }} />
+            <Typography variant="h6" component="div" className="font-bold block md:hidden lg:block">
+              {process.env.NEXT_PUBLIC_SITE_NAME}
+            </Typography>
+          </Link>
 
           <section className="hidden md:block ml-2">
             <Menu />
@@ -29,7 +31,10 @@ const Header: React.FC = () => (
           <Search />
         </section>
 
-        <AccountMenu />
+        <section className="flex items-center gap-2">
+          <ThemeBtn />
+          <AccountMenu />
+        </section>
       </Toolbar>
     </Container>
   </AppBar>
