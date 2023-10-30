@@ -1,4 +1,4 @@
-import { BookRounded, HomeRounded, LocalLibraryRounded, MenuBookRounded } from '@mui/icons-material'
+import { AllInclusiveRounded, BookRounded, LocalLibraryRounded, MenuBookRounded } from '@mui/icons-material'
 
 type Menu = {
   name: string
@@ -8,7 +8,7 @@ type Menu = {
 const menu: Menu[] = [
   {
     name: 'All',
-    icon: <HomeRounded />,
+    icon: <AllInclusiveRounded />,
     path: '/search',
   },
   {
