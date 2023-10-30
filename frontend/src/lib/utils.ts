@@ -1,5 +1,4 @@
-import IUser from '@/types/user.type'
-import { API_URL } from '.'
+import { API_URL, IUser } from '.'
 
 const getUser = async (token: string): Promise<IUser> => {
   const user = await fetch(`${API_URL}/user/me`, {
@@ -23,4 +22,4 @@ const refreshAccessToken = async (refreshToken: string) => {
   return data.accessToken
 }
 
-export { refreshAccessToken, getUser }
+export { getUser, refreshAccessToken }

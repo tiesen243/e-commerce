@@ -4,7 +4,7 @@ import { CssBaseline, GlobalStyles, Paper, ThemeProvider, createTheme, css } fro
 import { useTheme } from 'next-themes'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
-import poppins from '@/utils/font'
+import { poppins } from '@/lib'
 
 const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const { resolvedTheme } = useTheme()

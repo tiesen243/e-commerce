@@ -1,15 +1,11 @@
-import { Checkbox, CheckboxProps, FormControlLabel, FormGroup } from '@mui/material'
+import { Checkbox as MuiCheckbox, CheckboxProps, FormControlLabel, FormGroup } from '@mui/material'
 
 interface Props {
   label: string
 }
 
-const CustomCheckbox: React.FC<Props & CheckboxProps> = (props) => {
-  return (
-    <FormGroup>
-      <FormControlLabel control={<Checkbox {...props} color="info" />} label={props.label} />
-    </FormGroup>
-  )
-}
-
-export default CustomCheckbox
+export const Checkbox: React.FC<Props & CheckboxProps> = (props) => (
+  <FormGroup>
+    <FormControlLabel control={<MuiCheckbox {...props} color="info" />} label={props.label} />
+  </FormGroup>
+)

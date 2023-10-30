@@ -3,7 +3,7 @@ import { AppBar, Box, Container, Grid, Typography } from '@mui/material'
 import Contact from './Contact'
 import Nav from './Nav'
 
-const Footer: React.FC = () => (
+export const Footer: React.FC = () => (
   <AppBar position="static" className="trans-colors">
     <Container maxWidth="lg">
       <Grid container spacing={2} marginY={1}>
@@ -30,5 +30,3 @@ const Footer: React.FC = () => (
     </Container>
   </AppBar>
 )
-
-export default Footer

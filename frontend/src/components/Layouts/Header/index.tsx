@@ -4,11 +4,11 @@ import AccountMenu from './AccountMenu'
 import Menu from './Menu'
 import MobileMenu from './MobileMenu'
 import Search from './Search'
-import { logo } from '@/utils'
 import Link from 'next/link'
 import ThemeBtn from './ThemeBtn'
+import { logo } from '@/lib'
 
-const Header: React.FC = () => (
+export const Header: React.FC = () => (
   <AppBar position="sticky" className="trans-colors">
     <Container maxWidth="lg">
       <Toolbar disableGutters className="flex justify-between gap-2">
@@ -39,5 +39,3 @@ const Header: React.FC = () => (
     </Container>
   </AppBar>
 )
-
-export default Header

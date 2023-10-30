@@ -1,10 +1,10 @@
-export enum Role {
+enum Role {
   ADMIN = 'admin',
   SELLER = 'seller',
   USER = 'user',
 }
 
-export default interface IUser {
+interface IUser {
   _id: string
   token: string
   userName: string
@@ -13,3 +13,6 @@ export default interface IUser {
   role: Role
   createdAt: Date
 }
+
+export type { IUser }
+export { Role }

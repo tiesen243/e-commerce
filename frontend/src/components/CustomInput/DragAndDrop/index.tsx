@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '@mui/material'
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import { showErrorToast } from '@/utils'
+import { showErrorToast, showSuccessToast } from '@/lib'
 
 interface Props {
   preview?: string
@@ -12,7 +12,7 @@ interface Props {
   setValue: (value: any) => void
 }
 
-const DragAndDrop: React.FC<Props> = (props) => {
+export const DragAndDrop: React.FC<Props> = (props) => {
   const { name, setValue } = props
 
   // set preview image
@@ -30,6 +30,7 @@ const DragAndDrop: React.FC<Props> = (props) => {
       file.readAsDataURL(acceptedFiles[0])
 
       setValue(acceptedFiles[0])
+      showSuccessToast('Image uploaded successfully')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -58,5 +59,3 @@ const DragAndDrop: React.FC<Props> = (props) => {
     </>
   )
 }
-
-export default DragAndDrop

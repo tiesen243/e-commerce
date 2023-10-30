@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const Notification: React.FC = () => {
+export const Notification: React.FC = () => {
   const { theme } = useTheme()
   return (
     <ToastContainer
@@ -21,5 +21,3 @@ const Notification: React.FC = () => {
     />
   )
 }
-
-export default Notification

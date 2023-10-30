@@ -4,7 +4,7 @@ import { Button } from '@mui/material'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import useRefreshToken from '@/hooks/useRefreshToken'
+import { useRefreshToken } from '@/lib'
 import UserAvatar from './UserAvatar'
 import UserMenu from './UserMenu'
 

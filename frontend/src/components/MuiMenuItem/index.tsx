@@ -7,7 +7,7 @@ interface AccountMenuProps {
   href?: string
   onClick?: () => void
 }
-const MuiMenuItem: React.FC<AccountMenuProps> = (props) => (
+export const MuiMenuItem: React.FC<AccountMenuProps> = (props) => (
   <MenuItem
     {...(props.href && { component: Link, href: props.href })}
     onClick={props.onClick}
@@ -17,5 +17,3 @@ const MuiMenuItem: React.FC<AccountMenuProps> = (props) => (
     <ListItemText primary={props.title} />
   </MenuItem>
 )
-
-export default MuiMenuItem

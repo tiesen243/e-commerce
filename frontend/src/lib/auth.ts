@@ -1,6 +1,8 @@
-import { API_URL, getUser, refreshAccessToken } from '@/utils'
-import { NextAuthOptions } from 'next-auth'
+import nextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+
+import { API_URL } from './constants'
+import { getUser, refreshAccessToken } from './utils'
 
 const opts: NextAuthOptions = {
   providers: [
@@ -73,4 +75,5 @@ const opts: NextAuthOptions = {
   },
 }
 
-export default opts
+const handlers = nextAuth(opts)
+export { handlers as GET, handlers as POST }

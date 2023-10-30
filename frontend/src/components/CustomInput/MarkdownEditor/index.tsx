@@ -1,5 +1,3 @@
-'use client'
-
 import { FormControl, FormControlLabel, Switch, TextField, TextFieldProps, Typography } from '@mui/material'
 import MuiMarkdown from 'mui-markdown'
 import { useState } from 'react'
@@ -10,7 +8,7 @@ interface Props {
   setValue: (value: string) => void
 }
 
-const MarkdownEditor: React.FC<Props & TextFieldProps> = ({ label, value, setValue, ...rest }) => {
+export const MarkdownEditor: React.FC<Props & TextFieldProps> = ({ label, value, setValue, ...rest }) => {
   const [preview, setPreview] = useState<boolean>(false)
   return (
     <FormControl fullWidth>
@@ -40,5 +38,3 @@ const MarkdownEditor: React.FC<Props & TextFieldProps> = ({ label, value, setVal
     </FormControl>
   )
 }
-
-export default MarkdownEditor

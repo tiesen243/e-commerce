@@ -5,7 +5,7 @@ interface Props {
   setValue: (value: any) => void
 }
 
-const Select: React.FC<Props & TextFieldProps> = ({ data, value, setValue, ...rest }) => (
+export const Select: React.FC<Props & TextFieldProps> = ({ data, value, setValue, ...rest }) => (
   <TextField select fullWidth color="secondary" value={value} onChange={(e) => setValue(e.target.value)} {...rest}>
     {data.map((item) => (
       <MenuItem key={item} value={item}>
@@ -14,5 +14,3 @@ const Select: React.FC<Props & TextFieldProps> = ({ data, value, setValue, ...re
     ))}
   </TextField>
 )
-
-export default Select

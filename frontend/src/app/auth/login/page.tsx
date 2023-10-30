@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { Loading } from '@/components'
-import { showErrorToast, showSuccessToast } from '@/utils'
+import { showErrorToast, showSuccessToast } from '@/lib'
 
 interface FormData {
   email: string

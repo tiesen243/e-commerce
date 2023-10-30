@@ -1,6 +1,7 @@
-import { logo } from '@/utils'
 import { Avatar, Grid, List, ListItem, ListItemText, Typography } from '@mui/material'
 import Link from 'next/link'
+
+import { logo } from '@/lib'
 
 const Nav: React.FC = () => (
   <Grid item xs={6} className="grid grid-cols-1 md:grid-cols-3">

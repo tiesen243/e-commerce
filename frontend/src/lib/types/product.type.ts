@@ -1,4 +1,4 @@
-export interface Product {
+interface IProduct {
   _id: string
   name: string
   description: string
@@ -14,7 +14,7 @@ export interface Product {
   updatedAt: Date
 }
 
-export interface CreateProduct {
+interface CreateProduct {
   name: string
   description: string
   image: File | null
@@ -24,7 +24,7 @@ export interface CreateProduct {
   tags: Tag[]
 }
 
-export interface UpdateProduct {
+interface UpdateProduct {
   name: string
   description: string
   image: File
@@ -36,14 +36,14 @@ export interface UpdateProduct {
   tags: Tag[]
 }
 
-export enum Category {
+enum Category {
   Novel = 'Novel',
   LightNovel = 'Light Novel',
   Manga = 'Manga',
   Other = 'Other',
 }
 
-export enum Tag {
+enum Tag {
   Action = 'Action',
   AtA = 'Adapted to Anime',
   AtDCD = 'Adapted to Drama CD',
@@ -103,3 +103,6 @@ export enum Tag {
   R18G = 'R18G',
   Other = 'Other',
 }
+
+export type { IProduct, CreateProduct, UpdateProduct }
+export { Category, Tag }

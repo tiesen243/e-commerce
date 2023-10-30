@@ -1,4 +1,4 @@
-import IUser, { Role } from '@/types/user.type'
+import IUser, { Role } from '@/lib/types/user.type'
 import { DefaultSession, DefaultUser } from 'next-auth'
 import { DefaultJWT } from 'next-auth/jwt'
 

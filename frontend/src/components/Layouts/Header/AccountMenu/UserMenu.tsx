@@ -4,9 +4,7 @@ import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 import { MuiMenuItem } from '@/components'
-import { showSuccessToast } from '@/utils'
-
-import type IUser from '@/types/user.type'
+import { IUser, showSuccessToast } from '@/lib'
 
 interface Props {
   user: IUser
@@ -41,10 +39,10 @@ const UserMenu: React.FC<Props> = (props) => {
       <Divider />
 
       {user.role === 'admin' && (
-        <MuiMenuItem icon={<AdminPanelSettingsRounded fontSize="small" />} title="Admin panel" href="/manage/admin" />
+        <MuiMenuItem icon={<AdminPanelSettingsRounded fontSize="small" />} title="Admin panel" href="/admin" />
       )}
       {user.role !== 'user' && (
-        <MuiMenuItem icon={<Inventory2Rounded fontSize="small" />} title="Product Manager" href="/manage/product" />
+        <MuiMenuItem icon={<Inventory2Rounded fontSize="small" />} title="Product Manager" href="/manage" />
       )}
 
       <Divider />

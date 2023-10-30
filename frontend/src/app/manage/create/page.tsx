@@ -3,12 +3,11 @@
 import { NextPage } from 'next'
 
 import { DragAndDrop, Loading, MarkdownEditor, MultiSelect, Select } from '@/components'
-import { Category, CreateProduct, Tag } from '@/types/product.type'
-import { showErrorToast, showSuccessToast, uploadImage } from '@/utils'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { Category, CreateProduct, Tag, showErrorToast, showSuccessToast, uploadImage } from '@/lib'
 
 const initFormData: CreateProduct = {
   name: '',
@@ -45,7 +44,7 @@ const Page: NextPage = () => {
     })
     if (res.status === 201) {
       showSuccessToast('Product created successfully')
-      push('/manage/product')
+      push('/manage')
     } else {
       const { message } = await res.json()
       showErrorToast('Something went wrong')

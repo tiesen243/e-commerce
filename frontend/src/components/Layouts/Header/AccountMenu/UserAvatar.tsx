@@ -1,6 +1,6 @@
 import { Tooltip, IconButton, Avatar } from '@mui/material'
 
-import type IUser from '@/types/user.type'
+import { type IUser } from '@/lib'
 interface Props {
   user: IUser
   handleClick: (e: React.MouseEvent<HTMLElement>) => void

@@ -7,7 +7,7 @@ interface Props {
   setValue: (value: any[]) => void
 }
 
-const MultipleSelectChip: React.FC<Props & TextFieldProps> = ({ data, label, name, value, setValue }) => (
+export const MultiSelect: React.FC<Props & TextFieldProps> = ({ data, label, name, value, setValue }) => (
   <TextField
     select
     fullWidth
@@ -27,5 +27,3 @@ const MultipleSelectChip: React.FC<Props & TextFieldProps> = ({ data, label, nam
     ))}
   </TextField>
 )
-
-export default MultipleSelectChip

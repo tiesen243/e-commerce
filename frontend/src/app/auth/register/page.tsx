@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { Loading } from '@/components'
-import { API_URL, showErrorToast, showSuccessToast } from '@/utils'
+import { showErrorToast, showSuccessToast } from '@/lib'
 
 interface FormData {
   userName: string
@@ -30,7 +30,7 @@ const Page: NextPage = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoggin(true)
-    const res = await fetch(`${API_URL}/auth/register`, {
+    const res = await fetch('/api/v1/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
