@@ -1,15 +1,15 @@
 'use client'
 
 import { Button } from '@mui/material'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import { useRefreshToken } from '@/lib'
 import UserAvatar from './UserAvatar'
 import UserMenu from './UserMenu'
 
 const AccountMenu: React.FC = () => {
-  const user = useRefreshToken()
+  const { user } = useSession().data || {}
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)

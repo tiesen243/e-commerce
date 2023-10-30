@@ -56,7 +56,7 @@ const opts: NextAuthOptions = {
       if (session)
         return {
           ...session,
-          token: token.accessToken,
+          token: token.refreshToken,
           user: await getUser(token.refreshToken),
         }
 
