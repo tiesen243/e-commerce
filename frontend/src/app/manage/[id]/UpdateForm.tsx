@@ -1,48 +1,23 @@
 'use client'
 
 import { NextPage } from 'next'
-
-import { BackBtn, DragAndDrop, Loading, MarkdownEditor, MultiSelect, Select } from '@/components'
-import { Box, Button, TextField, Typography } from '@mui/material'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { Category, CreateProduct, Tag } from '@/lib'
-import createProduct from './createProduct'
-import { useSession } from 'next-auth/react'
+import { Category, IProduct, Tag, UpdateProduct } from '@/lib'
+import { BackBtn, Checkbox, DragAndDrop, MarkdownEditor, MultiSelect, Select, Slider } from '@/components'
+import { Box, Button, TextField, Typography } from '@mui/material'
 
-const initFormData: CreateProduct = {
-  name: '',
-  description: '',
-  image: null,
-  price: 0,
-  stock: 0,
-  category: Category.Other,
-  tags: [],
+interface Props {
+  product: IProduct
 }
 const cate: string[] = Object.values(Category)
 const tags: string[] = Object.values(Tag)
-
-const Page: NextPage = () => {
-  const { token } = useSession().data || {}
-  const [formData, setFormData] = useState<CreateProduct>(initFormData)
-  const [error, setError] = useState<string>('')
-  const [isCreating, setIsCreating] = useState<boolean>(false)
-
-  const { back } = useRouter()
+const UpdateForm: NextPage<Props> = ({ product }) => {
+  const [formData, setFormData] = useState<UpdateProduct>(product as unknown as UpdateProduct)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsCreating(true)
-    if (!token) return
-    const { data, error } = await createProduct(formData, token)
-    if (error) {
-      setError(error)
-      setIsCreating(false)
-    } else back()
+    console.log(formData)
   }
-
-  if (isCreating) return <Loading text="Creating product..." />
-
   return (
     <>
       <BackBtn />
@@ -61,7 +36,11 @@ const Page: NextPage = () => {
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
 
-        <DragAndDrop name="image" setValue={(value: File) => setFormData((prev) => ({ ...prev, image: value }))} />
+        <DragAndDrop
+          name="image"
+          preview={product.image}
+          setValue={(value: File) => setFormData((prev) => ({ ...prev, image: value }))}
+        />
 
         <MarkdownEditor
           required
@@ -81,6 +60,15 @@ const Page: NextPage = () => {
           onChange={(e) => setFormData({ ...formData, price: +e.target.value })}
         />
 
+        <Slider
+          color="secondary"
+          label="Sale off percent"
+          min={0}
+          max={100}
+          value={formData.saleOffPercent}
+          onChange={(e, value) => setFormData({ ...formData, saleOffPercent: value as number })}
+        />
+
         <TextField
           required
           fullWidth
@@ -90,6 +78,13 @@ const Page: NextPage = () => {
           color="secondary"
           value={formData.stock}
           onChange={(e) => setFormData({ ...formData, stock: +e.target.value })}
+        />
+
+        <Checkbox
+          label="Available"
+          name="available"
+          checked={formData.available}
+          onChange={(e) => setFormData({ ...formData, available: e.target.checked })}
         />
 
         <Select
@@ -110,8 +105,6 @@ const Page: NextPage = () => {
           setValue={(value: Tag[]) => setFormData({ ...formData, tags: value })}
         />
 
-        {error && <Typography color="error">* {error}</Typography>}
-
         <Button variant="contained" fullWidth className="btn" type="submit">
           Submit
         </Button>
@@ -120,4 +113,4 @@ const Page: NextPage = () => {
   )
 }
 
-export default Page
+export default UpdateForm

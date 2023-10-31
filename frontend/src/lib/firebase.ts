@@ -15,14 +15,14 @@ const app = initializeApp(firebaseConfig)
 export const storage = getStorage(app)
 
 const uploadImage = async (image: File | null, name: string, type: string): Promise<string> => {
-  const imageRef = ref(storage, `${type}/${name.replace(/\s/g, '')}`)
+  const imageRef = ref(storage, `${type}/${name}`)
   const uploadTask = await uploadBytes(imageRef, image as Blob)
   const url = await getDownloadURL(uploadTask.ref)
   return url
 }
 
 const deleteImage = async (name: string, type: string) => {
-  const imageRef = ref(storage, `${type}/${name.replace(/\s/g, '')}`)
+  const imageRef = ref(storage, `${type}/${name}`)
   await deleteObject(imageRef).catch(() => {})
 }
 

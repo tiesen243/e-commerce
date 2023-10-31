@@ -19,6 +19,7 @@ export { getUser, refreshAccessToken } from '@/lib/utils'
 // Hooks
 export { useRefreshToken } from '@/lib/hooks/useRefreshToken'
 export { useProductByUser } from '@/lib/hooks/useProductByUser'
+export { useProductById } from '@/lib/hooks/useProductById'
 
 // Types
 export { type IUser, Role } from '@/lib/types/user.type'
