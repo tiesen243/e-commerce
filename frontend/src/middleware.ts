@@ -5,7 +5,6 @@ export default withAuth(
   function middleware(req: NextRequestWithAuth) {
     const role = req.nextauth.token?.role
     const pathname = req.nextUrl.pathname
-    console.log(pathname, role)
 
     if (pathname.startsWith('/manage') && role === 'user') return NextResponse.rewrite(new URL('/deny', req.nextUrl))
     else if (pathname.startsWith('/admin') && role !== 'admin')
