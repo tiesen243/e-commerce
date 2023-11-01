@@ -21,7 +21,7 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalStyles styles={globalStyles} />
-      {!mounted ? <Paper className="trans-colors"> {children}</Paper> : <SkeletonLoadPage />}
+      {mounted ? <Paper className="trans-colors"> {children}</Paper> : <SkeletonLoadPage />}
     </ThemeProvider>
   )
 }
