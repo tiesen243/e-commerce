@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { IProduct } from '..'
+import { IProduct } from '@/lib'
 
 const fetcher = async (url: string): Promise<IProduct> => {
   const res = await fetch(url)

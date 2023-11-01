@@ -5,11 +5,14 @@ export default withAuth(
   function middleware(req: NextRequestWithAuth) {
     const role = req.nextauth.token?.role
     const pathname = req.nextUrl.pathname
+    console.log(pathname, role)
 
-    if (pathname.startsWith('/manage') && role !== 'admin' && role !== 'seller')
+    if (pathname.startsWith('/manage') && role === 'user') return NextResponse.rewrite(new URL('/deny', req.nextUrl))
+    else if (pathname.startsWith('/admin') && role !== 'admin')
       return NextResponse.rewrite(new URL('/deny', req.nextUrl))
-    else if (pathname.startsWith('/manage/admin') && role !== 'admin')
-      return NextResponse.rewrite(new URL('/deny', req.nextUrl))
+    else if (pathname.includes('/auth') && role) return NextResponse.rewrite(new URL('/deny', req.nextUrl))
+
+    return NextResponse.next()
   },
   {
     callbacks: {
@@ -18,4 +21,4 @@ export default withAuth(
   },
 )
 
-export const config = { matcher: ['/manage/:path*'] }
+export const config = { matcher: ['/manage/:path*', '/admin/:path*'] }

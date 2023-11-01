@@ -1,10 +1,18 @@
-import { AdminPanelSettingsRounded, Inventory2Rounded, Logout, ShoppingCartRounded } from '@mui/icons-material'
+import {
+  AdminPanelSettingsRounded,
+  DarkModeRounded,
+  Inventory2Rounded,
+  LightModeRounded,
+  Logout,
+  ShoppingCartRounded,
+} from '@mui/icons-material'
 import { Avatar, Divider, Menu, PaperProps } from '@mui/material'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 import { MuiMenuItem } from '@/components'
 import { IUser, showSuccessToast } from '@/lib'
+import { useTheme } from 'next-themes'
 
 interface Props {
   user: IUser
@@ -15,6 +23,9 @@ interface Props {
 
 const UserMenu: React.FC<Props> = (props) => {
   const { user, anchorEl, open, handleClose } = props
+
+  const { theme, resolvedTheme, setTheme } = useTheme()
+  const handleClick = () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
 
   const { push } = useRouter()
   const handleLogout = async () => {
@@ -46,6 +57,12 @@ const UserMenu: React.FC<Props> = (props) => {
       )}
 
       <Divider />
+
+      <MuiMenuItem
+        icon={theme === 'light' ? <DarkModeRounded fontSize="small" /> : <LightModeRounded fontSize="small" />}
+        title={theme === 'light' ? 'Dark mode' : 'Light mode'}
+        onClick={handleClick}
+      />
 
       <MuiMenuItem icon={<Logout fontSize="small" />} title="Logout" onClick={handleLogout} />
     </Menu>

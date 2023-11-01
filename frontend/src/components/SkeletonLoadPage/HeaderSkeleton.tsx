@@ -25,10 +25,7 @@ const HeaderSkeleton = () => (
 
         <Skeleton variant="rounded" className="hidden md:block flex-grow h-[56px] border my-2" />
 
-        <section className="flex items-center gap-6">
-          <Skeleton variant="circular" className="w-8 h-8" />
-          <Skeleton variant="circular" className="w-11 h-11 mr-2" />
-        </section>
+        <Skeleton variant="circular" className="w-11 h-11 ml-6" />
       </Toolbar>
     </Container>
   </AppBar>

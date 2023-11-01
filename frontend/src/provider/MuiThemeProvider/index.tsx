@@ -19,7 +19,7 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <CssBaseline enableColorScheme />
       <GlobalStyles styles={globalStyles} />
       {mounted ? <Paper className="trans-colors"> {children}</Paper> : <SkeletonLoadPage />}
     </ThemeProvider>

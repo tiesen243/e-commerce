@@ -13,6 +13,7 @@ const Search: React.FC = () => {
   return (
     <FormControl fullWidth component="form" onSubmit={handleSearch}>
       <TextField
+        required
         variant="outlined"
         label="Search"
         color="secondary"

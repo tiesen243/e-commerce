@@ -5,7 +5,6 @@ import Logo from './Logo'
 import Menu from './Menu'
 import MobileMenu from './MobileMenu'
 import Search from './Search'
-import ThemeBtn from './ThemeBtn'
 
 export const Header: React.FC = () => (
   <AppBar position="sticky" className="trans-colors">
@@ -25,10 +24,7 @@ export const Header: React.FC = () => (
           <Search />
         </section>
 
-        <section className="flex items-center gap-2">
-          <ThemeBtn />
-          <AccountMenu />
-        </section>
+        <AccountMenu />
       </Toolbar>
     </Container>
   </AppBar>
