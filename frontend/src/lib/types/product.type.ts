@@ -1,8 +1,9 @@
 interface IProduct {
   _id: string
+  code: number
   name: string
   description: string
-  image: string
+  image: string | File
   price: number
   stock: number
   available: boolean
@@ -20,18 +21,6 @@ interface CreateProduct {
   image: File | null
   price: number
   stock: number
-  category: Category
-  tags: Tag[]
-}
-
-interface UpdateProduct {
-  name: string
-  description: string
-  image: File
-  price: number
-  stock: number
-  available: boolean
-  saleOffPercent: number
   category: Category
   tags: Tag[]
 }
@@ -104,5 +93,5 @@ enum Tag {
   Other = 'Other',
 }
 
-export type { IProduct, CreateProduct, UpdateProduct }
+export type { IProduct, CreateProduct }
 export { Category, Tag }

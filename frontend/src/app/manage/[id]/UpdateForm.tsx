@@ -3,9 +3,12 @@
 import { NextPage } from 'next'
 import { useState } from 'react'
 
-import { Category, IProduct, Tag, UpdateProduct } from '@/lib'
-import { BackBtn, Checkbox, DragAndDrop, MarkdownEditor, MultiSelect, Select, Slider } from '@/components'
-import { Box, Button, TextField, Typography } from '@mui/material'
+import { BackBtn, Checkbox, DragAndDrop, Loading, MarkdownEditor, MultiSelect, Select, Slider } from '@/components'
+import { Category, IProduct, Tag, showSuccessToast } from '@/lib'
+import { Box, Button, FormHelperText, TextField, Typography } from '@mui/material'
+import { useSession } from 'next-auth/react'
+import updateProduct from './updateProduct'
+import { useRouter } from 'next/navigation'
 
 interface Props {
   product: IProduct
@@ -13,11 +16,26 @@ interface Props {
 const cate: string[] = Object.values(Category)
 const tags: string[] = Object.values(Tag)
 const UpdateForm: NextPage<Props> = ({ product }) => {
-  const [formData, setFormData] = useState<UpdateProduct>(product as unknown as UpdateProduct)
+  const { token } = useSession().data || {}
+
+  const [formData, setFormData] = useState<IProduct>(product)
+  const [error, setError] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const { push } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(formData)
+    setIsLoading(true)
+    const res = await updateProduct(formData, token)
+    if (res.status === 204) {
+      showSuccessToast(res.message[0])
+      push('/manage')
+    } else {
+      setError(res.message)
+      setIsLoading(false)
+    }
   }
+
   return (
     <>
       <BackBtn />
@@ -38,7 +56,7 @@ const UpdateForm: NextPage<Props> = ({ product }) => {
 
         <DragAndDrop
           name="image"
-          preview={product.image}
+          preview={typeof product.image === 'string' ? product.image : ''}
           setValue={(value: File) => setFormData((prev) => ({ ...prev, image: value }))}
         />
 
@@ -105,10 +123,20 @@ const UpdateForm: NextPage<Props> = ({ product }) => {
           setValue={(value: Tag[]) => setFormData({ ...formData, tags: value })}
         />
 
+        {error && (
+          <FormHelperText error>
+            {error.map((err, i) => (
+              <p key={i}>{`* ${err}`}</p>
+            ))}
+          </FormHelperText>
+        )}
+
         <Button variant="contained" fullWidth className="btn" type="submit">
-          Submit
+          Update Product
         </Button>
       </Box>
+
+      {isLoading && <Loading text="Updating..." />}
     </>
   )
 }

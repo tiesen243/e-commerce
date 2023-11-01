@@ -36,13 +36,6 @@ const Page: NextPage = () => {
           noRowsOverlay: () => <div>No data</div>,
           toolbar: () => <Toolbar />,
         }}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
-          },
-        }}
       />
     )
   )

@@ -23,4 +23,4 @@ export { useProductById } from '@/lib/hooks/useProductById'
 
 // Types
 export { type IUser, Role } from '@/lib/types/user.type'
-export { type IProduct, type CreateProduct, type UpdateProduct, Category, Tag } from '@/lib/types/product.type'
+export { type IProduct, type CreateProduct, Category, Tag } from '@/lib/types/product.type'
