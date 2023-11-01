@@ -1,11 +1,12 @@
-import { logo } from '@/lib'
 import { AppBar, Avatar, Container, Skeleton, Toolbar, Typography } from '@mui/material'
+
+import { logo } from '@/lib'
 
 const HeaderSkeleton = () => (
   <AppBar position="sticky">
     <Container maxWidth="lg">
-      <Toolbar disableGutters className="flex justify-between gap-2 py-4">
-        <Skeleton variant="rounded" className="icon-btn w-11 h-11 flex md:hidden" />
+      <Toolbar disableGutters className="flex justify-between gap-2 py-1">
+        <Skeleton variant="rounded" className="icon-btn w-[42px] h-[42px] my-2 flex md:hidden" />
 
         <section className="flex items-center">
           <section className="flex items-center gap-2">
@@ -15,18 +16,18 @@ const HeaderSkeleton = () => (
             </Typography>
           </section>
 
-          <section className="hidden ml-2 gap-4 text-sm md:flex md:items-center">
+          <section className="hidden ml-2 gap-6 text-sm md:flex md:items-center">
             {Array.from({ length: 4 }).map((_, i) => (
-              <Skeleton key={i} variant="rectangular" className="w-20 h-11 aspect-square" />
+              <Skeleton key={i} variant="rectangular" className="w-[75px] h-11 aspect-square" />
             ))}
           </section>
         </section>
 
-        <Skeleton variant="rounded" className="hidden md:block flex-grow h-11 my-2" />
+        <Skeleton variant="rounded" className="hidden md:block flex-grow h-[56px] border my-2" />
 
-        <section className="flex items-center gap-4">
+        <section className="flex items-center gap-6">
           <Skeleton variant="circular" className="w-8 h-8" />
-          <Skeleton variant="circular" className="w-10 h-10" />
+          <Skeleton variant="circular" className="w-11 h-11 mr-2" />
         </section>
       </Toolbar>
     </Container>

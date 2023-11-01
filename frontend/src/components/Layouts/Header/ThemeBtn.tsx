@@ -14,7 +14,7 @@ const ThemeBtn: FC = () => {
   if (!mounted) return null
 
   return (
-    <IconButton onClick={handleClick} color="secondary">
+    <IconButton onClick={handleClick} color="secondary" size="small">
       {theme === 'dark' ? <LightModeRounded /> : <DarkModeRounded />}
     </IconButton>
   )

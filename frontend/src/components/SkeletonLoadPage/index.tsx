@@ -1,4 +1,5 @@
-import { AppBar, Container, Paper, Toolbar } from '@mui/material'
+import { Paper } from '@mui/material'
+
 import HeaderSkeleton from './HeaderSkeleton'
 
 export const SkeletonLoadPage: React.FC = () => (

@@ -5,6 +5,7 @@ type Menu = {
   icon: JSX.Element
   path: string
 }
+
 const menu: Menu[] = [
   {
     name: 'All',
@@ -17,7 +18,7 @@ const menu: Menu[] = [
     path: '/search/novel',
   },
   {
-    name: 'Light Novel',
+    name: 'L.Novel',
     icon: <LocalLibraryRounded />,
     path: '/search/lightnovel',
   },

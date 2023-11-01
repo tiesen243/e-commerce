@@ -1,12 +1,11 @@
-import { AppBar, Avatar, Container, Toolbar, Typography } from '@mui/material'
+import { AppBar, Container, Toolbar } from '@mui/material'
 
 import AccountMenu from './AccountMenu'
+import Logo from './Logo'
 import Menu from './Menu'
 import MobileMenu from './MobileMenu'
 import Search from './Search'
-import Link from 'next/link'
 import ThemeBtn from './ThemeBtn'
-import { logo } from '@/lib'
 
 export const Header: React.FC = () => (
   <AppBar position="sticky" className="trans-colors">
@@ -15,12 +14,7 @@ export const Header: React.FC = () => (
         <MobileMenu />
 
         <section className="flex items-center">
-          <Link href="/" className="flex items-center gap-2">
-            <Avatar alt="Logo" src={logo} sx={{ width: 32, height: 32 }} />
-            <Typography variant="h6" component="div" className="font-bold block md:hidden lg:block">
-              {process.env.NEXT_PUBLIC_SITE_NAME}
-            </Typography>
-          </Link>
+          <Logo />
 
           <section className="hidden md:block ml-2">
             <Menu />
