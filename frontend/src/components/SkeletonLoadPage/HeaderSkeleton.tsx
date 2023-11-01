@@ -4,7 +4,7 @@ import { AppBar, Avatar, Container, Skeleton, Toolbar, Typography } from '@mui/m
 const HeaderSkeleton = () => (
   <AppBar position="sticky">
     <Container maxWidth="lg">
-      <Toolbar disableGutters className="flex justify-between gap-2 py-2">
+      <Toolbar disableGutters className="flex justify-between gap-2 py-4">
         <Skeleton variant="rounded" className="icon-btn w-11 h-11 flex md:hidden" />
 
         <section className="flex items-center">
