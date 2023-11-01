@@ -34,16 +34,10 @@ const opts: NextAuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
-      // Refresh access token
-      if (trigger === 'update' && session) {
-        token.accessToken = await refreshAccessToken(token.refreshToken)
-      }
-      // Initial sign in
+    async jwt({ token, user }) {
       if (user) {
         return {
           ...token,
-          accessToken: user.accessToken,
           refreshToken: user.refreshToken,
           role: await getUser(user.accessToken).then((res) => res.role),
         }

@@ -6,8 +6,8 @@ export const metadata: Metadata = {
 }
 
 import { poppins } from '@/lib'
+import '@/lib/styles/globals.css'
 import AppProviders from '@/provider'
-import './globals.css'
 
 const RootLayout: NextPage<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>

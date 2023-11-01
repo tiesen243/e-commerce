@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 
 interface Props {
   params: {
-    slug: string
+    category: string
   }
   searchParams: {
     q: string
@@ -13,7 +13,7 @@ interface Props {
 }
 const Page: NextPage<Props> = ({ params, searchParams }) => {
   console.log(params, searchParams)
-  return <div>Page {params.slug}</div>
+  return <div>Page {params.category}</div>
 }
 
 export default Page

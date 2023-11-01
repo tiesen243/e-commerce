@@ -1,3 +1,5 @@
+'use client'
+
 import { FormControl, FormControlLabel, Switch, TextField, TextFieldProps, Typography } from '@mui/material'
 import MuiMarkdown from 'mui-markdown'
 import { useState } from 'react'

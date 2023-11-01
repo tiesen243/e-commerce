@@ -2,31 +2,22 @@
 
 import { Container } from '@mui/material'
 
-import { Footer, Header, Loading, Notification } from '@/components'
-import { Suspense, useEffect, useState } from 'react'
+import { Footer, Header, Notification } from '@/components'
 
-const Template: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
+const Template: React.FC<React.PropsWithChildren> = ({ children }) => (
+  <main className="flex flex-col gap-3 min-h-screen w-screen select-none">
+    {/* Header */}
+    <Header />
 
-  return (
-    <main className="flex flex-col gap-3 min-h-screen w-screen select-none">
-      {/* Header */}
-      <Header />
+    {/* Content */}
+    <Container className="flex-grow">{children}</Container>
 
-      {/* Content */}
-      <Suspense fallback={<Loading />}>
-        <Container className="flex-grow">{children}</Container>
-      </Suspense>
+    {/* Actions */}
+    <Notification />
 
-      {/* Actions */}
-      <Notification />
-
-      {/* Footer */}
-      <Footer />
-    </main>
-  )
-}
+    {/* Footer */}
+    <Footer />
+  </main>
+)
 
 export default Template
