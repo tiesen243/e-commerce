@@ -4,11 +4,14 @@ import { CssBaseline, GlobalStyles, Paper, ThemeProvider, createTheme, css } fro
 import { useTheme } from 'next-themes'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
+import { SkeletonLoadPage } from '@/components/SkeletonLoadPage'
 import { poppins } from '@/lib'
 
 const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const { resolvedTheme } = useTheme()
   const [theme, setTheme] = useState(darkTheme)
+  const [mounted, setMounted] = useState<boolean>(false)
+  setTimeout(() => setMounted(true), 1000)
 
   useEffect(() => {
     resolvedTheme === 'dark' ? setTheme(darkTheme) : setTheme(lightTheme)
@@ -18,7 +21,7 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalStyles styles={globalStyles} />
-      <Paper className="trans-colors"> {children}</Paper>
+      {mounted ? <Paper className="trans-colors"> {children}</Paper> : <SkeletonLoadPage />}
     </ThemeProvider>
   )
 }

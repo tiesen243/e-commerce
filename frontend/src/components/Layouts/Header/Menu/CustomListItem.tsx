@@ -1,3 +1,5 @@
+'use client'
+
 import { usePathname } from 'next/navigation'
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import Link from 'next/link'

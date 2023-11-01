@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren } from 'react'
+
 import AuthProvider from './AuthProvider'
 import MuiThemeProvider from './MuiThemeProvider'
 import NextThemeProvider from './NextThemeProvider'
