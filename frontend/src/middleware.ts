@@ -9,7 +9,6 @@ export default withAuth(
     if (pathname.startsWith('/manage') && role === 'user') return NextResponse.rewrite(new URL('/deny', req.nextUrl))
     else if (pathname.startsWith('/admin') && role !== 'admin')
       return NextResponse.rewrite(new URL('/deny', req.nextUrl))
-    else if (pathname.includes('/auth') && role) return NextResponse.rewrite(new URL('/deny', req.nextUrl))
 
     return NextResponse.next()
   },

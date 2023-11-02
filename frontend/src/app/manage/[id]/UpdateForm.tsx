@@ -7,8 +7,8 @@ import { BackBtn, Checkbox, DragAndDrop, Loading, MarkdownEditor, MultiSelect, S
 import { Category, IProduct, Tag, showSuccessToast } from '@/lib'
 import { Box, Button, FormHelperText, TextField, Typography } from '@mui/material'
 import { useSession } from 'next-auth/react'
-import updateProduct from './updateProduct'
 import { useRouter } from 'next/navigation'
+import updateProduct from './updateProduct'
 
 interface Props {
   product: IProduct
