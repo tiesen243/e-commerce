@@ -14,7 +14,7 @@ const cate: string[] = Object.values(Category)
 const tags: string[] = Object.values(Tag)
 
 const Page: NextPage = () => {
-  const { mutate, token } = useContext(ManageContext)
+  const { mutate, update, token } = useContext(ManageContext)
 
   const [formData, setFormData] = useState<CreateProduct>(initFormData)
   const [error, setError] = useState<string>('')
@@ -25,6 +25,7 @@ const Page: NextPage = () => {
     e.preventDefault()
     setIsCreating(true)
     if (!token) return
+    await update({})
     const { error } = await createProduct(formData, token)
     if (error) {
       setError(error)

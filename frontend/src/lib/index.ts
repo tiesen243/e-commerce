@@ -13,13 +13,13 @@ export { poppins } from '@/lib/fonts'
 // Show toast notification
 export { showSuccessToast, showErrorToast } from '@/lib/notify'
 
-// Utils functions
-export { getUser, refreshAccessToken } from '@/lib/utils'
-
 // Hooks
 export { useRefreshToken } from '@/lib/hooks/useRefreshToken'
 export { useProductByUser } from '@/lib/hooks/useProductByUser'
 export { useProductById } from '@/lib/hooks/useProductById'
+
+// Utils
+export { formatDate } from '@/lib/utils'
 
 // Types
 export { type IUser, Role } from '@/lib/types/user.type'

@@ -6,6 +6,7 @@ export interface IManageContext {
   error: { message: string; cause: { status: number } }
   isLoading: boolean
   mutate: () => void
+  update: any
   token: string
 }
 export const ManageContext = createContext<IManageContext>({
@@ -13,5 +14,6 @@ export const ManageContext = createContext<IManageContext>({
   error: { message: '', cause: { status: 200 } },
   isLoading: true,
   mutate: () => {},
+  update: () => {},
   token: '',
 })

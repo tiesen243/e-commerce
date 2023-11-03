@@ -11,7 +11,7 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const { resolvedTheme } = useTheme()
   const [theme, setTheme] = useState(darkTheme)
   const [mounted, setMounted] = useState<boolean>(false)
-  setTimeout(() => setMounted(true), 1500)
+  setTimeout(() => setMounted(true), 2000)
 
   useEffect(() => {
     resolvedTheme === 'dark' ? setTheme(darkTheme) : setTheme(lightTheme)

@@ -11,23 +11,15 @@ import { ManageContext } from './manageContext'
 import { Toolbar, col } from './otps'
 
 const Page: NextPage = () => {
-  const { products, error, isLoading } = useContext(ManageContext)
+  const { products, error, isLoading, update } = useContext(ManageContext)
   if (isLoading) return <Loading text="Loading products..." />
   else if (error) {
     const { cause } = error
-    if (cause.status === 404)
-      return (
-        <div className="flex flex-col items-center gap-4">
-          <Typography variant="h4" fontWeight="bold">
-            You have no products
-          </Typography>
-
-          <Button variant="contained" color="secondary" component={Link} href="/manage/create">
-            Create new product
-          </Button>
-        </div>
-      )
-    else return <div>Something went wrong</div>
+    if (cause.status === 404) return <NotFound />
+    else if (cause.status === 401) {
+      update({})
+      return <Loading text="Loading products..." />
+    } else return <div>Something went wrong</div>
   }
 
   return (
@@ -46,3 +38,15 @@ const Page: NextPage = () => {
 }
 
 export default Page
+
+const NotFound: NextPage = () => (
+  <div className="flex flex-col items-center gap-4">
+    <Typography variant="h4" fontWeight="bold">
+      You have no products
+    </Typography>
+
+    <Button variant="contained" color="secondary" component={Link} href="/manage/create">
+      Create new product
+    </Button>
+  </div>
+)

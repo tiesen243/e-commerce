@@ -20,8 +20,7 @@ interface Props {
 }
 
 const Page: NextPage<Props> = ({ params }) => {
-  const { products, mutate, token } = useContext(ManageContext)
-
+  const { products, mutate, update, token } = useContext(ManageContext)
   const product = products.find((p) => p._id === params.id) as IProduct
 
   const [formData, setFormData] = useState<IProduct>(product)
@@ -32,6 +31,7 @@ const Page: NextPage<Props> = ({ params }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
+    await update({})
     const res = await updateProduct(formData, token)
     if (res.status === 204) {
       showSuccessToast(res.message[0])
