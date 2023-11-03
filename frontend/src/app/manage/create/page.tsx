@@ -1,30 +1,21 @@
 'use client'
 
+import { Box, Button, TextField, Typography } from '@mui/material'
 import { NextPage } from 'next'
+import { useRouter } from 'next/navigation'
+import { useContext, useState } from 'react'
 
 import { BackBtn, DragAndDrop, Loading, MarkdownEditor, MultiSelect, Select } from '@/components'
-import { Box, Button, TextField, Typography } from '@mui/material'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-
 import { Category, CreateProduct, Tag } from '@/lib'
+import { ManageContext } from '../manageContext'
 import createProduct from './createProduct'
-import { useSession } from 'next-auth/react'
 
-const initFormData: CreateProduct = {
-  name: '',
-  description: '',
-  image: null,
-  price: 0,
-  stock: 0,
-  category: Category.Other,
-  tags: [],
-}
 const cate: string[] = Object.values(Category)
 const tags: string[] = Object.values(Tag)
 
 const Page: NextPage = () => {
-  const { token } = useSession().data || {}
+  const { mutate, token } = useContext(ManageContext)
+
   const [formData, setFormData] = useState<CreateProduct>(initFormData)
   const [error, setError] = useState<string>('')
   const [isCreating, setIsCreating] = useState<boolean>(false)
@@ -34,11 +25,14 @@ const Page: NextPage = () => {
     e.preventDefault()
     setIsCreating(true)
     if (!token) return
-    const { data, error } = await createProduct(formData, token)
+    const { error } = await createProduct(formData, token)
     if (error) {
       setError(error)
       setIsCreating(false)
-    } else back()
+    } else {
+      await mutate()
+      back()
+    }
   }
 
   if (isCreating) return <Loading text="Creating product..." />
@@ -113,7 +107,7 @@ const Page: NextPage = () => {
         {error && <Typography color="error">* {error}</Typography>}
 
         <Button variant="contained" fullWidth className="btn" type="submit">
-          Submit
+          Create new product
         </Button>
       </Box>
     </>
@@ -121,3 +115,13 @@ const Page: NextPage = () => {
 }
 
 export default Page
+
+const initFormData: CreateProduct = {
+  name: '',
+  description: '',
+  image: null,
+  price: 0,
+  stock: 0,
+  category: Category.Other,
+  tags: [],
+}

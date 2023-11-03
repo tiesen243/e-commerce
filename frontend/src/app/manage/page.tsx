@@ -1,30 +1,34 @@
 'use client'
 
+import { Button, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import { NextPage } from 'next'
+import Link from 'next/link'
+import { useContext } from 'react'
 
 import { Loading } from '@/components'
-import { useProductByUser } from '@/lib'
-import { Button, Typography } from '@mui/material'
-import Link from 'next/link'
-import Toolbar from './Toolbar'
-import { col } from './otps'
+import { ManageContext } from './manageContext'
+import { Toolbar, col } from './otps'
 
 const Page: NextPage = () => {
-  const { products, isLoading, error } = useProductByUser()
+  const { products, error, isLoading } = useContext(ManageContext)
   if (isLoading) return <Loading text="Loading products..." />
-  else if (error)
-    return (
-      <div className="flex flex-col items-center gap-8">
-        <Typography variant="h3" textAlign="center" fontWeight="bold">
-          {error.message}
-        </Typography>
+  else if (error) {
+    const { cause } = error
+    if (cause.status === 404)
+      return (
+        <div className="flex flex-col items-center gap-4">
+          <Typography variant="h4" fontWeight="bold">
+            You have no products
+          </Typography>
 
-        <Button component={Link} variant="outlined" color="secondary" href="/manage/create">
-          Create Product
-        </Button>
-      </div>
-    )
+          <Button variant="contained" color="secondary" component={Link} href="/manage/create">
+            Create new product
+          </Button>
+        </div>
+      )
+    else return <div>Something went wrong</div>
+  }
 
   return (
     products && (

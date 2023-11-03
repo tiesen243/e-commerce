@@ -1,19 +1,21 @@
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
-import { IProduct, showErrorToast } from '@/lib'
+import { IProduct } from '@/lib'
 
 const fetcher = async (url: string, token: string) => {
   const res = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
   })
   const data = await res.json()
+
   if (res.status !== 200) {
-    showErrorToast(data.message)
-    throw new Error(data.message)
+    const err = new Error(data.message, {
+      cause: {
+        status: res.status,
+      },
+    })
+    throw err
   }
 
   return data.data
@@ -22,20 +24,20 @@ const fetcher = async (url: string, token: string) => {
 export const useProductByUser = (): {
   products: IProduct[]
   isLoading: boolean
-  error: any
+  error: { message: string; cause: { status: number } }
+  mutate: () => void
 } => {
   const { data: session } = useSession()
 
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR(
     session ? ['/api/v1/product/me', session.token] : null,
     ([url, token]) => fetcher(url, token),
-    { refreshInterval: 2000 },
   )
-  console.log(error)
 
   return {
     products: data,
     isLoading,
     error,
+    mutate,
   }
 }

@@ -7,6 +7,7 @@ interface IResponse {
 
 const updateProduct = async (formData: IProduct, token?: string): Promise<IResponse> => {
   if (!token) return { status: 401, message: ['Unauthorized'] }
+
   if (typeof formData.image !== 'string') await deleteImage(formData.code.toString(), 'product')
   const url: string =
     typeof formData.image === 'string'
@@ -19,7 +20,10 @@ const updateProduct = async (formData: IProduct, token?: string): Promise<IRespo
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ ...formData, image: url }),
+    body: JSON.stringify({
+      ...formData,
+      image: url,
+    }),
   })
   if (res.status !== 204)
     return {
