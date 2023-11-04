@@ -4,9 +4,9 @@ import { logo } from '@/lib'
 
 const HeaderSkeleton = () => (
   <AppBar position="sticky">
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Toolbar disableGutters className="flex justify-between gap-2 py-1">
-        <Skeleton variant="rounded" className="icon-btn w-[42px] h-[42px] my-2 flex md:hidden" />
+        <Skeleton variant="rounded" className="icon-btn w-[42px] h-[42px] aspect-square my-2 flex md:hidden" />
 
         <section className="flex items-center">
           <section className="flex items-center gap-2">
@@ -16,9 +16,9 @@ const HeaderSkeleton = () => (
             </Typography>
           </section>
 
-          <section className="hidden ml-2 gap-6 text-sm md:flex md:items-center">
+          <section className="hidden ml-2 gap-4 md:flex md:items-center">
             {Array.from({ length: 4 }).map((_, i) => (
-              <Skeleton key={i} variant="rectangular" className="w-[75px] h-11 aspect-square" />
+              <Skeleton key={i} variant="rectangular" className="w-28 h-11" />
             ))}
           </section>
         </section>

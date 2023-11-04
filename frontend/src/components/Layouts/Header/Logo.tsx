@@ -6,7 +6,7 @@ import { logo } from '@/lib'
 const Logo: React.FC = () => (
   <Link href="/" className="flex items-center gap-2">
     <Avatar alt="Logo" src={logo} sx={{ width: 32, height: 32 }} />
-    <Typography variant="h6" component="div" className="font-bold block md:hidden lg:block">
+    <Typography variant="h6" component="div" className="font-bold block md:hidden lg:block whitespace-nowrap">
       {process.env.NEXT_PUBLIC_SITE_NAME}
     </Typography>
   </Link>

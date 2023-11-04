@@ -1,12 +1,17 @@
-'use client'
-
 import { NextPage } from 'next'
-import { useSession } from 'next-auth/react'
+
+import { Carousel, ThreeItemsGrid } from '@/components'
+import { Suspense } from 'react'
 
 const Page: NextPage = () => {
-  const { data } = useSession()
-  console.log(data)
-  return <div>Home Page</div>
+  return (
+    <>
+      <ThreeItemsGrid />
+      <Suspense>
+        <Carousel />
+      </Suspense>
+    </>
+  )
 }
 
 export default Page

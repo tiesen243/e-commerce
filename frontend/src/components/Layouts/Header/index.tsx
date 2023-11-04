@@ -8,7 +8,7 @@ import Search from './Search'
 
 export const Header: React.FC = () => (
   <AppBar position="sticky" className="trans-colors">
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Toolbar disableGutters className="flex justify-between gap-2 py-2">
         <MobileMenu />
 

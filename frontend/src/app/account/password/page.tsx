@@ -1,5 +1,6 @@
 'use client'
 
+import { SettingsRounded } from '@mui/icons-material'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import { signOut, useSession } from 'next-auth/react'
@@ -8,10 +9,9 @@ import { useState } from 'react'
 
 import { BackBtn } from '@/components'
 import { showErrorToast, showSuccessToast } from '@/lib'
-import { SettingsRounded } from '@mui/icons-material'
 
 const Page: NextPage = () => {
-  const { token } = useSession().data || {}
+  const { data, update } = useSession()
 
   const [formData, setFormData] = useState({
     oldPassword: '',
@@ -22,9 +22,10 @@ const Page: NextPage = () => {
   const { push } = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    await update({})
     const res = await fetch('/api/v1/user/update/password', {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${data?.token}` },
       body: JSON.stringify(formData),
     })
     if (res.status === 204) {
@@ -33,8 +34,7 @@ const Page: NextPage = () => {
       push('/')
     } else {
       const { message } = await res.json()
-      const mess = typeof message === 'string' ? message : message.join(', ')
-      showErrorToast(mess)
+      showErrorToast(typeof message === 'string' ? message : message.join(', '))
     }
   }
   return (

@@ -20,7 +20,6 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-      <GlobalStyles styles={globalStyles} />
       {mounted ? <Paper className="trans-colors"> {children}</Paper> : <SkeletonLoadPage />}
     </ThemeProvider>
   )
@@ -28,7 +27,23 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
 
 export default MuiThemeProvider
 
+const defaultOpts = {
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+    },
+  },
+  typography: {
+    fontFamily: poppins.style.fontFamily,
+  },
+}
+
 const lightTheme = createTheme({
+  ...defaultOpts,
   palette: {
     mode: 'light',
     primary: {
@@ -41,12 +56,10 @@ const lightTheme = createTheme({
       paper: '#f0f2f5',
     },
   },
-  typography: {
-    fontFamily: poppins.style.fontFamily,
-  },
 })
 
 const darkTheme = createTheme({
+  ...defaultOpts,
   palette: {
     mode: 'dark',
     primary: {
@@ -59,13 +72,4 @@ const darkTheme = createTheme({
       paper: '#18191a',
     },
   },
-  typography: {
-    fontFamily: poppins.style.fontFamily,
-  },
 })
-
-const globalStyles = css`
-  body {
-    transition: all 0.2s ease;
-  }
-`

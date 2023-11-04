@@ -18,7 +18,7 @@ const menu: Menu[] = [
     path: '/search/novel',
   },
   {
-    name: 'L.Novel',
+    name: 'Light Novel',
     icon: <LocalLibraryRounded />,
     path: '/search/lightnovel',
   },

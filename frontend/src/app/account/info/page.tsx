@@ -28,6 +28,7 @@ const Page: NextPage = () => {
 
     if (typeof formData.avatar !== 'string') url = await uploadImage(formData.avatar, data?.user._id, 'avatar')
 
+    await update({})
     const res = await fetch('/api/v1/user/update/info', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${data?.token}` },
@@ -40,7 +41,7 @@ const Page: NextPage = () => {
       back()
     } else {
       const { message } = await res.json()
-      showErrorToast(message.join(', '))
+      showErrorToast(typeof message === 'string' ? message : message.join(', '))
     }
   }
 

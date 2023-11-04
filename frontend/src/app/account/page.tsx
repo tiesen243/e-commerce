@@ -14,7 +14,7 @@ const Page: NextPage = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={4}>
-        <img src={user.avatar} alt={user.name} />
+        <img src={user.avatar} alt={user.name} className="rounded-full object-cover aspect-square" />
       </Grid>
 
       <Grid item xs={8}>

@@ -22,7 +22,7 @@ const MobileMenu: React.FC = () => {
         in={open}
         mountOnEnter
         unmountOnExit
-        className="fixed inset-0 w-screen h-screen bg-white/60 dark:bg-black/10 backdrop-blur pt-2 md:pt-3 z-50"
+        className="fixed inset-0 w-screen h-screen bg-white/60 dark:bg-black/60 backdrop-blur pt-2 md:pt-3 z-50"
       >
         <Container maxWidth="lg">
           <button className="icon-btn mb-4" onClick={handleClose}>

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Menu: React.FC<Props> = ({ handleClose }) => (
-  <List className="gap-6 text-sm md:flex md:items-center" onClick={handleClose}>
+  <List className="gap-4 md:flex items-center" onClick={handleClose}>
     {menu.map((item: Menu) => (
       <CustomListItemBtn item={item} key={item.name} />
     ))}

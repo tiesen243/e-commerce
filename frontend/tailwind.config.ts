@@ -32,6 +32,16 @@ const config: Config = {
           dark: '#232e3b',
         },
       },
+
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+      animation: {
+        carousel: 'marquee 60s linear infinite',
+      },
     },
   },
   plugins: [],
