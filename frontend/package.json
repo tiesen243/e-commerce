@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.15",
     "@mui/x-data-grid": "^6.17.0",
+    "axios": "^1.6.0",
     "firebase": "^10.5.2",
     "markdown-to-jsx": "^7.3.2",
     "mui-markdown": "^1.1.11",

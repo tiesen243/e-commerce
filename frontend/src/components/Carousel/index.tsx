@@ -18,10 +18,10 @@ export const Carousel: React.FC = () => {
 
   return (
     <Box className=" w-full overflow-x-auto pb-6 pt-1">
-      <List className="flex gap-4 max-w-screen-lg">
+      <List className="flex gap-4">
         {data.map((product: IProduct, idx: number) => (
           <ListItem key={idx} className="relative aspect-square flex-none animate-carousel md:w-1/3 group">
-            <Card component={Link} href={`/product/${product._id}`} className="aspect-square">
+            <Card component={Link} href={`/product/${product._id}`} className="aspect-square absolute w-full">
               <CardMedia component="img" src={product.image as string} alt={product.name} />
 
               <CardContent className="absolute bottom-0 left-0 w-full text-center bg-tertiary-light group-hover:bg-quaternary-light dark:bg-tertiary-dark dark:group-hover:bg-quaternary-dark trans-colors">
@@ -29,7 +29,17 @@ export const Carousel: React.FC = () => {
                   {product.name.length > 20 ? product.name.slice(0, 20) + '...' : product.name}
                 </Typography>
 
-                <Typography variant="body2">Price: {product.price}</Typography>
+                <Typography variant="subtitle2" className="text-gray-500 dark:text-gray-300">
+                  Price:{' '}
+                  {product.saleOffPercent !== 0 ? (
+                    <>
+                      <span className="line-through text-red-400">${product.price}</span>
+                      <span className="ml-2">${product.price - (product.price * product.saleOffPercent) / 100}</span>
+                    </>
+                  ) : (
+                    product.price
+                  )}
+                </Typography>
               </CardContent>
             </Card>
           </ListItem>

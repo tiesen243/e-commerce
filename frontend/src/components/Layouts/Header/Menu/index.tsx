@@ -9,8 +9,8 @@ interface Props {
 
 const Menu: React.FC<Props> = ({ handleClose }) => (
   <List className="gap-4 md:flex items-center" onClick={handleClose}>
-    {menu.map((item: Menu) => (
-      <CustomListItemBtn item={item} key={item.name} />
+    {menu.map((item: Menu, idx: number) => (
+      <CustomListItemBtn item={item} key={idx} />
     ))}
   </List>
 )

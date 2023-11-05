@@ -13,7 +13,7 @@ const FirstProductCard: React.FC<Props> = ({ product }) => {
   const { push } = useRouter()
   return (
     <Card
-      className="aspect-square main group hover:border border-sky-400 transition-all"
+      className="aspect-square main relative group hover:border border-sky-400 transition-all"
       {...(isMobile && { onClick: () => push(`/product/${product._id}`) })}
     >
       <CardHeader title={previewName} className="text-center font-bold" />
@@ -21,11 +21,27 @@ const FirstProductCard: React.FC<Props> = ({ product }) => {
         component="img"
         image={product.image as string}
         alt={product.name}
-        className="object-contain aspect-square group-hover:scale-105 transition-all h-4/5 md:h-3/5 lg:h-2/3"
+        className="object-contain aspect-square group-hover:scale-105 transition-all h-3/4 md:h-3/5 lg:h-2/3"
       />
 
       <CardContent className="flex justify-center">
-        <Typography variant="h5">Price: {product.price}</Typography>
+        <Typography variant="h5">
+          Price:{' '}
+          {product.saleOffPercent !== 0 ? (
+            <>
+              <span className="line-through text-red-500">${product.price}</span>
+              <span className="ml-2">${product.price - (product.price * product.saleOffPercent) / 100}</span>
+            </>
+          ) : (
+            product.price
+          )}
+        </Typography>
+
+        {product.saleOffPercent !== 0 && (
+          <Typography variant="subtitle2" className="absolute top-0 right-0 bg-red-500 p-2 rounded shadow">
+            {product.saleOffPercent}% OFF
+          </Typography>
+        )}
       </CardContent>
 
       <CardActions className="hidden md:flex justify-around items-center mx-12">

@@ -5,9 +5,10 @@ export { Notification } from './Layouts/Notification'
 
 // components
 export { BackBtn } from './BackBtn'
-export { Loading } from './Loading'
-export { ThreeItemsGrid } from './ThreeItemsGrid'
 export { Carousel } from './Carousel'
+export { Loading } from './Loading'
+export { SearchBar } from './SearchBar'
+export { ThreeItemsGrid } from './ThreeItemsGrid'
 
 // Custom Input
 export { Checkbox } from './CustomInput/Checkbox'
@@ -18,5 +19,5 @@ export { Select } from './CustomInput/Select'
 export { Slider } from './CustomInput/Slider'
 
 // Custom Mui Components
-export { MuiMenuItem } from './MuiMenuItem'
 export { FirstProductCard, ProductCard } from './Card'
+export { MuiMenuItem } from './MuiMenuItem'

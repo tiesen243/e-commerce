@@ -52,9 +52,10 @@ const opts: NextAuthOptions = {
 
     async session({ session, token, trigger }) {
       if (trigger === 'update') {
-        session.token = token.accessToken
         session.user = await getUser(token.refreshToken)
+        session.token = token.accessToken
       }
+
       if (session)
         return {
           ...session,

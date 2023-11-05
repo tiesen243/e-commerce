@@ -35,7 +35,7 @@ const Page: NextPage<Props> = ({ params }) => {
     const res = await updateProduct(formData, token)
     if (res.status === 204) {
       showSuccessToast(res.message[0])
-      await mutate()
+      mutate()
       back()
     } else {
       setError(res.message)
@@ -63,7 +63,7 @@ const Page: NextPage<Props> = ({ params }) => {
 
         <DragAndDrop
           name="image"
-          preview={typeof product.image === 'string' ? product.image : ''}
+          preview={formData.image as string}
           setValue={(value: File) => setFormData((prev) => ({ ...prev, image: value }))}
         />
 
@@ -91,7 +91,7 @@ const Page: NextPage<Props> = ({ params }) => {
           min={0}
           max={100}
           value={formData.saleOffPercent}
-          onChange={(e, value) => setFormData({ ...formData, saleOffPercent: value as number })}
+          onChange={(_e, value) => setFormData({ ...formData, saleOffPercent: value as number })}
         />
 
         <TextField

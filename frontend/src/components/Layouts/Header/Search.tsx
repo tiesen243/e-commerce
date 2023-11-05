@@ -2,13 +2,15 @@
 
 import { SearchRounded } from '@mui/icons-material'
 import { FormControl, IconButton, TextField } from '@mui/material'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const Search: React.FC = () => {
   const [search, setSearch] = useState<string>('')
+  const { push } = useRouter()
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(search)
+    push(`/search?query=${search}`)
   }
   return (
     <FormControl fullWidth component="form" onSubmit={handleSearch}>
