@@ -1,52 +1,29 @@
 'use client'
 
-import { Button, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import { NextPage } from 'next'
-import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Loading } from '@/components'
-import { ManageContext } from './manageContext'
-import { Toolbar, col } from './otps'
+import { ManageContext } from '@/contexts'
+import { col, Loading, NotFound } from './utils'
 
 const Page: NextPage = () => {
-  const { products, error, isLoading, update } = useContext(ManageContext)
-  if (isLoading) return <Loading text="Loading products..." />
-  else if (error) {
-    const { cause } = error
-    if (cause.status === 404) return <NotFound />
-    else if (cause.status === 401) {
-      update({})
-      return <Loading text="Loading products..." />
-    } else return <div>Something went wrong</div>
-  }
+  const { products, isLoading } = useContext(ManageContext)
 
   return (
-    products && (
+    <div style={{ height: 700, width: '100%' }}>
       <DataGrid
         columns={col}
-        rows={products}
+        rows={products || []}
         getRowId={(row) => row.code}
         slots={{
-          noRowsOverlay: () => <div>No data</div>,
-          toolbar: () => <Toolbar />,
+          loadingOverlay: Loading,
+          noRowsOverlay: NotFound,
         }}
+        loading={isLoading || !products}
       />
-    )
+    </div>
   )
 }
 
 export default Page
-
-const NotFound: NextPage = () => (
-  <div className="flex flex-col items-center gap-4">
-    <Typography variant="h4" fontWeight="bold">
-      You have no products
-    </Typography>
-
-    <Button variant="contained" color="secondary" component={Link} href="/manage/create">
-      Create new product
-    </Button>
-  </div>
-)

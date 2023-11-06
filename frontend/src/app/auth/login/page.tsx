@@ -26,12 +26,12 @@ const Page: NextPage = () => {
     e.preventDefault()
     setIsLoggin(true)
     const res = await signIn('credentials', { ...formData, redirect: false })
-    if (res?.status === 200) {
-      showSuccessToast('Login successfully')
-      push('/')
-    } else {
+    if (res?.error) {
       showErrorToast(res?.error ?? 'Error')
       setIsLoggin(false)
+    } else {
+      showSuccessToast('Logged in successfully')
+      push('/')
     }
   }
 

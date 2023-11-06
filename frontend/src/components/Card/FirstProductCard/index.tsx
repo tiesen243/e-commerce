@@ -1,8 +1,9 @@
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
-
-import { IProduct, useScreen } from '@/lib'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+
+import { useScreen } from '@/hooks'
+import { IProduct } from '@/lib'
 
 interface Props {
   product: IProduct
@@ -38,7 +39,7 @@ const FirstProductCard: React.FC<Props> = ({ product }) => {
         </Typography>
 
         {product.saleOffPercent !== 0 && (
-          <Typography variant="subtitle2" className="absolute top-0 right-0 bg-red-500 p-2 rounded shadow">
+          <Typography variant="subtitle2" className="absolute top-2 right-2 bg-red-500 p-2 rounded shadow">
             {product.saleOffPercent}% OFF
           </Typography>
         )}

@@ -13,12 +13,9 @@ export { poppins } from '@/lib/fonts'
 // Show toast notification
 export { showSuccessToast, showErrorToast } from '@/lib/notify'
 
-// Hooks
-export { useRefreshToken } from '@/lib/hooks/useRefreshToken'
-export { useScreen } from '@/lib/hooks/useScreen'
-
 // Utils
 export { formatDate, createUrl } from '@/lib/utils'
+export { default as axios } from '@/lib/axios'
 
 // Types
 export { type IUser, Role } from '@/lib/types/user.type'

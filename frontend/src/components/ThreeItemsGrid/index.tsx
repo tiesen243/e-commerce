@@ -1,23 +1,29 @@
 'use client'
-import { FirstProductCard, Loading, ProductCard } from '@/components'
-import { IProduct } from '@/lib'
+
 import { Grid } from '@mui/material'
 import useSWR, { Fetcher } from 'swr'
+
+import { FirstProductCard, ProductCard } from '@/components'
+import { IProduct, axios, showErrorToast } from '@/lib'
 import ThreeItemSkeleton from './Skeleton'
 
 const fetcher: Fetcher<IProduct[]> = async (url: string) => {
-  const res = await fetch(url)
-  const { data, message } = await res.json()
-  if (res.status !== 200) throw new Error(message, { cause: res.status })
-
-  return data.sort((a: IProduct, b: IProduct) => (a.updatedAt > b.updatedAt ? -1 : 1))
+  try {
+    const { data } = await axios.get(url)
+    data.data = data.data.filter((product: IProduct) => product.available)
+    return data.data.sort((a: IProduct, b: IProduct) => (a.updatedAt > b.updatedAt ? -1 : 1))
+  } catch (err: any) {
+    showErrorToast(err.response.data.message)
+    throw new Error(err.response.data.message, {
+      cause: err.response.data.status,
+    })
+  }
 }
 
 export const ThreeItemsGrid = () => {
-  const { data, isLoading, error } = useSWR('/api/v1/product', fetcher)
-  if (error) return <div>{error.message}</div>
+  const { data, isLoading, error } = useSWR('/product', fetcher)
 
-  if (!data || isLoading) return <ThreeItemSkeleton />
+  if (!data || isLoading || error) return <ThreeItemSkeleton />
 
   return (
     <Grid container spacing={2}>

@@ -1,34 +1,20 @@
-import { IProduct } from '@/lib'
-import axios from 'axios'
+'use client'
 import { useSession } from 'next-auth/react'
+import useSWR from 'swr'
 
-const fetcher = async ([url, token]: string[]): Promise<IProduct[]> => {
-  try {
-    const data = await axios.get(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    return data.data
-  } catch (err: any) {
-    throw new Error(err.response.data.message, {
-      cause: err.response.status,
-    })
-  }
-}
+import { ManageContext } from '@/contexts'
+import { fetcher } from './utils'
 
 const ManageLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
-  /*  const { data: session, update } = useSession()
+  const { data: session, update } = useSession()
   const token = session?.token || ''
   if (!token) return null
- */
-  /* return <ManageContext.Provider value={value}>{children}</ManageContext.Provider>  */
 
-  /* const { data: products, error, isLoading, mutate } = useSWR(['/api/v1/product/me', token], fetcher) */
+  const { data: products, error, isLoading, mutate } = useSWR(['/product/me', token], fetcher)
+  if (error?.cause === 401) update({})
 
-  /* const value = { products, error, isLoading, mutate, update, token } */
-
-  fetch('/api/v1/product/me', {})
-
-  return <div></div>
+  const value = { products, error, isLoading, mutate, update, token }
+  return <ManageContext.Provider value={value}>{children}</ManageContext.Provider>
 }
 
 export default ManageLayout

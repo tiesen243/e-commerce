@@ -3,17 +3,15 @@ import { Box, MenuItem, TextField, TextFieldProps } from '@mui/material'
 interface Props {
   data: string[]
   label: string
-  name: string
   value: string[]
   setValue: (value: any[]) => void
 }
 
-export const MultiSelect: React.FC<Props & TextFieldProps> = ({ data, label, name, value, setValue }) => (
+export const MultiSelect: React.FC<Props & TextFieldProps> = ({ data, label, value, setValue }) => (
   <TextField
     select
     fullWidth
     label={label}
-    name={name}
     value={value}
     color="secondary"
     SelectProps={{

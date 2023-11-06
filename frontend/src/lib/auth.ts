@@ -1,7 +1,7 @@
 import nextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-import { IUser, API_URL } from '@/lib'
+import { IUser, axios } from '@/lib'
 
 const opts: NextAuthOptions = {
   providers: [
@@ -17,17 +17,18 @@ const opts: NextAuthOptions = {
       },
 
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) throw new Error('Please enter your email and password')
-        const { email, password } = credentials
+        try {
+          if (!credentials?.email || !credentials?.password) throw new Error('Please enter your email and password')
+          const { email, password } = credentials
 
-        const loginRes = await fetch(`${API_URL}/auth/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        }).then((res) => res.json())
+          const { data } = await axios.post('/auth/login', { email, password })
 
-        if (loginRes.statusCode !== 201) throw new Error(loginRes.message)
-        return loginRes.data
+          return data.data
+        } catch (err: any) {
+          throw new Error(err.response.data.message, {
+            cause: err.response.data.status,
+          })
+        }
       },
     }),
   ],
@@ -82,23 +83,11 @@ const handlers = nextAuth(opts)
 export { handlers as GET, handlers as POST }
 
 export const getUser = async (token: string): Promise<IUser> => {
-  const user = await fetch(`${API_URL}/user/me`, {
-    method: 'GET',
-    headers: { Authorization: `Bearer ${token}` },
-  }).then((res) => res.json())
-  if (user.statusCode !== 200) throw new Error(user.message)
-
-  return user.data
+  const { data } = await axios.get('/user/me', { headers: { Authorization: `Bearer ${token}` } })
+  return data.data
 }
 
 export const refreshAccessToken = async (refreshToken: string) => {
-  const data = await fetch(`${API_URL}/auth/refresh`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ refreshToken }),
-  })
-    .then((res) => res.json())
-    .then((data) => data.data)
-
-  return data.accessToken
+  const { data } = await axios.post('/auth/refresh', { refreshToken })
+  return data.data.accessToken
 }
