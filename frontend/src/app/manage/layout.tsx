@@ -8,7 +8,6 @@ import { fetcher } from './utils'
 const ManageLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { data: session, update } = useSession()
   const token = session?.token || ''
-  if (!token) return null
 
   const { data: products, error, isLoading, mutate } = useSWR(['/product/me', token], fetcher)
   if (error?.cause === 401) update({})

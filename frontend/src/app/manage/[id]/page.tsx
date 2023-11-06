@@ -42,7 +42,7 @@ const Page: NextPage<Props> = ({ params }) => {
 
   useEffect(() => {
     getProductById(params.id, setFormData)
-  }, [])
+  }, [params.id])
 
   return (
     formData && (
