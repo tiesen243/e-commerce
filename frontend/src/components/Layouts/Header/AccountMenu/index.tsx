@@ -23,7 +23,7 @@ const AccountMenu: React.FC = () => {
       <UserMenu user={user} anchorEl={anchorEl} open={open} handleClose={handleClose} />
     </>
   ) : (
-    <Button variant="contained" component={Link} color="secondary" href="/auth/login">
+    <Button variant="contained" component={Link} color="secondary" href="/login">
       Login
     </Button>
   )

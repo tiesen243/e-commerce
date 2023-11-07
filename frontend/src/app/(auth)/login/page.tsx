@@ -67,7 +67,7 @@ const Page: NextPage = () => {
 
       <FormHelperText>
         Dont have an account?{' '}
-        <Button variant="text" color="secondary" onClick={() => push('/auth/register')}>
+        <Button variant="text" color="secondary" onClick={() => push('/register')}>
           Register
         </Button>
       </FormHelperText>

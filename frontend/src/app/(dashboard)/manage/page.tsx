@@ -5,7 +5,7 @@ import { NextPage } from 'next'
 import { useContext } from 'react'
 
 import { ManageContext } from '@/contexts'
-import { col, Loading, NotFound } from './utils'
+import { col, Loading, NotFound, Toolbar } from './utils'
 
 const Page: NextPage = () => {
   const { products, isLoading } = useContext(ManageContext)
@@ -17,6 +17,7 @@ const Page: NextPage = () => {
         rows={products || []}
         getRowId={(row) => row.code}
         slots={{
+          toolbar: Toolbar,
           loadingOverlay: Loading,
           noRowsOverlay: NotFound,
         }}

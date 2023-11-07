@@ -1,6 +1,6 @@
 'use client'
 
-import { CssBaseline, GlobalStyles, Paper, ThemeProvider, createTheme, css } from '@mui/material'
+import { CssBaseline, Paper, ThemeProvider, createTheme } from '@mui/material'
 import { useTheme } from 'next-themes'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 

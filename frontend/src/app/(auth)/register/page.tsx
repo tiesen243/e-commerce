@@ -104,7 +104,7 @@ const Page: NextPage = () => {
 
       <FormHelperText>
         Already have an account?{' '}
-        <Button variant="text" color="secondary" onClick={() => push('/auth/login')}>
+        <Button variant="text" color="secondary" onClick={() => push('/login')}>
           Login
         </Button>
       </FormHelperText>
