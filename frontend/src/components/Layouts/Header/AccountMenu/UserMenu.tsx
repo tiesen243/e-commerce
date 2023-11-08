@@ -1,11 +1,4 @@
-import {
-  AdminPanelSettingsRounded,
-  DarkModeRounded,
-  Inventory2Rounded,
-  LightModeRounded,
-  Logout,
-  ShoppingCartRounded,
-} from '@mui/icons-material'
+import { DarkModeRounded, Inventory2Rounded, LightModeRounded, Logout, ShoppingCartRounded } from '@mui/icons-material'
 import { Avatar, Divider, Menu, PaperProps } from '@mui/material'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -49,11 +42,8 @@ const UserMenu: React.FC<Props> = (props) => {
 
       <Divider />
 
-      {user.role === 'admin' && (
-        <MuiMenuItem icon={<AdminPanelSettingsRounded fontSize="small" />} title="Admin panel" href="/admin" />
-      )}
       {user.role !== 'user' && (
-        <MuiMenuItem icon={<Inventory2Rounded fontSize="small" />} title="Product Manager" href="/manage" />
+        <MuiMenuItem icon={<Inventory2Rounded fontSize="small" />} title="Manager" href="/manage" />
       )}
 
       <Divider />
