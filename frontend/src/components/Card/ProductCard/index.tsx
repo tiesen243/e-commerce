@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
+import { Box, Card, CardMedia, Typography } from '@mui/material'
 import Link from 'next/link'
 
 import { useScreen } from '@/hooks'
@@ -12,37 +12,35 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   const previewName = product.name.length > end ? product.name.slice(0, end) + '...' : product.name
   return (
     <Card
-      className="aspect-square main relative group hover:border border-sky-400 transition-all"
+      className="aspect-square relative group hover:border border-sky-400 transition-all"
       component={Link}
       href={`/product/${product._id}`}
     >
-      <CardHeader title={previewName} className="text-center font-bold" />
       <CardMedia
         component="img"
         image={product.image as string}
         alt={product.name}
-        className="object-contain aspect-square group-hover:scale-105 transition-all h-3/4 md:h-1/2 lg:h-3/5"
+        className="object-cover group-hover:scale-105 transition-all"
       />
 
-      <CardContent className="flex justify-center">
-        <Typography variant="h5">
-          Price:{' '}
+      <Box className="flex gap-4 absolute z-20 bg-secondary-light dark:bg-secondary-dark shadow-lg bottom-2 left-2 py-2 px-2 rounded-full">
+        <Typography variant="body1">{previewName}</Typography>
+        <Typography variant="body1" className="bg-blue-500 text-white rounded-full px-2">
           {product.saleOffPercent !== 0 ? (
             <>
               <span className="line-through text-red-500">${product.price}</span>
               <span className="ml-2">${product.price - (product.price * product.saleOffPercent) / 100}</span>
             </>
           ) : (
-            product.price
+            '$' + product.price
           )}
         </Typography>
-
-        {product.saleOffPercent !== 0 && (
-          <Typography variant="subtitle2" className="absolute top-2 right-2 bg-red-500 p-2 rounded shadow text-sm">
-            {product.saleOffPercent}% OFF
-          </Typography>
-        )}
-      </CardContent>
+      </Box>
+      {product.saleOffPercent !== 0 && (
+        <Typography variant="subtitle2" className="absolute top-2 right-2 bg-red-500 p-2 rounded shadow text-sm">
+          {product.saleOffPercent}% OFF
+        </Typography>
+      )}
     </Card>
   )
 }

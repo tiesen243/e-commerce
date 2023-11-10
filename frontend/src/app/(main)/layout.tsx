@@ -6,7 +6,7 @@ const MainLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <main className="flex flex-col min-h-screen w-screen select-none">
     <Header />
 
-    <Container maxWidth="lg" className="flex-grow my-8">
+    <Container maxWidth="xl" className="flex-grow my-8">
       {children}
     </Container>
 
