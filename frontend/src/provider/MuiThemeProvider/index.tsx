@@ -4,7 +4,7 @@ import { CssBaseline, Paper, ThemeProvider, createTheme } from '@mui/material'
 import { useTheme } from 'next-themes'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
-import { SkeletonLoadPage } from '@/components/SkeletonLoadPage'
+import { LoadingPage } from '@/components'
 import { poppins } from '@/lib'
 
 const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -20,7 +20,7 @@ const MuiThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-      {mounted ? <Paper className="trans-colors"> {children}</Paper> : <SkeletonLoadPage />}
+      {mounted ? <Paper className="trans-colors"> {children}</Paper> : <LoadingPage />}
     </ThemeProvider>
   )
 }
