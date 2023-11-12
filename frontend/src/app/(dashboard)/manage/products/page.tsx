@@ -5,7 +5,7 @@ import { NextPage } from 'next'
 import { useContext } from 'react'
 
 import { ManageContext } from '@/contexts'
-import { col, Loading, NotFound, Toolbar } from './utils'
+import { col, Loading, NotFound, Toolbar } from '../utils'
 
 const Page: NextPage = () => {
   const { products, isLoading } = useContext(ManageContext)

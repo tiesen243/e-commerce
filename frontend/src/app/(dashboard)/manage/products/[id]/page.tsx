@@ -1,14 +1,14 @@
 'use client'
 
-import { Box, Button, TextField, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import { useRouter } from 'next/navigation'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { BackBtn, Checkbox, DragAndDrop, Loading, MarkdownEditor, MultiSelect, Select, Slider } from '@/components'
 import { ManageContext } from '@/contexts'
 import { Category, IProduct, Tag } from '@/lib'
-import { FormError, FormStatus, StyledTextField } from '../utils'
+import { FormError, FormStatus, StyledTextField } from '../../utils'
 import { getProductById, updateProduct } from './actions'
 
 const cate: string[] = Object.values(Category)

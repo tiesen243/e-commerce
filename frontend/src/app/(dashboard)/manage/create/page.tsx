@@ -5,7 +5,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/navigation'
 import { useContext, useState } from 'react'
 
-import { BackBtn, DragAndDrop, Loading, MarkdownEditor, MultiSelect, Select } from '@/components'
+import { DragAndDrop, Loading, MarkdownEditor, MultiSelect, Select } from '@/components'
 import { ManageContext } from '@/contexts'
 import { Category, CreateProduct, Tag } from '@/lib'
 import { FormError, StyledTextField } from '../utils'
@@ -43,66 +43,63 @@ const Page: NextPage = () => {
   }
 
   return (
-    <>
+    <Box component="form" onSubmit={handleSubmit} className="flex flex-col gap-8">
+      <Typography variant="h3" textAlign="center" fontWeight="bold">
+        Create Product
+      </Typography>
+
+      <StyledTextField
+        label="Name"
+        value={formData.name}
+        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+      />
+
+      <DragAndDrop name="image" setValue={(value: File) => setFormData((prev) => ({ ...prev, image: value }))} />
+
+      <MarkdownEditor
+        required
+        label="Description"
+        value={formData.description}
+        setValue={(value: string) => setFormData({ ...formData, description: value })}
+      />
+
+      <StyledTextField
+        label="Price"
+        type="number"
+        value={formData.price}
+        onChange={(e) => setFormData({ ...formData, price: +e.target.value })}
+      />
+
+      <StyledTextField
+        label="Stock"
+        type="number"
+        value={formData.stock}
+        onChange={(e) => setFormData({ ...formData, stock: +e.target.value })}
+      />
+
+      <Select
+        required
+        data={cate}
+        label="Category"
+        value={formData.category}
+        setValue={(value: Category) => setFormData({ ...formData, category: value })}
+      />
+
+      <MultiSelect
+        required
+        data={tags}
+        label="Tags"
+        value={formData.tags}
+        setValue={(value: Tag[]) => setFormData({ ...formData, tags: value })}
+      />
+
+      <FormError error={formStatus.error} />
+
+      <Button variant="contained" fullWidth className="btn" type="submit">
+        Create new product
+      </Button>
       {formStatus.isCreating && <Loading text="Creating..." />}
-      <BackBtn />
-      <Box component="form" onSubmit={handleSubmit} className="flex flex-col gap-8">
-        <Typography variant="h3" textAlign="center" fontWeight="bold">
-          Create Product
-        </Typography>
-
-        <StyledTextField
-          label="Name"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        />
-
-        <DragAndDrop name="image" setValue={(value: File) => setFormData((prev) => ({ ...prev, image: value }))} />
-
-        <MarkdownEditor
-          required
-          label="Description"
-          value={formData.description}
-          setValue={(value: string) => setFormData({ ...formData, description: value })}
-        />
-
-        <StyledTextField
-          label="Price"
-          type="number"
-          value={formData.price}
-          onChange={(e) => setFormData({ ...formData, price: +e.target.value })}
-        />
-
-        <StyledTextField
-          label="Stock"
-          type="number"
-          value={formData.stock}
-          onChange={(e) => setFormData({ ...formData, stock: +e.target.value })}
-        />
-
-        <Select
-          required
-          data={cate}
-          label="Category"
-          value={formData.category}
-          setValue={(value: Category) => setFormData({ ...formData, category: value })}
-        />
-
-        <MultiSelect
-          required
-          data={tags}
-          label="Tags"
-          value={formData.tags}
-          setValue={(value: Tag[]) => setFormData({ ...formData, tags: value })}
-        />
-
-        <FormError error={formStatus.error} />
-
-        <Button variant="contained" fullWidth className="btn" type="submit">
-          Create new product
-        </Button>
-      </Box>
-    </>
+    </Box>
   )
 }
 
