@@ -1,4 +1,4 @@
-import { DarkModeRounded, Inventory2Rounded, LightModeRounded, Logout, ShoppingCartRounded } from '@mui/icons-material'
+import { DarkModeRounded, Dashboard, LightModeRounded, Logout, ShoppingCartRounded } from '@mui/icons-material'
 import { Avatar, Divider, Menu, PaperProps } from '@mui/material'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -43,7 +43,7 @@ const UserMenu: React.FC<Props> = (props) => {
       <Divider />
 
       {user.role !== 'user' && (
-        <MuiMenuItem icon={<Inventory2Rounded fontSize="small" />} title="Manager" href="/manage" />
+        <MuiMenuItem icon={<Dashboard fontSize="small" />} title="Dashboard" href="/manage/products" />
       )}
 
       <Divider />
@@ -67,6 +67,7 @@ const paperProps: PaperProps = {
     overflow: 'visible',
     filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
     mt: 1.5,
+    minWidth: 200,
     backgroundColor: 'primary.main',
     '& .MuiAvatar-root': {
       width: 32,

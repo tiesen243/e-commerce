@@ -29,7 +29,7 @@ const Infomation: NextPage<Props> = ({ user, token }) => {
   }
 
   return (
-    <Box className="flex flex-col  gap-4">
+    <Box className="flex flex-col gap-4">
       <Typography variant="body1">
         <b>Email:</b> {user.email}
       </Typography>

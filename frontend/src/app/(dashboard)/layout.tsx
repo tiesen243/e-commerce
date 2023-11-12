@@ -8,7 +8,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
         <DashboardNav />
       </Grid>
 
-      <Grid item xs={12} md={9} className="max-h-[750px] h-[750px] overflow-auto">
+      <Grid item xs={12} md={9} className="max-h-[80vh] h-[80vh] overflow-auto">
         {children}
       </Grid>
     </Grid>
