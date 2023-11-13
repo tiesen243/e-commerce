@@ -3,7 +3,7 @@
 import { Grid } from '@mui/material'
 import useSWR, { Fetcher } from 'swr'
 
-import { FirstProductCard, ProductCard } from '@/components'
+import { ProductCard, ProductCardSkeleton } from '@/components'
 import { IProduct, axios, showErrorToast } from '@/lib'
 import ThreeItemSkeleton from './Skeleton'
 
@@ -23,12 +23,12 @@ const fetcher: Fetcher<IProduct[]> = async (url: string) => {
 export const ThreeItemsGrid = () => {
   const { data, isLoading, error } = useSWR('/product', fetcher)
 
-  if (!data || isLoading || error) return <ThreeItemSkeleton />
+  if (!data || !isLoading || error) return <ThreeItemSkeleton />
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={8}>
-        <FirstProductCard product={data[0]} />
+        <ProductCard product={data[0]} />
       </Grid>
 
       <Grid item xs={12} md={4} className="flex flex-col gap-4">

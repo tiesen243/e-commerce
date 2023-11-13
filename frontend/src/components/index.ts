@@ -21,5 +21,5 @@ export { Select } from './CustomInput/Select'
 export { Slider } from './CustomInput/Slider'
 
 // Custom Mui Components
-export { FirstProductCard, ProductCard } from './Card'
+export { ProductCard, ProductCardSkeleton } from './ProductCard'
 export { MuiMenuItem } from './MuiMenuItem'

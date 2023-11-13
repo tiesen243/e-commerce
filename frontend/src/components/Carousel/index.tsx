@@ -22,12 +22,15 @@ export const Carousel: React.FC = () => {
   if (!data || isLoading || error) return <CarouselSkeleton />
 
   return (
-    <Box className=" w-full overflow-x-auto pb-6 pt-1">
-      <List className="flex gap-4">
-        {data.map((product: IProduct, idx: number) => (
-          <CarouselCard key={idx} product={product} />
-        ))}
-      </List>
-    </Box>
+    <>
+      <Box className=" w-full overflow-x-auto pb-6 pt-1">
+        <List className="flex gap-4">
+          {data.map((product: IProduct, idx: number) => (
+            <CarouselCard key={idx} product={product} />
+          ))}
+        </List>
+      </Box>
+      <CarouselSkeleton />
+    </>
   )
 }
