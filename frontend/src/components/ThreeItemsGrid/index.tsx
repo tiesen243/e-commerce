@@ -23,7 +23,7 @@ const fetcher: Fetcher<IProduct[]> = async (url: string) => {
 export const ThreeItemsGrid = () => {
   const { data, isLoading, error } = useSWR('/product', fetcher)
 
-  if (!data || !isLoading || error) return <ThreeItemSkeleton />
+  if (!data || isLoading || error) return <ThreeItemSkeleton />
 
   return (
     <Grid container spacing={2}>
