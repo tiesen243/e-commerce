@@ -30,7 +30,6 @@ export const Carousel: React.FC = () => {
           ))}
         </List>
       </Box>
-      <CarouselSkeleton />
     </>
   )
 }
