@@ -11,8 +11,7 @@ interface Props {
     page: number
   }
 }
-const Page: NextPage<Props> = ({ params, searchParams }) => {
-  console.log(params, searchParams)
+const Page: NextPage<Props> = ({ params }) => {
   return <div>Page {params.category}</div>
 }
 

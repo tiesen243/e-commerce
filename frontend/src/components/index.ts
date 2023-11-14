@@ -8,7 +8,6 @@ export { BackBtn } from './BackBtn'
 export { Carousel } from './Carousel'
 export { Loading } from './Loading'
 export { LoadingPage } from './LoadingPage'
-export { SearchBar } from './SearchBar'
 export { TableActionsBtn } from './TableActionsBtn'
 export { ThreeItemsGrid } from './ThreeItemsGrid'
 

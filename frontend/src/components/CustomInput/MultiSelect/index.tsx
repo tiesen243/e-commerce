@@ -7,7 +7,7 @@ interface Props {
   setValue: (value: any[]) => void
 }
 
-export const MultiSelect: React.FC<Props & TextFieldProps> = ({ data, label, value, setValue }) => (
+export const MultiSelect: React.FC<Props & TextFieldProps> = ({ data, label, value, setValue, ...rest }) => (
   <TextField
     select
     fullWidth
@@ -17,16 +17,9 @@ export const MultiSelect: React.FC<Props & TextFieldProps> = ({ data, label, val
     SelectProps={{
       multiple: true,
       onChange: (e) => setValue(e.target.value as string[]),
-      renderValue: (selected) => (
-        <Box className="flex flex-wrap max-h-10 overflow-y-auto">
-          {(selected as string[]).map((tag) => (
-            <Box key={tag} className="m-1 rounded-md bg-secondary-light dark:bg-secondary-dark px-2 py-1 shadow">
-              {tag}
-            </Box>
-          ))}
-        </Box>
-      ),
+      renderValue: (selected) => <Box className="overflow-x-auto">{(selected as string[]).join(', ')}</Box>,
     }}
+    {...rest}
   >
     {data.map((item) => (
       <MenuItem key={item} value={item} className={value.includes(item) ? 'bg-blue-light dark:bg-blue-dark' : ''}>

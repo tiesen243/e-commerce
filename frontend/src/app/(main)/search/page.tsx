@@ -1,6 +1,14 @@
 import { NextPage } from 'next'
 
-const Page: NextPage = () => {
+interface Props {
+  searchParams: {
+    tag: string
+    q: string
+    page: string
+  }
+}
+const Page: NextPage<Props> = (props) => {
+  console.log(props.searchParams.tag)
   return <div>Page</div>
 }
 

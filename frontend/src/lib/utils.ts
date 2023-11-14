@@ -10,7 +10,7 @@ export const formatDate = (date: Date): string => {
 }
 
 export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyURLSearchParams) => {
-  const paramsString = params.toString()
+  const paramsString = params.toString().replace(/%5B/g, '[').replace(/%5D/g, ']')
   const queryString = `${paramsString.length ? '?' : ''}${paramsString}`
 
   return `${pathname}${queryString}`
