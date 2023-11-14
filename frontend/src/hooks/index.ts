@@ -1,1 +1,0 @@
-export { useScreen } from './useScreen'

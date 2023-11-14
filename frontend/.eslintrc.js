@@ -1,10 +1,4 @@
-/** @type {import('eslint').Linter.Config} */
-const config = {
+module.exports = {
   extends: 'next/core-web-vitals',
-  plugins: ['@next/next', 'prettier'],
-  rules: {
-    '@next/next/no-img-element': 'off',
-  },
+  plugins: ['prettier'],
 }
-
-module.exports = config
