@@ -1,4 +1,3 @@
-import { Typography } from '@/components/ui'
 import { NextPage } from 'next'
 
 const Page: NextPage = () => {

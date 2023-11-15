@@ -1,4 +1,4 @@
-import axios from '@/lib/axios'
+import { signIn } from 'next-auth/react'
 
 export interface FormData {
   email: string
@@ -9,19 +9,22 @@ export const initialValues: FormData = {
   email: '',
   password: '',
 }
+
 export const action = async (formData: FormData, toast: any) => {
-  try {
-    await axios.post('/auth/login', formData)
+  const res = await signIn('credentials', { ...formData, redirect: false })
+
+  if (res?.status === 200) {
     toast({
-      title: 'Success',
-      description: 'Logged in successfully',
+      title: 'Login success',
+      description: 'You are now logged in',
+      status: 'success',
     })
     return true
-  } catch (err: any) {
+  } else {
     toast({
-      title: 'Error',
-      description: err.response.data.message,
-      variant: 'destructive',
+      title: 'Login failed',
+      description: res?.error,
+      status: 'error',
     })
     return false
   }

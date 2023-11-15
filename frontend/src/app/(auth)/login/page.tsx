@@ -18,10 +18,10 @@ const Page: NextPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (isSubmitting) return
+    setIsSubmitting(true)
     const res = await action(formData, toast)
     if (res) push('/')
-    else setIsSubmitting(false)
+    setIsSubmitting(false)
   }
 
   return (
