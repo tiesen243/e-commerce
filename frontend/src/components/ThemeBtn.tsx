@@ -17,7 +17,11 @@ const ThemeBtn = () => {
 
   return (
     <Button variant="outline" size="icon" onClick={toggleTheme}>
-      {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+      {theme === 'dark' ? (
+        <SunIcon className="h-5 w-5" />
+      ) : (
+        <MoonIcon className="h-5 w-5" />
+      )}
     </Button>
   )
 }
