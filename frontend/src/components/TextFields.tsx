@@ -1,6 +1,6 @@
 import { Input, Label } from './ui'
 
-interface Props extends React.HTMLAttributes<HTMLInputElement> {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string
 }
 

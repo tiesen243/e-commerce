@@ -12,9 +12,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui'
-import axios from '@/lib/axios'
 import { uploadImage } from '@/lib/firebase'
 import { IUser } from '@/types/user'
+import axios from 'axios'
 import { useState } from 'react'
 
 interface Props {
@@ -33,8 +33,8 @@ const EditProfileDialog: React.FC<Props> = ({ user, token }) => {
     else url = await uploadImage(formData.avatar, user._id, 'avatar')
 
     const res = await axios.patch(
-      '/user/update/info',
-      {},
+      'http://localhost:5000/user/update/info',
+      { userName: formData.userName, avatar: url },
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -57,7 +57,11 @@ const EditProfileDialog: React.FC<Props> = ({ user, token }) => {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <TextFields label="Username" defaultValue={user.userName} />
+          <TextFields
+            label="Username"
+            value={formData.userName}
+            onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
+          />
 
           <DragAndDrop
             preview={user.avatar}
