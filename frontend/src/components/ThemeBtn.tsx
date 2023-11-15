@@ -1,13 +1,19 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { Button } from '../ui'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
+import { Button } from './ui'
+import { useEffect, useState } from 'react'
 
-export const ThemeBtn = () => {
+const ThemeBtn = () => {
   const { theme, resolvedTheme, setTheme } = useTheme()
   const toggleTheme = () =>
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+
+  // Prevents SSR mismatch
+  const [mounted, setMounted] = useState<boolean>(false)
+  useEffect(() => setMounted(true), [])
+  if (!mounted) return null
 
   return (
     <Button variant="outline" size="icon" onClick={toggleTheme}>
@@ -15,3 +21,5 @@ export const ThemeBtn = () => {
     </Button>
   )
 }
+
+export default ThemeBtn

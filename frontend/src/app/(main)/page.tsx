@@ -1,5 +1,4 @@
-'use client'
-import { ThemeBtn } from '@/components/ThemeBtn'
+import ThemeBtn from '@/components/ThemeBtn'
 import { NextPage } from 'next'
 
 const Page: NextPage = () => {
