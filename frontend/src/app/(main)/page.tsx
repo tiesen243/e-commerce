@@ -1,11 +1,10 @@
-'use client'
 import { Typography } from '@/components/ui'
 import { NextPage } from 'next'
 
 const Page: NextPage = () => {
   return (
     <main className="prose-lg">
-      <Typography variant="large">
+      <p>
         Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
         enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
         exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
@@ -17,7 +16,7 @@ const Page: NextPage = () => {
         Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
         Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
         et culpa duis.
-      </Typography>
+      </p>
     </main>
   )
 }

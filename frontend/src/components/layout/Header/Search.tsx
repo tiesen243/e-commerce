@@ -14,6 +14,7 @@ const Search: React.FC = () => {
         placeholder="Search..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        className="bg-transparent"
       />
     </form>
   )

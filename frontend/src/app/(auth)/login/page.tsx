@@ -5,6 +5,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import Loading from '@/components/Loading'
 import Footer from './Footer'
 import Header from './Header'
 import { FormData, action, initialValues } from './action'
@@ -13,11 +14,14 @@ const Page: NextPage = () => {
   const { toast } = useToast()
   const { push } = useRouter()
   const [formData, setFormData] = useState(initialValues)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (isSubmitting) return
     const res = await action(formData, toast)
     if (res) push('/')
+    else setIsSubmitting(false)
   }
 
   return (
@@ -46,6 +50,8 @@ const Page: NextPage = () => {
       </CardContent>
 
       <Footer />
+
+      {isSubmitting && <Loading text="Logging in..." />}
     </>
   )
 }

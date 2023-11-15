@@ -1,4 +1,3 @@
-import ThemeProvider from '@/providers/ThemeProvider'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -8,10 +7,14 @@ export const metadata: Metadata = {
 
 import './globals.css'
 import fonts from '@/lib/fonts'
+import { AuthProvider, ThemeProvider } from '@/providers'
+
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={fonts}>
-      <ThemeProvider>{children}</ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>{children}</ThemeProvider>
+      </AuthProvider>
     </body>
   </html>
 )
