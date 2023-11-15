@@ -46,7 +46,7 @@ export const DragAndDrop: React.FC<Props> = (props) => {
     <>
       <section className="flex items-center justify-between rounded-md border-2 border-dashed border-gray-400 p-4">
         <Button asChild>
-          <Label htmlFor={name}>
+          <Label>
             Choose image <input onChange={getInputProps().onChange} type="file" hidden />
           </Label>
         </Button>
