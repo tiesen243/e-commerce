@@ -8,9 +8,6 @@ const poppins = Poppins({
   variable: '--font-sans',
 })
 
-const fonts = cn(
-  'min-h-screen bg-background font-sans antialiased',
-  poppins.variable
-)
+const fonts = cn('min-h-screen bg-background font-sans antialiased', poppins.variable)
 
 export default fonts

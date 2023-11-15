@@ -1,9 +1,4 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Typography,
-} from '@/components/ui'
+import { Avatar, AvatarFallback, AvatarImage, Typography } from '@/components/ui'
 import { logo } from '@/lib/constants'
 import Link from 'next/link'
 

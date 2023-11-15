@@ -37,9 +37,7 @@ const Page: NextPage = () => {
                 type={key.toLowerCase().includes('password') ? 'password' : key}
                 placeholder={`Enter your ${key}`}
                 value={formData[key as keyof FormData]}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, [key]: e.target.value }))
-                }
+                onChange={(e) => setFormData((prev) => ({ ...prev, [key]: e.target.value }))}
                 required
               />
             </div>

@@ -18,9 +18,7 @@ const UserAvatar: React.FC<{ user: IUser }> = ({ user }) => (
           <AvatarFallback>{user.userName}</AvatarFallback>
         </Avatar>
       </TooltipTrigger>
-      <TooltipContent className="mt-4 rounded bg-secondary p-2">
-        {user.userName}
-      </TooltipContent>
+      <TooltipContent className="mt-4 rounded bg-secondary p-2">{user.userName}</TooltipContent>
     </Tooltip>
   </TooltipProvider>
 )

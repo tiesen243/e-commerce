@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  Button,
-  CardContent,
-  Checkbox,
-  Input,
-  Label,
-  useToast,
-} from '@/components/ui'
+import { Button, CardContent, Checkbox, Input, Label, useToast } from '@/components/ui'
 import { NextPage } from 'next'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -46,9 +39,7 @@ const Page: NextPage = () => {
                       : 'text'
                 }
                 value={formData[key as keyof FormData]}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, [key]: e.target.value }))
-                }
+                onChange={(e) => setFormData((prev) => ({ ...prev, [key]: e.target.value }))}
                 required
               />
             </div>

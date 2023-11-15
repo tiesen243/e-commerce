@@ -31,17 +31,16 @@ const UserControl: React.FC<{ user: IUser }> = ({ user }) => {
       <DropdownMenuSeparator />
 
       <DropdownMenuGroup>
-        <DropdownMenuItem asChild>
-          <Link href="/manage" className="flex gap-2">
-            <GanttChartSquare />
-            <span>Manage</span>
-          </Link>
-        </DropdownMenuItem>
+        {user.role !== 'user' && (
+          <DropdownMenuItem asChild>
+            <Link href="/manage" className="flex gap-2">
+              <GanttChartSquare />
+              <span>Manage</span>
+            </Link>
+          </DropdownMenuItem>
+        )}
 
-        <DropdownMenuItem
-          className="flex gap-2"
-          onClick={() => signOut({ redirect: false })}
-        >
+        <DropdownMenuItem className="flex gap-2" onClick={() => signOut({ redirect: false })}>
           <LogOutIcon />
           <span>Logout</span>
         </DropdownMenuItem>

@@ -29,13 +29,4 @@ export default class UpdateUserDto {
     },
   )
   readonly avatar: string
-
-  @ApiProperty({
-    description: 'The old password of the user',
-    type: String,
-    example: 'Abcd@1234',
-  })
-  @IsOptional()
-  @IsString()
-  readonly password: string
 }

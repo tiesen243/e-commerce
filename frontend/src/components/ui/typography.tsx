@@ -16,11 +16,7 @@ interface Props {
     | 'small'
     | 'muted'
 }
-export const Typography: React.FC<Props> = ({
-  variant = 'p',
-  className,
-  children,
-}) => {
+export const Typography: React.FC<Props> = ({ variant = 'p', className, children }) => {
   const renderSwitch = (variant: string) => {
     switch (variant) {
       case 'h1':
@@ -49,33 +45,19 @@ export const Typography: React.FC<Props> = ({
 
       case 'h3':
         return (
-          <h3
-            className={cn(
-              className,
-              'scroll-m-20 text-2xl font-semibold tracking-tight'
-            )}
-          >
+          <h3 className={cn(className, 'scroll-m-20 text-2xl font-semibold tracking-tight')}>
             {children}
           </h3>
         )
 
       case 'h4':
         return (
-          <h4
-            className={cn(
-              className,
-              'scroll-m-20 text-xl font-semibold tracking-tight'
-            )}
-          >
+          <h4 className={cn(className, 'scroll-m-20 text-xl font-semibold tracking-tight')}>
             {children}{' '}
           </h4>
         )
       case 'p':
-        return (
-          <p className={cn(className, 'leading-7 [&:not(:first-child)]:mt-6')}>
-            {children}
-          </p>
-        )
+        return <p className={cn(className, 'leading-7 [&:not(:first-child)]:mt-6')}>{children}</p>
 
       case 'blockquote':
         return (
@@ -97,38 +79,20 @@ export const Typography: React.FC<Props> = ({
         )
 
       case 'lead':
-        return (
-          <p className={cn(className, 'text-xl text-muted-foreground')}>
-            {children}
-          </p>
-        )
+        return <p className={cn(className, 'text-xl text-muted-foreground')}>{children}</p>
 
       case 'large':
-        return (
-          <div className={cn(className, 'text-lg font-semibold')}>
-            {children}
-          </div>
-        )
+        return <div className={cn(className, 'text-lg font-semibold')}>{children}</div>
 
       case 'small':
         return (
-          <small className={cn(className, 'text-sm font-medium leading-none')}>
-            {children}
-          </small>
+          <small className={cn(className, 'text-sm font-medium leading-none')}>{children}</small>
         )
 
       case 'muted':
-        return (
-          <p className={cn(className, 'text-sm text-muted-foreground')}>
-            {children}
-          </p>
-        )
+        return <p className={cn(className, 'text-sm text-muted-foreground')}>{children}</p>
     }
   }
 
-  return (
-    <div className="prose prose-zinc dark:prose-invert">
-      {renderSwitch(variant)}
-    </div>
-  )
+  return <div className="prose prose-zinc dark:prose-invert">{renderSwitch(variant)}</div>
 }

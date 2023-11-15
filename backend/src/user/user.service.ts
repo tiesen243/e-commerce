@@ -71,6 +71,8 @@ export class UserService {
     const newName: string = updateDto.userName || user.userName
     const newAvatar: string = updateDto.avatar || user.avatar
 
+    console.log(newName, newAvatar)
+
     const updateUser: User = await this.userModel.findByIdAndUpdate(
       user._id,
       {

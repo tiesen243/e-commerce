@@ -78,14 +78,7 @@ export class UserController {
   @HttpCode(204)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiOperation({
-    summary: 'Update user info',
-    description: 'Update user information',
-  })
-  @ApiOkResponse({
-    description: 'Update user info successfully',
-    type: User,
-  })
+  @ApiNoContentResponse({ description: 'Update user information' })
   @ApiBadRequestResponse({ description: 'Some field is invalid' })
   @ApiUnauthorizedResponse({ description: 'You are not login' })
   @ApiNotFoundResponse({ description: 'User not found' })

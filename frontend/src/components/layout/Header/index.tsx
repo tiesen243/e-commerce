@@ -9,8 +9,8 @@ import { Card } from '@/components/ui'
 import Nav from './Nav'
 
 const Header: React.FC = () => (
-  <Card className="sticky inset-0 rounded-none bg-transparent py-2 shadow-lg backdrop-blur-lg">
-    <nav className="container mx-auto flex max-w-screen-xl items-center justify-between gap-4">
+  <Card className="sticky inset-0 rounded-none bg-transparent p-2 shadow-lg backdrop-blur-lg">
+    <nav className="mx-auto flex max-w-screen-xl items-center justify-between gap-4">
       <MobileMenu />
       <Logo />
       <section className="hidden  md:flex">
