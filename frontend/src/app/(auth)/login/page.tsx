@@ -1,16 +1,18 @@
 'use client'
 
-import { Button, Input, Typography, useToast } from '@/components/ui'
+import { Button, CardContent, Input, Label, useToast } from '@/components/ui'
 import { NextPage } from 'next'
-import Link from 'next/link'
-import { useState } from 'react'
-import { FormData, action, initialize } from './action'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+
+import Footer from './Footer'
+import Header from './Header'
+import { FormData, action, initialValues } from './action'
 
 const Page: NextPage = () => {
   const { toast } = useToast()
   const { push } = useRouter()
-  const [formData, setFormData] = useState(initialize)
+  const [formData, setFormData] = useState(initialValues)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -19,33 +21,32 @@ const Page: NextPage = () => {
   }
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-      <Typography variant="h1" className="text-center">
-        Login
-      </Typography>
+    <>
+      <Header />
 
-      {Array.from(Object.keys(formData)).map((key) => (
-        <Input
-          key={key}
-          label={key}
-          type={key.toLowerCase().includes('password') ? 'password' : key}
-          value={formData[key as keyof FormData]}
-          onChange={(e) =>
-            setFormData((prev) => ({ ...prev, [key]: e.target.value }))
-          }
-          required
-        />
-      ))}
+      <CardContent>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          {Array.from(Object.keys(formData)).map((key) => (
+            <div key={key} className="flex flex-col space-y-2">
+              <Label htmlFor={key}>{key.toUpperCase()}</Label>
+              <Input
+                type={key.toLowerCase().includes('password') ? 'password' : key}
+                placeholder={`Enter your ${key}`}
+                value={formData[key as keyof FormData]}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, [key]: e.target.value }))
+                }
+                required
+              />
+            </div>
+          ))}
 
-      <Typography variant="small">
-        Dont have an account?{' '}
-        <Link href="/register" className="underline-offset-4 hover:underline">
-          Register
-        </Link>
-      </Typography>
+          <Button type="submit">Login</Button>
+        </form>
+      </CardContent>
 
-      <Button type="submit">Login</Button>
-    </form>
+      <Footer />
+    </>
   )
 }
 

@@ -1,26 +1,31 @@
 import axios from '@/lib/axios'
 
 export interface FormData {
+  userName: string
   email: string
   password: string
+  confirmPassword: string
 }
 
 export const initialValues: FormData = {
+  userName: '',
   email: '',
   password: '',
+  confirmPassword: '',
 }
+
 export const action = async (formData: FormData, toast: any) => {
   try {
-    await axios.post('/auth/login', formData)
+    await axios.post('/auth/register', formData)
     toast({
       title: 'Success',
-      description: 'Logged in successfully',
+      description: 'Account created successfully',
     })
     return true
-  } catch (err: any) {
+  } catch (e: any) {
     toast({
       title: 'Error',
-      description: err.response.data.message,
+      description: e.response.data.message || 'Something went wrong',
       variant: 'destructive',
     })
     return false

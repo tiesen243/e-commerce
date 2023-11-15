@@ -1,8 +1,8 @@
 'use client'
 
+import { Toaster } from '@/components/ui'
 import { ThemeProvider as NextThemeProvider } from 'next-themes'
 import { type ThemeProviderProps } from 'next-themes/dist/types'
-import { useState } from 'react'
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...rest }) => (
   <NextThemeProvider
@@ -12,6 +12,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...rest }) => (
     {...rest}
   >
     {children}
+    <Toaster />
   </NextThemeProvider>
 )
 

@@ -1,4 +1,3 @@
-import fonts from '@/lib/fonts'
 import ThemeProvider from '@/providers/ThemeProvider'
 import type { Metadata } from 'next'
 
@@ -8,6 +7,7 @@ export const metadata: Metadata = {
 }
 
 import './globals.css'
+import fonts from '@/lib/fonts'
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={fonts}>

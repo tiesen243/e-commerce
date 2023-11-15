@@ -14,10 +14,7 @@ const Logo: React.FC = () => (
       <AvatarFallback>Logo Icon</AvatarFallback>
     </Avatar>
 
-    <Typography
-      variant="h3"
-      className="block whitespace-nowrap md:hidden lg:block"
-    >
+    <Typography variant="h3" className="block font-bold md:hidden lg:block">
       {process.env.NEXT_PUBLIC_APP_NAME}
     </Typography>
   </Link>
