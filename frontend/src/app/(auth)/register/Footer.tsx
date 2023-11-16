@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Footer: React.FC = () => (
   <CardFooter>
-    <Typography variant="small">
+    <Typography variant="subtitle">
       Already have an account?{' '}
       <Link href="/login" className="underline-offset-4 hover:underline">
         Login

@@ -1,7 +1,6 @@
 'use client'
 
 import { DragAndDrop } from '@/components/DragAndDrop'
-import Loading from '@/components/Loading'
 import TextFields from '@/components/TextFields'
 import {
   Button,

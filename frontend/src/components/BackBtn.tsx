@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronLeftIcon } from '@radix-ui/react-icons'
+import { ChevronLeft } from 'lucide-react'
 import { Button } from './ui'
 import { useRouter } from 'next/navigation'
 
@@ -13,7 +13,7 @@ const BackBtn: React.FC<Props> = ({ className }) => {
   const back = () => push('/')
   return (
     <Button variant="outline" size="icon" onClick={back} className={className}>
-      <ChevronLeftIcon />
+      <ChevronLeft />
     </Button>
   )
 }

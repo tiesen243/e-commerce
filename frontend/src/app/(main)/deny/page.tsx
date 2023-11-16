@@ -1,4 +1,3 @@
-'use client'
 import { Button, Typography } from '@/components/ui'
 import Link from 'next/link'
 

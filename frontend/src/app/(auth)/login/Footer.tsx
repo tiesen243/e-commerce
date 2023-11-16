@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Footer = () => (
   <CardFooter>
-    <Typography variant="small">
+    <Typography variant="subtitle">
       Dont have an account?{' '}
       <Link href="/register" className="underline-offset-4 hover:underline">
         Register

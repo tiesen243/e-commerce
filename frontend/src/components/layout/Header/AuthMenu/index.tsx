@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -21,6 +23,7 @@ const AuthMenu: React.FC = () => {
           <UserAvatar user={data.user} />
         </button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent className="w-56">
         <UserControl user={data.user} />
       </DropdownMenuContent>

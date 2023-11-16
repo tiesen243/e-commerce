@@ -1,15 +1,15 @@
 'use client'
 
+import { MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import { Button } from './ui'
 import { useEffect, useState } from 'react'
+
+import { Button } from './ui'
 
 const ThemeBtn = () => {
   const { theme, resolvedTheme, setTheme } = useTheme()
   const toggleTheme = () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
 
-  // Prevents SSR mismatch
   const [mounted, setMounted] = useState<boolean>(false)
   useEffect(() => setMounted(true), [])
   if (!mounted) return null

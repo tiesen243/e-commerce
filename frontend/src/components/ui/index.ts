@@ -1,3 +1,5 @@
+'use client'
+
 export { Avatar, AvatarFallback, AvatarImage } from './avatar'
 export { Button, buttonVariants } from './button'
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card'

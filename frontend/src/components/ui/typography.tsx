@@ -1,43 +1,114 @@
-import { Slot } from '@radix-ui/react-slot'
-import { cva, type VariantProps } from 'class-variance-authority'
-import React from 'react'
+'use client'
 
-const typeVariants = cva('text-foreground', {
+import { cn } from '@/lib/utils'
+import { Slot } from '@radix-ui/react-slot'
+import { VariantProps, cva } from 'class-variance-authority'
+import * as React from 'react'
+
+const variantMapping = {
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
+  subtitle: 'h6',
+  body: 'p',
+  caption: 'span',
+  code: 'code',
+  quote: 'blockquote',
+}
+
+const typographyVariants = cva('', {
   variants: {
-    variant: {
-      h1: 'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
-      h2: 'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
-      h3: 'scroll-m-20 text-2xl font-semibold tracking-tight',
-      h4: 'scroll-m-20 text-xl font-semibold tracking-tight',
-      body: 'leading-7 [&:not(:first-child)]:mt-6',
-      quote: 'mt-6 border-l-2 pl-6 italic',
-      list: 'my-6 ml-6 list-disc [&>li]:mt-2',
-      code: 'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
-      lead: 'text-xl text-muted-foreground',
-    },
-    size: {
+    fontSize: {
+      xs: 'text-xs',
       sm: 'text-sm',
-      md: 'text-md',
+      base: 'text-base',
       lg: 'text-lg',
+      xl: 'text-xl',
+      '2xl': 'text-2xl',
+      '3xl': 'text-3xl',
+      '4xl': 'text-4xl',
+      '5xl': 'text-5xl',
+      '6xl': 'text-6xl',
+      '7xl': 'text-7xl',
+      '8xl': 'text-8xl',
+      '9xl': 'text-9xl',
+    },
+    colors: {
+      primary: 'text-primary',
+      secondary: 'text-secondary',
+      success: 'text-green-500',
+      info: 'text-blue-500',
+      warning: 'text-yellow-500',
+      danger: 'text-red-500',
+    },
+
+    fontWeight: {
+      serif: 'font-serif',
+      sans: 'font-sans',
+      mono: 'font-mono',
+      thin: 'font-thin',
+      light: 'font-light',
+      extralight: 'font-extralight',
+      normal: 'font-normal',
+      medium: 'font-medium',
+      semibold: 'font-semibold',
+      bold: 'font-bold',
+      extrabold: 'font-extrabold',
+      black: 'font-black',
+    },
+    fontSmoothing: {
+      antialiased: 'antialiased',
+      subpixel: 'subpixel-antialiased',
+    },
+    fontStyle: {
+      italic: 'italic',
+      normal: 'not-italic',
+      underline: 'underline underline-offset-2',
+      'line-through': 'line-through',
     },
   },
   defaultVariants: {
-    variant: 'body',
+    colors: 'primary',
+    fontSize: 'base',
+    fontWeight: 'normal',
+    fontSmoothing: 'antialiased',
+    fontStyle: 'normal',
   },
 })
 
-export interface TypographyProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof typeVariants> {
+interface TypographyProps
+  extends React.HTMLAttributes<HTMLParagraphElement>,
+    VariantProps<typeof typographyVariants> {
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'subtitle' | 'body' | 'caption' | 'code' | 'quote'
   asChild?: boolean
 }
-
 export const Typography = React.forwardRef<HTMLParagraphElement, TypographyProps>(
-  ({ variant, className, asChild, ...rest }, ref) => {
-    const Comp = asChild ? Slot : variant
+  ({ variant = 'body', asChild = false, className, ...rest }, ref) => {
+    const Comp = asChild ? Slot : variantMapping[variant] || 'p'
+    const Wrapper = variant === 'code' ? 'pre' : React.Fragment
+
+    const { fontSize, fontWeight, fontStyle, fontSmoothing, colors } = rest
+
     return (
-      <article className="prose prose-slate dark:prose-invert lg:prose-lg">
-        <Comp ref={ref} className={typeVariants({ variant, className })} {...rest} />
+      <article className="prose prose-zinc dark:prose-invert lg:prose-lg">
+        <Wrapper>
+          <Comp
+            ref={ref}
+            className={cn(
+              typographyVariants({
+                fontSize,
+                fontWeight,
+                fontStyle,
+                fontSmoothing,
+                colors,
+                className,
+              })
+            )}
+            {...rest}
+          />
+        </Wrapper>
       </article>
     )
   }
