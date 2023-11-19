@@ -24,7 +24,7 @@ const AuthMenu: React.FC = () => {
         </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="mt-4 w-56">
         <UserControl user={data.user} />
       </DropdownMenuContent>
     </DropdownMenu>

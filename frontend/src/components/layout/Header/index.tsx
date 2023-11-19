@@ -1,10 +1,9 @@
-import ThemeBtn from '@/components/ThemeBtn'
+import { Card } from '@/components/ui'
 import AuthMenu from './AuthMenu'
 import Logo from './Logo'
 import MobileMenu from './MobileMenu'
-import Search from './Search'
-import { Card } from '@/components/ui'
 import Nav from './Nav'
+import Search from './Search'
 
 const Header: React.FC = () => (
   <Card className="sticky inset-0 rounded-none bg-transparent p-2 shadow-lg backdrop-blur-lg">
@@ -18,10 +17,7 @@ const Header: React.FC = () => (
 
       <Search />
 
-      <section className="flex items-center gap-4">
-        <ThemeBtn />
-        <AuthMenu />
-      </section>
+      <AuthMenu />
     </nav>
   </Card>
 )

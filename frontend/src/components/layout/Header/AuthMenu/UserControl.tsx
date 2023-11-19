@@ -1,3 +1,4 @@
+import ThemeDropdownBtn from '@/components/ThemeDropdownBtn'
 import {
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -10,44 +11,43 @@ import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 
-const UserControl: React.FC<{ user: IUser }> = ({ user }) => {
-  return (
-    <>
-      <DropdownMenuLabel>{user.userName}</DropdownMenuLabel>
+const UserControl: React.FC<{ user: IUser }> = ({ user }) => (
+  <>
+    <DropdownMenuLabel>{user.userName}</DropdownMenuLabel>
 
-      <DropdownMenuSeparator />
+    <DropdownMenuSeparator />
 
-      <DropdownMenuGroup>
-        {controllers.map((controller, idx: number) => (
-          <DropdownMenuItem key={idx} asChild>
-            <Link href={controller.href} className="flex gap-2">
-              {controller.icon}
-              <span>{controller.label}</span>
-            </Link>
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuGroup>
-
-      <DropdownMenuSeparator />
-
-      <DropdownMenuGroup>
-        {user.role !== 'user' && (
-          <DropdownMenuItem asChild>
-            <Link href="/manage" className="flex gap-2">
-              <GanttChartSquare />
-              <span>Manage</span>
-            </Link>
-          </DropdownMenuItem>
-        )}
-
-        <DropdownMenuItem className="flex gap-2" onClick={() => signOut({ redirect: false })}>
-          <LogOutIcon />
-          <span>Logout</span>
+    <DropdownMenuGroup>
+      {controllers.map((controller, idx: number) => (
+        <DropdownMenuItem key={idx} asChild>
+          <Link href={controller.href} className="flex gap-2">
+            {controller.icon}
+            <span>{controller.label}</span>
+          </Link>
         </DropdownMenuItem>
-      </DropdownMenuGroup>
-    </>
-  )
-}
+      ))}
+
+      {user.role !== 'user' && (
+        <DropdownMenuItem asChild>
+          <Link href="/manage" className="flex gap-2">
+            <GanttChartSquare />
+            <span>Manage</span>
+          </Link>
+        </DropdownMenuItem>
+      )}
+    </DropdownMenuGroup>
+
+    <DropdownMenuSeparator />
+
+    <DropdownMenuGroup>
+      <ThemeDropdownBtn />
+      <DropdownMenuItem className="flex gap-2" onClick={() => signOut({ redirect: false })}>
+        <LogOutIcon />
+        <span>Logout</span>
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+  </>
+)
 
 export default UserControl
 
