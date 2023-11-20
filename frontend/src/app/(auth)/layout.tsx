@@ -1,6 +1,5 @@
-'use client'
 import BackBtn from '@/components/BackBtn'
-import { Card, CardHeader } from '@/components/ui'
+import { Card } from '@/components/ui'
 
 const AuthLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <div className="flex h-screen w-screen items-center justify-center">

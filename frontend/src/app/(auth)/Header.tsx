@@ -6,7 +6,7 @@ interface Props {
 
 const Header: React.FC<Props> = ({ title }) => (
   <CardHeader>
-    <Typography variant="h1" className="text-center">
+    <Typography variant="h1" className="text-center font-bold">
       {title}
     </Typography>
   </CardHeader>

@@ -17,8 +17,7 @@ const opts: NextAuthOptions = {
 
       async authorize(credentials) {
         try {
-          if (!credentials?.email || !credentials?.password)
-            throw new Error('Please enter your email and password')
+          if (!credentials?.email || !credentials?.password) throw new Error('Please enter your email and password')
 
           const { email, password } = credentials
 

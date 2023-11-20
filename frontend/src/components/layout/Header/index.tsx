@@ -15,7 +15,7 @@ const Header: React.FC = () => (
         <Nav />
       </section>
 
-      <Search />
+      <Search className="hidden md:flex" />
 
       <AuthMenu />
     </nav>

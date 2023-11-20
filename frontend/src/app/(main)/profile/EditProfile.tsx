@@ -29,6 +29,7 @@ interface FormData {
 }
 const EditProfileDialog: React.FC<Props> = ({ user, token, update }) => {
   const { toast } = useToast()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [formData, setFormData] = useState<FormData>({
     userName: user.userName,
     avatar: user.avatar,
@@ -49,9 +50,10 @@ const EditProfileDialog: React.FC<Props> = ({ user, token, update }) => {
       toast({
         title: 'Success',
         description: 'Your profile has been updated.',
+        variant: 'success',
       })
+      setIsOpen(false)
     } catch (err: any) {
-      console.log(err.response.data.message)
       toast({
         title: 'Error',
         description: err.response.data.message,
@@ -61,7 +63,7 @@ const EditProfileDialog: React.FC<Props> = ({ user, token, update }) => {
   }
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button>Edit Profile</Button>
       </DialogTrigger>
@@ -69,9 +71,7 @@ const EditProfileDialog: React.FC<Props> = ({ user, token, update }) => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you&#39;re done.
-          </DialogDescription>
+          <DialogDescription>Make changes to your profile here. Click save when you&#39;re done.</DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <TextFields

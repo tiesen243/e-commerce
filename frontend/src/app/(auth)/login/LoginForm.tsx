@@ -12,15 +12,7 @@ import {
   Input,
   useToast,
 } from '@/components/ui'
-import {
-  LoginSchema,
-  LoginType,
-  defaultValues,
-  signIn,
-  useForm,
-  useRouter,
-  zodResolver,
-} from './action'
+import { LoginSchema, LoginType, defaultValues, signIn, useForm, useRouter, zodResolver } from './action'
 
 const LogInForm: React.FC = () => {
   const { toast } = useToast()
@@ -28,13 +20,11 @@ const LogInForm: React.FC = () => {
     resolver: zodResolver(LoginSchema),
     defaultValues: defaultValues,
   })
+
   const { push } = useRouter()
   const onSubmit = async (data: LoginType) => {
     try {
-      const res = await signIn('credentials', {
-        ...data,
-        redirect: false,
-      })
+      const res = await signIn('credentials', { ...data, redirect: false })
       if (res?.error) throw new Error(res?.error)
 
       toast({

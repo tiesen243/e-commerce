@@ -78,9 +78,7 @@ const typographyVariants = cva('', {
   },
 })
 
-interface TypographyProps
-  extends React.HTMLAttributes<HTMLParagraphElement>,
-    VariantProps<typeof typographyVariants> {
+interface TypographyProps extends React.HTMLAttributes<HTMLParagraphElement>, VariantProps<typeof typographyVariants> {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'subtitle' | 'body' | 'caption' | 'code' | 'quote'
   asChild?: boolean
 }

@@ -3,6 +3,7 @@ import { Button, Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } fr
 import { MenuIcon } from 'lucide-react'
 import Logo from './Logo'
 import Nav from './Nav'
+import Search from './Search'
 
 const MobileMenu: React.FC = () => (
   <aside className="block md:hidden">
@@ -20,6 +21,7 @@ const MobileMenu: React.FC = () => (
           </SheetTitle>
         </SheetHeader>
 
+        <Search className="mt-4 flex md:hidden" />
         <Nav />
       </SheetContent>
     </Sheet>

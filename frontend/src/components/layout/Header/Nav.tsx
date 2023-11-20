@@ -14,9 +14,7 @@ const Nav: React.FC = () => {
           <Link
             href={item.href}
             className={cn(
-              pathName === item.href
-                ? 'text-primary underline underline-offset-4'
-                : 'text-secondary',
+              pathName === item.href ? 'text-primary underline underline-offset-4' : 'text-secondary',
               'hover:text-primary/50'
             )}
           >

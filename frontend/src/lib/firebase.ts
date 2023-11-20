@@ -14,11 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 export const storage = getStorage(app)
 
-const uploadImage = async (
-  image: File | null,
-  name: string,
-  type: 'avatar' | 'product'
-): Promise<string> => {
+const uploadImage = async (image: File | null, name: string, type: 'avatar' | 'product'): Promise<string> => {
   const imageRef = ref(storage, `${type}/${name}`)
   const uploadTask = await uploadBytes(imageRef, image as Blob)
   const url = await getDownloadURL(uploadTask.ref)

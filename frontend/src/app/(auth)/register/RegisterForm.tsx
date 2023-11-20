@@ -14,14 +14,7 @@ import {
   Label,
   useToast,
 } from '@/components/ui'
-import {
-  RegisterSchema,
-  RegisterType,
-  defaultValues,
-  useForm,
-  useRouter,
-  zodResolver,
-} from './utils'
+import { RegisterSchema, RegisterType, defaultValues, useForm, useRouter, zodResolver } from './utils'
 import axios from '@/lib/axios'
 
 const RegisterForm: React.FC = () => {
@@ -58,9 +51,7 @@ const RegisterForm: React.FC = () => {
           {Object.keys(form.getValues()).map((key: string, idx: number) => {
             const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())
             const type = key === 'confirmPassword' ? 'password' : key === 'userName' ? 'text' : key
-            return (
-              <FormChild key={idx} item={key} label={label} control={form.control} type={type} />
-            )
+            return <FormChild key={idx} item={key} label={label} control={form.control} type={type} />
           })}
 
           <AcceptTerms />
