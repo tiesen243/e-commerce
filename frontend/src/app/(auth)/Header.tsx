@@ -1,9 +1,13 @@
 import { CardHeader, Typography } from '@/components/ui'
 
-const Header: React.FC = () => (
+interface Props {
+  title: string
+}
+
+const Header: React.FC<Props> = ({ title }) => (
   <CardHeader>
     <Typography variant="h1" className="text-center">
-      Register
+      {title}
     </Typography>
   </CardHeader>
 )

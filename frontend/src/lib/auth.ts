@@ -19,15 +19,13 @@ const opts: NextAuthOptions = {
         try {
           if (!credentials?.email || !credentials?.password)
             throw new Error('Please enter your email and password')
+
           const { email, password } = credentials
 
           const { data } = await axios.post('/auth/login', { email, password })
-
           return data.data
-        } catch (err: any) {
-          throw new Error(err.response.data.message, {
-            cause: err.response.data.status,
-          })
+        } catch (error: any) {
+          throw new Error(error.response.data.message)
         }
       },
     }),
