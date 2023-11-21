@@ -61,6 +61,7 @@ export {
   SheetTrigger,
 } from './sheet'
 export { Skeleton } from './skeleton'
+export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from './table'
 export {
   Toast,
   ToastAction,
