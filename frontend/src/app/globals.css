@@ -73,4 +73,13 @@
   body {
     @apply bg-background text-foreground transition-colors duration-300 ease-linear;
   }
+  ::-webkit-scrollbar {
+    @apply h-1 w-1;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-primary transition-colors hover:bg-primary/80;
+  }
 }

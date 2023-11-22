@@ -24,7 +24,7 @@ const UserControl: React.FC<{ user: IUser }> = ({ user }) => (
 
       {user.role !== 'user' && (
         <DropdownMenuItem asChild>
-          <Link href="/manage" className="flex gap-2">
+          <Link href="/manage/products" className="flex gap-2">
             <GanttChartSquare />
             <span>Manage</span>
           </Link>

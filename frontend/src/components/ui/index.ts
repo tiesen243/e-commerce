@@ -49,6 +49,18 @@ export {
   navigationMenuTriggerStyle,
 } from './navigation-menu'
 export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from './select'
+export {
   Sheet,
   SheetClose,
   SheetContent,
@@ -62,6 +74,7 @@ export {
 } from './sheet'
 export { Skeleton } from './skeleton'
 export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from './table'
+export { Textarea } from './textarea'
 export {
   Toast,
   ToastAction,

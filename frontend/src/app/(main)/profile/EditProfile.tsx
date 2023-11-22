@@ -79,11 +79,7 @@ const EditProfileDialog: React.FC<Props> = ({ user, update }) => {
             onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
           />
 
-          <DragAndDrop
-            preview={user.avatar}
-            name="avatar"
-            setValue={(value) => setFormData({ ...formData, avatar: value })}
-          />
+          <DragAndDrop preview={user.avatar} onChange={(value) => setFormData({ ...formData, avatar: value })} />
         </div>
         <DialogFooter>
           <Button onClick={handleSubmit}>Save changes</Button>

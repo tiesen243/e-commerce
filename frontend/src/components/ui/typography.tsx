@@ -29,6 +29,13 @@ const typographyVariants = cva('', {
       danger: 'text-red-500',
     },
 
+    textAlign: {
+      start: 'text-start',
+      center: 'text-center',
+      end: 'text-end',
+      justify: 'text-justify',
+    },
+
     fontWeight: {
       serif: 'font-serif',
       sans: 'font-sans',
@@ -43,25 +50,22 @@ const typographyVariants = cva('', {
       extrabold: 'font-extrabold',
       black: 'font-black',
     },
+
     fontSmoothing: {
       antialiased: 'antialiased',
       subpixel: 'subpixel-antialiased',
     },
+
     fontStyle: {
       italic: 'italic',
       normal: 'not-italic',
       underline: 'underline underline-offset-2',
       'line-through': 'line-through',
     },
-    textAlign: {
-      start: 'text-start',
-      center: 'text-center',
-      end: 'text-end',
-      justify: 'text-justify',
-    },
   },
   defaultVariants: {
     colors: 'primary',
+    textAlign: 'start',
     fontWeight: 'normal',
     fontSmoothing: 'antialiased',
     fontStyle: 'normal',
@@ -77,7 +81,7 @@ export const Typography = React.forwardRef<HTMLParagraphElement, TypographyProps
     const Comp = asChild ? Slot : variantMapping[variant] || 'p'
     const Wrapper = variant === 'code' ? 'pre' : React.Fragment
 
-    const { fontWeight, fontStyle, fontSmoothing, colors, textAlign } = rest
+    const { colors, textAlign, fontWeight, fontStyle, fontSmoothing } = rest
 
     return (
       <article className="prose prose-zinc dark:prose-invert lg:prose-lg">
