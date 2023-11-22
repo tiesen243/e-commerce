@@ -53,6 +53,12 @@ const typographyVariants = cva('', {
       underline: 'underline underline-offset-2',
       'line-through': 'line-through',
     },
+    textAlign: {
+      start: 'text-start',
+      center: 'text-center',
+      end: 'text-end',
+      justify: 'text-justify',
+    },
   },
   defaultVariants: {
     colors: 'primary',
@@ -71,7 +77,7 @@ export const Typography = React.forwardRef<HTMLParagraphElement, TypographyProps
     const Comp = asChild ? Slot : variantMapping[variant] || 'p'
     const Wrapper = variant === 'code' ? 'pre' : React.Fragment
 
-    const { fontWeight, fontStyle, fontSmoothing, colors } = rest
+    const { fontWeight, fontStyle, fontSmoothing, colors, textAlign } = rest
 
     return (
       <article className="prose prose-zinc dark:prose-invert lg:prose-lg">
@@ -84,6 +90,7 @@ export const Typography = React.forwardRef<HTMLParagraphElement, TypographyProps
                 fontStyle,
                 fontSmoothing,
                 colors,
+                textAlign,
                 className,
               })
             )}

@@ -33,12 +33,11 @@ const opts: NextAuthOptions = {
   callbacks: {
     jwt: async ({ token, user }) => {
       if (!user) return token
-      const userInfo = await getUserInfo(user.refreshToken)
+      const userInfo = await getUserInfo(user.token)
 
       return {
         ...token,
-        accessToken: user.accessToken,
-        refreshToken: user.refreshToken,
+        token: user.token,
         role: userInfo.role,
       }
     },
@@ -46,9 +45,9 @@ const opts: NextAuthOptions = {
     session: async ({ session, token, trigger }) => {
       if (!token) return session
 
-      if (trigger === 'update') session.user = await getUserInfo(token.refreshToken)
+      if (trigger === 'update') session.user = await getUserInfo(token.token)
 
-      const userInfo = await getUserInfo(token.refreshToken)
+      const userInfo = await getUserInfo(token.token)
 
       session.user = userInfo
 

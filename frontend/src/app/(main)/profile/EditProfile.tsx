@@ -13,21 +13,19 @@ import {
   DialogTrigger,
   useToast,
 } from '@/components/ui'
-import axios from '@/lib/axios'
 import { uploadImage } from '@/lib/firebase'
 import { IUser } from '@/types/user'
 import { useState } from 'react'
 
 interface Props {
   user: IUser
-  token: string
   update: ({}) => void
 }
 interface FormData {
   userName: string
   avatar: string | File
 }
-const EditProfileDialog: React.FC<Props> = ({ user, token, update }) => {
+const EditProfileDialog: React.FC<Props> = ({ user, update }) => {
   const { toast } = useToast()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [formData, setFormData] = useState<FormData>({
@@ -41,11 +39,12 @@ const EditProfileDialog: React.FC<Props> = ({ user, token, update }) => {
       if (typeof formData.avatar === 'string') url = formData.avatar
       else url = await uploadImage(formData.avatar, user._id, 'avatar')
 
-      await axios.patch(
-        '/user/update/info',
-        { userName: formData.userName, avatar: url },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+      const res = await fetch('/api/auth/updateInfo', {
+        method: 'PATCH',
+        body: JSON.stringify({ ...formData, avatar: url }),
+      })
+      if (res.status !== 200) throw new Error((await res.json()).message)
+
       update({})
       toast({
         title: 'Success',
@@ -55,8 +54,8 @@ const EditProfileDialog: React.FC<Props> = ({ user, token, update }) => {
       setIsOpen(false)
     } catch (err: any) {
       toast({
-        title: 'Error',
-        description: err.response.data.message,
+        title: 'Update failed',
+        description: err.message,
         variant: 'destructive',
       })
     }

@@ -32,7 +32,7 @@ const Page: NextPage = () => {
         </Typography>
 
         <section className="grid grid-cols-1 space-y-4 md:grid-cols-3 md:space-x-4 md:space-y-0">
-          <EditProfileDialog user={data.user} token={data.token} update={update} />
+          <EditProfileDialog user={data.user} update={update} />
           <Button>Change password</Button>
           <Button variant="destructive" onClick={() => signOut({ callbackUrl: '/' })}>
             Log out
