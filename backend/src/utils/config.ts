@@ -26,22 +26,16 @@ const ConfigApp = (app: NestExpressApplication) => {
     req.headers['if-none-match'] = 'no-match-for-this'
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Content-Type, Accept, Authorization',
-    )
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization')
     next()
   })
 
   // Swagger
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api-docs', app, document, options)
-  app.useStaticAssets(
-    join(__dirname, '..', '..', 'node_modules/swagger-ui-dist'),
-    {
-      index: false,
-    },
-  )
+  app.useStaticAssets(join(__dirname, '..', '..', 'node_modules/swagger-ui-dist'), {
+    index: false,
+  })
 }
 
 export default ConfigApp

@@ -12,8 +12,8 @@ import { Model } from 'mongoose'
 
 import { IResponse } from '../utils'
 import { LoginDto, RegisterDto } from './dto'
-import { User } from './schemas'
 import { JwtPayload } from './jwt.strategy'
+import { User } from './schemas'
 
 @Injectable()
 export class AuthService {
@@ -22,15 +22,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(
-    registerDto: RegisterDto,
-  ): Promise<IResponse<{ token: string }>> {
+  async register(registerDto: RegisterDto): Promise<IResponse<{ token: string }>> {
     const { userName, email, password, confirmPassword } = registerDto
     const isExist = await this.userModel.findOne({ email })
     if (isExist) throw new ConflictException('User already exists')
 
-    if (password !== confirmPassword)
-      throw new UnauthorizedException('Passwords do not match')
+    if (password !== confirmPassword) throw new UnauthorizedException('Passwords do not match')
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const newUser = await this.userModel.create({
@@ -54,38 +51,12 @@ export class AuthService {
     const isCorrect: boolean = await bcrypt.compare(password, user.password)
     if (!isCorrect) throw new UnauthorizedException('Incorrect password')
 
-    const [at, rt] = await Promise.all([
-      this.jwtService.signAsync({ id: user._id }, { expiresIn: '15m' }),
-      this.jwtService.signAsync({ id: user._id }, { expiresIn: '60d' }),
-    ])
+    const token = await this.jwtService.signAsync({ id: user._id }, { expiresIn: '60d' })
 
     return {
       statusCode: 201,
       message: 'User logged in successfully',
-      data: {
-        accessToken: at,
-        refreshToken: rt,
-      },
-    }
-  }
-
-  async refresh(refreshToken: string): Promise<IResponse<JwtPayload>> {
-    const payload = await this.jwtService.verifyAsync(refreshToken)
-    const user = await this.userModel.findById(payload.id)
-    if (!user) throw new NotFoundException('User not found')
-
-    const at = await this.jwtService.signAsync(
-      { id: user._id },
-      { expiresIn: '15m' },
-    )
-
-    return {
-      statusCode: 201,
-      message: 'Token refreshed successfully',
-      data: {
-        accessToken: at,
-        refreshToken,
-      },
+      data: { token },
     }
   }
 }

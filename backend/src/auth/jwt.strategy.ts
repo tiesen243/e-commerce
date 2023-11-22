@@ -23,8 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const { id } = payload
 
     const user = await this.userModel.findById(id)
-    if (!user)
-      throw new UnauthorizedException('Login first to access this endpoint')
+    if (!user) throw new UnauthorizedException('Login first to access this endpoint')
 
     return user
   }
@@ -35,11 +34,5 @@ export class JwtPayload {
     example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
     description: 'Access token',
   })
-  accessToken: string
-
-  @ApiProperty({
-    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
-    description: 'Refresh token',
-  })
-  refreshToken: string
+  token: string
 }

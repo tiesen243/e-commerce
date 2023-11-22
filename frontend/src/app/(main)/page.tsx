@@ -1,7 +1,18 @@
+'use client'
 import { Button, Typography } from '@/components/ui'
 import { NextPage } from 'next'
+import { useEffect } from 'react'
 
 const Page: NextPage = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch('/api/test')
+      const data = await res.json()
+      console.log(data)
+    }
+
+    fetchData()
+  }, [])
   return (
     <main>
       <Button className="">Default</Button>

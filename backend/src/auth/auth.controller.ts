@@ -12,7 +12,7 @@ import {
 
 import { IResponse } from '../utils'
 import { AuthService } from './auth.service'
-import { LoginDto, RefreshDto, RegisterDto } from './dto'
+import { LoginDto, RegisterDto } from './dto'
 import { JwtPayload } from './jwt.strategy'
 
 @Controller('auth')
@@ -38,13 +38,5 @@ export class AuthController {
   @ApiUnauthorizedResponse({ description: 'Incorrect password' })
   async login(@Body() loginDto: LoginDto): Promise<IResponse<JwtPayload>> {
     return this.authService.login(loginDto)
-  }
-
-  @Post('refresh')
-  @ApiOperation({ summary: 'Refresh access token' })
-  @ApiCreatedResponse({ description: 'Access token successfully refreshed' })
-  @ApiUnauthorizedResponse({ description: 'Invalid refresh token' })
-  async refresh(@Body() refreshToken: RefreshDto) {
-    return this.authService.refresh(refreshToken.refreshToken)
   }
 }

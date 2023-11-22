@@ -14,9 +14,7 @@ import { Product } from './schemas/product.schema'
 
 @Injectable()
 export class ProductService {
-  constructor(
-    @InjectModel(Product.name) private readonly productModel: Model<Product>,
-  ) {}
+  constructor(@InjectModel(Product.name) private readonly productModel: Model<Product>) {}
 
   async findAll(q: QueryProductDto): Promise<IResponse<Product[]>> {
     const { limit, page, keyword, code, category, tags } = q
@@ -39,9 +37,7 @@ export class ProductService {
         message: 'No products found',
       })
 
-    const totalPage: number = Math.ceil(
-      (await this.productModel.countDocuments()) / limit,
-    )
+    const totalPage: number = Math.ceil((await this.productModel.countDocuments()) / limit)
 
     return {
       statusCode: 200,
@@ -53,11 +49,8 @@ export class ProductService {
   }
 
   async findAllByUser(user: User): Promise<IResponse<Product[]>> {
-    const allProducts = await this.productModel
-      .find({ userId: user._id })
-      .exec()
-    if (allProducts.length === 0)
-      throw new NotFoundException('No products found')
+    const allProducts = await this.productModel.find({ userId: user._id }).exec()
+    if (allProducts.length === 0) throw new NotFoundException('No products found')
 
     return {
       statusCode: 200,
@@ -68,8 +61,7 @@ export class ProductService {
 
   async findOne(id: string): Promise<IResponse<Product>> {
     const product = await this.productModel.findById(id).exec()
-    if (!product)
-      throw new NotFoundException('Product has been deleted or not found')
+    if (!product) throw new NotFoundException('Product has been deleted or not found')
 
     return {
       statusCode: 200,
@@ -78,10 +70,7 @@ export class ProductService {
     }
   }
 
-  async create(
-    createDto: CreateProductDto,
-    user: User,
-  ): Promise<IResponse<Product>> {
+  async create(createDto: CreateProductDto, user: User): Promise<IResponse<Product>> {
     if (user.role !== Role.ADMIN && user.role !== Role.SELLER)
       throw new UnauthorizedException('You are not admin or seller')
 
@@ -100,11 +89,7 @@ export class ProductService {
     }
   }
 
-  async update(
-    id: string,
-    updateDto: UpdateProductDto,
-    user: User,
-  ): Promise<IResponse<Product>> {
+  async update(id: string, updateDto: UpdateProductDto, user: User): Promise<IResponse<Product>> {
     const { data } = await this.findOne(id)
     if (user._id.toString() !== data.userId.toString())
       throw new UnauthorizedException('You are not owner of this product')

@@ -1,15 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
-import {
-  IsNotEmpty,
-  IsString,
-  Length,
-  IsNumber,
-  IsUrl,
-  IsEnum,
-  Min,
-  Max,
-} from 'class-validator'
+import { IsNotEmpty, IsString, Length, IsNumber, IsUrl, IsEnum, Min, Max } from 'class-validator'
 import { Category, Tag } from '../schemas/enum'
 
 export default class CreateProductDto {

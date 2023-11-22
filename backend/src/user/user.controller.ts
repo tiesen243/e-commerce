@@ -127,10 +127,7 @@ export class UserController {
   @ApiNoContentResponse({ description: 'Delete user successfully' })
   @ApiUnauthorizedResponse({ description: 'You are not admin' })
   @ApiNotFoundResponse({ status: 404, description: 'User not found' })
-  async adminDeleteUser(
-    @Param('id') id: string,
-    @Req() req: IRequest,
-  ): Promise<IResponse<User>> {
+  async adminDeleteUser(@Param('id') id: string, @Req() req: IRequest): Promise<IResponse<User>> {
     return await this.userService.adminDelete(id, req.user)
   }
 }

@@ -1,14 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
-import {
-  IsEnum,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Length,
-  Max,
-  Min,
-} from 'class-validator'
+import { IsEnum, IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validator'
 import { Category, Tag } from '../schemas/enum'
 
 export default class QueryDto {

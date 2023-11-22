@@ -1,8 +1,4 @@
-import {
-  DocumentBuilder,
-  OpenAPIObject,
-  SwaggerCustomOptions,
-} from '@nestjs/swagger'
+import { DocumentBuilder, OpenAPIObject, SwaggerCustomOptions } from '@nestjs/swagger'
 
 const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
   .setTitle('Yuki API')
@@ -32,8 +28,7 @@ const options: SwaggerCustomOptions = {
     persistAuthorization: true,
   },
   customSiteTitle: 'Yuki API',
-  customfavIcon:
-    'https://raw.githubusercontent.com/tiesen243/albums/main/favicon.ico',
+  customfavIcon: 'https://raw.githubusercontent.com/tiesen243/albums/main/favicon.ico',
 }
 
 export { config, options }

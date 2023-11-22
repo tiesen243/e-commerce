@@ -115,10 +115,7 @@ export class ProductController {
   })
   @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
   @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
-  async delete(
-    @Param('id') id: string,
-    @Req() req: IRequest,
-  ): Promise<IResponse<Product>> {
+  async delete(@Param('id') id: string, @Req() req: IRequest): Promise<IResponse<Product>> {
     return await this.productService.delete(id, req.user)
   }
 }

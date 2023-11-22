@@ -14,9 +14,7 @@ import { ChangePasswordDto, UpdateRoleDto, UpdateUserDto } from './dto'
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectModel(User.name) private readonly userModel: Model<User>,
-  ) {}
+  constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
 
   async getUserInfo(id: string): Promise<IResponse<User>> {
     const user: User = await this.userModel.findById(id).select('-password')
@@ -30,8 +28,7 @@ export class UserService {
   }
 
   async getAllUser(user: User): Promise<IResponse<User[]>> {
-    if (user.role !== Role.ADMIN)
-      throw new UnauthorizedException('You are not admin')
+    if (user.role !== Role.ADMIN) throw new UnauthorizedException('You are not admin')
 
     const users: User[] = await this.userModel.find({}, { password: 0 }).exec()
     if (!users) throw new NotFoundException('User not found')
@@ -43,12 +40,8 @@ export class UserService {
     }
   }
 
-  async changeRole(
-    updateRoleDto: UpdateRoleDto,
-    user: User,
-  ): Promise<IResponse<User>> {
-    if (user.role !== Role.ADMIN)
-      throw new UnauthorizedException('You are not admin')
+  async changeRole(updateRoleDto: UpdateRoleDto, user: User): Promise<IResponse<User>> {
+    if (user.role !== Role.ADMIN) throw new UnauthorizedException('You are not admin')
 
     const { email, role } = updateRoleDto
     const userUpdate: User = await this.userModel.findOneAndUpdate(
@@ -64,10 +57,7 @@ export class UserService {
     }
   }
 
-  async updateInfo(
-    updateDto: UpdateUserDto,
-    user: User,
-  ): Promise<IResponse<User>> {
+  async updateInfo(updateDto: UpdateUserDto, user: User): Promise<IResponse<User>> {
     const newName: string = updateDto.userName || user.userName
     const newAvatar: string = updateDto.avatar || user.avatar
 
@@ -88,20 +78,15 @@ export class UserService {
     }
   }
 
-  async changePassword(
-    changePasswordDto: ChangePasswordDto,
-    user: User,
-  ): Promise<IResponse<User>> {
+  async changePassword(changePasswordDto: ChangePasswordDto, user: User): Promise<IResponse<User>> {
     const { oldPassword, newPassword, confirmPassword } = changePasswordDto
-    if (newPassword !== confirmPassword)
-      throw new NotFoundException('Confirm password not match')
+    if (newPassword !== confirmPassword) throw new NotFoundException('Confirm password not match')
 
     const isMatch: boolean = await bcrypt.compare(oldPassword, user.password)
     if (!isMatch) throw new UnauthorizedException('Password not match')
 
     const isSame: boolean = await bcrypt.compare(newPassword, user.password)
-    if (isSame)
-      throw new ForbiddenException('New password is same old password')
+    if (isSame) throw new ForbiddenException('New password is same old password')
 
     const updatePassword = await this.userModel.findByIdAndUpdate(
       user._id,
@@ -131,8 +116,7 @@ export class UserService {
   }
 
   async adminDelete(id: string, user: User): Promise<IResponse<User>> {
-    if (user.role !== Role.ADMIN)
-      throw new UnauthorizedException('You are not admin')
+    if (user.role !== Role.ADMIN) throw new UnauthorizedException('You are not admin')
 
     const delUser = await this.userModel.findByIdAndDelete(id)
     if (!delUser) throw new NotFoundException('User not found')
