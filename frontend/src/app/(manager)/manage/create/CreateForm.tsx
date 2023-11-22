@@ -4,7 +4,6 @@ import {
   Button,
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,15 +16,21 @@ import {
   SelectValue,
   Textarea,
 } from '@/components/ui'
+import { Category, Tag } from '@/types/product'
 import { useForm } from 'react-hook-form'
 import { CreateFormValues, defaultValues, resolver } from './utils'
-import { Category, Tag } from '@/types/product'
 
 const CreateForm: React.FC = () => {
   const form = useForm<CreateFormValues>({ resolver, defaultValues })
 
-  const onSubmit = (values: CreateFormValues) => {
+  const onSubmit = async (values: CreateFormValues) => {
     console.log(values)
+    const res = await fetch('/api/product/create', {
+      method: 'POST',
+      body: JSON.stringify(values),
+    }).then((res) => res.json())
+
+    console.log(res)
   }
 
   return (
@@ -65,7 +70,7 @@ const CreateForm: React.FC = () => {
             <FormItem>
               <FormLabel className="capitalize">{field.name}</FormLabel>
               <FormControl>
-                <DragAndDrop {...field} onChange={(value) => field.onChange(value)} />
+                <DragAndDrop name={field.name} setValues={field.onChange} />
               </FormControl>
               <FormMessage />
             </FormItem>
