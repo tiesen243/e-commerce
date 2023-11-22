@@ -19,7 +19,8 @@ import {
 } from '@/components/ui'
 import { Category, Tag } from '@/types/product'
 import { useForm } from 'react-hook-form'
-import { CreateFormValues, defaultValues, resolver } from './utils'
+
+import { CreateFormValues, resolver, defaultValues } from './utils'
 
 const CreateForm: React.FC = () => {
   const form = useForm<CreateFormValues>({ resolver, defaultValues })
