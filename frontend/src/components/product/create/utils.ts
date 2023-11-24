@@ -7,6 +7,7 @@ const imageRegex = z
   .refine((val) => val.name, { message: 'Please upload a valid image' })
   .refine((val) => val.type.startsWith('image'), { message: 'Please upload an image' })
   .refine((val) => val.size < 1024 * 1024 * 5, { message: 'Image must be less than 5MB' })
+  .nullable()
 
 export const createFormSchema = z.object({
   name: z.string().min(4).max(255),
@@ -23,7 +24,7 @@ export const resolver = zodResolver(createFormSchema)
 export type CreateFormValues = z.infer<typeof createFormSchema>
 export const defaultValues: CreateFormValues = {
   name: '',
-  image: new File([], '') || '',
+  image: null,
   description: '',
   price: 0,
   stock: 0,
