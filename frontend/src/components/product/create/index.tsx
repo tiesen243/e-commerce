@@ -5,8 +5,6 @@ import { useForm } from 'react-hook-form'
 
 import Field from './Field'
 import { CreateFormValues, defaultValues, resolver } from './utils'
-import { PlusIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
 
 const CreateForm: React.FC = () => {
   const form = useForm<CreateFormValues>({ resolver, defaultValues })
@@ -20,10 +18,6 @@ const CreateForm: React.FC = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <Field name="name" control={form.control}>
           {(field) => <Input placeholder={`input your ${field.name}`} {...field} />}
-        </Field>
-
-        <Field name="image" control={form.control}>
-          {(field) => <Input type="file" accept="image/*" onChange={(e: any) => field.onChange(e.target.files[0])} />}
         </Field>
 
         <Field name="description" control={form.control}>
