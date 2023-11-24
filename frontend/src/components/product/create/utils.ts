@@ -11,7 +11,6 @@ const imageRegex = z
 export const createFormSchema = z.object({
   name: z.string().min(4).max(255),
   description: z.string().min(4).max(255),
-  image: imageRegex,
   price: z.string().transform((val) => Number(val)),
   stock: z.string().transform((val) => Number(val)),
   category: z.nativeEnum(Category),
@@ -23,7 +22,6 @@ export const resolver = zodResolver(createFormSchema)
 export type CreateFormValues = z.infer<typeof createFormSchema>
 export const defaultValues: CreateFormValues = {
   name: '',
-  image: new File([], ''),
   description: '',
   price: 0,
   stock: 0,
