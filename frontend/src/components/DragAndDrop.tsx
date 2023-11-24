@@ -1,37 +1,58 @@
 import { forwardRef, useState } from 'react'
 import Dropzone, { DropzoneRef } from 'react-dropzone'
-import { Input } from './ui'
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  preview?: string
-  setValues: (value: any) => any
+import Field from '@/types/field'
+import { Input, useToast } from './ui'
+
+interface Props {
+  previewImg?: string
+  field: Field
 }
 
-export const DragAndDrop = forwardRef<DropzoneRef, Props>(({ name, setValues }, ref) => {
-  const [preview, setPreview] = useState<string | undefined>(undefined)
+const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, field }, ref) => {
+  const [preview, setPreview] = useState<string | undefined>(previewImg ?? undefined)
+  const { toast } = useToast()
+
   const onDrop = (file: File[]) => {
-    const reader = new FileReader()
-    reader.onload = () => setPreview(reader.result as string)
-    reader.readAsDataURL(file[0])
-    return setValues(file[0])
+    try {
+      const reader = new FileReader()
+      reader.onload = () => setPreview(reader.result as string)
+      reader.readAsDataURL(file[0])
+      toast({
+        title: 'Success',
+        description: 'Image uploaded',
+        variant: 'success',
+      })
+
+      return field.onChange(file[0] as any)
+    } catch (e) {
+      toast({
+        title: 'Error',
+        description: 'Image not uploaded',
+        variant: 'destructive',
+      })
+    }
   }
 
   return (
-    <Dropzone onDrop={onDrop} multiple={false} ref={ref}>
+    <Dropzone onDrop={onDrop} multiple={false} ref={ref} maxSize={5242880} accept={{ image: ['image/*'] }}>
       {({ getRootProps, getInputProps, isDragActive }) => (
         <section
           {...getRootProps({})}
           className="flex items-center justify-between rounded-md border-2 border-dashed border-gray-400 p-4"
         >
-          <Input {...getInputProps()} name={name} accept="image/*" onFocus={(e) => e.target.blur()} />
+          <Input {...getInputProps()} name={field.name} accept="image/*" />
           <p className="text-gray-400">
             {isDragActive ? 'Drop the files here ...' : "Drag 'n' drop some files here, or click to select files"}
           </p>
-          {preview && <img src={preview} alt="preview" className="w-16" />}
+
+          {preview && <img src={preview} alt="preview" width={100} height={200} loading="lazy" />}
         </section>
       )}
     </Dropzone>
   )
 })
+
+export default DragAndDrop
 
 DragAndDrop.displayName = 'DragAndDrop'

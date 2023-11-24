@@ -1,15 +1,16 @@
 'use client'
 
 import { Button, Form, Input, LoadingSpinner, Textarea } from '@/components/ui'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
-import { Category, Tag } from '@/types/product'
-import Field from './Field'
+import DragAndDrop from '@/components/DragAndDrop'
+import { CreateFormValues, defaultValues, resolver } from './config'
+import Fields, { FieldsProps } from '@/components/Fields'
+
+const CreateField = Fields as React.FC<FieldsProps<CreateFormValues>>
 
 const CreateForm: React.FC = () => {
-  const form = useForm<CreateFormValues>({ resolver: zodResolver(createFormSchema), defaultValues })
+  const form = useForm<CreateFormValues>({ resolver, defaultValues })
 
   const onSubmit = async (values: CreateFormValues) => {
     console.log(values)
@@ -18,25 +19,25 @@ const CreateForm: React.FC = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <Field name="name" control={form.control}>
+        <CreateField name="name" control={form.control}>
           {(field) => <Input placeholder={`input your ${field.name}`} {...field} />}
-        </Field>
+        </CreateField>
 
-        <Field name="image" control={form.control}>
-          {(field) => <Input type="file" accept="image/*" onChange={(e: any) => field.onChange(e.target.files[0])} />}
-        </Field>
+        <CreateField name="image" control={form.control}>
+          {(field) => <DragAndDrop field={field} />}
+        </CreateField>
 
-        <Field name="description" control={form.control}>
+        <CreateField name="description" control={form.control}>
           {(field) => <Textarea placeholder={`input your ${field.name}`} {...field} />}
-        </Field>
+        </CreateField>
 
-        <Field name="price" control={form.control}>
+        <CreateField name="price" control={form.control}>
           {(field) => <Input type="number" placeholder={`input your ${field.name}`} {...field} />}
-        </Field>
+        </CreateField>
 
-        <Field name="stock" control={form.control}>
+        <CreateField name="stock" control={form.control}>
           {(field) => <Input type="number" placeholder={`input your ${field.name}`} {...field} />}
-        </Field>
+        </CreateField>
 
         <Button variant="outline" type="submit" className="w-full" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting && <LoadingSpinner />} Create
@@ -47,24 +48,3 @@ const CreateForm: React.FC = () => {
 }
 
 export default CreateForm
-
-const createFormSchema = z.object({
-  name: z.string().min(4).max(255),
-  image: z.instanceof(File).nullable(),
-  description: z.string().min(4).max(255),
-  price: z.string().transform((val) => Number(val)),
-  stock: z.string().transform((val) => Number(val)),
-  category: z.nativeEnum(Category),
-  tags: z.array(z.nativeEnum(Tag)),
-})
-
-export type CreateFormValues = z.infer<typeof createFormSchema>
-const defaultValues: CreateFormValues = {
-  name: '',
-  image: null,
-  description: '',
-  price: 0,
-  stock: 0,
-  category: Category.Other,
-  tags: [],
-}

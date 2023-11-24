@@ -71,7 +71,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground transition-colors duration-300 ease-linear;
+    @apply min-h-screen w-screen overflow-x-hidden bg-background text-foreground transition-colors duration-300 ease-linear;
   }
   ::-webkit-scrollbar {
     @apply h-1 w-1;

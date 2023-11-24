@@ -1,10 +1,11 @@
 'use client'
+import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 
 import { Button } from '@/components/ui'
-import { NextPage } from 'next'
 import { signOut, useSession } from 'next-auth/react'
-import EditProfileDialog from './EditProfile'
-import { Suspense } from 'react'
+
+const EditProfileDialog = dynamic(() => import('@/components/profile/update'), { ssr: false })
 
 const Page: NextPage = () => {
   const { data, update } = useSession()
@@ -17,25 +18,16 @@ const Page: NextPage = () => {
         <img src={data.user.avatar} alt="hero" className="aspect-square rounded-full object-cover" />
       </section>
 
-      <section className="typography flex flex-col gap-2 md:col-span-2">
-        <h2>
-          {getIn}, {data.user.userName}
-        </h2>
-
-        <h3>Information</h3>
-
-        <p>Email: {data.user.email}</p>
-        <p>
-          Joined:{' '}
-          {new Date(data?.user.createdAt).toLocaleString('vi-VN', {
-            timeZone: 'UTC',
-          })}
-        </p>
+      <section className="flex flex-col gap-2 md:col-span-2">
+        <article className="typography">
+          <h2>{`${getIn}, ${data.user.userName}`}</h2>
+          <h3>Information</h3>
+          <p>Email: {data.user.email}</p>
+          <p>Joined: {new Date(data?.user.createdAt).toLocaleString('vi-VN', { timeZone: 'UTC' })}</p>
+        </article>
 
         <section className="grid grid-cols-1 space-y-4 md:grid-cols-3 md:space-x-4 md:space-y-0">
-          <Suspense>
-            <EditProfileDialog user={data.user} update={update} />
-          </Suspense>
+          <EditProfileDialog user={data.user} update={update} />
 
           <Button>Change password</Button>
 
