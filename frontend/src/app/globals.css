@@ -83,3 +83,8 @@
     @apply rounded-full bg-primary transition-colors hover:bg-primary/80;
   }
 }
+@layer components {
+  .typography {
+    @apply prose prose-zinc dark:prose-invert lg:prose-lg;
+  }
+}

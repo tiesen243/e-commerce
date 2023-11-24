@@ -10,6 +10,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  LoadingSpinner,
   useToast,
 } from '@/components/ui'
 import { LoginSchema, LoginType, defaultValues, signIn, useForm, useRouter, zodResolver } from './action'
@@ -49,7 +50,9 @@ const LogInForm: React.FC = () => {
             <FormCard control={form.control} item={item} key={idx} />
           ))}
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting ? <LoadingSpinner /> : 'Login'}
+          </Button>
         </form>
       </Form>
     </CardContent>

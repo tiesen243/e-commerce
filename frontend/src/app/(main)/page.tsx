@@ -1,22 +1,11 @@
-'use client'
-import { Button, Typography } from '@/components/ui'
+import { Button } from '@/components/ui'
 import { NextPage } from 'next'
-import { useEffect } from 'react'
 
 const Page: NextPage = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch('/api/test')
-      const data = await res.json()
-      console.log(data)
-    }
-
-    fetchData()
-  }, [])
   return (
-    <main>
+    <main className="typography">
       <Button className="">Default</Button>
-      <Typography>
+      <p>
         Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem
         pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud
         ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut
@@ -24,7 +13,7 @@ const Page: NextPage = () => {
         cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
         eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat
         ullamco ut ea consectetur et est culpa et culpa duis.
-      </Typography>
+      </p>
     </main>
   )
 }

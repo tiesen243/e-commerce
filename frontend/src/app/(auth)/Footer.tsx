@@ -1,4 +1,4 @@
-import { CardFooter, Typography } from '@/components/ui'
+import { CardFooter } from '@/components/ui'
 import Link from 'next/link'
 
 interface Props {
@@ -8,13 +8,13 @@ interface Props {
 }
 
 const Footer: React.FC<Props> = ({ text, href, hrefText }) => (
-  <CardFooter>
-    <Typography variant="subtitle">
+  <CardFooter className="typography">
+    <h6>
       {text}
       <Link href={href} className="underline-offset-4 hover:underline">
         {hrefText}
       </Link>
-    </Typography>
+    </h6>
   </CardFooter>
 )
 

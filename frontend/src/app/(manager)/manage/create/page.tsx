@@ -1,15 +1,5 @@
 import { NextPage } from 'next'
 
-import { Typography } from '@/components/ui'
-
-const Page: NextPage = () => (
-  <div>
-    <Typography variant="h1" className="text-center font-bold">
-      Create
-    </Typography>
-
-    {/* <CreateForm /> */}
-  </div>
-)
+const Page: NextPage = () => <p className="text-center font-bold">Create</p>
 
 export default Page

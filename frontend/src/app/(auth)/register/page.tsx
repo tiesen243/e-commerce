@@ -1,8 +1,9 @@
 import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 
-import Footer from '../Footer'
-import Header from '../Header'
-import RegisterForm from './RegisterForm'
+const RegisterForm = dynamic(() => import('./RegisterForm'))
+const Header = dynamic(() => import('../Header'))
+const Footer = dynamic(() => import('../Footer'))
 
 const Page: NextPage = () => (
   <>

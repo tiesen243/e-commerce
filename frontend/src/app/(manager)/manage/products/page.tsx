@@ -2,7 +2,7 @@
 import { NextPage } from 'next'
 import React from 'react'
 import useFetch from './useFetch'
-import { Button, Typography } from '@/components/ui'
+import { Button } from '@/components/ui'
 import Link from 'next/link'
 
 const Page: NextPage = () => {
@@ -11,9 +11,7 @@ const Page: NextPage = () => {
   if (error)
     return (
       <div className="flex flex-col items-center gap-4">
-        <Typography variant="h1" fontWeight="semibold">
-          {error}
-        </Typography>
+        <article>{error}</article>
         <Button asChild>
           <Link href="/manage/create">Create a new product</Link>
         </Button>

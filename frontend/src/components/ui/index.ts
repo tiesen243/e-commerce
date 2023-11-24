@@ -88,6 +88,4 @@ export {
 } from './toast'
 export { Toaster } from './toaster'
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
-export { Typography } from './typography'
-
 export { toast, useToast } from './use-toast'

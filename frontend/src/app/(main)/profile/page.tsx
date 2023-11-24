@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Typography } from '@/components/ui'
+import { Button } from '@/components/ui'
 import { NextPage } from 'next'
 import { signOut, useSession } from 'next-auth/react'
 import EditProfileDialog from './EditProfile'
@@ -16,20 +16,20 @@ const Page: NextPage = () => {
         <img src={data.user.avatar} alt="hero" className="aspect-square rounded-full object-cover" />
       </section>
 
-      <section className="flex flex-col gap-2 md:col-span-2">
-        <Typography variant="h2">
+      <section className="typography flex flex-col gap-2 md:col-span-2">
+        <h2>
           {getIn}, {data.user.userName}
-        </Typography>
+        </h2>
 
-        <Typography variant="h3">Information</Typography>
+        <h3>Information</h3>
 
-        <Typography>Email: {data.user.email}</Typography>
-        <Typography>
+        <p>Email: {data.user.email}</p>
+        <p>
           Joined:{' '}
           {new Date(data?.user.createdAt).toLocaleString('vi-VN', {
             timeZone: 'UTC',
           })}
-        </Typography>
+        </p>
 
         <section className="grid grid-cols-1 space-y-4 md:grid-cols-3 md:space-x-4 md:space-y-0">
           <EditProfileDialog user={data.user} update={update} />

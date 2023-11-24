@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage, Typography } from '@/components/ui'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui'
 import { logo } from '@/lib/constants'
 import Link from 'next/link'
 
@@ -9,9 +9,9 @@ const Logo: React.FC = () => (
       <AvatarFallback>Logo Icon</AvatarFallback>
     </Avatar>
 
-    <Typography variant="h3" className="block font-bold md:hidden lg:block">
-      {process.env.NEXT_PUBLIC_APP_NAME}
-    </Typography>
+    <article className="typography block font-bold md:hidden lg:block">
+      <h5>{process.env.NEXT_PUBLIC_APP_NAME}</h5>
+    </article>
   </Link>
 )
 

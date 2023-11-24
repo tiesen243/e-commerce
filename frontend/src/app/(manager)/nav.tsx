@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-import { Button, Card, Typography } from '@/components/ui'
+import { Button, Card } from '@/components/ui'
 import { adminNav, manageNav } from '@/lib/nav'
 
 const Nav: React.FC = () => {
@@ -18,7 +18,7 @@ const Nav: React.FC = () => {
             <Button variant="outline" className="flex items-center justify-stretch" asChild>
               <Link href={item.href}>
                 {item.icon}
-                <Typography className="ml-4">{item.title}</Typography>
+                <p className="ml-4">{item.title}</p>
               </Link>
             </Button>
           </li>

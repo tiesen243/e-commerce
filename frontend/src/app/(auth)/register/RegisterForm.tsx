@@ -1,21 +1,9 @@
 'use client'
 
-import {
-  Button,
-  CardContent,
-  Checkbox,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-  Label,
-  useToast,
-} from '@/components/ui'
-import { RegisterSchema, RegisterType, defaultValues, useForm, useRouter, zodResolver } from './utils'
+import { Button, CardContent, Form, LoadingSpinner, useToast } from '@/components/ui'
 import axios from '@/lib/axios'
+import { AcceptTerms, FormChild } from './FormField'
+import { RegisterSchema, RegisterType, defaultValues, useForm, useRouter, zodResolver } from './utils'
 
 const RegisterForm: React.FC = () => {
   const { toast } = useToast()
@@ -24,6 +12,7 @@ const RegisterForm: React.FC = () => {
     resolver: zodResolver(RegisterSchema),
     defaultValues: defaultValues,
   })
+
   const onSubmit = async (data: RegisterType) => {
     try {
       await axios.post('/auth/register', data)
@@ -56,7 +45,9 @@ const RegisterForm: React.FC = () => {
 
           <AcceptTerms />
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting ? <LoadingSpinner /> : 'Register'}
+          </Button>
         </form>
       </Form>
     </CardContent>
@@ -64,33 +55,3 @@ const RegisterForm: React.FC = () => {
 }
 
 export default RegisterForm
-
-interface FormChildProps {
-  item: string
-  label: string
-  control: any
-  type: string
-}
-
-const FormChild: React.FC<FormChildProps> = ({ item, label, control, type }) => (
-  <FormField
-    name={item as keyof RegisterType}
-    control={control}
-    render={({ field }) => (
-      <FormItem>
-        <FormLabel>{label}</FormLabel>
-        <FormControl>
-          <Input {...field} type={type} placeholder={`Enter your ${label.toLowerCase()}`} />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-)
-
-const AcceptTerms: React.FC = () => (
-  <div className="flex items-center space-x-2">
-    <Checkbox id="terms" required />
-    <Label htmlFor="terms">Accept terms and conditions</Label>
-  </div>
-)

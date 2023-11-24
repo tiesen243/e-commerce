@@ -1,9 +1,13 @@
-import { Card, Typography } from '@/components/ui'
+import { Card } from '@/components/ui'
 
 const Footer: React.FC = () => (
-  <Card className="flex items-center justify-center p-2">
-    <Typography>&copy; {new Date().getFullYear()}. All rights reserved</Typography>
-  </Card>
+  <footer className="w-screen">
+    <Card className="flex items-center justify-center">
+      <article className="typography">
+        <p>&copy; {new Date().getFullYear()}. All rights reserved</p>
+      </article>
+    </Card>
+  </footer>
 )
 
 export default Footer

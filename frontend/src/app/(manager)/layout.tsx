@@ -1,6 +1,6 @@
 import BackBtn from '@/components/BackBtn'
 import AuthMenu from '@/components/layout/Header/AuthMenu'
-import { Card, Typography } from '@/components/ui'
+import { Card } from '@/components/ui'
 import Nav from './nav'
 
 const ManagerLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
@@ -8,9 +8,7 @@ const ManagerLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
     <Card className="sticky inset-0 z-50 px-4 py-2">
       <header className="container mx-auto flex max-w-screen-xl items-center justify-between">
         <BackBtn />
-        <Typography variant="h1" fontWeight="black" className="text-center">
-          Dashboard
-        </Typography>
+        <h1 className="text-center">Dashboard</h1>
 
         <AuthMenu />
       </header>

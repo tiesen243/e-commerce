@@ -1,5 +1,5 @@
 import Dropzone, { DropzoneRef } from 'react-dropzone'
-import { Input, Typography } from './ui'
+import { Input } from './ui'
 import { forwardRef, useState } from 'react'
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -25,9 +25,9 @@ export const DragAndDrop = forwardRef<DropzoneRef, Props>(({ name, setValues, ..
           className="flex items-center justify-between rounded-md border-2 border-dashed border-gray-400 p-4"
         >
           <Input {...getInputProps()} name={name} accept="image/*" />
-          <Typography className="text-gray-400">
+          <p className="text-gray-400">
             {isDragActive ? 'Drop the files here ...' : "Drag 'n' drop some files here, or click to select files"}
-          </Typography>
+          </p>
           {preview && <img src={preview} alt="preview" className="w-16" />}
         </section>
       )}
