@@ -3,16 +3,13 @@
 import { Button, Form, Input, LoadingSpinner, Textarea } from '@/components/ui'
 import { useForm } from 'react-hook-form'
 
-import { DragAndDrop } from '@/components/DragAndDrop'
 import Field from './Field'
 import { CreateFormValues, defaultValues, resolver } from './utils'
+import { PlusIcon } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const CreateForm: React.FC = () => {
-  const form = useForm<CreateFormValues>({
-    resolver,
-    defaultValues: typeof window !== 'undefined' ? defaultValues : undefined,
-    shouldFocusError: false,
-  })
+  const form = useForm<CreateFormValues>({ resolver, defaultValues })
 
   const onSubmit = async (values: CreateFormValues) => {
     console.log(values)
@@ -26,7 +23,7 @@ const CreateForm: React.FC = () => {
         </Field>
 
         <Field name="image" control={form.control}>
-          {(field) => <DragAndDrop setValues={field.onChange} {...field} />}
+          {(field) => <Input type="file" accept="image/*" onChange={(e: any) => field.onChange(e.target.files[0])} />}
         </Field>
 
         <Field name="description" control={form.control}>
