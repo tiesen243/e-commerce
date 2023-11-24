@@ -23,7 +23,7 @@ export const resolver = zodResolver(createFormSchema)
 export type CreateFormValues = z.infer<typeof createFormSchema>
 export const defaultValues: CreateFormValues = {
   name: '',
-  image: new File([], ''),
+  image: new File([], '') || '',
   description: '',
   price: 0,
   stock: 0,

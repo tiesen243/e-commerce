@@ -20,9 +20,9 @@ const CreateForm: React.FC = () => {
         <Field name="name" control={form.control}>
           {(field) => <Input placeholder={`input your ${field.name}`} {...field} />}
         </Field>
-        <Field name="image" control={form.control}>
-          {(field) => <DragAndDrop setValues={field.onChange} {...field} />}
-        </Field>
+        {/* <Field name="image" control={form.control}> */}
+        {/*   {(field) => <DragAndDrop setValues={field.onChange} {...field} />} */}
+        {/* </Field> */}
         <Field name="description" control={form.control}>
           {(field) => <Textarea placeholder={`input your ${field.name}`} {...field} />}
         </Field>
