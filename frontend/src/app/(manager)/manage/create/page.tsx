@@ -1,6 +1,7 @@
-import CreateForm from '@/components/product/create'
 import { NextPage } from 'next'
-import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
+
+const CreateForm = dynamic(() => import('@/components/product/create'), { ssr: false })
 
 const Page: NextPage = () => (
   <main>
@@ -8,9 +9,7 @@ const Page: NextPage = () => (
       <h1>Create new product</h1>
     </article>
 
-    <Suspense>
-      <CreateForm />
-    </Suspense>
+    <CreateForm />
   </main>
 )
 
