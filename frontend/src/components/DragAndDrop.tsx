@@ -1,14 +1,13 @@
+import { forwardRef, useState } from 'react'
 import Dropzone, { DropzoneRef } from 'react-dropzone'
 import { Input } from './ui'
-import { forwardRef, useState } from 'react'
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   preview?: string
-  name: string
   setValues: (value: any) => any
 }
 
-export const DragAndDrop = forwardRef<DropzoneRef, Props>(({ name, setValues, ...rest }, ref) => {
+export const DragAndDrop = forwardRef<DropzoneRef, Props>(({ name, setValues }, ref) => {
   const [preview, setPreview] = useState<string | undefined>(undefined)
   const onDrop = (file: File[]) => {
     const reader = new FileReader()
@@ -24,7 +23,7 @@ export const DragAndDrop = forwardRef<DropzoneRef, Props>(({ name, setValues, ..
           {...getRootProps({})}
           className="flex items-center justify-between rounded-md border-2 border-dashed border-gray-400 p-4"
         >
-          <Input {...getInputProps()} name={name} accept="image/*" />
+          <Input {...getInputProps()} name={name} accept="image/*" onFocus={(e) => e.target.blur()} />
           <p className="text-gray-400">
             {isDragActive ? 'Drop the files here ...' : "Drag 'n' drop some files here, or click to select files"}
           </p>

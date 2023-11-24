@@ -14,24 +14,10 @@ import {
 import { Category, Tag } from '../schemas/enum'
 
 export default class UpdateProductDto {
-  @ApiProperty({
-    description: 'The name of the product',
-  })
+  @ApiProperty({ description: 'The description of the product' })
   @IsOptional()
   @IsString()
-  @Length(4, 100, {
-    message: 'The name must be between 4 and 100 characters',
-  })
-  readonly name: string
-
-  @ApiProperty({
-    description: 'The description of the product',
-  })
-  @IsOptional()
-  @IsString()
-  @Length(4, 1000, {
-    message: 'The description must be between 4 and 1000 characters',
-  })
+  @Length(4, 1000, { message: 'The description must be between 4 and 1000 characters' })
   readonly description: string
 
   @ApiProperty({
@@ -41,13 +27,8 @@ export default class UpdateProductDto {
   @IsOptional()
   @IsString()
   @IsUrl(
-    {
-      require_protocol: true,
-      require_valid_protocol: true,
-    },
-    {
-      message: 'The image must be a valid url of an image',
-    },
+    { require_protocol: true, require_valid_protocol: true },
+    { message: 'The image must be a valid url of an image' },
   )
   readonly image: string
 

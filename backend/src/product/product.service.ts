@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import slug from 'slugify'
 
 import { Role, User } from '../auth/schemas'
 import { IResponse } from '../utils'
@@ -17,17 +18,24 @@ export class ProductService {
   constructor(@InjectModel(Product.name) private readonly productModel: Model<Product>) {}
 
   async findAll(q: QueryProductDto): Promise<IResponse<Product[]>> {
-    const { limit, page, keyword, code, category, tags } = q
+    const { limit, page, keyword, code, slug, category, tags } = q
     const skip: number = (page - 1) * limit
 
     // Search by name, code, category, tags
-    const name = keyword ? { name: { $regex: keyword, $options: 'i' } } : {}
-    const productCode = code ? { code: { $gte: code, $lte: code } } : {}
-    const productTags = tags ? { tags: { $in: tags } } : {}
-    const productCategory = category ? { category: category } : {}
+    const search = {
+      ...(code ? { code: { $gte: code, $lte: code } } : {}),
+      ...(slug ? { slug: { $regex: slug, $options: 'i' } } : {}),
+      ...(keyword ? { name: { $regex: keyword, $options: 'i' } } : {}),
+      ...(category ? { category: category } : {}),
+      ...(tags ? { tags: { $in: tags } } : {}),
+    }
+
+    // Sort by name, price, createdAt, updatedAt
+    const { sortBy, isAscending } = q
 
     const allProducts = await this.productModel
-      .find({ ...productCode, ...name, ...productCategory, ...productTags })
+      .find(search)
+      .sort({ [sortBy]: isAscending ? 'asc' : 'desc' })
       .limit(limit)
       .skip(skip)
       .exec()
@@ -74,6 +82,7 @@ export class ProductService {
     if (user.role !== Role.ADMIN && user.role !== Role.SELLER)
       throw new UnauthorizedException('You are not admin or seller')
 
+    createDto.slug = slug(createDto.name, { lower: true })
     const newProduct = await this.productModel.create({
       createdAt: new Date(),
       userId: user._id,

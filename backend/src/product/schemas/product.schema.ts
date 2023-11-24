@@ -5,12 +5,24 @@ import mongoose, { Document } from 'mongoose'
 
 @Schema({ timestamps: true })
 export class Product extends Document {
-  @Prop({ required: true, unique: true })
+  @Prop({
+    required: true,
+    unique: true,
+    default: Math.floor(Math.random() * 999999) + 100000,
+    isInteger: true,
+  })
   @ApiProperty({
     description: 'The unique identifier of the product',
     example: 177013,
   })
   code: number
+
+  @Prop({ required: true, unique: true, slug: 'name' })
+  @ApiProperty({
+    description: 'The slug of the product',
+    example: 'metamorphosis',
+  })
+  slug: string
 
   @Prop({ required: true })
   @ApiProperty({

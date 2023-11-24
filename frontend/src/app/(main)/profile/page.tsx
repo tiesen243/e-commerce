@@ -4,6 +4,7 @@ import { Button } from '@/components/ui'
 import { NextPage } from 'next'
 import { signOut, useSession } from 'next-auth/react'
 import EditProfileDialog from './EditProfile'
+import { Suspense } from 'react'
 
 const Page: NextPage = () => {
   const { data, update } = useSession()
@@ -32,8 +33,12 @@ const Page: NextPage = () => {
         </p>
 
         <section className="grid grid-cols-1 space-y-4 md:grid-cols-3 md:space-x-4 md:space-y-0">
-          <EditProfileDialog user={data.user} update={update} />
+          <Suspense>
+            <EditProfileDialog user={data.user} update={update} />
+          </Suspense>
+
           <Button>Change password</Button>
+
           <Button variant="destructive" onClick={() => signOut({ callbackUrl: '/' })}>
             Log out
           </Button>

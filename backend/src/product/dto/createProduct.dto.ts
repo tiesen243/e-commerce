@@ -1,31 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
-import { IsNotEmpty, IsString, Length, IsNumber, IsUrl, IsEnum, Min, Max } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsNumber, IsString, IsUrl, Length, Min } from 'class-validator'
 import { Category, Tag } from '../schemas/enum'
 
 export default class CreateProductDto {
-  @ApiProperty({ description: 'The code of the product' })
-  @IsNotEmpty()
-  @IsNumber()
-  @Min(100000)
-  @Max(999999)
-  @Type(() => Number)
-  readonly code: number
+  public slug: string
 
   @ApiProperty({ description: 'The name of the product' })
   @IsNotEmpty()
   @IsString()
-  @Length(4, 100, {
-    message: 'The name must be between 4 and 100 characters',
-  })
+  @Length(4, 100, { message: 'The name must be between 4 and 100 characters' })
   readonly name: string
 
   @ApiProperty({ description: 'The description of the product' })
   @IsNotEmpty()
   @IsString()
-  @Length(4, 1000, {
-    message: 'The description must be between 4 and 1000 characters',
-  })
+  @Length(4, 1000, { message: 'The description must be between 4 and 1000 characters' })
   readonly description: string
 
   @ApiProperty({
@@ -35,13 +25,8 @@ export default class CreateProductDto {
   @IsNotEmpty()
   @IsString()
   @IsUrl(
-    {
-      require_protocol: true,
-      require_valid_protocol: true,
-    },
-    {
-      message: 'The image must be a valid url of an image',
-    },
+    { require_protocol: true, require_valid_protocol: true },
+    { message: 'The image must be a valid url of an image' },
   )
   readonly image: string
 
@@ -59,20 +44,13 @@ export default class CreateProductDto {
   @Min(0)
   readonly stock: number
 
-  @ApiProperty({
-    description: 'The category of the product',
-    enum: Category,
-  })
+  @ApiProperty({ description: 'The category of the product', enum: Category })
   @IsNotEmpty()
   @IsString()
   @IsEnum(Category)
   readonly category: Category
 
-  @ApiProperty({
-    description: 'The tags of the product',
-    enum: Tag,
-    isArray: true,
-  })
+  @ApiProperty({ description: 'The tags of the product', enum: Tag, isArray: true })
   @IsNotEmpty()
   @IsString({ each: true })
   @IsEnum(Tag, { each: true })
