@@ -1,15 +1,18 @@
 import { NextPage } from 'next'
-import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
 
-const RegisterForm = dynamic(() => import('./RegisterForm'))
-const Header = dynamic(() => import('../Header'))
-const Footer = dynamic(() => import('../Footer'))
+import { LoadingSpinner } from '@/components/ui'
+import Footer from '../Footer'
+import Header from '../Header'
+import RegisterForm from './RegisterForm'
 
 const Page: NextPage = () => (
   <>
     <Header title="Register" />
 
-    <RegisterForm />
+    <Suspense fallback={<LoadingSpinner />}>
+      <RegisterForm />
+    </Suspense>
 
     <Footer text="Already have an account? " href="/login" hrefText="Login" />
   </>

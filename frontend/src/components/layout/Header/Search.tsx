@@ -18,6 +18,7 @@ const Search: React.FC<SearchProps> = ({ className }) => {
     <form onSubmit={handleSearch} className={className}>
       <Input
         placeholder="Search..."
+        type="search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="bg-transparent"

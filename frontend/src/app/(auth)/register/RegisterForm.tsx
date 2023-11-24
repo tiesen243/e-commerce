@@ -2,7 +2,7 @@
 
 import { Button, CardContent, Form, LoadingSpinner, useToast } from '@/components/ui'
 import axios from '@/lib/axios'
-import { AcceptTerms, FormChild } from './FormField'
+import { AcceptTerms, FormChild as Field } from './FormField'
 import { RegisterSchema, RegisterType, defaultValues, useForm, useRouter, zodResolver } from './utils'
 
 const RegisterForm: React.FC = () => {
@@ -40,7 +40,7 @@ const RegisterForm: React.FC = () => {
           {Object.keys(form.getValues()).map((key: string, idx: number) => {
             const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())
             const type = key === 'confirmPassword' ? 'password' : key === 'userName' ? 'text' : key
-            return <FormChild key={idx} item={key} label={label} control={form.control} type={type} />
+            return <Field key={idx} item={key} label={label} control={form.control} type={type} />
           })}
 
           <AcceptTerms />

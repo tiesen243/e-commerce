@@ -1,18 +1,7 @@
 'use client'
 
-import {
-  Button,
-  CardContent,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-  LoadingSpinner,
-  useToast,
-} from '@/components/ui'
+import { Button, CardContent, Form, LoadingSpinner, useToast } from '@/components/ui'
+import { Field } from './Field'
 import { LoginSchema, LoginType, defaultValues, signIn, useForm, useRouter, zodResolver } from './action'
 
 const LogInForm: React.FC = () => {
@@ -47,7 +36,7 @@ const LogInForm: React.FC = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           {Object.keys(defaultValues).map((item: string, idx: number) => (
-            <FormCard control={form.control} item={item} key={idx} />
+            <Field control={form.control} item={item} key={idx} />
           ))}
 
           <Button type="submit" disabled={form.formState.isSubmitting}>
@@ -58,25 +47,5 @@ const LogInForm: React.FC = () => {
     </CardContent>
   )
 }
-
-interface FormCardProps {
-  control: any
-  item: string
-}
-const FormCard: React.FC<FormCardProps> = ({ control, item }) => (
-  <FormField
-    name={item}
-    control={control}
-    render={({ field }) => (
-      <FormItem>
-        <FormLabel className="capitalize">{item}</FormLabel>
-        <FormControl>
-          <Input placeholder={`Enter your ${item}`} type={item} {...field} />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-)
 
 export default LogInForm
