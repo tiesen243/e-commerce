@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export const createFormSchema = z.object({
   name: z.string().min(4).max(255),
-  image: z.instanceof(File).nullable(),
+  image: z.instanceof(FileList).nullable(),
   description: z.string().min(4).max(255),
   price: z.string().transform((val) => Number(val)),
   stock: z.string().transform((val) => Number(val)),
