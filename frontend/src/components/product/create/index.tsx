@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Form, Input, Textarea } from '@/components/ui'
+import { Button, Form, Input, LoadingSpinner, Textarea } from '@/components/ui'
 import { useForm } from 'react-hook-form'
 
 import { DragAndDrop } from '@/components/DragAndDrop'
@@ -8,7 +8,11 @@ import Field from './Field'
 import { CreateFormValues, defaultValues, resolver } from './utils'
 
 const CreateForm: React.FC = () => {
-  const form = useForm<CreateFormValues>({ resolver, defaultValues, shouldFocusError: false })
+  const form = useForm<CreateFormValues>({
+    resolver,
+    defaultValues: typeof window !== 'undefined' ? defaultValues : undefined,
+    shouldFocusError: false,
+  })
 
   const onSubmit = async (values: CreateFormValues) => {
     console.log(values)
@@ -20,12 +24,15 @@ const CreateForm: React.FC = () => {
         <Field name="name" control={form.control}>
           {(field) => <Input placeholder={`input your ${field.name}`} {...field} />}
         </Field>
-        {/* <Field name="image" control={form.control}> */}
-        {/*   {(field) => <DragAndDrop setValues={field.onChange} {...field} />} */}
-        {/* </Field> */}
+
+        <Field name="image" control={form.control}>
+          {(field) => <DragAndDrop setValues={field.onChange} {...field} />}
+        </Field>
+
         <Field name="description" control={form.control}>
           {(field) => <Textarea placeholder={`input your ${field.name}`} {...field} />}
         </Field>
+
         <Field name="price" control={form.control}>
           {(field) => <Input type="number" placeholder={`input your ${field.name}`} {...field} />}
         </Field>
@@ -33,8 +40,9 @@ const CreateForm: React.FC = () => {
         <Field name="stock" control={form.control}>
           {(field) => <Input type="number" placeholder={`input your ${field.name}`} {...field} />}
         </Field>
-        <Button variant="outline" type="submit" className="w-full">
-          Create
+
+        <Button variant="outline" type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting && <LoadingSpinner />} Create
         </Button>
       </form>
     </Form>
