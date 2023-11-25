@@ -1,18 +1,18 @@
+'use client'
 import { NextPage } from 'next'
-import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
 
-import Footer from '../Footer'
-import Header from '../Header'
-import LogInForm from './LoginForm'
-import { LoadingSpinner } from '@/components/ui'
+import Footer from '@/components/auth/Footer'
+import Header from '@/components/auth/Header'
+const LoginForm = dynamic(() => import('@/components/auth/login/LoginForm'), {
+  ssr: false,
+})
 
 const Page: NextPage = () => (
   <>
     <Header title="Login" />
 
-    <Suspense fallback={<LoadingSpinner />}>
-      <LogInForm />
-    </Suspense>
+    <LoginForm />
 
     <Footer text="Dont have account? " href="/register" hrefText="Register" />
   </>

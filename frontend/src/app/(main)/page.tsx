@@ -1,9 +1,13 @@
-import { Button } from '@/components/ui'
+'use client'
+import nextImport from '@/lib/nextImport'
 import { NextPage } from 'next'
+
+const Button = nextImport('Button')
 
 const Page: NextPage = () => {
   return (
     <main className="typography">
+      <Button>Button</Button>
       <p>
         Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem
         pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud

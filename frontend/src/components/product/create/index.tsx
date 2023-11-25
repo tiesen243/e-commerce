@@ -1,5 +1,3 @@
-'use client'
-
 import { Button, Form, Input, LoadingSpinner, Textarea } from '@/components/ui'
 import { useForm } from 'react-hook-form'
 

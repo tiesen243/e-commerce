@@ -1,5 +1,8 @@
-import { Button } from '@/components/ui'
+'use client'
+
+import nextImport from '@/lib/nextImport'
 import Link from 'next/link'
+const Button = nextImport('Button')
 
 const Page = () => (
   <main className="typography flex flex-col items-center justify-center">

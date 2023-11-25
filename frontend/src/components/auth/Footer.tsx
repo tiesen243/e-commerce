@@ -1,5 +1,9 @@
-import { CardFooter } from '@/components/ui'
+'use client'
+
 import Link from 'next/link'
+
+import nextImport from '@/lib/nextImport'
+const CardFooter = nextImport('CardFooter')
 
 interface Props {
   text: string

@@ -1,9 +1,8 @@
-'use client'
-
-import { Button, CardContent, Form, LoadingSpinner, useToast } from '@/components/ui'
 import axios from '@/lib/axios'
-import { AcceptTerms, FormChild as Field } from './FormField'
+
+import { Button, CardContent, Checkbox, Form, Input, Label, LoadingSpinner, useToast } from '@/components/ui'
 import { RegisterSchema, RegisterType, defaultValues, useForm, useRouter, zodResolver } from './utils'
+import Fields from '@/components/Fields'
 
 const RegisterForm: React.FC = () => {
   const { toast } = useToast()
@@ -37,10 +36,13 @@ const RegisterForm: React.FC = () => {
     <CardContent>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          {Object.keys(form.getValues()).map((key: string, idx: number) => {
-            const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())
-            const type = key === 'confirmPassword' ? 'password' : key === 'userName' ? 'text' : key
-            return <Field key={idx} item={key} label={label} control={form.control} type={type} />
+          {Object.keys(form.getValues()).map((item: string, idx: number) => {
+            const type = item === 'confirmPassword' ? 'password' : item === 'userName' ? 'text' : item
+            return (
+              <Fields key={idx} name={item} control={form.control}>
+                {(field) => <Input type={type} placeholder={`Enter your ${field.name}`} {...field} />}
+              </Fields>
+            )
           })}
 
           <AcceptTerms />
@@ -55,3 +57,10 @@ const RegisterForm: React.FC = () => {
 }
 
 export default RegisterForm
+
+export const AcceptTerms: React.FC = () => (
+  <div className="flex items-center space-x-2">
+    <Checkbox id="terms" required />
+    <Label htmlFor="terms">Accept terms and conditions</Label>
+  </div>
+)

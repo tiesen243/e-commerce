@@ -1,4 +1,7 @@
-import { CardHeader } from '@/components/ui'
+'use client'
+
+import nextImport from '@/lib/nextImport'
+const CardHeader = nextImport('CardHeader')
 
 interface Props {
   title: string

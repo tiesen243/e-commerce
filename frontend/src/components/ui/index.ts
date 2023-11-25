@@ -1,7 +1,7 @@
 'use client'
 
 export { Avatar, AvatarFallback, AvatarImage } from './avatar'
-export { Button, buttonVariants } from './button'
+export { Button } from './button'
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card'
 export { Checkbox } from './checkbox'
 export {
@@ -50,15 +50,15 @@ export {
 } from './navigation-menu'
 export {
   Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
-  SelectLabel,
+  SelectGroup,
   SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
+  SelectLabel,
   SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
 } from './select'
 export {
   Sheet,
@@ -73,7 +73,7 @@ export {
   SheetTrigger,
 } from './sheet'
 export { Skeleton } from './skeleton'
-export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from './table'
+export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from './table'
 export { Textarea } from './textarea'
 export {
   Toast,

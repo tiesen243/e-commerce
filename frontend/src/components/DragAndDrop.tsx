@@ -1,12 +1,14 @@
+'use client'
+
 import { forwardRef, useState } from 'react'
 import Dropzone, { DropzoneRef } from 'react-dropzone'
 
-import Field from '@/types/field'
+import IField from '@/types/field'
 import { Input, useToast } from './ui'
 
 interface Props {
   previewImg?: string
-  field: Field
+  field: IField
 }
 
 const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, field }, ref) => {

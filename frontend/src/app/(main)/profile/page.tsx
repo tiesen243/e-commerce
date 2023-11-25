@@ -2,10 +2,11 @@
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 
-import { Button } from '@/components/ui'
 import { signOut, useSession } from 'next-auth/react'
+import nextImport from '@/lib/nextImport'
 
 const EditProfileDialog = dynamic(() => import('@/components/profile/update'), { ssr: false })
+const Button = nextImport('components/ui/button')
 
 const Page: NextPage = () => {
   const { data, update } = useSession()

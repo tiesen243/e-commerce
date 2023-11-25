@@ -1,10 +1,8 @@
-'use client'
+import { Button, CardContent, Form, Input, LoadingSpinner, useToast } from '@/components/ui'
+import { LoginSchema, LoginType, defaultValues, signIn, useForm, useRouter, zodResolver } from './utils'
+import Field from '@/components/Fields'
 
-import { Button, CardContent, Form, LoadingSpinner, useToast } from '@/components/ui'
-import { Field } from './Field'
-import { LoginSchema, LoginType, defaultValues, signIn, useForm, useRouter, zodResolver } from './action'
-
-const LogInForm: React.FC = () => {
+const LoginForm: React.FC = () => {
   const { toast } = useToast()
   const form = useForm<LoginType>({
     resolver: zodResolver(LoginSchema),
@@ -36,7 +34,9 @@ const LogInForm: React.FC = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           {Object.keys(defaultValues).map((item: string, idx: number) => (
-            <Field control={form.control} item={item} key={idx} />
+            <Field key={idx} control={form.control} name={item}>
+              {(field) => <Input placeholder={`Enter your ${item}`} type={item} {...field} />}
+            </Field>
           ))}
 
           <Button type="submit" disabled={form.formState.isSubmitting}>
@@ -48,4 +48,4 @@ const LogInForm: React.FC = () => {
   )
 }
 
-export default LogInForm
+export default LoginForm
