@@ -3,7 +3,9 @@
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 
-const CreateForm = dynamic(() => import('@/components/product/create'), { ssr: false })
+const CreateForm = dynamic(() => import('@/components/product/create'), {
+  ssr: false,
+})
 
 const Page: NextPage = () => (
   <main>

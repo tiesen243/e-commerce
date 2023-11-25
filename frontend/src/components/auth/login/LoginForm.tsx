@@ -1,5 +1,20 @@
-import { Button, CardContent, Form, Input, LoadingSpinner, useToast } from '@/components/ui'
-import { LoginSchema, LoginType, defaultValues, signIn, useForm, useRouter, zodResolver } from './utils'
+import {
+  Button,
+  CardContent,
+  Form,
+  Input,
+  LoadingSpinner,
+  useToast,
+} from '@/components/ui'
+import {
+  LoginSchema,
+  LoginType,
+  defaultValues,
+  signIn,
+  useForm,
+  useRouter,
+  zodResolver,
+} from './utils'
 import Field from '@/components/Fields'
 
 const LoginForm: React.FC = () => {
@@ -35,7 +50,14 @@ const LoginForm: React.FC = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           {Object.keys(defaultValues).map((item: string, idx: number) => (
             <Field key={idx} control={form.control} name={item}>
-              {(field) => <Input placeholder={`Enter your ${item}`} type={item} {...field} />}
+              {(field) => (
+                <Input
+                  placeholder={`Enter your ${item}`}
+                  type={item}
+                  {...field}
+                  disabled={form.formState.isSubmitting}
+                />
+              )}
             </Field>
           ))}
 

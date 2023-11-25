@@ -30,14 +30,23 @@ const CreateForm: React.FC = () => {
         </CreateField>
 
         <CreateField name="price" control={form.control}>
-          {(field) => <Input type="number" placeholder={`input your ${field.name}`} {...field} />}
+          {(field) => (
+            <Input type="number" placeholder={`input your ${field.name}`} {...field} />
+          )}
         </CreateField>
 
         <CreateField name="stock" control={form.control}>
-          {(field) => <Input type="number" placeholder={`input your ${field.name}`} {...field} />}
+          {(field) => (
+            <Input type="number" placeholder={`input your ${field.name}`} {...field} />
+          )}
         </CreateField>
 
-        <Button variant="outline" type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+        <Button
+          variant="outline"
+          type="submit"
+          className="w-full"
+          disabled={form.formState.isSubmitting}
+        >
           {form.formState.isSubmitting && <LoadingSpinner />} Create
         </Button>
       </form>

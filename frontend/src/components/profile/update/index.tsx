@@ -24,7 +24,9 @@ const EditProfileDialog: React.FC<Props> = (props) => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>Make changes to your profile here. Click save when you&#39;re done.</DialogDescription>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you&#39;re done.
+          </DialogDescription>
         </DialogHeader>
 
         <UpdateForm {...props} setIsOpen={setIsOpen} />

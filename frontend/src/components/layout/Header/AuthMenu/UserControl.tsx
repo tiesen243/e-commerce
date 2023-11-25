@@ -1,5 +1,10 @@
 import ThemeDropdownBtn from '@/components/ThemeDropdownBtn'
-import { DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui'
+import {
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from '@/components/ui'
 import { IUser } from '@/types/user'
 import { GanttChartSquare, LogOutIcon, ShoppingCart, User } from 'lucide-react'
 import { signOut } from 'next-auth/react'
@@ -36,7 +41,10 @@ const UserControl: React.FC<{ user: IUser }> = ({ user }) => (
 
     <DropdownMenuGroup>
       <ThemeDropdownBtn />
-      <DropdownMenuItem className="flex gap-2" onClick={() => signOut({ callbackUrl: '/' })}>
+      <DropdownMenuItem
+        className="flex gap-2"
+        onClick={() => signOut({ callbackUrl: '/' })}
+      >
         <LogOutIcon />
         <span>Logout</span>
       </DropdownMenuItem>

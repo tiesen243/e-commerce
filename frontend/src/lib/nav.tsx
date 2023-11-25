@@ -1,4 +1,9 @@
-import { FolderKanbanIcon, FolderPlusIcon, ListOrderedIcon, UsersIcon } from 'lucide-react'
+import {
+  FolderKanbanIcon,
+  FolderPlusIcon,
+  ListOrderedIcon,
+  UsersIcon,
+} from 'lucide-react'
 
 export const navItems = [
   {

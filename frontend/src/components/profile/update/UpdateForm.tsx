@@ -10,11 +10,9 @@ import axios from 'axios'
 
 const UpdateFields = Fields as React.FC<FieldsProps<FormValues>>
 
-const UpdateForm: React.FC<Props & { setIsOpen: React.Dispatch<React.SetStateAction<boolean>> }> = ({
-  user,
-  update,
-  setIsOpen,
-}) => {
+const UpdateForm: React.FC<
+  Props & { setIsOpen: React.Dispatch<React.SetStateAction<boolean>> }
+> = ({ user, update, setIsOpen }) => {
   const toast = useToast().toast
   const form = useForm<FormValues>({
     resolver,
@@ -28,7 +26,10 @@ const UpdateForm: React.FC<Props & { setIsOpen: React.Dispatch<React.SetStateAct
       let url: string = user.avatar
       if (data.avatar) url = await uploadImage(data.avatar, user._id, 'avatar')
 
-      await axios.patch('/api/auth/updateInfo', { userName: data.userName, avatar: url })
+      await axios.patch('/api/auth/updateInfo', {
+        userName: data.userName,
+        avatar: url,
+      })
       update({})
       setIsOpen(false)
       toast({

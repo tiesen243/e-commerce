@@ -37,7 +37,13 @@ const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, field }, ref) 
   }
 
   return (
-    <Dropzone onDrop={onDrop} multiple={false} ref={ref} maxSize={5242880} accept={{ image: ['image/*'] }}>
+    <Dropzone
+      onDrop={onDrop}
+      multiple={false}
+      ref={ref}
+      maxSize={5242880}
+      accept={{ image: ['image/*'] }}
+    >
       {({ getRootProps, getInputProps, isDragActive }) => (
         <section
           {...getRootProps({})}
@@ -45,10 +51,14 @@ const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, field }, ref) 
         >
           <Input {...getInputProps()} name={field.name} accept="image/*" />
           <p className="text-gray-400">
-            {isDragActive ? 'Drop the files here ...' : "Drag 'n' drop some files here, or click to select files"}
+            {isDragActive
+              ? 'Drop the files here ...'
+              : "Drag 'n' drop some files here, or click to select files"}
           </p>
 
-          {preview && <img src={preview} alt="preview" width={100} height={200} loading="lazy" />}
+          {preview && (
+            <img src={preview} alt="preview" width={100} height={200} loading="lazy" />
+          )}
         </section>
       )}
     </Dropzone>

@@ -15,7 +15,9 @@ const Fields: React.FC<FieldsProps<any>> = ({ children, control, name }) => (
     name={name.toString()}
     render={({ field }) => (
       <FormItem>
-        <FormLabel className="capitalize">{field.name.replace(/([A-Z])/g, ' $1')}</FormLabel>
+        <FormLabel className="capitalize">
+          {field.name.replace(/([A-Z])/g, ' $1')}
+        </FormLabel>
         <FormControl>{children(field)}</FormControl>
         <FormMessage />
       </FormItem>

@@ -2,7 +2,14 @@
 
 export { Avatar, AvatarFallback, AvatarImage } from './avatar'
 export { Button } from './button'
-export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card'
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './card'
 export { Checkbox } from './checkbox'
 export {
   Dialog,
@@ -33,7 +40,16 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from './dropdown-menu'
-export { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, useFormField } from './form'
+export {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  useFormField,
+} from './form'
 export { Input } from './input'
 export { Label } from './label'
 export { LoadingSpinner } from './loading'
@@ -73,7 +89,16 @@ export {
   SheetTrigger,
 } from './sheet'
 export { Skeleton } from './skeleton'
-export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from './table'
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from './table'
 export { Textarea } from './textarea'
 export {
   Toast,

@@ -7,7 +7,9 @@ import nextImport from '@/lib/nextImport'
 import Image from 'next/image'
 import { formatDateTime } from '@/lib/utils'
 
-const EditProfileDialog = dynamic(() => import('@/components/profile/update'), { ssr: false })
+const EditProfileDialog = dynamic(() => import('@/components/profile/update'), {
+  ssr: false,
+})
 const Button = nextImport('Button')
 
 const Page: NextPage = () => {

@@ -1,7 +1,23 @@
 import axios from '@/lib/axios'
 
-import { Button, CardContent, Checkbox, Form, Input, Label, LoadingSpinner, useToast } from '@/components/ui'
-import { RegisterSchema, RegisterType, defaultValues, useForm, useRouter, zodResolver } from './utils'
+import {
+  Button,
+  CardContent,
+  Checkbox,
+  Form,
+  Input,
+  Label,
+  LoadingSpinner,
+  useToast,
+} from '@/components/ui'
+import {
+  RegisterSchema,
+  RegisterType,
+  defaultValues,
+  useForm,
+  useRouter,
+  zodResolver,
+} from './utils'
 import Fields from '@/components/Fields'
 
 const RegisterForm: React.FC = () => {
@@ -37,10 +53,21 @@ const RegisterForm: React.FC = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           {Object.keys(form.getValues()).map((item: string, idx: number) => {
-            const type = item === 'confirmPassword' ? 'password' : item === 'userName' ? 'text' : item
+            const type =
+              item === 'confirmPassword'
+                ? 'password'
+                : item === 'userName'
+                  ? 'text'
+                  : item
             return (
               <Fields key={idx} name={item} control={form.control}>
-                {(field) => <Input type={type} placeholder={`Enter your ${field.name}`} {...field} />}
+                {(field) => (
+                  <Input
+                    type={type}
+                    placeholder={`Enter your ${field.name}`}
+                    {...field}
+                  />
+                )}
               </Fields>
             )
           })}

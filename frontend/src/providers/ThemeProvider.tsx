@@ -5,7 +5,13 @@ import { ThemeProvider as NextThemeProvider } from 'next-themes'
 import { type ThemeProviderProps } from 'next-themes/dist/types'
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...rest }) => (
-  <NextThemeProvider defaultTheme="dark" attribute="class" storageKey="theme" disableTransitionOnChange {...rest}>
+  <NextThemeProvider
+    defaultTheme="dark"
+    attribute="class"
+    storageKey="theme"
+    disableTransitionOnChange
+    {...rest}
+  >
     {children}
     <Toaster />
   </NextThemeProvider>

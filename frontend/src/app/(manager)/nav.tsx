@@ -15,7 +15,11 @@ const Nav: React.FC = () => {
       <ul className="grid w-full grid-cols-2 gap-2 md:grid-cols-1">
         {items.map((item, idx: number) => (
           <li key={idx}>
-            <Button variant="outline" className="flex items-center justify-stretch" asChild>
+            <Button
+              variant="outline"
+              className="flex items-center justify-stretch"
+              asChild
+            >
               <Link href={item.href}>
                 {item.icon}
                 <p className="ml-4">{item.title}</p>

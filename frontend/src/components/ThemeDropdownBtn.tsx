@@ -8,7 +8,11 @@ const ThemeDropdownBtn = () => {
 
   return (
     <DropdownMenuItem className="flex gap-2" onClick={toggleTheme}>
-      {theme === 'dark' ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
+      {theme === 'dark' ? (
+        <SunIcon className="h-5 w-5" />
+      ) : (
+        <MoonIcon className="h-5 w-5" />
+      )}
       <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
     </DropdownMenuItem>
   )
