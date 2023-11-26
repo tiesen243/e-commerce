@@ -1,10 +1,10 @@
 import axios from '@/lib/axios'
-import { getToken } from 'next-auth/jwt'
+import { getUserToken } from '@/lib/utils'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { token } = (await getToken({ req, secret: process.env.NEXTAUTH_SECRET })) as any
+    const token = await getUserToken(req)
     const body = await req.json()
 
     await axios.post('/product/create', body, {
