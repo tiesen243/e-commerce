@@ -16,9 +16,7 @@ const ManagerLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
 
     <main className="container grid max-w-screen-xl grid-cols-1 space-x-4 space-y-2 md:grid-cols-3 lg:grid-cols-4">
       <Nav />
-      <section className="container pb-12 md:col-span-2 lg:col-span-3">
-        {children}
-      </section>
+      <section className="container pb-12 md:col-span-2 lg:col-span-3">{children}</section>
     </main>
   </div>
 )

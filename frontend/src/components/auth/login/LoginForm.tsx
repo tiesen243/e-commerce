@@ -1,11 +1,4 @@
-import {
-  Button,
-  CardContent,
-  Form,
-  Input,
-  LoadingSpinner,
-  useToast,
-} from '@/components/ui'
+import { Button, CardContent, Form, Input, LoadingSpinner, useToast } from '@/components/ui'
 import {
   LoginSchema,
   LoginType,

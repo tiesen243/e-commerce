@@ -12,6 +12,7 @@ import { Role, User } from '../auth/schemas'
 import { IResponse } from '../utils'
 import { CreateProductDto, QueryProductDto, UpdateProductDto } from './dto'
 import { Product } from './schemas/product.schema'
+import { create } from 'domain'
 
 @Injectable()
 export class ProductService {
@@ -82,7 +83,11 @@ export class ProductService {
     if (user.role !== Role.ADMIN && user.role !== Role.SELLER)
       throw new UnauthorizedException('You are not admin or seller')
 
+    const allProducts = await this.productModel.find().exec()
     createDto.slug = slug(createDto.name, { lower: true })
+    if (allProducts.find((product) => product.slug === createDto.slug))
+      throw new BadRequestException('Product name has been existed')
+
     const newProduct = await this.productModel.create({
       createdAt: new Date(),
       userId: user._id,

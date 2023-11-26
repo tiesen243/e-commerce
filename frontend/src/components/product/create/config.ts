@@ -3,14 +3,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 const createFormSchema = z.object({
-  name: z.string().min(4).max(255),
+  name: z.string().min(4).max(100),
   image: z
     .instanceof(File)
     .nullable()
     .refine((val) => val !== null, {
       message: 'Please upload an image',
     }),
-  description: z.string().min(4).max(255),
+  description: z.string().min(4).max(1000),
   price: z.string().transform((val) => Number(val)),
   stock: z.string().transform((val) => Number(val)),
   category: z.nativeEnum(Category),

@@ -56,9 +56,7 @@ const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, field }, ref) 
               : "Drag 'n' drop some files here, or click to select files"}
           </p>
 
-          {preview && (
-            <img src={preview} alt="preview" width={100} height={200} loading="lazy" />
-          )}
+          {preview && <img src={preview} alt="preview" width={100} height={200} loading="lazy" />}
         </section>
       )}
     </Dropzone>

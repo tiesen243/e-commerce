@@ -1,12 +1,12 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui'
 import { FieldValues, UseFormReturn } from 'react-hook-form'
 
-import Fields from '@/types/field'
+import IFields from '@/types/field'
 
 export interface FieldsProps<T extends FieldValues> {
   control: UseFormReturn<T>['control']
   name: keyof T
-  children: (field: Fields) => React.ReactNode
+  children: (field: IFields) => React.ReactNode
 }
 
 const Fields: React.FC<FieldsProps<any>> = ({ children, control, name }) => (
@@ -15,9 +15,7 @@ const Fields: React.FC<FieldsProps<any>> = ({ children, control, name }) => (
     name={name.toString()}
     render={({ field }) => (
       <FormItem>
-        <FormLabel className="capitalize">
-          {field.name.replace(/([A-Z])/g, ' $1')}
-        </FormLabel>
+        <FormLabel className="capitalize">{field.name.replace(/([A-Z])/g, ' $1')}</FormLabel>
         <FormControl>{children(field)}</FormControl>
         <FormMessage />
       </FormItem>

@@ -54,19 +54,11 @@ const RegisterForm: React.FC = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           {Object.keys(form.getValues()).map((item: string, idx: number) => {
             const type =
-              item === 'confirmPassword'
-                ? 'password'
-                : item === 'userName'
-                  ? 'text'
-                  : item
+              item === 'confirmPassword' ? 'password' : item === 'userName' ? 'text' : item
             return (
               <Fields key={idx} name={item} control={form.control}>
                 {(field) => (
-                  <Input
-                    type={type}
-                    placeholder={`Enter your ${field.name}`}
-                    {...field}
-                  />
+                  <Input type={type} placeholder={`Enter your ${field.name}`} {...field} />
                 )}
               </Fields>
             )

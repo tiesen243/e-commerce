@@ -29,9 +29,9 @@ const UserControl: React.FC<{ user: IUser }> = ({ user }) => (
 
       {user.role !== 'user' && (
         <DropdownMenuItem asChild>
-          <Link href="/manage/products" className="flex gap-2">
+          <Link href="/management/products" className="flex gap-2">
             <GanttChartSquare />
-            <span>Manage</span>
+            <span>Management</span>
           </Link>
         </DropdownMenuItem>
       )}
@@ -41,10 +41,7 @@ const UserControl: React.FC<{ user: IUser }> = ({ user }) => (
 
     <DropdownMenuGroup>
       <ThemeDropdownBtn />
-      <DropdownMenuItem
-        className="flex gap-2"
-        onClick={() => signOut({ callbackUrl: '/' })}
-      >
+      <DropdownMenuItem className="flex gap-2" onClick={() => signOut({ callbackUrl: '/' })}>
         <LogOutIcon />
         <span>Logout</span>
       </DropdownMenuItem>

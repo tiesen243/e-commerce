@@ -1,42 +1,22 @@
-'use client'
-import {
-  Form,
-  FormField,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui'
 import { type NextPage } from 'next'
-import { useForm } from 'react-hook-form'
 
-const Page: NextPage = () => {
-  const form = useForm()
-  return (
-    <div>
-      <h1>Page</h1>
-      <Form {...form}>
-        <form>
-          <FormField
-            name="name"
-            render={() => (
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a verified email to display" />
-                </SelectTrigger>
-                <SelectContent className="z-50">
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
-            )}
-          />
-        </form>
-      </Form>
-    </div>
-  )
-}
+const Page: NextPage = () => (
+  <article className="typography">
+    <h1>
+      Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur
+      cupidatat.
+    </h1>
+    <p>
+      Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint
+      ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur
+      officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
+      minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla
+      sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia
+      voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+      eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris
+      sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.
+    </p>
+  </article>
+)
 
 export default Page

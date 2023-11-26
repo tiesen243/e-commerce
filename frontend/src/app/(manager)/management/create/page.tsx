@@ -5,16 +5,14 @@ import dynamic from 'next/dynamic'
 
 const CreateForm = dynamic(() => import('@/components/product/create'), {
   ssr: false,
+  loading: () => <p>Loading...</p>,
 })
 
 const Page: NextPage = () => (
-  <main>
-    <article className="typography">
-      <h1>Create new product</h1>
-    </article>
-
+  <div className="typography">
+    <h1 className="text-center">Create new Product</h1>
     <CreateForm />
-  </main>
+  </div>
 )
 
 export default Page
