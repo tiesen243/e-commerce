@@ -86,7 +86,7 @@ export class ProductService {
     const allProducts = await this.productModel.find().exec()
     createDto.slug = slug(createDto.name, { lower: true })
     if (allProducts.find((product) => product.slug === createDto.slug))
-      throw new BadRequestException('Product name has been existed')
+      throw new BadRequestException('Product has been existed')
 
     const newProduct = await this.productModel.create({
       createdAt: new Date(),

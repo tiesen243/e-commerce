@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import DragAndDrop from '@/components/DragAndDrop'
 import { Button, Form, Input, LoadingSpinner, Textarea, useToast } from '@/components/ui'
-import { uploadImage } from '@/lib/firebase'
+import { deleteImage, uploadImage } from '@/lib/firebase'
 import { CreateFormValues, defaultValues, resolver } from './config'
 
 import Fields, { FieldsProps } from '@/components/Fields'
@@ -19,19 +19,15 @@ const CreateForm: React.FC = () => {
   const form = useForm<CreateFormValues>({ resolver, defaultValues })
 
   const onSubmit = async (values: CreateFormValues) => {
+    const name: string = values.name.toLowerCase().replace(/\s/g, '-')
     try {
-      const image = await uploadImage(
-        values.image,
-        values.name.toLowerCase().replace(/\s/g, '-'),
-        'product'
-      )
+      const image = await uploadImage(values.image, name, 'product')
       await axios.post('/api/product/create', { ...values, image })
-
       toast({ description: 'Product created successfully', variant: 'success' })
       push('/management/products')
     } catch (err: any) {
       const message = err.response.data.message
-
+      await deleteImage(name, 'product')
       toast({ description: message, variant: 'destructive' })
     }
   }
