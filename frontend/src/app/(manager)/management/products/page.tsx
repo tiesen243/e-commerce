@@ -1,31 +1,19 @@
 'use client'
 
-import { Product } from '@/types/product'
-import axios from 'axios'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import useSWR, { Fetcher } from 'swr'
-import { column } from './column'
+import useSWR from 'swr'
 
-const DataTable = dynamic(() => import('@/components/DataTable'), {
-  ssr: false,
-})
+import { column, fetcher } from '@/components/product/table'
+import { ColumnDef } from '@tanstack/react-table'
 
-const fetcher: Fetcher<Product[]> = async (url: string) => {
-  try {
-    const { data } = await axios.get(url)
-    return data
-  } catch (e: any) {
-    throw e.response.data
-  }
-}
+const DataTable = dynamic(() => import('@/components/DataTable'), { ssr: false })
+
 const Page: NextPage = () => {
-  const { data, error } = useSWR('/api/product/me', fetcher, {
-    refreshInterval: 1000,
-  })
+  const { data, error } = useSWR('/api/product/me', fetcher as any)
   if (error || !data) return <div>{error}</div>
 
-  return <DataTable columns={column as any} data={data} filter="name" />
+  return <DataTable columns={column as ColumnDef<unknown, unknown>[]} data={data} filter="name" />
 }
 
 export default Page

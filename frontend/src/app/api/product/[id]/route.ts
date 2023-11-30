@@ -3,15 +3,15 @@ import { NextResponse } from 'next/server'
 
 interface Params {
   params: {
-    slug: string
+    id: string
   }
 }
 
 export const GET = async (_req: Request, { params }: Params) => {
-  const { slug } = params
+  const { id } = params
 
   try {
-    const { data } = await axios.get(`/product?slug=${slug}`)
+    const { data } = await axios.get(`/product/${id}`)
     return NextResponse.json(data, { status: 200 })
   } catch (e: any) {
     const message = e.response.data.message
