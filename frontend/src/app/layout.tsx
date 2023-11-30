@@ -5,13 +5,14 @@ export const metadata: Metadata = {
   description: 'E-Commerce App built with Next.js and Shadcn/ui',
 }
 
-import './globals.css'
-import fonts from '@/lib/fonts'
+import { cn } from '@/lib/utils'
 import { AuthProvider, ThemeProvider } from '@/providers'
+import { GeistSans } from 'geist/font/sans'
+import './globals.css'
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
-    <body className={fonts}>
+    <body className={cn('min-h-screen bg-background font-sans antialiased', GeistSans.variable)}>
       <AuthProvider>
         <ThemeProvider>{children}</ThemeProvider>
       </AuthProvider>
