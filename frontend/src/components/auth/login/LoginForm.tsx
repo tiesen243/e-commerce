@@ -1,48 +1,31 @@
-import { Button, CardContent, Form, Input, LoadingSpinner, useToast } from '@/components/ui'
-import {
-  LoginSchema,
-  LoginType,
-  defaultValues,
-  signIn,
-  useForm,
-  useRouter,
-  zodResolver,
-} from './utils'
-import Field from '@/components/Fields'
+import { Fields, FieldsProps } from '@/components/fields'
+import { Button, CardContent, Form, Input, LoadingSpinner } from '@/components/ui'
+import { LoginType, defaultValues, resolver, signIn, useForm, useRouter } from './config'
+import { toast } from '@/components/ui/use-toast'
+
+const LoginFields = Fields as React.FC<FieldsProps<LoginType>>
 
 const LoginForm: React.FC = () => {
-  const { toast } = useToast()
-  const form = useForm<LoginType>({
-    resolver: zodResolver(LoginSchema),
-    defaultValues: defaultValues,
-  })
+  const form = useForm<LoginType>({ resolver, defaultValues })
 
   const { push } = useRouter()
   const onSubmit = async (data: LoginType) => {
     try {
       const res = await signIn('credentials', { ...data, redirect: false })
       if (res?.error) throw new Error(res?.error)
-
-      toast({
-        title: 'Login success',
-        description: 'You have successfully logged in',
-        variant: 'success',
-      })
+      toast({ title: 'Login success', variant: 'success' })
       push('/')
     } catch (err) {
-      toast({
-        title: 'Login failed',
-        description: 'Please check your email and password',
-        variant: 'destructive',
-      })
+      toast({ title: 'Login failed', variant: 'destructive' })
     }
   }
+
   return (
     <CardContent>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          {Object.keys(defaultValues).map((item: string, idx: number) => (
-            <Field key={idx} control={form.control} name={item}>
+          {Object.keys(defaultValues).map((item: any, idx: number) => (
+            <LoginFields key={idx} control={form.control} name={item}>
               {(field) => (
                 <Input
                   placeholder={`Enter your ${item}`}
@@ -51,7 +34,7 @@ const LoginForm: React.FC = () => {
                   disabled={form.formState.isSubmitting}
                 />
               )}
-            </Field>
+            </LoginFields>
           ))}
 
           <Button type="submit" disabled={form.formState.isSubmitting}>

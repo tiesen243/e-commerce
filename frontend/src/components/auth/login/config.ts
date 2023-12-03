@@ -1,8 +1,8 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-export { zodResolver } from '@hookform/resolvers/zod'
-export { useForm } from 'react-hook-form'
-export { useRouter } from 'next/navigation'
 export { signIn } from 'next-auth/react'
+export { useRouter } from 'next/navigation'
+export { useForm } from 'react-hook-form'
 
 export const LoginSchema = z.object({
   email: z.string().email(),
@@ -15,3 +15,5 @@ export const defaultValues = {
   email: '',
   password: '',
 }
+
+export const resolver = zodResolver(LoginSchema)

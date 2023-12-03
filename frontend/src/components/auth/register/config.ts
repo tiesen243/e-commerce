@@ -1,5 +1,5 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-export { zodResolver } from '@hookform/resolvers/zod'
 export { useForm } from 'react-hook-form'
 export { useRouter } from 'next/navigation'
 
@@ -26,3 +26,5 @@ export const defaultValues = {
   password: '',
   confirmPassword: '',
 }
+
+export const resolver = zodResolver(RegisterSchema)

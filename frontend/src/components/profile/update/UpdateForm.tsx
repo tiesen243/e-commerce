@@ -1,48 +1,34 @@
-import { Button, DialogFooter, Form, Input, useToast } from '@/components/ui'
+'use client'
+
+import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { FormValues, Props, resolver } from './config'
-import Fields, { FieldsProps } from '@/components/Fields'
-import DragAndDrop from '@/components/DragAndDrop'
+import { toast } from '@/components/ui/use-toast'
 import { uploadImage } from '@/lib/firebase'
-import axios from 'axios'
+import nextImport from '@/lib/nextImport'
+import { FormValues, Props, defaultValues, resolver } from './config'
 
+import { DragAndDrop } from '@/components/DragAndDrop'
+import { FieldsProps } from '@/components/fields'
+import { Button, DialogFooter, Form, Input } from '@/components/ui'
+
+const Fields = nextImport('Fields')
 const UpdateFields = Fields as React.FC<FieldsProps<FormValues>>
 
-const UpdateForm: React.FC<
-  Props & { setIsOpen: React.Dispatch<React.SetStateAction<boolean>> }
-> = ({ user, update, setIsOpen }) => {
-  const toast = useToast().toast
-  const form = useForm<FormValues>({
-    resolver,
-    defaultValues: {
-      userName: user.userName,
-      avatar: null,
-    },
-  })
+const UpdateForm: React.FC<Props> = ({ user, update, setIsOpen }) => {
+  const form = useForm<FormValues>({ resolver, defaultValues: defaultValues(user) })
+
   const onSubmit = async (data: FormValues) => {
     try {
       let url: string = user.avatar
       if (data.avatar) url = await uploadImage(data.avatar, user._id, 'avatar')
-
-      await axios.patch('/api/auth/updateInfo', {
-        userName: data.userName,
-        avatar: url,
-      })
+      await axios.patch('/api/auth/updateInfo', { userName: data.userName, avatar: url })
       update({})
-      setIsOpen(false)
-      toast({
-        title: 'Success',
-        description: 'Your profile has been updated.',
-        variant: 'success',
-      })
+      setIsOpen && setIsOpen(false)
+      toast({ title: 'Success', description: 'Your profile has been updated.', variant: 'success' })
     } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.message,
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', description: error.message, variant: 'destructive' })
     }
   }
 
@@ -56,6 +42,7 @@ const UpdateForm: React.FC<
         <UpdateFields name="avatar" control={form.control}>
           {(field) => <DragAndDrop field={field} />}
         </UpdateFields>
+
         <DialogFooter>
           <Button type="submit">Save changes</Button>
         </DialogFooter>

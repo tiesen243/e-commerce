@@ -82,28 +82,6 @@ export {
   SheetTrigger,
 } from './sheet'
 export { Skeleton } from './skeleton'
-export {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from './table'
 export { Textarea } from './textarea'
-export {
-  Toast,
-  ToastAction,
-  ToastClose,
-  ToastDescription,
-  ToastProvider,
-  ToastTitle,
-  ToastViewport,
-  type ToastActionElement,
-  type ToastProps,
-} from './toast'
 export { Toaster } from './toaster'
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
-export { toast, useToast } from './use-toast'

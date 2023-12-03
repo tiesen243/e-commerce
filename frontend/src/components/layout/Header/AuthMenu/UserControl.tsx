@@ -6,7 +6,7 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui'
 import { IUser } from '@/types/user'
-import { GanttChartSquare, LogOutIcon, ShoppingCart, User } from 'lucide-react'
+import { LayoutDashboardIcon, LogOutIcon, ShoppingCart, User } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
@@ -29,9 +29,9 @@ const UserControl: React.FC<{ user: IUser }> = ({ user }) => (
 
       {user.role !== 'user' && (
         <DropdownMenuItem asChild>
-          <Link href="/management/products" className="flex gap-2">
-            <GanttChartSquare />
-            <span>Management</span>
+          <Link href="/dashboard/products" className="flex gap-2">
+            <LayoutDashboardIcon />
+            <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
       )}

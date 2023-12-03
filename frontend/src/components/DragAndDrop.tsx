@@ -4,35 +4,27 @@ import { forwardRef, useState } from 'react'
 import Dropzone, { DropzoneRef } from 'react-dropzone'
 
 import IField from '@/types/field'
-import { Input, useToast } from './ui'
+import { Input } from './ui'
+import { toast } from './ui/use-toast'
 
 interface Props {
   previewImg?: string
   field: IField
 }
 
-const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, field }, ref) => {
+export const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, field }, ref) => {
   const [preview, setPreview] = useState<string | undefined>(previewImg ?? undefined)
-  const { toast } = useToast()
 
   const onDrop = (file: File[]) => {
     try {
       const reader = new FileReader()
       reader.onload = () => setPreview(reader.result as string)
       reader.readAsDataURL(file[0])
-      toast({
-        title: 'Success',
-        description: 'Image uploaded',
-        variant: 'success',
-      })
 
+      toast({ title: 'Success', variant: 'success' })
       return field.onChange(file[0] as any)
     } catch (e) {
-      toast({
-        title: 'Error',
-        description: 'Image not uploaded',
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', variant: 'destructive' })
     }
   }
 
@@ -62,7 +54,5 @@ const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, field }, ref) 
     </Dropzone>
   )
 })
-
-export default DragAndDrop
 
 DragAndDrop.displayName = 'DragAndDrop'

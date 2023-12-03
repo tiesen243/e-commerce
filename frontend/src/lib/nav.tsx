@@ -21,13 +21,11 @@ export const navItems = [
 
 export const manageNav = [
   {
-    title: 'Manage Products',
-    href: '/management/products',
+    href: '/dashboard/products',
     icon: <FolderKanbanIcon />,
   },
   {
-    title: 'Create Product',
-    href: '/management/create',
+    href: '/dashboard/products/create',
     icon: <FolderPlusIcon />,
   },
 ]
@@ -35,13 +33,11 @@ export const manageNav = [
 export const adminNav = [
   ...manageNav,
   {
-    title: 'Manage Orders',
-    href: '/admin/orders',
+    href: '/dashboard/admin/orders',
     icon: <ListOrderedIcon />,
   },
   {
-    title: 'Manage Users',
-    href: '/admin/users',
+    href: '/dashboard/admin/users',
     icon: <UsersIcon />,
   },
 ]

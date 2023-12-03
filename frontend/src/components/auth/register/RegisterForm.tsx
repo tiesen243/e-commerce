@@ -1,52 +1,24 @@
 import axios from '@/lib/axios'
-
-import {
-  Button,
-  CardContent,
-  Checkbox,
-  Form,
-  Input,
-  Label,
-  LoadingSpinner,
-  useToast,
-} from '@/components/ui'
-import {
-  RegisterSchema,
-  RegisterType,
-  defaultValues,
-  useForm,
-  useRouter,
-  zodResolver,
-} from './utils'
-import Fields from '@/components/Fields'
+import { Button, CardContent, Checkbox, Form, Input, Label, LoadingSpinner } from '@/components/ui'
+import { RegisterType, defaultValues, resolver, useForm, useRouter } from './config'
+import { Fields } from '@/components/fields'
+import { toast } from '@/components/ui/use-toast'
 
 const RegisterForm: React.FC = () => {
-  const { toast } = useToast()
   const { push } = useRouter()
-  const form = useForm<RegisterType>({
-    resolver: zodResolver(RegisterSchema),
-    defaultValues: defaultValues,
-  })
+  const form = useForm<RegisterType>({ resolver, defaultValues })
 
   const onSubmit = async (data: RegisterType) => {
     try {
       await axios.post('/auth/register', data)
-
-      toast({
-        title: 'Registration successful',
-        description: 'Redirecting you to the login page...',
-        variant: 'success',
-      })
+      toast({ title: 'Registration successful', variant: 'success' })
       push('/login')
     } catch (err: any) {
-      console.log(err.response.data.message)
-      toast({
-        title: 'Registration failed',
-        description: err.response.data.message,
-        variant: 'destructive',
-      })
+      toast({ title: 'Registration failed', variant: 'destructive' })
     }
   }
+
+  const isDisabled = form.formState.isSubmitting
 
   return (
     <CardContent>
@@ -57,9 +29,7 @@ const RegisterForm: React.FC = () => {
               item === 'confirmPassword' ? 'password' : item === 'userName' ? 'text' : item
             return (
               <Fields key={idx} name={item} control={form.control}>
-                {(field) => (
-                  <Input type={type} placeholder={`Enter your ${field.name}`} {...field} />
-                )}
+                {(field) => <Input type={type} disabled={isDisabled} {...field} />}
               </Fields>
             )
           })}
@@ -67,7 +37,7 @@ const RegisterForm: React.FC = () => {
           <AcceptTerms />
 
           <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting ? <LoadingSpinner /> : 'Register'}
+            {isDisabled ? <LoadingSpinner /> : 'Register'}
           </Button>
         </form>
       </Form>
