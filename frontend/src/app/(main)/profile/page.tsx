@@ -1,15 +1,15 @@
 'use client'
 
 import { NextPage } from 'next'
-import dynamic from 'next/dynamic'
 
 import { signOut, useSession } from 'next-auth/react'
 import nextImport from '@/lib/nextImport'
 import Image from 'next/image'
 import { formatDateTime } from '@/lib/utils'
+import dynamic from 'next/dynamic'
 
-const EditProfileDialog = dynamic(() => import('@/components/profile/update'), { ssr: false })
 const Button = nextImport('Button')
+const EditProfileDialog = dynamic(() => import('@/components/profile/update'), { ssr: false })
 
 const Page: NextPage = () => {
   const { data, update } = useSession()

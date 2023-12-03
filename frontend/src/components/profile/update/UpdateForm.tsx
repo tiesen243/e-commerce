@@ -6,14 +6,12 @@ import { useForm } from 'react-hook-form'
 
 import { toast } from '@/components/ui/use-toast'
 import { uploadImage } from '@/lib/firebase'
-import nextImport from '@/lib/nextImport'
 import { FormValues, Props, defaultValues, resolver } from './config'
 
 import { DragAndDrop } from '@/components/DragAndDrop'
-import { FieldsProps } from '@/components/fields'
+import { Fields, FieldsProps } from '@/components/fields'
 import { Button, DialogFooter, Form, Input } from '@/components/ui'
 
-const Fields = nextImport('Fields')
 const UpdateFields = Fields as React.FC<FieldsProps<FormValues>>
 
 const UpdateForm: React.FC<Props> = ({ user, update, setIsOpen }) => {
