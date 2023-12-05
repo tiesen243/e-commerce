@@ -71,20 +71,6 @@
     @apply border-border;
   }
   body {
-    @apply min-h-screen w-screen overflow-x-hidden bg-background text-foreground transition-colors duration-300 ease-linear;
-  }
-  ::-webkit-scrollbar {
-    @apply h-1 w-1;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-primary transition-colors hover:bg-primary/80;
-  }
-}
-@layer components {
-  .typography {
-    @apply prose prose-zinc dark:prose-invert lg:prose-lg;
+    @apply bg-background text-foreground;
   }
 }

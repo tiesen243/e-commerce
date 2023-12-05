@@ -1,9 +1,16 @@
 import { type Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
+import typography from '@tailwindcss/typography'
+import animate from 'tailwindcss-animate'
 
 const config: Config = {
   darkMode: ['class'],
-  content: ['./components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+  ],
   theme: {
     container: {
       center: true,
@@ -72,7 +79,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [typography, animate],
 }
 
 export default config
