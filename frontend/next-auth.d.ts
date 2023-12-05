@@ -1,4 +1,4 @@
-import { IUser, Role } from '@/types/user'
+import IUser, { Role } from '@/interfaces/user.interface'
 import { DefaultSession, DefaultUser } from 'next-auth'
 import { DefaultJWT } from 'next-auth/jwt'
 
@@ -17,6 +17,5 @@ declare module 'next-auth/jwt' {
   interface JWT extends DefaultJWT {
     role: Role
     token: string
-    expires: number
   }
 }

@@ -1,9 +1,11 @@
 'use client'
+import { Toaster } from '@/components/ui/toaster'
 import { ThemeProvider as NextThemeProvider } from 'next-themes'
 
 const ThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <NextThemeProvider defaultTheme="dark" enableSystem attribute="class" disableTransitionOnChange>
+  <NextThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
     {children}
+    <Toaster />
   </NextThemeProvider>
 )
 

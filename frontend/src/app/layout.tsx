@@ -38,11 +38,14 @@ import { cn } from '@/lib/utils'
 import ThemeProvider from '@/provider/theme.provider'
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
+import AuthProvider from '@/provider/auth.provider'
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={cn('min-h-screen bg-background font-sans antialiased', GeistSans.variable)}>
-      <ThemeProvider>{children}</ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>{children}</ThemeProvider>
+      </AuthProvider>
     </body>
   </html>
 )
