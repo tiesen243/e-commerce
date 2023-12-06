@@ -9,6 +9,6 @@ export default interface IUser {
   readonly email: string
   readonly avatar: string
   readonly role: Role
-  readonly createdAt: string
-  readonly updatedAt: string
+  readonly createdAt: Date
+  readonly updatedAt: Date
 }

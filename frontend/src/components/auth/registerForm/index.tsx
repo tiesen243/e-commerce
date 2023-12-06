@@ -19,8 +19,8 @@ const RegisterForm: React.FC = () => {
   const isPending = form.formState.isSubmitting
   return (
     <Form {...form}>
-      <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-        <CardContent>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <CardContent className="space-y-4">
           {Object.keys(defaultValues).map((key) => (
             <RegisterFields key={key} name={key as keyof IRegister} control={form.control}>
               {(field) => (

@@ -3,10 +3,10 @@
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
+import { buttonVariants } from '@/components/ui/button'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
 import UserAvatar from './user.avatar'
 import UserMenu from './user.menu'
-import { buttonVariants } from '@/components/ui/button'
 
 const User: React.FC = () => {
   const { user } = useSession().data || {}

@@ -19,8 +19,8 @@ const LoginForm: React.FC = () => {
   const isPending = form.formState.isSubmitting
   return (
     <Form {...form}>
-      <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-        <CardContent>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <CardContent className="space-y-4">
           {Object.keys(defaultValues).map((key) => (
             <LoginFields key={key} name={key as keyof ILogin} control={form.control}>
               {(field) => (

@@ -1,6 +1,10 @@
-import Header from '@/components/auth/header'
-import LoginForm from '@/components/auth/loginForm'
+'use client'
+
 import type { NextPage } from 'next'
+import dynamic from 'next/dynamic'
+
+import Header from '@/components/auth/header'
+const LoginForm = dynamic(() => import('@/components/auth/loginForm'), { ssr: false })
 
 const Page: NextPage = () => (
   <>
