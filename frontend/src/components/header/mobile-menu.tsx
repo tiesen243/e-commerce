@@ -16,6 +16,7 @@ const MobileMenu: React.FC = () => (
 
     <SheetContent side="left" className="block space-y-4 md:hidden">
       <Logo />
+
       <Search className="flex md:hidden" />
 
       <Navigation className="flex md:hidden" />

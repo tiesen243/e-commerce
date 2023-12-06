@@ -4,7 +4,7 @@ import IUser from '@/interfaces/user.interface'
 
 const UserAvatar: React.FC<{ user: IUser }> = ({ user }) => (
   <DropdownMenuTrigger>
-    <Avatar>
+    <Avatar className="ring-1 ring-primary hover:ring-2">
       <AvatarImage src={user.avatar} />
       <AvatarFallback title={user.userName} />
     </Avatar>

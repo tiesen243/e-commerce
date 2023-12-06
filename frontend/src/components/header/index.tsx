@@ -15,7 +15,7 @@ const Header: React.FC = () => (
 
       <Navigation className="hidden md:block" />
 
-      <Search className="hidden md:grid" />
+      <Search className="hidden md:flex" />
 
       <UserMenu />
     </header>
