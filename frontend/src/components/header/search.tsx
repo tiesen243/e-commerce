@@ -2,10 +2,7 @@ import { redirect } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
-interface Props {
-  className: string
-}
-const Search: React.FC<Props> = ({ className }) => {
+const Search: React.FC<{ className: string }> = ({ className }) => {
   const handleSubmit = async (formData: FormData) => {
     'use server'
     const search = formData.get('search')
@@ -13,7 +10,7 @@ const Search: React.FC<Props> = ({ className }) => {
   }
 
   return (
-    <form action={handleSubmit} className={cn('w-full md:w-1/2', className)}>
+    <form action={handleSubmit} className={cn('w-full md:w-1/3', className)}>
       <Input name="search" type="search" placeholder="Search" autoFocus={false} />
     </form>
   )

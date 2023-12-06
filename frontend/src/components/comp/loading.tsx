@@ -1,9 +1,6 @@
 import { cn } from '@/lib/utils'
 
-interface LoadingProps {
-  className?: string
-}
-export const LoadingSpinner: React.FC<LoadingProps> = ({ className }) => (
+export const LoadingSpinner: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"

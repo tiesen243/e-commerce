@@ -15,6 +15,7 @@ interface Props {
   href?: string
   onClick?: () => void
 }
+
 export const DropdownItem: React.FC<Props> = ({ title, icon, href, onClick }) => (
   <DropdownMenuItem asChild>
     <Link href={href ? href : '#'} onClick={onClick}>
@@ -29,17 +30,17 @@ export const items = [
   {
     title: 'Profile',
     icon: <UserIcon className={className} />,
-    /* href: '/profile', */
+    href: '/profile',
   },
   {
     title: 'Cart',
     icon: <ShoppingCartIcon className={className} />,
-    /* href: '/profile/cart', */
+    href: '/profile/cart',
   },
   {
     title: 'Dashboard',
     icon: <LayoutDashboard className={className} />,
-    /* href: '/dashboard', */
+    href: '/dashboard',
   },
 ]
 

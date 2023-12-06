@@ -28,12 +28,12 @@ const UserMenu: React.FC<{ user: IUser }> = ({ user }) => {
       <DropdownMenuSeparator />
 
       <DropdownMenuGroup>
-        <DropdownItem title="Sign out" icon={<LogoutIcon />} onClick={handleLogout} />
         <DropdownItem
           title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
           icon={theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
           onClick={handleToggleTheme}
         />
+        <DropdownItem title="Sign out" icon={<LogoutIcon />} onClick={handleLogout} />
       </DropdownMenuGroup>
     </DropdownMenuContent>
   )
