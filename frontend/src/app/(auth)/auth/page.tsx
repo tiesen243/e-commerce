@@ -23,7 +23,7 @@ const Page: NextPage = () => {
         description: 'You will be redirected to the home page.',
       })
     }
-  }, [data])
+  }, [data, push])
 
   return (
     <Tabs defaultValue="login" className="container fixed h-[600px] w-screen max-w-screen-md">

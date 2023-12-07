@@ -1,12 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { DialogTrigger } from '@/components/ui/dialog'
-import { EditIcon } from 'lucide-react'
 
-const Trigger = () => (
+const Trigger: React.FC<React.PropsWithChildren> = ({ children }) => (
   <DialogTrigger asChild>
-    <Button>
-      <EditIcon className="mr-2" /> Edit profile
-    </Button>
+    <Button>{children}</Button>
   </DialogTrigger>
 )
 

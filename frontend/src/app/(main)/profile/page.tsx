@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { formatDate } from '@/lib/utils'
 
 const EditProfile = dynamic(() => import('@/components/profile/edit'), { ssr: false })
+const ChangePassword = dynamic(() => import('@/components/profile/changePass'), { ssr: false })
 
 const Page: NextPage = () => {
   const { data, update } = useSession()
@@ -36,9 +37,7 @@ const Page: NextPage = () => {
       <section className="col-span-3 grid grid-cols-2 gap-2 md:grid-cols-3">
         <EditProfile user={data.user} update={update} />
 
-        <Button variant="secondary">
-          <LockIcon className="mr-2" /> Change password
-        </Button>
+        <ChangePassword />
 
         <Button variant="destructive" className="col-span-2 md:col-span-1" onClick={handleLogout}>
           <LogOutIcon className="mr-2" /> Log out
