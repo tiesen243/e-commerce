@@ -9,8 +9,14 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { formatDate } from '@/lib/utils'
 
-const EditProfile = dynamic(() => import('@/components/profile/edit'), { ssr: false })
-const ChangePassword = dynamic(() => import('@/components/profile/changePass'), { ssr: false })
+const EditProfile = dynamic(() => import('@/components/profile/edit'), {
+  ssr: false,
+  loading: () => <Button>...</Button>,
+})
+const ChangePassword = dynamic(() => import('@/components/profile/changePass'), {
+  ssr: false,
+  loading: () => <Button>...</Button>,
+})
 
 const Page: NextPage = () => {
   const { data, update } = useSession()
