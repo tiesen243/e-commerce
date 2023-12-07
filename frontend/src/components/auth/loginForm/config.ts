@@ -1,3 +1,4 @@
+import { Fields, FieldsProps } from '@/components/comp/fields'
 import { toast } from '@/components/ui/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
@@ -17,17 +18,12 @@ export const defaultValues: ILogin = {
   password: '',
 }
 
-export const submit = async (data: ILogin, push: any) => {
+export const LoginFields = Fields as React.FC<FieldsProps<ILogin>>
+
+export const submit = async (data: ILogin) => {
   try {
     const res = await signIn('credentials', { ...data, redirect: false })
     if (res?.error) throw new Error(res.error)
-
-    toast({
-      title: 'Login success',
-      description: 'You are now logged in',
-      variant: 'success',
-    })
-    push('/')
   } catch (e: any) {
     toast({
       title: 'Login failed',

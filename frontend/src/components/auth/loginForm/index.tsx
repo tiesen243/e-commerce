@@ -1,49 +1,45 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import Footer from '@/components/auth/footer'
-import { Fields, FieldsProps } from '@/components/comp/fields'
-import { CardContent } from '@/components/ui/card'
+import Header from '@/components/auth/header'
+import { Card, CardContent } from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ILogin, defaultValues, resolver, submit } from './config'
+import { ILogin, LoginFields, defaultValues, resolver, submit } from './config'
 
-const LoginFields = Fields as React.FC<FieldsProps<ILogin>>
 const LoginForm: React.FC = () => {
-  const { push } = useRouter()
   const form = useForm<ILogin>({ resolver, defaultValues })
-  const onSubmit = async (data: ILogin) => await submit(data, push)
+  const onSubmit = async (data: ILogin) => await submit(data)
 
   const isPending = form.formState.isSubmitting
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <CardContent className="space-y-4">
-          {Object.keys(defaultValues).map((key) => (
-            <LoginFields key={key} name={key as keyof ILogin} control={form.control}>
-              {(field) => (
-                <Input
-                  {...field}
-                  type={key}
-                  placeholder={`Enter your ${key}`}
-                  disabled={isPending}
-                  required
-                />
-              )}
-            </LoginFields>
-          ))}
-        </CardContent>
+    <Card>
+      <Header title="Login" description="Enter your credentials to continue" />
 
-        <Footer
-          btnText="Login"
-          isPending={isPending}
-          text="Don't have an account?"
-          href="/register"
-        />
-      </form>
-    </Form>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <CardContent className="space-y-4">
+            {Object.keys(defaultValues).map((key) => (
+              <LoginFields key={key} name={key as keyof ILogin} control={form.control}>
+                {(field) => (
+                  <Input
+                    {...field}
+                    type={key}
+                    placeholder={`Enter your ${key}`}
+                    disabled={isPending}
+                    required
+                  />
+                )}
+              </LoginFields>
+            ))}
+          </CardContent>
+
+          <Footer btnText="Login" isPending={isPending} />
+        </form>
+      </Form>
+    </Card>
   )
 }
 

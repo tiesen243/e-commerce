@@ -15,11 +15,10 @@ export const metadata: Metadata = {
   },
 }
 
-import { Card } from '@/components/ui/card'
 import { Toaster } from '@/components/ui/toaster'
 const AuthLayout: NextPage<React.PropsWithChildren> = ({ children }) => (
   <main className="flex h-screen w-screen items-center justify-center overflow-hidden">
-    <Card className="container mx-4 max-w-screen-md">{children}</Card>
+    {children}
     <Toaster />
   </main>
 )

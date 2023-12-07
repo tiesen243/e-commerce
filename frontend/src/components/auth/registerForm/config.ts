@@ -1,3 +1,4 @@
+import { Fields, FieldsProps } from '@/components/comp/fields'
 import { toast } from '@/components/ui/use-toast'
 import axios from '@/lib/axios'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -28,7 +29,9 @@ export const defaultValues: IRegister = {
   confirmPassword: '',
 }
 
-export const submit = async (data: IRegister, push: any) => {
+export const RegisterFields = Fields as React.FC<FieldsProps<IRegister>>
+
+export const submit = async (data: IRegister) => {
   try {
     await axios.post('/auth/register', data)
     toast({
@@ -36,7 +39,6 @@ export const submit = async (data: IRegister, push: any) => {
       description: 'Form submitted successfully',
       variant: 'success',
     })
-    push('/login')
   } catch (e: any) {
     toast({
       title: 'Registration failed',

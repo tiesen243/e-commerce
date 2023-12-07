@@ -59,6 +59,10 @@ const opts: NextAuthOptions = {
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
   },
+
+  pages: {
+    signIn: '/auth',
+  },
 }
 
 const handlers = nextAuth(opts)

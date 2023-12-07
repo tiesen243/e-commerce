@@ -24,10 +24,14 @@ export const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, ...fiel
       reader.onload = () => setPreview(reader.result as string)
       reader.readAsDataURL(file[0])
 
-      toast({ title: 'Success', variant: 'success' })
+      toast({ title: 'Upload image successfully', variant: 'success' })
       return fields.onChange(file[0] as any)
     } catch (e) {
-      toast({ title: 'Error', variant: 'destructive' })
+      toast({
+        title: 'Update Fail',
+        description: 'Image must be less than 5MB and in PNG, JPG or JPEG format',
+        variant: 'destructive',
+      })
     }
   }
 
