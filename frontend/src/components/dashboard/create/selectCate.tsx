@@ -8,8 +8,15 @@ import {
 import { Category } from '@/interfaces/product.interface'
 import IFields from '@/types/fields.type'
 
-const SelectCate: React.FC<IFields> = (props) => (
-  <Select onValueChange={() => props.onChange} defaultValue={props.value}>
+interface Props extends IFields {
+  disabled: boolean
+}
+const SelectCate: React.FC<Props> = (fields) => (
+  <Select
+    disabled={fields.disabled}
+    onValueChange={() => fields.onChange}
+    defaultValue={fields.value}
+  >
     <SelectTrigger>
       <SelectValue placeholder="Select product's category" />
     </SelectTrigger>

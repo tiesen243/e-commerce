@@ -48,7 +48,9 @@ export const create = async (data: ICreate) => {
     await axios.post('/api/product/create', { ...data, image: url })
     toast({ description: 'Product created', variant: 'success' })
   } catch (e: any) {
-    const message = e.response.data.message
+    const message: string = e.response.data.message
+    if (!message.includes('existed')) await deleteImage(name, 'product')
+
     toast({ description: message, variant: 'destructive' })
   }
 }

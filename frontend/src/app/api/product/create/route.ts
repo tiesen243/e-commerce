@@ -12,7 +12,6 @@ export const POST = async (req: NextRequest) => {
   } catch (e: any) {
     const message = e.response.data.message
     const status = e.response.status
-    console.log(e.response.data)
 
     return NextResponse.json({ message }, { status })
   }

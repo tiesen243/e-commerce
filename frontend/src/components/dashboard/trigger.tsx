@@ -5,7 +5,8 @@ import { TabsList, TabsTrigger } from '../ui/tabs'
 
 const Trigger: React.FC = () => {
   const { data } = useSession()
-  if (!data) return null
+  if (!data) return <LoadingTrigger />
+
   const role = data.user.role
 
   return (
@@ -23,3 +24,13 @@ const Trigger: React.FC = () => {
 }
 
 export default Trigger
+
+const LoadingTrigger: React.FC = () => (
+  <TabsList className="grid w-full grid-cols-4">
+    {Array.from({ length: 4 }).map((_, i) => (
+      <TabsTrigger key={i} value="dashboard">
+        Loading...
+      </TabsTrigger>
+    ))}
+  </TabsList>
+)

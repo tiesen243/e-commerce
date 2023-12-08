@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const description =
   'TN E-Commerce is a starter template for building a fast, modern e-commerce store with Next.js, NestJS, Shadcn UI, and Firebase.'
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tn-ecommerce.vercel.app/'),
+  metadataBase: new URL('https://tn-ecommerce.tiesen.id.vn'),
   title: 'TN E-Commerce',
   description,
   openGraph: {
