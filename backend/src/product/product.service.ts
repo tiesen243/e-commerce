@@ -90,6 +90,7 @@ export class ProductService {
 
     const newProduct = await this.productModel.create({
       createdAt: new Date(),
+      code: Math.floor(100000 + Math.random() * 900000),
       userId: user._id,
       ...createDto,
     })

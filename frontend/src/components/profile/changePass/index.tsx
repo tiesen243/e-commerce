@@ -7,7 +7,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import Footer from '../footer'
+import Footer from '@/components/comp/form-footer'
 import Header from '../header'
 import Trigger from '../trigger'
 import { IPass, PassFields, changePassword, defaultValues, resolver } from './config'
@@ -33,7 +33,7 @@ const EditProfile: React.FC = () => {
               </PassFields>
             ))}
 
-            <Footer disabled={isPending} />
+            <Footer btnText="Save Changes" isPending={isPending} cancel />
           </form>
         </Form>
       </DialogContent>

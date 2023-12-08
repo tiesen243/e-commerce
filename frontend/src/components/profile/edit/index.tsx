@@ -1,18 +1,17 @@
 'use client'
 
+import { EditIcon } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { DragAndDrop } from '@/components/comp/dragndrop'
+import { DragAndDrop } from '@/components/comp/drag-drop'
+import Footer from '@/components/comp/form-footer'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-
-import Footer from '../footer'
 import Header from '../header'
 import Trigger from '../trigger'
 import { EditFields, IEdit, Props, defaultValues, resolver, updateProfile } from './config'
-import { EditIcon } from 'lucide-react'
 
 const EditProfile: React.FC<Props> = ({ user, update }) => {
   const [open, setOpen] = useState<boolean>(false)
@@ -45,7 +44,7 @@ const EditProfile: React.FC<Props> = ({ user, update }) => {
               )}
             </EditFields>
 
-            <Footer disabled={isPending} />
+            <Footer btnText="Save changes" cancel isPending={isPending} />
           </form>
         </Form>
       </DialogContent>

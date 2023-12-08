@@ -2,8 +2,8 @@
 
 import { useForm } from 'react-hook-form'
 
-import Footer from '@/components/auth/footer'
 import Header from '@/components/auth/header'
+import Footer from '@/components/comp/form-footer'
 import { Card, CardContent } from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'

@@ -3,7 +3,7 @@ import { type NextPage } from 'next'
 
 const Page: NextPage = () => {
   return (
-    <div>
+    <div className="h-[10000px]">
       Page
       <Button>Button</Button>
     </div>
