@@ -5,9 +5,9 @@ import Dropzone, { DropzoneRef } from 'react-dropzone'
 
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
-import IFields from '@/types/fields.type'
-import Image from 'next/image'
+import IFields from '@/interfaces/fields.interface'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 interface Props extends IFields {
   previewImg?: string

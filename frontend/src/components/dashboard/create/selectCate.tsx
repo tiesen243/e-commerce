@@ -6,7 +6,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Category } from '@/interfaces/product.interface'
-import IFields from '@/types/fields.type'
+import IFields from '@/interfaces/fields.interface'
 
 interface Props extends IFields {
   disabled: boolean

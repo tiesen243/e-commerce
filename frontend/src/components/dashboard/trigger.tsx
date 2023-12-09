@@ -11,7 +11,7 @@ const Trigger: React.FC = () => {
 
   return (
     <TabsList className={`grid w-full ${role === 'admin' ? 'grid-cols-4' : 'grid-cols-2'}`}>
-      <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+      <TabsTrigger value="products">Products</TabsTrigger>
       <TabsTrigger value="create">Create product</TabsTrigger>
       {role === 'admin' && (
         <>

@@ -18,15 +18,6 @@ export const metadata: Metadata = {
   },
 }
 
-import Trigger from '@/components/dashboard/trigger'
-import { Tabs } from '@/components/ui/tabs'
-
-const DashboardLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <Tabs defaultValue="dashboard">
-    <Trigger />
-
-    {children}
-  </Tabs>
-)
+const DashboardLayout: React.FC<React.PropsWithChildren> = ({ children }) => <>{children}</>
 
 export default DashboardLayout
