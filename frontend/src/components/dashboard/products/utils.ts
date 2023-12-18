@@ -1,12 +1,8 @@
 import axios from 'axios'
-import { Fetcher } from 'swr'
+import { Fetcher, mutate } from 'swr'
 
 import { toast } from '@/components/ui/use-toast'
-import { IProduct } from '@/interfaces/product.interface'
-
-export interface Error {
-  message: string
-}
+import { IProduct } from '@/types/product'
 
 export const fetcher: Fetcher<IProduct[]> = async (url: string) => {
   try {
@@ -18,10 +14,10 @@ export const fetcher: Fetcher<IProduct[]> = async (url: string) => {
   }
 }
 
-export const handleDelete = async (id: string, mutate: () => void) => {
+export const handleDelete = async (id: string) => {
   try {
     await axios.delete(`/api/product/${id}`)
-    mutate()
+    mutate('/api/product/me')
     toast({ title: 'Deleted successfully', variant: 'success' })
   } catch (e: any) {
     const message = e.response.data.message

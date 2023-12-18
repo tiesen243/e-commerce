@@ -1,8 +1,8 @@
-import { redirect } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
-import { Button } from '../ui/button'
 import { SearchIcon } from 'lucide-react'
+import { redirect } from 'next/navigation'
+import { Button } from '../ui/button'
 
 const Search: React.FC<{ className: string }> = ({ className }) => {
   const handleSubmit = async (formData: FormData) => {

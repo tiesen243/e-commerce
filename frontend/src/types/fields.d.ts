@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 import { RefCallBack } from 'react-hook-form'
 
-export default interface IFields {
+interface IFields {
   ref: RefCallBack
   name: string
   value: any

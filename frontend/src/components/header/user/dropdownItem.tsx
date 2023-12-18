@@ -18,7 +18,11 @@ interface Props {
 
 export const DropdownItem: React.FC<Props> = ({ title, icon, href, onClick }) => (
   <DropdownMenuItem asChild>
-    <Link href={href ? href : '#'} onClick={onClick}>
+    <Link
+      href={href ? href : '#'}
+      onClick={onClick}
+      {...(href?.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
+    >
       {icon}
       <span>{title}</span>
     </Link>
@@ -28,14 +32,14 @@ export const DropdownItem: React.FC<Props> = ({ title, icon, href, onClick }) =>
 const className = 'mr-2 h-4 w-4'
 export const items = [
   {
-    title: 'Profile',
+    title: 'Account Center',
     icon: <UserIcon className={className} />,
-    href: '/profile',
+    href: 'https://account.tiesen.id.vn',
   },
   {
     title: 'Cart',
     icon: <ShoppingCartIcon className={className} />,
-    href: '/profile/cart',
+    href: '/cart',
   },
   {
     title: 'Dashboard',

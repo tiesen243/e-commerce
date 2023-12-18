@@ -1,9 +1,6 @@
-export enum Role {
-  ADMIN = 'admin',
-  SELLER = 'seller',
-  USER = 'user',
-}
-export default interface IUser {
+import { Role } from './enum'
+
+interface IUser {
   readonly _id: string
   readonly userName: string
   readonly email: string

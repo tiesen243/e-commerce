@@ -34,17 +34,22 @@ export const metadata: Metadata = {
   },
 }
 
+import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
+import AuthProvider from '@/provider/auth.provider'
 import ThemeProvider from '@/provider/theme.provider'
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
-import AuthProvider from '@/provider/auth.provider'
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={cn('min-h-screen bg-background font-sans antialiased', GeistSans.variable)}>
       <AuthProvider>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+
+          <Toaster />
+        </ThemeProvider>
       </AuthProvider>
     </body>
   </html>

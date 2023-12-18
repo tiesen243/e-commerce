@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox'
 import { FormLabel } from '@/components/ui/form'
-import { Tag } from '@/interfaces/product.interface'
-import IFields from '@/interfaces/fields.interface'
+import { Tag } from '@/types/enum'
+import { IFields } from '@/types/fields'
 
 interface Props extends IFields {
   disabled: boolean

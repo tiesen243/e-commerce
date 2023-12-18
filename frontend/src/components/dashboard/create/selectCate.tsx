@@ -5,8 +5,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Category } from '@/interfaces/product.interface'
-import IFields from '@/interfaces/fields.interface'
+import { Category } from '@/types/enum'
+import { IFields } from '@/types/fields'
 
 interface Props extends IFields {
   disabled: boolean

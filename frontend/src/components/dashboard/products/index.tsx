@@ -1,14 +1,19 @@
-import { Table } from '@/components/ui/table'
-import Header from './header'
+import { Table, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import Content from './content'
 
-const Products: React.FC = () => {
-  return (
-    <Table>
-      <Header />
-      <Content />
-    </Table>
-  )
-}
+const heads = ['Code', 'Name', 'Created At', 'Updated At', 'Actions']
+
+const Products: React.FC = () => (
+  <Table>
+    <TableHeader>
+      <TableRow>
+        {heads.map((head: string) => (
+          <TableHead key={head}>{head}</TableHead>
+        ))}
+      </TableRow>
+    </TableHeader>
+    <Content />
+  </Table>
+)
 
 export default Products

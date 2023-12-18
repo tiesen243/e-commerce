@@ -1,7 +1,7 @@
 import { FieldValues, UseFormReturn } from 'react-hook-form'
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import type IFields from '@/interfaces/fields.interface'
+import { IFields } from '@/types/fields'
 
 export interface FieldsProps<T extends FieldValues> {
   control: UseFormReturn<T>['control']

@@ -1,3 +1,4 @@
+import CheckProvider from '@/provider/check.provider'
 import type { Metadata, NextPage } from 'next'
 
 export const metadata: Metadata = {
@@ -15,12 +16,12 @@ export const metadata: Metadata = {
   },
 }
 
-import { Toaster } from '@/components/ui/toaster'
 const AuthLayout: NextPage<React.PropsWithChildren> = ({ children }) => (
-  <main className="flex h-screen w-screen items-center justify-center overflow-hidden">
-    {children}
-    <Toaster />
-  </main>
+  <CheckProvider>
+    <main className="flex h-screen w-screen items-center justify-center overflow-hidden">
+      {children}
+    </main>
+  </CheckProvider>
 )
 
 export default AuthLayout

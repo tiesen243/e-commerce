@@ -1,13 +1,14 @@
-import { DarkModeIcon, DropdownItem, LightModeIcon, LogoutIcon, items } from './dropdownItem'
+import { signOut } from 'next-auth/react'
+import { useTheme } from 'next-themes'
+
 import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
-import IUser from '@/interfaces/user.interface'
-import { signOut } from 'next-auth/react'
-import { useTheme } from 'next-themes'
+import { IUser } from '@/types/user'
+import { DarkModeIcon, DropdownItem, LightModeIcon, LogoutIcon, items } from './dropdownItem'
 
 const UserMenu: React.FC<{ user: IUser }> = ({ user }) => {
   const { theme, resolvedTheme, setTheme } = useTheme()

@@ -1,11 +1,11 @@
-import { Fields, FieldsProps } from '@/components/comp/fields'
-import { toast } from '@/components/ui/use-toast'
-import { Category, Tag } from '@/interfaces/product.interface'
-import { deleteImage, uploadImage } from '@/lib/firebase'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
-import { revalidatePath } from 'next/cache'
 import * as z from 'zod'
+
+import { Fields, FieldsProps } from '@/components/comp/fields'
+import { toast } from '@/components/ui/use-toast'
+import { deleteImage, uploadImage } from '@/lib/firebase'
+import { Category, Tag } from '@/types/enum'
 
 const isNuber = z
   .string()

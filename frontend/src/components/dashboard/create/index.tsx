@@ -3,15 +3,15 @@
 import { useForm } from 'react-hook-form'
 
 import { DragAndDrop } from '@/components/comp/drag-drop'
-import Footer from '@/components/comp/form-footer'
-import Header from '@/components/dashboard/header'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+
+import FormFooter from '@/components/comp/form-footer'
+import ChooseTags from './chooseTags'
 import { CreateFields, ICreate, create, defaultValues, resolver } from './config'
 import SelectCate from './selectCate'
-import ChooseTags from './chooseTags'
 
 const CreateProduct: React.FC = () => {
   const form = useForm<ICreate>({ resolver, defaultValues })
@@ -19,7 +19,9 @@ const CreateProduct: React.FC = () => {
   const isPending = form.formState.isSubmitting
   return (
     <Card>
-      <Header title="Create product" description="Create a new product" />
+      <CardHeader>
+        <CardTitle>Create product</CardTitle>
+      </CardHeader>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(create)} autoFocus={false}>
@@ -53,7 +55,7 @@ const CreateProduct: React.FC = () => {
             </CreateFields>
           </CardContent>
 
-          <Footer btnText="Create" isPending={isPending} cancel />
+          <FormFooter btnText="Create" isPending={isPending} cancel />
         </form>
       </Form>
     </Card>

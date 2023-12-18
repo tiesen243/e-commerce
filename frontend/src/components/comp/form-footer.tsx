@@ -9,10 +9,10 @@ interface Props {
   isPending: boolean
   cancel?: boolean
 }
-const Footer: React.FC<Props> = ({ btnText, isPending, cancel: isCancel = false }) => (
+const FormFooter: React.FC<Props> = ({ btnText, isPending, cancel = false }) => (
   <CardFooter className="flex flex-col items-stretch">
-    <section className={`flex items-center ${isCancel ? 'justify-end' : 'justify-around'}`}>
-      {!isCancel && (
+    <section className={`flex items-center ${cancel ? 'justify-end' : 'justify-around'}`}>
+      {cancel && (
         <Button variant="ghost" asChild>
           <Link href="/">Cancel</Link>
         </Button>
@@ -25,4 +25,4 @@ const Footer: React.FC<Props> = ({ btnText, isPending, cancel: isCancel = false 
   </CardFooter>
 )
 
-export default Footer
+export default FormFooter

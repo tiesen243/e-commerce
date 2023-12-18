@@ -13,7 +13,7 @@ const User: React.FC = () => {
 
   if (!user)
     return (
-      <Link href="/auth" className={buttonVariants({ variant: 'outline' })}>
+      <Link href="/login" className={buttonVariants({ variant: 'default' })}>
         Sign in
       </Link>
     )

@@ -61,7 +61,7 @@ const opts: NextAuthOptions = {
   },
 
   pages: {
-    signIn: '/auth',
+    signIn: '/login',
   },
 }
 
