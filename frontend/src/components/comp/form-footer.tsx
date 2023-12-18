@@ -11,14 +11,16 @@ interface Props {
 }
 const FormFooter: React.FC<Props> = ({ btnText, isPending, cancel = false }) => (
   <CardFooter className="flex flex-col items-stretch">
-    <section className={`flex items-center ${cancel ? 'justify-end' : 'justify-around'}`}>
+    <section className={`flex items-center gap-4 ${cancel ? 'justify-end' : 'justify-around'}`}>
       {cancel && (
-        <Button variant="ghost" asChild>
-          <Link href="/">Cancel</Link>
-        </Button>
+        <Link href="/" passHref legacyBehavior>
+          <Button variant="ghost" disabled={isPending}>
+            Cancel
+          </Button>
+        </Link>
       )}
 
-      <Button type="submit" disabled={isPending}>
+      <Button type="submit" className="w-1/6 " disabled={isPending}>
         {isPending ? <LoadingSpinner /> : btnText}
       </Button>
     </section>

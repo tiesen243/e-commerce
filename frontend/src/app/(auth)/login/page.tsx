@@ -28,6 +28,13 @@ const Page: NextPage = () => {
                 {(field) => <Input {...field} type={key} disabled={isPending} />}
               </LoginFields>
             ))}
+
+            <CardDescription className="typography">
+              Don&apos;t have an account?{' '}
+              <a href="https://account.tiesen.id.vn/register" target="_blank" rel="noreferrer">
+                Register here
+              </a>
+            </CardDescription>
           </CardContent>
 
           <FormFooter btnText="Login" isPending={isPending} cancel />
