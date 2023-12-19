@@ -1,5 +1,4 @@
 import { signOut } from 'next-auth/react'
-import { useTheme } from 'next-themes'
 
 import {
   DropdownMenuContent,
@@ -8,14 +7,13 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { IUser } from '@/types/user'
-import { DarkModeIcon, DropdownItem, LightModeIcon, LogoutIcon, items } from './dropdownItem'
+import { DropdownItem } from '@/components/comp/dropdownItem'
+import { LayoutDashboard, LogOutIcon, ShoppingCartIcon, UserIcon } from 'lucide-react'
+import ThemeBtn from '@/components/comp/themeBtn'
 
 const UserMenu: React.FC<{ user: IUser }> = ({ user }) => {
-  const { theme, resolvedTheme, setTheme } = useTheme()
-  const handleLogout = () => signOut({ redirect: false, callbackUrl: '/' })
-  const handleToggleTheme = () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
-
   const end = user.role !== 'user' ? 3 : 2
+
   return (
     <DropdownMenuContent className="mt-2 w-56">
       <DropdownMenuLabel>{user.userName}</DropdownMenuLabel>
@@ -29,15 +27,33 @@ const UserMenu: React.FC<{ user: IUser }> = ({ user }) => {
       <DropdownMenuSeparator />
 
       <DropdownMenuGroup>
+        <ThemeBtn />
         <DropdownItem
-          title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
-          icon={theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
-          onClick={handleToggleTheme}
+          title="Sign out"
+          icon={<LogOutIcon className="mr-2 h-4 w-4" />}
+          onClick={() => signOut({ callbackUrl: '/' })}
         />
-        <DropdownItem title="Sign out" icon={<LogoutIcon />} onClick={handleLogout} />
       </DropdownMenuGroup>
     </DropdownMenuContent>
   )
 }
 
 export default UserMenu
+
+const items = [
+  {
+    title: 'Account Center',
+    icon: <UserIcon className="mr-2 h-4 w-4" />,
+    href: 'https://account.tiesen.id.vn',
+  },
+  {
+    title: 'Cart',
+    icon: <ShoppingCartIcon className="mr-2 h-4 w-4" />,
+    href: '/cart',
+  },
+  {
+    title: 'Dashboard',
+    icon: <LayoutDashboard className="mr-2 h-4 w-4" />,
+    href: '/dashboard',
+  },
+]

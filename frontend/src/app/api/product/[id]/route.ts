@@ -1,4 +1,4 @@
-import axios from '@/lib/axios'
+import axios, { secret } from '@/lib/axios'
 import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -6,7 +6,7 @@ const getId = (req: NextRequest) => req.nextUrl.pathname.split('/').pop()
 
 export const DELETE = async (req: NextRequest) => {
   const id = getId(req)
-  const { token } = (await getToken({ req, secret: process.env.NEXTAUTH_SECRET })) as any
+  const { token } = (await getToken({ req, secret })) as any
 
   try {
     await axios.delete(`/product/delete/${id}`, { headers: { Authorization: `Bearer ${token}` } })

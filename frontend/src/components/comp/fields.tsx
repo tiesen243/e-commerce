@@ -9,10 +9,10 @@ export interface FieldsProps<T extends FieldValues> {
   children: (field: IFields) => React.ReactNode
 }
 
-export const Fields: React.FC<FieldsProps<any>> = ({ children, control, name }) => (
+export const Fields = <T extends FieldValues>({ children, control, name }: FieldsProps<T>) => (
   <FormField
     control={control}
-    name={name.toString()}
+    name={name as any}
     render={({ field }) => (
       <FormItem>
         <FormLabel className="capitalize">{field.name.replace(/([A-Z])/g, ' $1')}</FormLabel>

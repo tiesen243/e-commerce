@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import * as z from 'zod'
 
-import { Fields, FieldsProps } from '@/components/comp/fields'
 import { toast } from '@/components/ui/use-toast'
 import { deleteImage, uploadImage } from '@/lib/firebase'
 import { Category, Tag } from '@/types/enum'
@@ -37,8 +36,6 @@ export const defaultValues = {
   category: Category.Other,
   tags: [],
 }
-
-export const CreateFields = Fields as React.FC<FieldsProps<ICreate>>
 
 export const create = async (data: ICreate) => {
   if (!data.image) return toast({ description: 'Image is required', variant: 'destructive' })

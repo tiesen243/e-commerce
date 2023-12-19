@@ -1,27 +1,25 @@
-import CheckProvider from '@/provider/check.provider'
+import { meta } from '@/lib/meta'
 import type { Metadata, NextPage } from 'next'
 
+const description = 'Authentification for TN E-Commerce'
 export const metadata: Metadata = {
-  title: 'TN E-Commerce | Authentification',
-  description: 'Authentification for TN E-Commerce',
+  title: `${meta.title} | Authentification`,
+  description,
   openGraph: {
-    title: 'TN E-Commerce | Authentification',
-    description: 'Authentification for TN E-Commerce',
-    type: 'website',
+    title: `${meta.title} | Authentification`,
+    description,
   },
   twitter: {
-    title: 'TN E-Commerce | Authentification',
-    description: 'Authentification for TN E-Commerce',
-    card: 'summary',
+    title: `${meta.title} | Authentification`,
+    description,
+    card: 'summary_large_image',
   },
 }
 
 const AuthLayout: NextPage<React.PropsWithChildren> = ({ children }) => (
-  <CheckProvider>
-    <main className="flex h-screen w-screen items-center justify-center overflow-hidden">
-      {children}
-    </main>
-  </CheckProvider>
+  <main className="flex h-screen w-screen items-center justify-center overflow-hidden">
+    {children}
+  </main>
 )
 
 export default AuthLayout

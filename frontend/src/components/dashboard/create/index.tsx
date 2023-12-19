@@ -3,16 +3,17 @@
 import { useForm } from 'react-hook-form'
 
 import { DragAndDrop } from '@/components/comp/drag-drop'
+import { Fields } from '@/components/comp/fields'
+import FormFooter from '@/components/comp/form-footer'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-
-import FormFooter from '@/components/comp/form-footer'
 import ChooseTags from './chooseTags'
-import { CreateFields, ICreate, create, defaultValues, resolver } from './config'
+import { ICreate, create, defaultValues, resolver } from './config'
 import SelectCate from './selectCate'
 
+const CreateFields = Fields<ICreate>
 const CreateProduct: React.FC = () => {
   const form = useForm<ICreate>({ resolver, defaultValues })
 

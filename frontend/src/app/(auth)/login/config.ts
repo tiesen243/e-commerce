@@ -1,4 +1,3 @@
-import { Fields, FieldsProps } from '@/components/comp/fields'
 import { toast } from '@/components/ui/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
@@ -17,8 +16,6 @@ export const defaultValues: ILogin = {
   email: '',
   password: '',
 }
-
-export const LoginFields = Fields as React.FC<FieldsProps<ILogin>>
 
 export const submit = async (data: ILogin) => {
   try {

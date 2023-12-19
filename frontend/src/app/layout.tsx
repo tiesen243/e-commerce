@@ -1,32 +1,23 @@
 import type { Metadata } from 'next'
 
-const description =
-  'TN E-Commerce is a starter template for building a fast, modern e-commerce store with Next.js, NestJS, Shadcn UI, and Firebase.'
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tn-ecommerce.tiesen.id.vn'),
-  title: 'TN E-Commerce',
-  description,
+  metadataBase: meta.metadataBase,
+  title: meta.title,
+  description: meta.description,
   openGraph: {
-    type: 'book',
+    type: 'website',
     locale: 'vi_VN',
-    siteName: 'TN E-Commerce',
-    url: 'https://tn-ecommerce.vercel.app/',
-    title: 'TN E-Commerce',
-    description,
-    images: [
-      {
-        url: 'logo.png',
-        width: 400,
-        height: 400,
-        alt: 'TN E-Commerce',
-      },
-    ],
+    siteName: meta.title,
+    url: meta.url,
+    title: meta.title,
+    description: meta.description,
+    images: meta.images,
   },
   twitter: {
-    title: 'TN E-Commerce',
-    description,
+    title: meta.title,
+    description: meta.description,
     card: 'summary_large_image',
-    images: '/logo.png',
+    images: meta.images[0].url,
     creator: 'Tiesen',
     creatorId: 'tiesen243',
     site: '@tiesen243',
@@ -34,23 +25,16 @@ export const metadata: Metadata = {
   },
 }
 
-import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
-import AuthProvider from '@/provider/auth.provider'
-import ThemeProvider from '@/provider/theme.provider'
+import { AppProvider } from '@/provider'
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
+import { meta } from '@/lib/meta'
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={cn('min-h-screen bg-background font-sans antialiased', GeistSans.variable)}>
-      <AuthProvider>
-        <ThemeProvider>
-          {children}
-
-          <Toaster />
-        </ThemeProvider>
-      </AuthProvider>
+      <AppProvider>{children}</AppProvider>
     </body>
   </html>
 )
