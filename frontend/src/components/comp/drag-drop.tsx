@@ -24,7 +24,7 @@ export const DragAndDrop = forwardRef<DropzoneRef, Props>(({ previewImg, ...fiel
       reader.onload = () => setPreview(reader.result as string)
       reader.readAsDataURL(file[0])
 
-      toast({ title: 'Upload image successfully', variant: 'success' })
+      toast({ title: 'Upload image successfully' })
       return fields.onChange(file[0] as any)
     } catch (e) {
       toast({

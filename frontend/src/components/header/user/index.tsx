@@ -5,9 +5,10 @@ import Link from 'next/link'
 
 import { buttonVariants } from '@/components/ui/button'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
+import { Skeleton } from '@/components/ui/skeleton'
 import UserAvatar from './user.avatar'
 import UserMenu from './user.menu'
-import { Skeleton } from '@/components/ui/skeleton'
+import { SignOutDialog } from './items'
 
 const User: React.FC = () => {
   const { status, data } = useSession()
@@ -19,14 +20,16 @@ const User: React.FC = () => {
       </Link>
     )
 
-  if (status === 'loading')
+  if (status === 'loading' || !data?.user)
     return <Skeleton className="h-10 w-10 rounded-full ring-primary hover:ring-2" />
 
   return (
-    <DropdownMenu>
-      <UserAvatar user={data?.user} />
-      <UserMenu user={data?.user} />
-    </DropdownMenu>
+    <SignOutDialog>
+      <DropdownMenu>
+        <UserAvatar user={data.user} />
+        <UserMenu user={data.user} />
+      </DropdownMenu>
+    </SignOutDialog>
   )
 }
 

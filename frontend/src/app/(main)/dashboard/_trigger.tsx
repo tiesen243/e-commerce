@@ -1,24 +1,19 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
-import { TabsList, TabsTrigger } from '../ui/tabs'
+import { TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const Trigger: React.FC = () => {
-  const { data } = useSession()
-  if (!data) return <LoadingTrigger />
+  const { data, status } = useSession()
+  if (status === 'loading' || !data) return <LoadingTrigger />
 
   const role = data.user.role
 
   return (
-    <TabsList className={`grid w-full ${role === 'admin' ? 'grid-cols-4' : 'grid-cols-2'}`}>
+    <TabsList className={`grid w-full ${role === 'admin' ? 'grid-cols-3' : 'grid-cols-2'}`}>
       <TabsTrigger value="products">Products</TabsTrigger>
       <TabsTrigger value="create">Create product</TabsTrigger>
-      {role === 'admin' && (
-        <>
-          <TabsTrigger value="orders">Orders</TabsTrigger>
-          <TabsTrigger value="users">Users</TabsTrigger>
-        </>
-      )}
+      {role === 'admin' && <TabsTrigger value="orders">Orders</TabsTrigger>}
     </TabsList>
   )
 }

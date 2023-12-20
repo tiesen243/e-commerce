@@ -1,12 +1,11 @@
 import { MenuIcon } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Navigation } from '.'
+import { Logo, Search } from '../utils'
 
-import Search from './search'
-import Logo from './logo'
-import Navigation from './nav'
-
-const MobileMenu: React.FC = () => (
+export const MobileMenu: React.FC = () => (
   <Sheet>
     <SheetTrigger className="block md:hidden" asChild>
       <Button variant="outline" size="icon">
@@ -23,5 +22,3 @@ const MobileMenu: React.FC = () => (
     </SheetContent>
   </Sheet>
 )
-
-export default MobileMenu

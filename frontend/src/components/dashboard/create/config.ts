@@ -14,7 +14,7 @@ const isNuber = z
 const isFile = z.instanceof(File).nullable()
 
 export const createSchema = z.object({
-  name: z.string().min(4).max(50),
+  name: z.string().min(4).max(100),
   description: z.string().min(4).max(500),
   image: isFile,
   price: isNuber,
@@ -43,7 +43,7 @@ export const create = async (data: ICreate) => {
   try {
     const url: string = await uploadImage(data.image, name, 'product')
     await axios.post('/api/product/create', { ...data, image: url })
-    toast({ description: 'Product created', variant: 'success' })
+    toast({ description: 'Product created' })
   } catch (e: any) {
     const message: string = e.response.data.message
     if (!message.includes('existed')) await deleteImage(name, 'product')

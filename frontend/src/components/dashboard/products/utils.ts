@@ -18,7 +18,7 @@ export const handleDelete = async (id: string) => {
   try {
     await axios.delete(`/api/product/${id}`)
     mutate('/api/product/me')
-    toast({ title: 'Deleted successfully', variant: 'success' })
+    toast({ title: 'Deleted successfully' })
   } catch (e: any) {
     const message = e.response.data.message
     toast({ title: 'Delete failed', description: message, variant: 'destructive' })

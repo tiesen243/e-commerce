@@ -7,7 +7,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { BookAIcon, BookIcon, BookOpenIcon, BookOpenTextIcon } from 'lucide-react'
 
-const Navigation: React.FC<{ className: string }> = ({ className }) => {
+export const Navigation: React.FC<{ className: string }> = ({ className }) => {
   const pathName = usePathname()
   const currentPath = navs.find((nav) => nav.href === pathName)
 
@@ -30,7 +30,7 @@ const Navigation: React.FC<{ className: string }> = ({ className }) => {
   )
 }
 
-export default Navigation
+export { MobileMenu } from './mobile'
 
 const className = 'mr-2 block md:hidden'
 const navs = [

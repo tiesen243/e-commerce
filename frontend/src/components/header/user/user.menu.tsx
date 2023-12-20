@@ -1,5 +1,3 @@
-import { signOut } from 'next-auth/react'
-
 import {
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -7,9 +5,8 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { IUser } from '@/types/user'
-import { DropdownItem } from '@/components/comp/dropdownItem'
-import { LayoutDashboard, LogOutIcon, ShoppingCartIcon, UserIcon } from 'lucide-react'
-import ThemeBtn from '@/components/comp/themeBtn'
+import { LayoutDashboard, ShoppingCartIcon, UserIcon } from 'lucide-react'
+import { DropdownItem, SignOutBtn, ThemeBtn } from './items'
 
 const UserMenu: React.FC<{ user: IUser }> = ({ user }) => {
   const end = user.role !== 'user' ? 3 : 2
@@ -28,11 +25,7 @@ const UserMenu: React.FC<{ user: IUser }> = ({ user }) => {
 
       <DropdownMenuGroup>
         <ThemeBtn />
-        <DropdownItem
-          title="Sign out"
-          icon={<LogOutIcon className="mr-2 h-4 w-4" />}
-          onClick={() => signOut({ callbackUrl: '/' })}
-        />
+        <SignOutBtn />
       </DropdownMenuGroup>
     </DropdownMenuContent>
   )

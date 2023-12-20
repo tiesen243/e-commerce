@@ -9,12 +9,12 @@ import { fetcher } from './utils'
 
 const Content: React.FC = () => {
   const { data, error, isLoading } = useSWR<IProduct[]>('/api/product/me', fetcher)
-  if (isLoading || !data) return <Error text="Loading..." />
+  if (isLoading) return <Error text="Loading..." />
   if (error) return <Error text={error.message} />
 
   return (
     <TableBody>
-      {data.map((product: IProduct) => (
+      {data?.map((product: IProduct) => (
         <TableRow key={product._id}>
           <TableCell className="w-2/12">{product.code}</TableCell>
           <TableCell className="w-4/12">{product.name}</TableCell>
@@ -32,7 +32,9 @@ export default Content
 const Error: React.FC<{ text: string }> = ({ text }) => (
   <TableBody>
     <TableRow>
-      <TableCell>{text}</TableCell>
+      <TableCell colSpan={5} className="text-center text-xl text-secondary">
+        {text}
+      </TableCell>
     </TableRow>
   </TableBody>
 )
