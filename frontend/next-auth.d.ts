@@ -1,6 +1,8 @@
-import type IUser, { Role } from '@/types/user'
 import { DefaultSession, DefaultUser } from 'next-auth'
 import { DefaultJWT } from 'next-auth/jwt'
+
+import { Role } from '@/types/enum'
+import type { IUser } from '@/types/user'
 
 declare module 'next-auth' {
   interface Session extends DefaultSession {
