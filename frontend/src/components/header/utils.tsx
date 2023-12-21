@@ -1,10 +1,11 @@
-import { handleSearch } from '@/actions/search'
-import { cn } from '@/lib/utils'
 import { SearchIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
+
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { handleSearch } from '@/lib/actions/search'
+import { cn } from '@/lib/utils'
 
 export const Logo: React.FC = () => (
   <Link href="/" className="flex cursor-pointer items-center space-x-2 text-2xl font-bold">

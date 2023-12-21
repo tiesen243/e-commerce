@@ -1,6 +1,6 @@
 import axios, { secret } from '@/lib/axios'
 import { getToken } from 'next-auth/jwt'
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export const POST = async (req: NextRequest) => {
   const data = await req.json()

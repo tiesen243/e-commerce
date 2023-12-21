@@ -7,14 +7,22 @@ import { CardFooter } from '@/components/ui/card'
 interface Props {
   btnText: string
   isPending: boolean
+  type?: 'button' | 'reset'
+  onClick?: () => void
   cancel?: boolean
 }
-const FormFooter: React.FC<Props> = ({ btnText, isPending, cancel = false }) => (
+const FormFooter: React.FC<Props> = ({
+  btnText,
+  isPending,
+  onClick,
+  type = 'button',
+  cancel = false,
+}) => (
   <CardFooter className="flex flex-col items-stretch">
     <section className={`flex items-center gap-4 ${cancel ? 'justify-end' : 'justify-around'}`}>
       {cancel && (
-        <Link href="/" passHref legacyBehavior>
-          <Button variant="ghost" disabled={isPending}>
+        <Link href={type === 'button' ? '/' : '#'} passHref legacyBehavior>
+          <Button variant="ghost" type={type} onClick={onClick} disabled={isPending}>
             Cancel
           </Button>
         </Link>
