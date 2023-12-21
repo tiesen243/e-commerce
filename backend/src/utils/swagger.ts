@@ -1,8 +1,8 @@
 import { DocumentBuilder, OpenAPIObject, SwaggerCustomOptions } from '@nestjs/swagger'
 
 const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
-  .setTitle('Yuki API')
-  .setDescription('Restful API for Yuki Shop')
+  .setTitle('TN | API')
+  .setDescription('Restful API for TN | Project')
   .setVersion('1.0')
   .setContact('Tiesen', 'https://tiesen.id.vn', 'ttien56906@gmail.com')
   .setLicense('MIT', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
@@ -27,7 +27,7 @@ const options: SwaggerCustomOptions = {
   swaggerOptions: {
     persistAuthorization: true,
   },
-  customSiteTitle: 'Yuki API',
+  customSiteTitle: 'TN | API',
   customfavIcon: 'https://raw.githubusercontent.com/tiesen243/albums/main/favicon.ico',
 }
 

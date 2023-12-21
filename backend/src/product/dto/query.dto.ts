@@ -60,7 +60,7 @@ export default class QueryDto {
   @ApiProperty({
     description: 'The sort by',
     enum: ['name', 'price', 'createdAt', 'updatedAt'],
-    default: 'name',
+    default: 'createdAt',
     required: false,
   })
   @IsOptional()
@@ -68,7 +68,7 @@ export default class QueryDto {
   @IsEnum(['name', 'price', 'createdAt', 'updatedAt'])
   readonly sortBy: string
 
-  @ApiProperty({ description: 'The sort order', default: 0, required: false })
+  @ApiProperty({ description: 'The sort order', default: false, required: false })
   @IsOptional()
   @IsBoolean()
   @Transform(({ value }) => value === 'true')
