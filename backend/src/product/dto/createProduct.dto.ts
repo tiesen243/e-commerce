@@ -4,8 +4,6 @@ import { IsEnum, IsNotEmpty, IsNumber, IsString, IsUrl, Length, Min } from 'clas
 import { Category, Tag } from '../schemas/enum'
 
 export default class CreateProductDto {
-  public slug: string
-
   @ApiProperty({ description: 'The name of the product' })
   @IsNotEmpty()
   @IsString()

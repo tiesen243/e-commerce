@@ -6,26 +6,23 @@ import {
 } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import slug from 'slugify'
 
 import { Role, User } from '../auth/schemas'
 import { IResponse } from '../utils'
 import { CreateProductDto, QueryProductDto, UpdateProductDto } from './dto'
 import { Product } from './schemas/product.schema'
-import { create } from 'domain'
 
 @Injectable()
 export class ProductService {
   constructor(@InjectModel(Product.name) private readonly productModel: Model<Product>) {}
 
   async findAll(q: QueryProductDto): Promise<IResponse<Product[]>> {
-    const { limit, page, keyword, code, slug, category, tags } = q
+    const { limit, page, keyword, code, category, tags } = q
     const skip: number = (page - 1) * limit
 
     // Search by name, code, category, tags
     const search = {
       ...(code ? { code: { $gte: code, $lte: code } } : {}),
-      ...(slug ? { slug: { $regex: slug, $options: 'i' } } : {}),
       ...(keyword ? { name: { $regex: keyword, $options: 'i' } } : {}),
       ...(category ? { category: category } : {}),
       ...(tags ? { tags: { $in: tags } } : {}),
@@ -83,13 +80,7 @@ export class ProductService {
     if (user.role !== Role.ADMIN && user.role !== Role.SELLER)
       throw new UnauthorizedException('You are not admin or seller')
 
-    const allProducts = await this.productModel.find().exec()
-    createDto.slug = slug(createDto.name, { lower: true })
-    if (allProducts.find((product) => product.slug === createDto.slug))
-      throw new BadRequestException('Product has been existed')
-
     const newProduct = await this.productModel.create({
-      createdAt: new Date(),
       code: Math.floor(100000 + Math.random() * 900000),
       userId: user._id,
       ...createDto,
@@ -111,13 +102,8 @@ export class ProductService {
 
     await this.productModel.findByIdAndUpdate(
       id,
-      {
-        updatedAt: new Date(),
-        ...updateDto,
-      },
-      {
-        new: true,
-      },
+      { ...updateDto, updatedAt: new Date() },
+      { new: true },
     )
 
     return {

@@ -17,13 +17,6 @@ export class Product extends Document {
   })
   code: number
 
-  @Prop({ required: true, unique: true, slug: 'name' })
-  @ApiProperty({
-    description: 'The slug of the product',
-    example: 'metamorphosis',
-  })
-  slug: string
-
   @Prop({ required: true })
   @ApiProperty({
     description: 'The name of the product',

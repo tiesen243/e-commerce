@@ -2,8 +2,6 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Transform, Type } from 'class-transformer'
 import {
   IsBoolean,
-  IsBooleanString,
-  IsDefined,
   IsEnum,
   IsNumber,
   IsOptional,
@@ -42,11 +40,6 @@ export default class QueryDto {
   @Max(999999)
   @Type(() => Number)
   readonly code: number
-
-  @ApiProperty({ description: 'The slug of product', type: String, required: false })
-  @IsOptional()
-  @IsString()
-  readonly slug: string
 
   @ApiProperty({ description: 'The category of product', enum: Category, required: false })
   @IsOptional()
