@@ -6,7 +6,7 @@ import { Category, Tag } from '@/types/enum'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const createSchema = z.object({
-  name: z.string().min(4).max(100),
+  name: z.string().min(1).max(100),
   description: z.string().min(4).max(1000),
   image: z.instanceof(File).nullable(),
   price: z.coerce.number(),
@@ -45,5 +45,6 @@ export const create = async (data: ICreate) => {
   } catch (e: any) {
     await deleteImage(data.name)
     toast({ description: e.message, variant: 'destructive' })
+    throw new Error(e.message)
   }
 }

@@ -7,6 +7,7 @@ import { CardContent } from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
 import { create, defaultValues, resolver, type ICreate } from './config'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useRouter } from 'next/navigation'
 
 const FormFields = dynamic(() => import('./input'), {
   ssr: false,
@@ -35,12 +36,21 @@ const FormBtn = dynamic(() => import('./submit'), {
 const CreateForm: React.FC = () => {
   const form = useForm<ICreate>({ resolver, defaultValues })
   const isPending = form.formState.isSubmitting
+  const { push } = useRouter()
 
   const handleReset = () => form.reset(defaultValues)
+  const handleSubmit = form.handleSubmit((data: ICreate) =>
+    create(data)
+      .then(() => {
+        handleReset()
+        push('/dashboard')
+      })
+      .catch(console.error)
+  )
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(create)}>
+      <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <FormFields form={form} isPending={isPending} />
         </CardContent>
