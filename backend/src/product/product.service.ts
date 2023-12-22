@@ -54,14 +54,30 @@ export class ProductService {
     }
   }
 
-  async findAllByUser(user: User): Promise<IResponse<Product[]>> {
-    const allProducts = await this.productModel.find({ userId: user._id }).exec()
+  async findAllByUser(user: User, q: QueryProductDto): Promise<IResponse<Product[]>> {
+    const { keyword, page, limit = 5 } = q
+    const skip: number = (page - 1) * limit
+    const search = {
+      ...(keyword ? { name: { $regex: keyword, $options: 'i' } } : {}),
+    }
+
+    const allProducts = await this.productModel
+      .find({ userId: user._id, ...search })
+      .limit(limit)
+      .skip(skip)
+      .exec()
     if (allProducts.length === 0) throw new NotFoundException('No products found')
+
+    const totalPage: number = Math.ceil(
+      (await this.productModel.countDocuments({ userId: user._id })) / limit,
+    )
 
     return {
       statusCode: 200,
       message: 'All products has been successfully retrieved.',
       data: allProducts,
+      page,
+      totalPage,
     }
   }
 

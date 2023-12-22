@@ -56,8 +56,11 @@ export class ProductController {
     type: [Product],
   })
   @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
-  async findAllByUser(@Req() req: IRequest): Promise<IResponse<Product[]>> {
-    return await this.productService.findAllByUser(req.user)
+  async findAllByUser(
+    @Req() req: IRequest,
+    @Query() q: QueryProductDto,
+  ): Promise<IResponse<Product[]>> {
+    return await this.productService.findAllByUser(req.user, q)
   }
 
   @Get(':id')
