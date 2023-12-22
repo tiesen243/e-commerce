@@ -15,7 +15,7 @@ import DeleteBtn from './deleteBtn'
 import type { IProduct } from '@/types/product'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 
-const headers: string[] = ['Code', 'Name', 'Created At', 'Updated At', 'Actions']
+const headers: string[] = ['Code', 'Name', 'Updated At', 'Actions']
 
 export const DashboardTable: React.FC<React.PropsWithChildren> = ({ children }) => (
   <>
@@ -25,6 +25,7 @@ export const DashboardTable: React.FC<React.PropsWithChildren> = ({ children }) 
         <Link href="/dashboard/create">Create a product</Link>
       </Button>
     </article>
+
     <Table>
       <TableHeader>
         <TableRow>
@@ -42,8 +43,9 @@ export const DashboardTable: React.FC<React.PropsWithChildren> = ({ children }) 
 export const TableChild: React.FC<{ product: IProduct }> = ({ product }) => (
   <TableRow>
     <TableCell align="center">{product.code}</TableCell>
-    <TableCell>{product.name}</TableCell>
-    <TableCell>{formatDate(product.createdAt)}</TableCell>
+    <TableCell>
+      {product.name.length > 15 ? `${product.name.slice(0, 15)}...` : product.name}
+    </TableCell>
     <TableCell>{formatDate(product.updatedAt)}</TableCell>
     <TableCell className="grid grid-cols-2 gap-2">
       <Button size="sm" asChild>

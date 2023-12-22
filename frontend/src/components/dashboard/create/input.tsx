@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Category, Tag } from '@/types/enum'
 import { ICreate } from './config'
+import { CardContent } from '@/components/ui/card'
 
 interface Props {
   form: UseFormReturn<ICreate>
@@ -16,7 +17,7 @@ interface Props {
 
 const CreateFields = Fields<ICreate>
 const FormFields: React.FC<Props> = ({ form, isPending }) => (
-  <>
+  <CardContent className="space-y-4">
     <CreateFields name="name" control={form.control}>
       {(field) => <Input {...field} disabled={isPending} />}
     </CreateFields>
@@ -57,9 +58,7 @@ const FormFields: React.FC<Props> = ({ form, isPending }) => (
         />
       )}
     </CreateFields>
-  </>
+  </CardContent>
 )
 
 export default FormFields
-
-
