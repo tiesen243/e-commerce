@@ -47,7 +47,9 @@ const ProductCard: React.FC<Props> = ({ product, isFirst = false, hasDetails = f
     <CardHeader className="absolute inset-0 hidden text-pretty group-hover:block">
       <CardTitle>{product.name}</CardTitle>
       <CardDescription
-        className={`overflow-y-auto text-primary ${!isFirst && 'md:max-h-12 lg:max-h-52'}`}
+        className={`overflow-y-auto text-primary ${
+          isFirst ? 'max-h-52' : 'md:max-h-12 lg:max-h-52'
+        }`}
       >
         {product.description}
       </CardDescription>

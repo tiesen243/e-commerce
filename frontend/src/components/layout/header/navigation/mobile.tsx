@@ -7,7 +7,7 @@ import { Logo, Search } from '../utils'
 
 export const MobileMenu: React.FC = () => (
   <Sheet>
-    <SheetTrigger className="block md:hidden" asChild>
+    <SheetTrigger className="flex md:hidden" asChild>
       <Button variant="outline" size="icon">
         <MenuIcon />
       </Button>
