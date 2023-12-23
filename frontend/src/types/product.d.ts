@@ -2,8 +2,7 @@ import { Category, Tag } from './enum'
 
 interface IProduct {
   _id: string
-  code: string
-  slug: string
+  code: number
   name: string
   image: string
   description: string

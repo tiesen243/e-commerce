@@ -33,7 +33,7 @@ import { meta } from '@/lib/meta'
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
-    <body className={cn('min-h-screen bg-background font-sans antialiased', GeistSans.variable)}>
+    <body className={cn('min-h-dvh bg-background font-sans antialiased', GeistSans.variable)}>
       <AppProvider>{children}</AppProvider>
     </body>
   </html>

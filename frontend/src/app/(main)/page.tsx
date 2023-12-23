@@ -1,7 +1,14 @@
 import { type NextPage } from 'next'
 
-const Page: NextPage = () => {
-  return <div className="h-[10000px]">Page</div>
-}
+import ThreeItemsGrid from '@/components/home/threeItemsGrid'
+import Carousel from '@/components/home/carousel'
+
+const Page: NextPage = () => (
+  <>
+    <ThreeItemsGrid />
+
+    <Carousel />
+  </>
+)
 
 export default Page
