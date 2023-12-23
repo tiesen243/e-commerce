@@ -10,7 +10,7 @@ const Footer: React.FC = () => (
   <footer className="rounded-lg border bg-card text-card-foreground shadow-sm">
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
       <div>
-        <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/home">
+        <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
           <div className="flex size-7 flex-none items-center justify-center rounded-lg border bg-background">
             <Image src="/logo.svg" alt="logo" width={10} height={10} className="dark:invert" />
           </div>
