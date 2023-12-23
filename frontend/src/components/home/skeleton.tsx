@@ -1,7 +1,6 @@
-import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card'
 import { Skeleton } from '../ui/skeleton'
 
-export const ThreeItemsGridSkeleton = () => (
+export const ThreeItemsGridSkeleton: React.FC = () => (
   <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
     {Array.from({ length: 3 }).map((_, i) => (
       <section key={i} className={`h-full w-full ${i === 0 && 'md:col-span-2 md:row-span-2'}`}>
@@ -11,24 +10,7 @@ export const ThreeItemsGridSkeleton = () => (
   </div>
 )
 
-interface Props {
-  status: number
-  message: string
-}
-export const ErrorThreeItemsGrid: React.FC<Props> = ({ status, message }) => (
-  <div className="absolute inset-0 z-50 flex items-start justify-center md:items-center">
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-xl font-bold">Oh no!</CardTitle>
-        <CardDescription className="my-2">
-          Error {status}: {message}
-        </CardDescription>
-      </CardHeader>
-    </Card>
-  </div>
-)
-
-export const CarouselSkeleton = () => (
+export const CarouselSkeleton: React.FC = () => (
   <div className="mt-4 w-full overflow-x-auto pb-6 pt-1">
     <ul className="flex h-fit animate-carousel gap-4">
       {Array.from({ length: 10 }).map((_, i) => (

@@ -1,7 +1,7 @@
 import BackBtn from '@/components/comp/backBtn'
 import axios from '@/lib/axios'
 import { meta } from '@/lib/meta'
-import { getIdFromSlug, makeSlug } from '@/lib/utils'
+import { getIdFromSlug } from '@/lib/utils'
 import { IProduct } from '@/types/product'
 import type { Metadata, NextPage } from 'next'
 
@@ -10,17 +10,17 @@ interface Props {
     slug: string
   }
 }
-export const generateMetadata = async (props: Props): Promise<Metadata> => {
-  const { params } = props
+
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { data } = await axios.get(`/product/${getIdFromSlug(params.slug)}`)
   const product: IProduct = data.data
   return {
-    title: `${meta.title} | ${product.name}`,
+    title: `${product.name} | ${meta.title}`,
     description: product.description,
     openGraph: {
-      title: `${meta.title} | ${product.name}`,
+      title: `${product.name} | ${meta.title}`,
       description: product.description,
-      url: `${meta.url}/product/${makeSlug(product)}`,
+      url: `${meta.url}/product/${params.slug}`,
       type: 'website',
       images: [
         {
@@ -32,7 +32,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
       ],
     },
     twitter: {
-      title: `${meta.title} | ${product.name}`,
+      title: `${product.name} | ${meta.title}`,
       description: product.description,
       images: product.image,
       card: 'summary_large_image',

@@ -1,17 +1,17 @@
 import type { Metadata, NextPage } from 'next'
 
 export const metadata: Metadata = {
-  title: `${meta.title} | Dashboard`,
-  description: `Dashboard of ${meta.title}`,
+  title: `Dashboard | ${meta.title}`,
+  description: `Dashboard of ${meta.title}. Manage your products here.`,
   metadataBase: meta.metadataBase,
   openGraph: {
-    title: `${meta.title} | Dashboard`,
-    description: `Dashboard of ${meta.title}`,
+    title: `Dashboard | ${meta.title}`,
+    description: `Dashboard of ${meta.title}. Manage your products here.`,
     url: `${meta.url}/dashboard`,
   },
   twitter: {
-    title: `${meta.title} | Dashboard`,
-    description: `Dashboard of ${meta.title}`,
+    title: `Dashboard | ${meta.title}`,
+    description: `Dashboard of ${meta.title}. Manage your products here.`,
   },
 }
 
