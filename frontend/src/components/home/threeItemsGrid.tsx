@@ -3,7 +3,7 @@ import { IProduct } from '@/types/product'
 import ProductCard from '../productCard'
 
 const ThreeItemsGrid = async () => {
-  const { data } = await axios('/product?limit=3')
+  const { data } = await axios('/product?limit=3&sortBy=createdAt&isAscending=false')
 
   const products: IProduct[] = data.data
   return (

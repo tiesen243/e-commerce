@@ -42,18 +42,22 @@ const ProductCard: React.FC<Props> = ({ product, hasDetails = false }) => (
     <div className="absolute h-full w-full transition-all group-hover:backdrop-blur-lg" />
 
     <CardHeader className="absolute inset-0 hidden text-pretty group-hover:block">
-      <CardTitle>{product.name}</CardTitle>
-      <CardDescription className="max-h-40 overflow-y-auto text-primary">
+      <CardTitle>
+        {product.name.length > 15 ? product.name.slice(0, 15) + '...' : product.name}
+      </CardTitle>
+      <CardDescription className="overflow-y-auto text-primary md:max-h-12 lg:max-h-52">
         {product.description}
       </CardDescription>
     </CardHeader>
 
     <CardFooter className="absolute bottom-0 left-0 flex w-full flex-col items-start bg-secondary transition-opacity group-hover:bg-secondary/20">
-      <CardTitle className="mt-4 group-hover:hidden">{product.name}</CardTitle>
+      <CardTitle className="mt-4 group-hover:hidden">
+        {product.name.length > 15 ? product.name.slice(0, 15) + '...' : product.name}
+      </CardTitle>
 
       <CardDescription className="mt-4 hidden text-lg text-primary group-hover:block">
         {product.saleOffPercent === 0 ? (
-          product.price
+          product.price + '$'
         ) : (
           <>
             <del>{product.price}$</del>{' '}
