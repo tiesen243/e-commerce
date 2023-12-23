@@ -1,7 +1,17 @@
-# YUKI'Shop
+# TN Store
 
-Full Stack E-Commerce Web Application with NestJS, NextJS, Redux, TypeScript, Material UI, MongoDB, Firebase and deployed on Vercel
+Full Stack E-Commerce Web Application with NestJS, NextJS, Redux, TypeScript, Shadcn UI, MongoDB, Firebase and deployed on Vercel
 
-api: [here](https://yuki-api.vercel.app/api-docs)
+## Installation
 
-app: [here](https://yukinu.vercel.app)
+```bash
+git clone https://github.com/tiesen243/e-commerce.git
+cd e-commerce
+yarn install
+```
+
+## Deploy
+
+api: [here](https://api.tiesen.id.vn/api-docs)
+
+app: [here](https://tn-store.tiesen.id.vn/)
