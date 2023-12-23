@@ -1,16 +1,12 @@
-import { meta } from '@/lib/meta'
 import type { Metadata, NextPage } from 'next'
 
 export const metadata: Metadata = {
-  title: `Shipping & Returns Policy | ${meta.title}`,
-  description: 'Shipping & Returns Policy',
+  title: `Shipping & Returns Policy`,
   openGraph: {
-    title: `${meta.title} | Shipping & Returns Policy`,
-    description: 'Shipping & Returns Policy',
+    title: `Shipping & Returns Policy`,
   },
   twitter: {
-    title: `${meta.title} | Shipping & Returns Policy`,
-    description: 'Shipping & Returns Policy',
+    title: `Shipping & Returns Policy`,
   },
 }
 

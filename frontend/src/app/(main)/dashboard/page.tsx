@@ -1,17 +1,16 @@
 import type { Metadata, NextPage } from 'next'
 
 export const metadata: Metadata = {
-  title: `Dashboard | ${meta.title}`,
-  description: `Dashboard of ${meta.title}. Manage your products here.`,
-  metadataBase: meta.metadataBase,
+  title: `Dashboard`,
+  description: `Manage your products here.`,
   openGraph: {
-    title: `Dashboard | ${meta.title}`,
-    description: `Dashboard of ${meta.title}. Manage your products here.`,
-    url: `${meta.url}/dashboard`,
+    title: `Dashboard`,
+    description: `Manage your products here.`,
+    url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/dashboard`,
   },
   twitter: {
-    title: `Dashboard | ${meta.title}`,
-    description: `Dashboard of ${meta.title}. Manage your products here.`,
+    title: `Dashboard`,
+    description: `Manage your products here.`,
   },
 }
 
@@ -19,13 +18,10 @@ import { DashboardTable, TFooter, TableChild, TableError } from '@/components/da
 import { TableBody } from '@/components/ui/table'
 import { API_URL } from '@/lib/axios'
 import { GetToken } from '@/lib/getToken'
-import { meta } from '@/lib/meta'
 import type { IProduct } from '@/types/product'
 
 interface Props {
-  searchParams: {
-    page: number
-  }
+  searchParams: { page: number }
 }
 
 const Page: NextPage<Props> = async ({ searchParams }) => {

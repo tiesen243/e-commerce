@@ -1,16 +1,12 @@
-import { meta } from '@/lib/meta'
 import type { Metadata, NextPage } from 'next'
 
 export const metadata: Metadata = {
-  title: `Terms & Conditions | ${meta.title}`,
-  description: 'Terms & Conditions',
+  title: `Terms & Conditions`,
   openGraph: {
-    title: `${meta.title} | Terms & Conditions`,
-    description: 'Terms & Conditions',
+    title: `Terms & Conditions`,
   },
   twitter: {
-    title: `${meta.title} | Terms & Conditions`,
-    description: 'Terms & Conditions',
+    title: `Terms & Conditions`,
   },
 }
 

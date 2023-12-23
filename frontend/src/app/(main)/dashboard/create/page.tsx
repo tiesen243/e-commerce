@@ -1,19 +1,17 @@
-import type { Metadata, NextPage } from 'next'
-
 import CreateForm from '@/components/dashboard/create'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { meta } from '@/lib/meta'
+import type { Metadata, NextPage } from 'next'
 
 export const metadata: Metadata = {
-  title: `Create a new product | ${meta.title}`,
+  title: 'Create a new product',
   description: `Fill in the form below to create a new product. Make sure you fill in all the required`,
   openGraph: {
-    title: `Create a new product | ${meta.title}`,
+    title: 'Create a new product',
     description: `Fill in the form below to create a new product. Make sure you fill in all the required`,
-    url: `${meta.url}/dashboard/create`,
+    url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/dashboard/create`,
   },
   twitter: {
-    title: `Create a new product | ${meta.title}`,
+    title: 'Create a new product',
     description: `Fill in the form below to create a new product. Make sure you fill in all the required`,
   },
 }

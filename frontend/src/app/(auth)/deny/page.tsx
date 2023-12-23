@@ -1,7 +1,20 @@
 import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { NextPage } from 'next'
+import type { Metadata, NextPage } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Access Denied',
+  description: "You don't have permission to access this page.",
+  openGraph: {
+    title: 'Access Denied',
+    description: "You don't have permission to access this page.",
+  },
+  twitter: {
+    title: 'Access Denied',
+    description: "You don't have permission to access this page.",
+  },
+}
 
 const Page: NextPage = () => (
   <Card className="typography prose-p:m-0 prose-a:no-underline">

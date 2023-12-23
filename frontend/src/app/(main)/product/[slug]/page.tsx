@@ -1,26 +1,24 @@
-import BackBtn from '@/components/comp/backBtn'
+import BackBtn from '@/components/comp/back-btn'
 import axios from '@/lib/axios'
-import { meta } from '@/lib/meta'
 import { getIdFromSlug } from '@/lib/utils'
 import { IProduct } from '@/types/product'
 import type { Metadata, NextPage } from 'next'
 
 interface Props {
-  params: {
-    slug: string
-  }
+  params: { slug: string }
 }
 
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { data } = await axios.get(`/product/${getIdFromSlug(params.slug)}`)
   const product: IProduct = data.data
   return {
-    title: `${product.name} | ${meta.title}`,
+    title: `${product.name} `,
     description: product.description,
     openGraph: {
-      title: `${product.name} | ${meta.title}`,
+      title: `${product.name} `,
       description: product.description,
-      url: `${meta.url}/product/${params.slug}`,
+      url: `${appUrl}/product/${params.slug}`,
       type: 'website',
       images: [
         {
@@ -32,7 +30,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
       ],
     },
     twitter: {
-      title: `${product.name} | ${meta.title}`,
+      title: `${product.name}`,
       description: product.description,
       images: product.image,
       card: 'summary_large_image',

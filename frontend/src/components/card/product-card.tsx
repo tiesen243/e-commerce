@@ -1,10 +1,11 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import type { IProduct } from '@/types/product'
 
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -14,7 +15,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { makeSlug } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 
 interface Props {
   product: IProduct

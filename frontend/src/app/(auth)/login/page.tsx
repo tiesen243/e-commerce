@@ -1,4 +1,18 @@
-import type { NextPage } from 'next'
+import type { Metadata, NextPage } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Login',
+  description: 'Enter your credentials to login.',
+  openGraph: {
+    title: 'Login',
+    description: 'Enter your credentials to login.',
+    url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/login`,
+  },
+  twitter: {
+    title: 'Login',
+    description: 'Enter your credentials to login.',
+  },
+}
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import CheckAuthProvider from '@/provider/checkauth.provider'

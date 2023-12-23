@@ -1,16 +1,12 @@
-import { meta } from '@/lib/meta'
-import { Metadata, NextPage } from 'next'
+import type { Metadata, NextPage } from 'next'
 
 export const metadata: Metadata = {
-  title: `Privacy Policy | ${meta.title}`,
-  description: 'Privacy Policy',
+  title: `Privacy Policy`,
   openGraph: {
-    title: `${meta.title} | Privacy Policy`,
-    description: 'Privacy Policy',
+    title: `$Privacy Policy`,
   },
   twitter: {
-    title: `${meta.title} | Privacy Policy`,
-    description: 'Privacy Policy',
+    title: `Privacy Policy`,
   },
 }
 

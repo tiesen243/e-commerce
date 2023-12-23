@@ -1,5 +1,5 @@
-import { IProduct } from '@/types/product'
-import ProductCard from '@/components/card/productCard'
+import ProductCard from '@/components/card/product-card'
+import type { IProduct } from '@/types/product'
 
 const ThreeItemsGrid: React.FC<{ products: IProduct[] }> = async ({ products }) => (
   <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">

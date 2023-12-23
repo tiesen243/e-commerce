@@ -1,5 +1,4 @@
 import axios from '@/lib/axios'
-import { meta } from '@/lib/meta'
 import { makeSlug } from '@/lib/utils'
 import { Category } from '@/types/enum'
 import { IProduct } from '@/types/product'
@@ -10,9 +9,11 @@ type Route = {
   lastModified: string
 }
 
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routesMap = ['', 'search', 'cart'].map((route) => ({
-    url: `${meta.url}/${route}`,
+    url: `${appUrl}/${route}`,
     lastModified: new Date().toISOString(),
   }))
 
@@ -21,13 +22,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .then((res) => res.data.data)
     .then((products: IProduct[]) =>
       products.map((product) => ({
-        url: `${meta.url}/product/${makeSlug(product)}`,
+        url: `${appUrl}/product/${makeSlug(product)}`,
         lastModified: new Date(product.updatedAt).toISOString(),
       }))
     )
 
   const categoriesPromise = Object.values(Category).map((cate) => ({
-    url: `${meta.url}/search/${cate}`,
+    url: `${appUrl}/search/${cate}`,
     lastModified: new Date().toISOString(),
   }))
 

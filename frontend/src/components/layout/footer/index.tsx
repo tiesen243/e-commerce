@@ -1,5 +1,4 @@
 import { Separator } from '@/components/ui/separator'
-import { meta } from '@/lib/meta'
 import Image from 'next/image'
 import Link from 'next/link'
 import FooterMenu from './footerMenu'
@@ -13,7 +12,7 @@ const Footer: React.FC = () => (
           <div className="flex size-7 flex-none items-center justify-center rounded-lg border bg-background">
             <Image src="/logo.svg" alt="logo" width={10} height={10} className="dark:invert" />
           </div>
-          <span className="uppercase">{meta.title}</span>
+          <span className="uppercase">{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </Link>
       </div>
 

@@ -1,23 +1,40 @@
 import type { Metadata } from 'next'
 
+const appName = process.env.NEXT_PUBLIC_APP_NAME || ''
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || ''
+const description =
+  'A simple e-commerce website built with Next.js, TypeScript, MongoDB, and Tailwind CSS.'
 export const metadata: Metadata = {
-  metadataBase: meta.metadataBase,
-  title: meta.title,
-  description: meta.description,
+  metadataBase: new URL(appUrl),
+  title: {
+    default: appName,
+    template: '%s | ' + appName,
+  },
+  description: description,
   openGraph: {
     type: 'website',
     locale: 'vi_VN',
-    siteName: meta.title,
-    url: meta.url,
-    title: meta.title,
-    description: meta.description,
-    images: meta.images,
+    siteName: appName,
+    url: appUrl,
+    title: {
+      default: appName,
+      template: '%s | ' + appName,
+    },
+    description: description,
+    images: [
+      {
+        url: '/logo.png',
+        width: 400,
+        height: 400,
+        alt: appName,
+      },
+    ],
   },
   twitter: {
-    title: meta.title,
-    description: meta.description,
+    title: appName,
+    description: description,
     card: 'summary_large_image',
-    images: meta.images[0].url,
+    images: '/logo.png',
     creator: 'Tiesen',
     creatorId: 'tiesen243',
     site: '@tiesen243',
@@ -29,7 +46,6 @@ import { cn } from '@/lib/utils'
 import { AppProvider } from '@/provider'
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
-import { meta } from '@/lib/meta'
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>

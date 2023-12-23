@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
+import ProductCard from '@/components/card/product-card'
 import { makeSlug } from '@/lib/utils'
 import { IProduct } from '@/types/product'
-import ProductCard from '@/components/card/productCard'
 
 const Carousel: React.FC<{ products: IProduct[] }> = ({ products }) => (
   <div className="mt-4 w-full overflow-x-auto pb-6 pt-1">

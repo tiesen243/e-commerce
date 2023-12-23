@@ -1,51 +1,35 @@
-import BackBtn from '@/components/comp/backBtn'
-import EditForm from '@/components/dashboard/edit'
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import axios from '@/lib/axios'
-import { meta } from '@/lib/meta'
 import { getIdFromSlug } from '@/lib/utils'
 import { IProduct } from '@/types/product'
 import type { Metadata, NextPage } from 'next'
 import { notFound } from 'next/navigation'
 
 interface Props {
-  params: {
-    slug: string
-  }
+  params: { slug: string }
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  try {
-    const { data } = await axios.get(`/product/${getIdFromSlug(params.slug)}`)
-    const product: IProduct = data.data
+  const { data } = await axios.get(`/product/${getIdFromSlug(params.slug)}`)
+  const product: IProduct = data.data
 
-    return {
-      title: `Edit ${product.name} | ${meta.title}`,
-      description: `Edit ${product.name} | ${meta.title}`,
-      openGraph: {
-        title: `Edit ${product.name} | ${meta.title}`,
-        description: `Edit ${product.name} | ${meta.title}`,
-      },
-      twitter: {
-        title: `Edit ${product.name} | ${meta.title}`,
-        description: `Edit ${product.name} | ${meta.title}`,
-      },
-    }
-  } catch (error) {
-    return {
-      title: `Not found | ${meta.title}`,
-      description: `Not found | ${meta.title}`,
-      openGraph: {
-        title: `Not found | ${meta.title}`,
-        description: `Not found | ${meta.title}`,
-      },
-      twitter: {
-        title: `Not found | ${meta.title}`,
-        description: `Not found | ${meta.title}`,
-      },
-    }
+  return {
+    title: `Edit ${product.name}`,
+    description: `Fill the form to edit ${product.name}`,
+    openGraph: {
+      title: `Edit ${product.name}`,
+      description: `Fill the form to edit ${product.name}`,
+    },
+    twitter: {
+      title: `Edit ${product.name} `,
+      description: `Fill the form to edit ${product.name}`,
+    },
   }
 }
+
+import BackBtn from '@/components/comp/back-btn'
+import EditForm from '@/components/dashboard/edit'
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
 const Page: NextPage<Props> = async ({ params }) => {
   try {
     const { data } = await axios.get(`/product/${getIdFromSlug(params.slug)}`)

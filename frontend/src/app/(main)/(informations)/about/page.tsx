@@ -1,16 +1,12 @@
-import { meta } from '@/lib/meta'
 import type { Metadata, NextPage } from 'next'
 
 export const metadata: Metadata = {
-  title: `About Us | ${meta.title}`,
-  description: 'About Us',
+  title: `About Us`,
   openGraph: {
-    title: `${meta.title} | About Us`,
-    description: 'About Us',
+    title: `About Us`,
   },
   twitter: {
-    title: `${meta.title} | About Us`,
-    description: 'About Us',
+    title: `About Us`,
   },
 }
 

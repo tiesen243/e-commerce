@@ -4,7 +4,7 @@ export const ThreeItemsGridSkeleton: React.FC = () => (
   <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
     {Array.from({ length: 3 }).map((_, i) => (
       <section key={i} className={`h-full w-full ${i === 0 && 'md:col-span-2 md:row-span-2'}`}>
-        <Skeleton className="aspect-square" />
+        <Skeleton className="aspect-square w-full" />
       </section>
     ))}
   </div>
