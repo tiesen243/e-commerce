@@ -46,7 +46,8 @@ const opts: NextAuthOptions = {
   pages: { signIn: '/login' },
 }
 
-const handlers = nextAuth(opts)
+export const { handlers, auth, signIn, signOut } = nextAuth(opts)
+
 export { handlers as GET, handlers as POST }
 
 const getUserInfo = async (token: string) => {
