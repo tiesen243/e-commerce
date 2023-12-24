@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import CheckAuthProvider from '@/provider/checkauth.provider'
-import LoginForm from './loginForm'
+import LoginForm from './_login-form'
 
 const Page: NextPage = () => (
   <CheckAuthProvider>

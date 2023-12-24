@@ -1,6 +1,6 @@
 import axios from '@/lib/axios'
 import { getIdFromSlug } from '@/lib/utils'
-import { IProduct } from '@/types/product'
+import type { IProduct } from '@/types/product'
 import type { Metadata, NextPage } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -26,7 +26,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   }
 }
 
-import BackBtn from '@/components/comp/back-btn'
+import BackBtn from '@/components/back-btn'
 import EditForm from '@/components/dashboard/edit'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 

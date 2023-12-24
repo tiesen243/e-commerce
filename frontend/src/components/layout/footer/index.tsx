@@ -1,7 +1,8 @@
-import { Separator } from '@/components/ui/separator'
 import Image from 'next/image'
 import Link from 'next/link'
-import FooterMenu from './footerMenu'
+
+import { Separator } from '@/components/ui/separator'
+import FooterMenu from './footer-menu'
 
 const copyrightDate = new Date().getFullYear()
 const Footer: React.FC = () => (

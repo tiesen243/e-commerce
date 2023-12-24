@@ -1,12 +1,12 @@
 'use client'
 
+import { Fields } from '@/components/fields'
+import FormFooter from '@/components/form-footer'
 import { CardContent, CardDescription } from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
-import { useForm } from 'react-hook-form'
-import { ILogin, resolver, defaultValues, submit } from './config'
-import { Fields } from '@/components/comp/fields'
 import { Input } from '@/components/ui/input'
-import FormFooter from '@/components/comp/form-footer'
+import { useForm } from 'react-hook-form'
+import { ILogin, defaultValues, resolver, submit } from './_config'
 
 const LoginFields = Fields<ILogin>
 const LoginForm: React.FC = () => {
