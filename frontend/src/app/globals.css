@@ -83,9 +83,3 @@
     @apply bg-primary;
   }
 }
-
-@layer components{
-  .typography {
-    @apply prose prose-zinc dark:prose-invert lg:prose-lg
-  }
-}

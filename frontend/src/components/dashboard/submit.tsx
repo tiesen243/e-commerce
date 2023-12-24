@@ -1,8 +1,7 @@
-import Link from 'next/link'
-
 import { Button } from '@/components/ui/button'
 import { CardFooter } from '@/components/ui/card'
-import { LoadingSpinner } from '../loading'
+import Link from 'next/link'
+import { LoadingSpinner } from '../comp/loading'
 
 interface Props {
   btnText: string

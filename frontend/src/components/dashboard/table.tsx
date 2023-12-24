@@ -2,14 +2,6 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination'
-import {
   Table,
   TableCell,
   TableFooter,
@@ -18,9 +10,10 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { formatDate, makeSlug } from '@/lib/utils'
-import DeleteBtn from './delete-btn'
+import DeleteBtn from './deleteBtn'
 
 import type { IProduct } from '@/types/product'
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 
 const headers: string[] = ['Code', 'Name', 'Updated At', 'Actions']
 
@@ -71,33 +64,33 @@ export const TFooter: React.FC<{ page?: number; totalPage?: number }> = ({
   <TableFooter>
     <TableRow>
       <TableCell colSpan={5}>
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href={{
-                  pathname: '/dashboard',
-                  query: { page: page > 1 ? page - 1 : 1 },
-                }}
-              />
-            </PaginationItem>
+        <section className="flex items-center justify-end gap-2">
+          <Button size="icon" variant="outline" disabled={page <= 1}>
+            <Link
+              href={{
+                pathname: '/dashboard',
+                query: { page: page <= 1 ? 1 : page - 1 },
+              }}
+            >
+              <ChevronLeftIcon />
+            </Link>
+          </Button>
 
-            {Array.from({ length: totalPage }, (_, i) => (
-              <PaginationItem key={i}>
-                <PaginationLink href={`/dashboard?page=${i + 1}`}>{i + 1}</PaginationLink>
-              </PaginationItem>
-            ))}
+          <Button variant="outline" disabled>
+            {page} / {totalPage}
+          </Button>
 
-            <PaginationItem>
-              <PaginationNext
-                href={{
-                  pathname: '/dashboard',
-                  query: { page: page < totalPage ? page + 1 : totalPage },
-                }}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+          <Button size="icon" variant="outline" disabled={page >= totalPage}>
+            <Link
+              href={{
+                pathname: '/dashboard',
+                query: { page: page >= totalPage ? totalPage : page + 1 },
+              }}
+            >
+              <ChevronRightIcon />
+            </Link>
+          </Button>
+        </section>
       </TableCell>
     </TableRow>
   </TableFooter>

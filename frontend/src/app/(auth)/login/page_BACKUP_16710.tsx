@@ -25,10 +25,16 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import CheckAuthProvider from '@/provider/checkauth.provider'
+<<<<<<< HEAD
+import { signIn } from '@/lib/auth'
+=======
+import LoginForm from './loginForm'
+>>>>>>> parent of 459b515 (dsasdsaddsada)
 
 const Page: NextPage = () => {
   const handleLogin = async (formData: FormData) => {
     'use server'
+    await signIn('github')
   }
   return (
     <CheckAuthProvider>

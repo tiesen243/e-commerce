@@ -6,20 +6,15 @@ interface Props {
   }
 }
 
-const formatTitle = (s: string): string =>
-  s
-    .split('-')
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ')
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => ({
-  title: formatTitle(params.category),
+  title: params.category,
   description: `Search ${params.category}`,
   openGraph: {
-    title: formatTitle(params.category),
+    title: params.category,
     description: `Search ${params.category}`,
   },
   twitter: {
-    title: formatTitle(params.category),
+    title: params.category,
     description: `Search ${params.category}`,
   },
 })

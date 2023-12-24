@@ -15,7 +15,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { makeSlug } from '@/lib/utils'
-import { toast } from '../ui/use-toast'
 
 interface Props {
   product: IProduct
@@ -37,25 +36,19 @@ const ProductCard: React.FC<Props> = ({ product, isFirst = false, hasDetails = f
         src={product.image}
         alt={product.name}
         onError={onError}
-        width={300}
-        height={410}
-        className="mt-4 w-2/3 object-contain transition-transform group-hover:scale-105"
+        width={200}
+        height={300}
+        className="mt-4 h-full w-2/3 object-contain transition-transform group-hover:scale-105"
       />
     </CardContent>
 
     <div className="absolute h-full w-full transition-all group-hover:backdrop-blur-lg" />
 
     <CardHeader className="absolute inset-0 hidden text-pretty group-hover:block">
-      <CardTitle>
-        {!isFirst
-          ? product.name.length > 20
-            ? product.name.slice(0, 20) + '...'
-            : product.name
-          : product.name}
-      </CardTitle>
+      <CardTitle>{product.name}</CardTitle>
       <CardDescription
         className={`overflow-y-auto text-primary ${
-          isFirst ? 'max-h-48' : 'md:max-h-12 lg:max-h-48'
+          isFirst ? 'max-h-52' : 'md:max-h-12 lg:max-h-52'
         }`}
       >
         {product.description}
@@ -80,16 +73,7 @@ const ProductCard: React.FC<Props> = ({ product, isFirst = false, hasDetails = f
       </CardDescription>
 
       <section className="hidden w-full grid-cols-2 gap-4 group-hover:grid">
-        <Button
-          className="mt-4"
-          variant="default"
-          onClick={() => {
-            toast({
-              title: 'Added to cart',
-              description: `Added ${product.name} to cart`,
-            })
-          }}
-        >
+        <Button className="mt-4" variant="default">
           Add to cart
         </Button>
 

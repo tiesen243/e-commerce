@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { LoadingSpinner } from '@/components/loading'
+import { LoadingSpinner } from '@/components/comp/loading'
 import { Button } from '@/components/ui/button'
 import { CardFooter } from '@/components/ui/card'
 

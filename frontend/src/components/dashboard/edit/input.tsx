@@ -1,16 +1,15 @@
-import { DragAndDrop } from '@/components/drag-drop'
-import { Fields } from '@/components/fields'
-import MultiSelect from '@/components/multi-select'
-import Select from '@/components/select'
+import { Fields } from '@/components/comp/fields'
 import { CardContent } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
 import { Slider } from '@/components/ui/slider'
-import { Textarea } from '@/components/ui/textarea'
-import { Category, Tag } from '@/types/enum'
 import { UseFormReturn } from 'react-hook-form'
-
 import { type IEdit } from './config'
+import { Textarea } from '@/components/ui/textarea'
+import { Checkbox } from '@/components/ui/checkbox'
+import { DragAndDrop } from '@/components/comp/drag-drop'
+import { Input } from '@/components/ui/input'
+import CustomSelect from '@/components/comp/customSelect'
+import CustomMultiSelect from '@/components/comp/customMultiSelect'
+import { Category, Tag } from '@/types/enum'
 
 interface Props {
   form: UseFormReturn<IEdit>
@@ -58,7 +57,7 @@ const FormFields: React.FC<Props> = ({ form, isPending, preview }) => (
 
     <EditFields name="category" control={form.control}>
       {(field) => (
-        <Select
+        <CustomSelect
           onValueChange={field.onChange as () => void}
           value={field.value}
           data={Object.values(Category)}
@@ -69,7 +68,7 @@ const FormFields: React.FC<Props> = ({ form, isPending, preview }) => (
 
     <EditFields name="tags" control={form.control}>
       {(field) => (
-        <MultiSelect
+        <CustomMultiSelect
           onChange={field.onChange as () => void}
           value={field.value}
           data={Object.values(Tag)}

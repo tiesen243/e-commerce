@@ -1,4 +1,4 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 
 interface Props {
   onValueChange: () => void
@@ -7,7 +7,7 @@ interface Props {
   disabled: boolean
 }
 
-const CSelect: React.FC<Props> = ({ value, onValueChange, data, disabled }) => (
+const CustomSelect: React.FC<Props> = ({ value, onValueChange, data, disabled }) => (
   <Select onValueChange={onValueChange} value={value} disabled={disabled}>
     <SelectTrigger>
       <SelectValue placeholder="Select Category..." />
@@ -23,4 +23,4 @@ const CSelect: React.FC<Props> = ({ value, onValueChange, data, disabled }) => (
   </Select>
 )
 
-export default CSelect
+export default CustomSelect

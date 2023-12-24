@@ -1,8 +1,8 @@
 'use client'
 
-import { ChevronLeftIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
+import { ChevronLeftIcon } from 'lucide-react'
 
 const BackBtn: React.FC<{ className?: string }> = ({ className }) => {
   const { back } = useRouter()

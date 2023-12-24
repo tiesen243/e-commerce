@@ -1,7 +1,8 @@
-import typography from '@tailwindcss/typography'
 import { type Config } from 'tailwindcss'
-import animate from 'tailwindcss-animate'
+import plugin from 'tailwindcss/plugin'
 import { fontFamily } from 'tailwindcss/defaultTheme'
+import typography from '@tailwindcss/typography'
+import animate from 'tailwindcss-animate'
 
 const config: Config = {
   darkMode: ['class'],
@@ -84,7 +85,17 @@ const config: Config = {
       },
     },
   },
-  plugins: [typography, animate],
+  plugins: [
+    typography,
+    animate,
+    plugin(({ addComponents }) => {
+      addComponents({
+        '.typography': {
+          '@apply prose prose-zinc dark:prose-invert lg:prose-lg': '',
+        },
+      })
+    }),
+  ],
 }
 
 export default config

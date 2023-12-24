@@ -1,17 +1,19 @@
 import { type NextPage } from 'next'
 
-import HomeCarousel from '@/components/home/carousel'
-import ThreeItemsGrid from '@/components/home/three-items-grid'
-import { getProducts } from '@/lib/actions/product'
+import Carousel from '@/components/home/carousel'
+import ThreeItemsGrid from '@/components/home/threeItemsGrid'
+import axios from '@/lib/axios'
 
-export const revalidate = 5
+export const revalidate = 3
 const Page: NextPage = async () => {
-  const products = await getProducts({ limit: 13, sortBy: 'createdAt' })
+  const { data } = await axios.get('/product?limit=13&sortBy=createdAt&isAscending=false')
 
+  const threeItemsData = data.data.slice(0, 3)
+  const carouselData = data.data.slice(3, 13)
   return (
     <>
-      <ThreeItemsGrid products={products.slice(0, 3)} />
-      <HomeCarousel products={products.slice(3, 13)} />
+      <ThreeItemsGrid products={threeItemsData} />
+      <Carousel products={carouselData} />
     </>
   )
 }

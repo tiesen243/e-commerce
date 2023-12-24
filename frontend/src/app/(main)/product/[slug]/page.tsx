@@ -1,4 +1,4 @@
-import BackBtn from '@/components/back-btn'
+import BackBtn from '@/components/comp/back-btn'
 import axios from '@/lib/axios'
 import { getIdFromSlug } from '@/lib/utils'
 import { IProduct } from '@/types/product'
@@ -13,7 +13,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   const { data } = await axios.get(`/product/${getIdFromSlug(params.slug)}`)
   const product: IProduct = data.data
   return {
-    title: `${product.name}`,
+    title: `${product.name} `,
     description: product.description,
     openGraph: {
       title: `${product.name} `,
@@ -23,8 +23,8 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
       images: [
         {
           url: product.image,
-          width: 400,
-          height: 400,
+          width: 800,
+          height: 600,
           alt: product.name,
         },
       ],

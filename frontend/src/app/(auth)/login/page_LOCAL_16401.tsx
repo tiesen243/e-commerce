@@ -25,10 +25,12 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import CheckAuthProvider from '@/provider/checkauth.provider'
+import { signIn } from '@/lib/auth'
 
 const Page: NextPage = () => {
   const handleLogin = async (formData: FormData) => {
     'use server'
+    await signIn('github')
   }
   return (
     <CheckAuthProvider>
