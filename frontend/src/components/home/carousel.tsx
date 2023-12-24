@@ -1,10 +1,9 @@
-import Link from 'next/link'
-
 import ProductCard from '@/components/card/product-card'
 import { makeSlug } from '@/lib/utils'
-import { IProduct } from '@/types/product'
+import type { IProduct } from '@/types/product'
+import Link from 'next/link'
 
-const Carousel: React.FC<{ products: IProduct[] }> = ({ products }) => (
+const HomeCarousel: React.FC<{ products: IProduct[] }> = ({ products }) => (
   <div className="mt-4 w-full overflow-x-auto pb-6 pt-1">
     <ul className="flex h-fit animate-carousel gap-4">
       {products.map((product) => (
@@ -18,4 +17,4 @@ const Carousel: React.FC<{ products: IProduct[] }> = ({ products }) => (
   </div>
 )
 
-export default Carousel
+export default HomeCarousel

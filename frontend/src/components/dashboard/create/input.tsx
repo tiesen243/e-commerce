@@ -1,14 +1,14 @@
 import { UseFormReturn } from 'react-hook-form'
 
-import CustomMultiSelect from '@/components/comp/customMultiSelect'
-import CustomSelect from '@/components/comp/customSelect'
-import { DragAndDrop } from '@/components/comp/drag-drop'
-import { Fields } from '@/components/comp/fields'
+import { DragAndDrop } from '@/components/drag-drop'
+import { Fields } from '@/components/fields'
+import MultiSelect from '@/components/multi-select'
+import CustomSelect from '@/components/select'
+import { CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Category, Tag } from '@/types/enum'
 import { ICreate } from './config'
-import { CardContent } from '@/components/ui/card'
 
 interface Props {
   form: UseFormReturn<ICreate>
@@ -51,7 +51,7 @@ const FormFields: React.FC<Props> = ({ form, isPending }) => (
 
     <CreateFields name="tags" control={form.control}>
       {(field) => (
-        <CustomMultiSelect
+        <MultiSelect
           onChange={field.onChange as () => void}
           value={field.value}
           data={Object.values(Tag)}

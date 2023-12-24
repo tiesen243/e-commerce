@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { menus, type Menu, footerMenus } from '../menus'
+import { footerMenus, type Menu } from '../menus'
 
 const FooterMenuItem = ({ item }: { item: Menu }) => {
   const pathname = usePathname()
