@@ -1,5 +1,3 @@
-import { Role } from './enum'
-
 interface IUser {
   readonly _id: string
   readonly userName: string

@@ -18,7 +18,6 @@ import { DashboardTable, TFooter, TableChild, TableError } from '@/components/da
 import { TableBody } from '@/components/ui/table'
 import { API_URL } from '@/lib/axios'
 import { GetToken } from '@/lib/getToken'
-import type { IProduct } from '@/types/product'
 
 interface Props {
   searchParams: { page: number }

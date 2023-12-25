@@ -4,7 +4,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
-import { IUser } from '@/types/user'
 import { LayoutDashboard, ShoppingCartIcon, UserIcon } from 'lucide-react'
 import { DropdownItem, SignOutBtn, ThemeBtn } from './items'
 

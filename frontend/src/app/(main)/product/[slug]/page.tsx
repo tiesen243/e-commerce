@@ -1,7 +1,6 @@
 import BackBtn from '@/components/back-btn'
 import axios from '@/lib/axios'
 import { getIdFromSlug } from '@/lib/utils'
-import { IProduct } from '@/types/product'
 import type { Metadata, NextPage } from 'next'
 
 interface Props {

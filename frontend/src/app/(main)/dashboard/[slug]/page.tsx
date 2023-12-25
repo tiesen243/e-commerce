@@ -1,6 +1,5 @@
 import axios from '@/lib/axios'
 import { getIdFromSlug } from '@/lib/utils'
-import type { IProduct } from '@/types/product'
 import type { Metadata, NextPage } from 'next'
 import { notFound } from 'next/navigation'
 

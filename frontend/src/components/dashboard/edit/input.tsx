@@ -1,3 +1,5 @@
+import { UseFormReturn } from 'react-hook-form'
+
 import { DragAndDrop } from '@/components/drag-drop'
 import { Fields } from '@/components/fields'
 import MultiSelect from '@/components/multi-select'
@@ -7,8 +9,6 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Slider } from '@/components/ui/slider'
 import { Textarea } from '@/components/ui/textarea'
-import { Category, Tag } from '@/types/enum'
-import { UseFormReturn } from 'react-hook-form'
 
 import { type IEdit } from './config'
 

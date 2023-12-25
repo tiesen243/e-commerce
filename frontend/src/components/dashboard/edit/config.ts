@@ -1,10 +1,9 @@
+import { mutate } from 'swr'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+
 import { toast } from '@/components/ui/use-toast'
 import { uploadImage } from '@/lib/firebase'
-import { Category, Tag } from '@/types/enum'
-import { IProduct } from '@/types/product'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { mutate } from 'swr'
-import * as z from 'zod'
 
 const editSchema = z.object({
   description: z.string().min(4).max(1000),

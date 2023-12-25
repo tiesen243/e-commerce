@@ -24,8 +24,9 @@ const Result: React.FC<Props> = ({ category, ...props }) => {
   const page = Number(props.page) || 1
   const isAscending = orderBy === 'asc'
   const fetcher = () => getProducts({ q, category, page, sortBy, isAscending, limit: 9 })
-  const { data, isLoading } = useSWR(`search-${page}-${sortBy}-${isAscending}`, fetcher)
+  const { data, isLoading, error } = useSWR(`search-${q}-${page}-${sortBy}-${isAscending}`, fetcher)
 
+  if (error) return <p className="text-center">{error.message}</p>
   if (isLoading || !data)
     return (
       <ul className="grid grid-cols-3 gap-2">

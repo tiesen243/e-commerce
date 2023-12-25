@@ -1,10 +1,9 @@
 import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { mutate } from 'swr'
 
 import { toast } from '@/components/ui/use-toast'
 import { deleteImage, uploadImage } from '@/lib/firebase'
-import { Category, Tag } from '@/types/enum'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { mutate } from 'swr'
 
 const createSchema = z.object({
   name: z.string().min(1).max(100),

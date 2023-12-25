@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { handleDelete } from '@/lib/actions/product'
-import { IProduct } from '@/types/product'
 
 const DeleteBtn: React.FC<{ product: IProduct }> = ({ product }) => (
   <AlertDialog>

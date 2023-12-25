@@ -2,12 +2,11 @@
 
 import dynamic from 'next/dynamic'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 
 import { Form } from '@/components/ui/form'
-import type { IProduct } from '@/types/product'
 import { BtnLoading, FieldsLoading } from '../loading'
 import { IEdit, resolver, edit } from './config'
-import { useRouter } from 'next/navigation'
 
 const FormFields = dynamic(() => import('./input'), { ssr: false, loading: FieldsLoading })
 const FormBtn = dynamic(() => import('../submit'), { ssr: false, loading: BtnLoading })

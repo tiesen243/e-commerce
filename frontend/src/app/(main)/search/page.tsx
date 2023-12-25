@@ -1,5 +1,6 @@
 import Result from '@/components/search/result'
 import { Metadata, NextPage } from 'next'
+import { Suspense } from 'react'
 
 interface Props {
   searchParams: SearchParams
@@ -22,7 +23,11 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
 }
 
 const Page: NextPage<Props> = ({ searchParams }) => {
-  return <Result {...searchParams} />
+  return (
+    <Suspense fallback="Loading...">
+      <Result {...searchParams} />
+    </Suspense>
+  )
 }
 
 export default Page

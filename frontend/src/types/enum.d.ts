@@ -1,17 +1,17 @@
-export enum Role {
+enum Role {
   ADMIN = 'admin',
   SELLER = 'seller',
   USER = 'user',
 }
 
-export enum Category {
+enum Category {
   Novel = 'Novel',
   LightNovel = 'Light Novel',
   Manga = 'Manga',
   Other = 'Other',
 }
 
-export enum Tag {
+enum Tag {
   Action = 'Action',
   AtA = 'Adapted to Anime',
   AtDCD = 'Adapted to Drama CD',

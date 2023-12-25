@@ -7,14 +7,13 @@ import CustomSelect from '@/components/select'
 import { CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Category, Tag } from '@/types/enum'
-import { ICreate } from './config'
+import { type ICreate } from './config'
+import { categories, tags } from '@/lib/constants'
 
 interface Props {
   form: UseFormReturn<ICreate>
   isPending: boolean
 }
-
 const CreateFields = Fields<ICreate>
 const FormFields: React.FC<Props> = ({ form, isPending }) => (
   <CardContent className="space-y-4">
@@ -43,7 +42,7 @@ const FormFields: React.FC<Props> = ({ form, isPending }) => (
         <CustomSelect
           onValueChange={field.onChange as () => void}
           value={field.value}
-          data={Object.values(Category)}
+          data={categories}
           disabled={isPending}
         />
       )}
@@ -51,11 +50,7 @@ const FormFields: React.FC<Props> = ({ form, isPending }) => (
 
     <CreateFields name="tags" control={form.control}>
       {(field) => (
-        <MultiSelect
-          onChange={field.onChange as () => void}
-          value={field.value}
-          data={Object.values(Tag)}
-        />
+        <MultiSelect onChange={field.onChange as () => void} value={field.value} data={tags} />
       )}
     </CreateFields>
   </CardContent>

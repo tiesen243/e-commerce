@@ -2,7 +2,6 @@
 
 import axios from '@/lib/axios'
 import { GetToken } from '@/lib/getToken'
-import { Category } from '@/types/enum'
 import { revalidateTag } from 'next/cache'
 
 export const handleDelete = async (formData: FormData) => {

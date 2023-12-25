@@ -19,7 +19,5 @@ export const handleTags = async (formData: FormData, current: SearchParams) => {
 
 export const handleSort = async (formData: FormData, current: SearchParams) => {
   const sort = formData.get('sort')
-  redirect(
-    `/search?page=${current.page}&q=${current.q}&tags=${current.tags}&sortBy=${current.sortBy}&sort=${sort}`
-  )
+  redirect(`/search?q=${current.q}&page=${current.page}&sortBy=${current.sortBy}&sort=${sort}`)
 }
