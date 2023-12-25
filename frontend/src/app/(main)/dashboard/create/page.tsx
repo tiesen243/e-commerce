@@ -1,3 +1,4 @@
+import CreateForm from '@/components/dashboard/create'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import type { NextPage } from 'next'
 
@@ -10,7 +11,7 @@ const Page: NextPage = () => (
       </CardDescription>
     </CardHeader>
 
-    {/* <CreateForm /> */}
+    <CreateForm />
   </Card>
 )
 

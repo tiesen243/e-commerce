@@ -1,7 +1,7 @@
 'use client'
+import useSWR from 'swr'
 
 import { getProducts } from '@/lib/actions/product'
-import useSWR from 'swr'
 import ProductCard from '../card/product-card'
 import { Skeleton } from '../ui/skeleton'
 import {

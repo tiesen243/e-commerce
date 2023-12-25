@@ -11,8 +11,8 @@ const createSchema = z.object({
   image: z.instanceof(File).nullable(),
   price: z.coerce.number(),
   stock: z.coerce.number(),
-  category: z.nativeEnum(Category),
-  tags: z.array(z.nativeEnum(Tag)),
+  category: z.string(),
+  tags: z.array(z.string()),
 })
 
 export type ICreate = z.infer<typeof createSchema>
@@ -25,7 +25,7 @@ export const defaultValues: ICreate = {
   image: null,
   price: 0,
   stock: 0,
-  category: Category.Other,
+  category: '',
   tags: [],
 }
 
