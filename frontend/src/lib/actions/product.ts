@@ -2,8 +2,7 @@
 
 import axios from '@/lib/axios'
 import { GetToken } from '@/lib/getToken'
-import { Category, Tag } from '@/types/enum'
-import type { IProduct } from '@/types/product'
+import { Category } from '@/types/enum'
 import { revalidateTag } from 'next/cache'
 
 export const handleDelete = async (formData: FormData) => {
@@ -18,29 +17,34 @@ export const handleDelete = async (formData: FormData) => {
 interface Query {
   page?: number
   limit?: number
-  keyword?: string
+  q?: string
   code?: number
-  category?: Category
-  tags?: Tag[]
+  category?: string
   sortBy?: 'name' | 'price' | 'createdAt' | 'updatedAt'
   isAscending?: boolean
 }
-export const getProducts = async (q: Query): Promise<IProduct[]> => {
+
+export const getProducts = async (
+  q: Query
+): Promise<{
+  page: number
+  totalPage: number
+  data: IProduct[]
+}> => {
   try {
     const { data } = await axios.get('/product', {
       params: {
+        keyword: q.q ? q.q : null,
         page: q.page ? q.page : 1,
         limit: q.limit ? q.limit : 10,
-        keyword: q.keyword ? q.keyword : null,
         code: q.code ? q.code : null,
         category: q.category ? q.category : null,
-        tags: q.tags ? q.tags : null,
-        sortBy: q.sortBy ? q.sortBy : null,
+        sortBy: q.sortBy ? q.sortBy : 'createdAt',
         isAscending: q.isAscending ? q.isAscending : false,
       },
     })
 
-    return data.data
+    return data
   } catch (err: any) {
     throw new Error(err.response.data.message)
   }

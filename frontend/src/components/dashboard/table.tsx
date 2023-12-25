@@ -20,8 +20,6 @@ import {
 import { formatDate, makeSlug } from '@/lib/utils'
 import DeleteBtn from './delete-btn'
 
-import type { IProduct } from '@/types/product'
-
 const headers: string[] = ['Code', 'Name', 'Updated At', 'Actions']
 
 export const DashboardTable: React.FC<React.PropsWithChildren> = ({ children }) => (

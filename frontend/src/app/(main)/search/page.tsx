@@ -1,9 +1,8 @@
+import Result from '@/components/search/result'
 import { Metadata, NextPage } from 'next'
 
 interface Props {
-  searchParams: {
-    q: string
-  }
+  searchParams: SearchParams
 }
 
 export const generateMetadata = ({ searchParams }: Props): Metadata => {
@@ -23,7 +22,7 @@ export const generateMetadata = ({ searchParams }: Props): Metadata => {
 }
 
 const Page: NextPage<Props> = ({ searchParams }) => {
-  return <div>Page {searchParams.q}</div>
+  return <Result {...searchParams} />
 }
 
 export default Page

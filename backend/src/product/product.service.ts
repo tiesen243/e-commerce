@@ -43,7 +43,7 @@ export class ProductService {
         message: 'No products found',
       })
 
-    const totalPage: number = Math.ceil((await this.productModel.countDocuments()) / limit)
+    const totalPage: number = Math.ceil((await this.productModel.countDocuments(search)) / limit)
 
     return {
       statusCode: 200,

@@ -1,5 +1,3 @@
-import { Category, Tag } from './enum'
-
 interface IProduct {
   _id: string
   code: number

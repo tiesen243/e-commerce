@@ -8,13 +8,13 @@ export const menus = [
     icon: <BookIcon className={className} />,
   },
   {
-    title: 'Light Novels',
-    href: '/search/light-novels',
+    title: 'Light Novel',
+    href: '/search/light-novel',
     icon: <BookOpenIcon className={className} />,
   },
   {
-    title: 'Novels',
-    href: '/search/novels',
+    title: 'Novel',
+    href: '/search/novel',
     icon: <BookOpenTextIcon className={className} />,
   },
   {
