@@ -3,6 +3,7 @@ import { uploadImage } from '@/lib/firebase'
 import { Category, Tag } from '@/types/enum'
 import { IProduct } from '@/types/product'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { mutate } from 'swr'
 import * as z from 'zod'
 
 const editSchema = z.object({
@@ -30,6 +31,7 @@ export const edit = async (data: IEdit, product: IProduct) => {
       body: JSON.stringify({ ...data, image: url }),
     })
     if (!res.ok) throw new Error((await res.json()).message)
+    mutate((key) => typeof key === 'string' && key.startsWith('products'))
     toast({ description: 'Product update successfully' })
   } catch (e: any) {
     toast({ description: e.message, variant: 'destructive' })

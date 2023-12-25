@@ -4,6 +4,7 @@ import { toast } from '@/components/ui/use-toast'
 import { deleteImage, uploadImage } from '@/lib/firebase'
 import { Category, Tag } from '@/types/enum'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { mutate } from 'swr'
 
 const createSchema = z.object({
   name: z.string().min(1).max(100),
@@ -41,6 +42,7 @@ export const create = async (data: ICreate) => {
       body: JSON.stringify({ ...data, image: url }),
     })
     if (!res.ok) throw new Error((await res.json()).message)
+    mutate((key) => typeof key === 'string' && key.startsWith('products'))
     toast({ description: 'Product created successfully' })
   } catch (e: any) {
     await deleteImage(data.name)
