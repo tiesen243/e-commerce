@@ -34,17 +34,21 @@ import { CreateProductDto, QueryProductDto, UpdateProductDto } from './dto'
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
   @Get()
-  @ApiOperation({
-    summary: 'Get all products',
-    description: 'Get all products',
-  })
+  @ApiOperation({ summary: 'Get all products' })
   @ApiNotFoundResponse({ description: 'No products found' })
-  @ApiOkResponse({
-    description: 'All products has been successfully retrieved.',
-    type: [Product],
-  })
+  @ApiOkResponse({ description: 'All products has been successfully retrieved.', type: [Product] })
   async findAll(@Query() q: QueryProductDto): Promise<IResponse<Product[]>> {
     return await this.productService.findAll(q)
+  }
+
+  @Get('/random')
+  @ApiOperation({ summary: 'Get random products' })
+  @ApiOkResponse({
+    description: 'Random products has been successfully retrieved.',
+    type: [Product],
+  })
+  async findRandom(): Promise<IResponse<Product[]>> {
+    return await this.productService.findRandom()
   }
 
   @Get('/me')
@@ -78,10 +82,7 @@ export class ProductController {
   @ApiOperation({ summary: 'Create new product' })
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiCreatedResponse({
-    description: 'The product has been successfully created.',
-    type: Product,
-  })
+  @ApiCreatedResponse({ description: 'The product has been successfully created.', type: Product })
   @ApiBadRequestResponse({ description: 'Create product failed' })
   async create(
     @Body() createDto: CreateProductDto,
@@ -95,9 +96,7 @@ export class ProductController {
   @ApiOperation({ summary: 'Update product by id' })
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-Auth')
-  @ApiNoContentResponse({
-    description: 'The product has been successfully updated.',
-  })
+  @ApiNoContentResponse({ description: 'The product has been successfully updated.' })
   @ApiUnauthorizedResponse({ description: 'You are not owner of this product' })
   @ApiNotFoundResponse({ description: 'Product has been deleted or not found' })
   async update(

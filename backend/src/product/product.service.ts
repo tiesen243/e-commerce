@@ -54,15 +54,34 @@ export class ProductService {
     }
   }
 
-  async findAllByUser(user: User, q: QueryProductDto): Promise<IResponse<Product[]>> {
-    const { keyword, page, limit = 5 } = q
-    const skip: number = (page - 1) * limit
-    const search = {
-      ...(keyword ? { name: { $regex: keyword, $options: 'i' } } : {}),
+  async findRandom(): Promise<IResponse<Product[]>> {
+    const randomProducts = await this.productModel.aggregate([{ $sample: { size: 5 } }])
+    if (randomProducts.length === 0) throw new NotFoundException('No products found')
+
+    return {
+      statusCode: 200,
+      message: 'All products has been successfully retrieved.',
+      data: randomProducts,
     }
+  }
+
+  async findOne(id: string): Promise<IResponse<Product>> {
+    const product = await this.productModel.findById(id).exec()
+    if (!product) throw new NotFoundException('Product has been deleted or not found')
+
+    return {
+      statusCode: 200,
+      message: 'The product has been successfully retrieved.',
+      data: product,
+    }
+  }
+
+  async findAllByUser(user: User, q: QueryProductDto): Promise<IResponse<Product[]>> {
+    const { page, limit = 5 } = q
+    const skip: number = (page - 1) * limit
 
     const allProducts = await this.productModel
-      .find({ userId: user._id, ...search })
+      .find({ userId: user._id })
       .limit(limit)
       .skip(skip)
       .exec()
@@ -78,17 +97,6 @@ export class ProductService {
       data: allProducts,
       page,
       totalPage,
-    }
-  }
-
-  async findOne(id: string): Promise<IResponse<Product>> {
-    const product = await this.productModel.findById(id).exec()
-    if (!product) throw new NotFoundException('Product has been deleted or not found')
-
-    return {
-      statusCode: 200,
-      message: 'The product has been successfully retrieved.',
-      data: product,
     }
   }
 
